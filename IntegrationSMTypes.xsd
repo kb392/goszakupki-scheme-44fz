@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- FCS INTEGRATION_SERVICE_TYPES Integration Scheme, version 9.3, create date 23.10.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/SMTypes/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/SMTypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
+	<!--Информация о полученных / отправленных пакетах-->
+	<xs:complexType name="packageListRequestType">
+		<xs:annotation>
+			<xs:documentation>Тип: Запрос списка пакетов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Id" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор запроса на список переданных/полученных пакетов</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="periodInfo">
+				<xs:annotation>
+					<xs:documentation>Период, за который необходимо получить список пакетов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fromDT" type="xs:dateTime">
+							<xs:annotation>
+								<xs:documentation>Начало временного интервала, в котором ведется поиск (включается)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="toDT" type="xs:dateTime">
+							<xs:annotation>
+								<xs:documentation>Конец временного интервала, в котором ведется поиск (не включается)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="documentKind" type="base:documentKindType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Вид документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="objectType" type="base:objectTypeEnum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Кодовое наименование объекта информационного обмена:
+94_OK - 94ФЗ Открытый конкурс;
+94_EF - 94ФЗ Открытый аукцион в электронной форме;
+94_ZK - 94ФЗ Запрос котировок;
+94_PO - 94ФЗ Предварительный отбор;
+94_SZ - 94ФЗ Сообщение о заинтересованности в проведении конкурса;
+94_DD - 94ФЗ Разные документы;
+EF - Электронный аукцион;
+EP - Единственный поставщик;
+ISM - Иной способ, многолотовый;
+ISO - Иной способ, однолотовый;
+OKD - Открытый конкурс, двухэтапный;
+OKOU - Открытый конкурс с ограниченным участием;
+OK - Открытый конкурс;
+PO - Предварительный отбор;
+ZAKA - Закрытый аукцион;
+ZAKKD - Закрытый конкурс, двухэтапный;
+ZAKKOU - Закрытый конкурс с ограниченным участием;
+ZAKK - Закрытый конкурс;
+ZKBI - Запрос котировок без извещения;
+ZK - Запрос котировок;
+ZP - Запрос предложений;
+ST111 - Способ определения поставщика (подрядчика, исполнителя), установленный Правительством Российской Федерации в соответствии со ст. 111 Федерального закона № 44-ФЗ;
+CT - Контракт;
+MD - Справочная информация;
+TP - План график;
+SP - План закупок;
+PP - План закупок (структурированный);
+BG - Банковская гарантия;
+ZC - Запрос цен;
+OZ - Отчет заказчика;
+DD - 44ФЗ Разные документы;
+PPM - План мероприятий для ИС ОВК;
+PRK - Результат контроля для ИС ОВК;
+PVKM - Информации по внеплановому контрольному мероприятию для ИС ОВК;
+CM - Информация по жалобе для ИС КО;
+CR - Результат контроля для ИС КО;
+UC - Внеплановая проверка для ИС КО;
+PC - Плановая проверка для ИС КО;
+99DOC - Документы контроля по 99 статье;
+615_PO - ПП РФ 615 Предварительный отбор;
+615_KPO - ПП РФ 615 Квалифицированная подрядная организация;
+615_EF - ПП РФ 615 Электронный аукцион;
+615_CT - ПП РФ 615 Договор;
+615_DD - ПП РФ 615 Разные документы;
+EOK - ЭП Открытый конкурс в электронной форме;
+EOKOU - ЭП Открытый конкурс с ограниченным участием  в электронной форме;
+EOKD - ЭП Двухэтапный конкурс в электронной форме;
+EZK - ЭП Запрос котировок в электронной форме;
+EZP - ЭП Запрос предложений в электронной форме;
+EZAKA - ЭП Закрытый аукцион в электронной форме;
+EZAKKD - ЭП Закрытый конкурс, двухэтапный в электронной форме;
+EZAKKOU - ЭП Закрытый конкурс с ограниченным участием в электронной форме;
+EZAKK - ЭП Закрытый конкурс в электронной форме;
+EP_DD - ЭП Разные документы;
+CP - Проекты контрактов.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="objectId" type="base:guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор объекта информационного обмена</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="packageListType">
+		<xs:annotation>
+			<xs:documentation>Тип: Ответ на запрос списка переданных/полученных пакетов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="requestId" type="base:guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор запроса на список переданных/полученных пакетов</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="packagesInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Список пакетов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="packageInfo" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения по пакету</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="id" type="base:guidType">
+										<xs:annotation>
+											<xs:documentation>Глобальный идентификатор  информационного пакета из индексной карточки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="status" type="base:messageStatusEnum">
+										<xs:annotation>
+											<xs:documentation>Статус передачи информационного пакета:
+processing - В процессе обработки, промежуточный статус;
+error - Ошибка обработки, окончательный статус;
+completed - Обработка завершена, окончательный статус подтверждений;
+wait_confirmation - Ожидает получения подтверждения приема, промежуточный статус бизнес-сообщения;
+confirmation_processing - Получено промежуточное подтверждение приема, промежуточный статус бизнес-сообщения;
+confirmation_ok - Получен положительный результат приема, окончательный статус бизнес-сообщения;
+confirmation_fail - Получен негативный результат приема, окончательный статус бизнес-сообщения;
+resend - Требует переотправки, промежуточный статус сообщения;
+resend_fail - Попытки переотправки не удались, промежуточный статус сообщения, требующий рассмотрения службой сопровождения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="sender" type="base:text200Type">
+										<xs:annotation>
+											<xs:documentation>Отправитель</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="receiver" type="base:text200Type">
+										<xs:annotation>
+											<xs:documentation>Получатель</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="createDT" type="xs:dateTime">
+										<xs:annotation>
+											<xs:documentation>Дата и время формирования информационного пакета</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="operationDT" type="xs:dateTime">
+										<xs:annotation>
+											<xs:documentation>Дата и время последней обработки сообщения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="documentKind" type="base:documentKindType">
+										<xs:annotation>
+											<xs:documentation>Вид документа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="objectType" type="base:objectTypeEnum">
+										<xs:annotation>
+											<xs:documentation>Кодовое наименование объекта информационного обмена:
+94_OK - 94ФЗ Открытый конкурс;
+94_EF - 94ФЗ Открытый аукцион в электронной форме;
+94_ZK - 94ФЗ Запрос котировок;
+94_PO - 94ФЗ Предварительный отбор;
+94_SZ - 94ФЗ Сообщение о заинтересованности в проведении конкурса;
+94_DD - 94ФЗ Разные документы;
+EF - Электронный аукцион;
+EP - Единственный поставщик;
+ISM - Иной способ, многолотовый;
+ISO - Иной способ, однолотовый;
+OKD - Открытый конкурс, двухэтапный;
+OKOU - Открытый конкурс с ограниченным участием;
+OK - Открытый конкурс;
+PO - Предварительный отбор;
+ZAKA - Закрытый аукцион;
+ZAKKD - Закрытый конкурс, двухэтапный;
+ZAKKOU - Закрытый конкурс с ограниченным участием;
+ZAKK - Закрытый конкурс;
+ZKBI - Запрос котировок без извещения;
+ZK - Запрос котировок;
+ZP - Запрос предложений;
+ST111 - Способ определения поставщика (подрядчика, исполнителя), установленный Правительством Российской Федерации в соответствии со ст. 111 Федерального закона № 44-ФЗ;
+CT - Контракт;
+MD - Справочная информация;
+TP - План график;
+SP - План закупок;
+PP - План закупок (структурированный);
+BG - Банковская гарантия;
+ZC - Запрос цен;
+OZ - Отчет заказчика;
+DD - 44ФЗ Разные документы;
+PPM - План мероприятий для ИС ОВК;
+PRK - Результат контроля для ИС ОВК;
+PVKM - Информации по внеплановому контрольному мероприятию для ИС ОВК;
+CM - Информация по жалобе для ИС КО;
+CR - Результат контроля для ИС КО;
+UC - Внеплановая проверка для ИС КО;
+PC - Плановая проверка для ИС КО;
+99DOC - Документы контроля по 99 статье;
+615_PO - ПП РФ 615 Предварительный отбор;
+615_KPO - ПП РФ 615 Квалифицированная подрядная организация;
+615_EF - ПП РФ 615 Электронный аукцион;
+615_CT - ПП РФ 615 Договор;
+615_DD - ПП РФ 615 Разные документы;
+EOK - ЭП Открытый конкурс в электронной форме;
+EOKOU - ЭП Открытый конкурс с ограниченным участием  в электронной форме;
+EOKD - ЭП Двухэтапный конкурс в электронной форме;
+EZK - ЭП Запрос котировок в электронной форме;
+EZP - ЭП Запрос предложений в электронной форме;
+EZAKA - ЭП Закрытый аукцион в электронной форме;
+EZAKKD - ЭП Закрытый конкурс, двухэтапный в электронной форме;
+EZAKKOU - ЭП Закрытый конкурс с ограниченным участием в электронной форме;
+EZAKK - ЭП Закрытый конкурс в электронной форме;
+EP_DD - ЭП Разные документы;
+CP - Проекты контрактов;
+SM - Служебные сообщения.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="objectId" type="base:guidType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Идентификатор объекта информационного обмена (реестровый номер)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="indexNum" type="xs:int" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Порядковый номер пакета данных в рамках передачи информации об объекте информационного обмена</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="reSendPackageType">
+		<xs:annotation>
+			<xs:documentation>Тип: Запрос на повторную отправку пакета</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reSendingPackagesIds">
+				<xs:annotation>
+					<xs:documentation>Список идентификаторов пакетов, которые необходимо направить повторно</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="base:guidType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Глобальный идентификатор  информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

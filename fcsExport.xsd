@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 9.3.1, create date 18.10.2019 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS EXPORT Integration Scheme, version 10.0, create date 23.10.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/EPtypes/1" schemaLocation="IntegrationEPTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/CPtypes/1" schemaLocation="IntegrationCPTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/TPtypes/1" schemaLocation="IntegrationTPTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/SMTypes/1" schemaLocation="IntegrationSMTypes.xsd"/>
 	<xs:element name="export">
 		<xs:annotation>
 			<xs:documentation>Схема данных подсистемы экспорта</xs:documentation>
@@ -1477,6 +1478,16 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
+					<xs:element name="edoNsiOperatorInfoList">
+						<xs:annotation>
+							<xs:documentation>Справочник операторов электронного документооборота</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="edoNsiOperatorInfo" type="oos:zfcs_edoNsiOperatorInfoType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
 					<xs:element name="pprf615NotificationEF" type="pp615:notificationEFType">
 						<xs:annotation>
 							<xs:documentation>Извещение о проведении ЭА (электронный аукцион) по ПП РФ № 615</xs:documentation>
@@ -1813,6 +1824,21 @@
 					<xs:element name="cpNoticeEvasion" type="cp:noticeEvasionType">
 						<xs:annotation>
 							<xs:documentation>Уведомление об отказе от заключения контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sentPackageList" type="sm:packageListType">
+						<xs:annotation>
+							<xs:documentation>Список отправленных из ЕИС пакетов</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="receivPackageList" type="sm:packageListType">
+						<xs:annotation>
+							<xs:documentation>Cписок полученных в ЕИС пакетов</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="notificationRemoveDoc" type="oos:zfcs_notificationRemoveDocType">
+						<xs:annotation>
+							<xs:documentation>Уведомление об удалении из ЕИС проекта документа</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:choice>
