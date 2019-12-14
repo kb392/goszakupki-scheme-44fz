@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS INTEGRATION eisSignIncoming Scheme, version 7.1, create date 17.03.2017 -->
+<!-- EIS INTEGRATION eisSignIncoming Scheme, version 7.1, create date 19.05.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/signIncoming/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/signIncoming/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:element name="processingResult" type="processingResultType">
@@ -207,23 +207,6 @@
 			<xs:extension base="packetType">
 				<xs:sequence>
 					<xs:element name="data" type="oos:zfcs_contractProcedure2015Type">
-						<xs:annotation>
-							<xs:documentation>Данные информационного пакета</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="contractProceduretWithControl99NoticeCompliance">
-		<xs:annotation>
-			<xs:documentation>Пакет данных:
-Информация об исполнении (расторжении) контракта с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="packetType">
-				<xs:sequence>
-					<xs:element name="data" type="oos:zfcs_contractProcedure2015WithControl99NoticeComplianceType">
 						<xs:annotation>
 							<xs:documentation>Данные информационного пакета</xs:documentation>
 						</xs:annotation>

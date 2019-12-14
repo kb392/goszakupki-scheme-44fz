@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS SOAP Messages Integration Scheme, version 7.1, create date 17.03.2017 -->
+<!-- EIS SOAP Messages Integration Scheme, version 7.1, create date 19.05.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/signIncoming/soap/messages" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:si="http://zakupki.gov.ru/oos/signIncoming/1" targetNamespace="http://zakupki.gov.ru/oos/signIncoming/soap/messages" elementFormDefault="qualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/signIncoming/1" schemaLocation="eisSignIncoming.xsd"/>
 	<xs:element name="receiveRbgRequest" type="receiveRbgRequestType">
@@ -222,7 +222,6 @@
 	<xs:complexType name="receiveRkRequestType">
 		<xs:choice>
 			<xs:element name="contractProcedure" type="si:contractProcedure"/>
-			<xs:element name="contractProcedureWithControl99NoticeCompliance" type="si:contractProceduretWithControl99NoticeCompliance"/>
 			<xs:element name="contractProcedureCancel" type="si:contractProcedureCancel"/>
 			<xs:element name="contract" type="si:contract"/>
 			<xs:element name="contractWithControl99NoticeCompliance" type="si:contractWithControl99NoticeCompliance"/>

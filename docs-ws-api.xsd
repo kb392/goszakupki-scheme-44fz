@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS docs-ws-api Integration Scheme, version 7.1, create date 17.03.2017 -->
+<!-- EIS docs-ws-api Integration Scheme, version 7.1, create date 19.05.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/fz44/ws/priz" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/fz44/ws/priz">
 	<xs:element name="getPRIZObjectListRequest">
 		<xs:annotation>

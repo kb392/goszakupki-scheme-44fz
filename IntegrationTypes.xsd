@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 7.1, create date 17.03.2017 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 7.1, create date 19.05.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:complexType name="account">
 		<xs:annotation>
@@ -6723,7 +6723,7 @@ RESUME - возобновление</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="date" type="xs:dateTime">
+						<xs:element name="date" type="xs:dateTime" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Дата и время очных публичных слушаний</xs:documentation>
 							</xs:annotation>
@@ -9707,6 +9707,32 @@ PA - Принять правила нормирования.
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="placer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация об организации, разместившей документ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="responsibleOrg" type="zfcs_organizationRef">
+							<xs:annotation>
+								<xs:documentation>Организация, разместившая документ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="responsibleRole" type="zfcs_bankGuaranteeRefusalPlacerOrgType">
+							<xs:annotation>
+								<xs:documentation>Роль организации, разместившей документ
+
+CU - Заказчик;
+OCU - Заказчик в качестве организатора совместного аукциона;
+RA - Уполномоченный орган;
+AI - Уполномоченное учреждение;
+CS - Организация, осуществляющие полномочия заказчика, в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ;
+OA - Организация, осуществляющие полномочия заказчика на осуществление закупок на основании договора (соглашения) в соответствии с частью 6 статьи 15 Федерального закона № 44-ФЗ.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="attachments" type="zfcs_attachmentListType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Прикрепленные файлы</xs:documentation>
@@ -10024,6 +10050,26 @@ PA - Принять правила нормирования.
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
+							<xs:element name="majorRepairEnsure">
+								<xs:annotation>
+									<xs:documentation>Обеспечения исполнения договора о проведении капитального ремонта</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="EFNumber">
+											<xs:annotation>
+												<xs:documentation>Номер электронного аукциона</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="50"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
 						</xs:choice>
 						<xs:element name="customer" type="zfcs_bankGuaranteeOrganizationType">
 							<xs:annotation>
@@ -10309,6 +10355,32 @@ C - Внесение исправлений в информацию о  банк
 					<xs:documentation>Информация о прекращении обязательств поставщика, обеспеченных банковской гарантией</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="placer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация об организации, разместившей документ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="responsibleOrg" type="zfcs_organizationRef">
+							<xs:annotation>
+								<xs:documentation>Организация, разместившая документ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="responsibleRole" type="zfcs_bankGuaranteeRefusalPlacerOrgType">
+							<xs:annotation>
+								<xs:documentation>Роль организации, разместившей документ
+
+CU - Заказчик;
+OCU - Заказчик в качестве организатора совместного аукциона;
+RA - Уполномоченный орган;
+AI - Уполномоченное учреждение;
+CS - Организация, осуществляющие полномочия заказчика, в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ;
+OA - Организация, осуществляющие полномочия заказчика на осуществление закупок на основании договора (соглашения) в соответствии с частью 6 статьи 15 Федерального закона № 44-ФЗ.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="href" type="zfcs_hrefType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Гиперссылка на опубликованный документ</xs:documentation>
@@ -10512,6 +10584,32 @@ C - Внесение исправлений в информацию о  банк
 				<xs:annotation>
 					<xs:documentation>Информация о возвращении банковской гарантии или уведомление об освобождении от обязательств по банковской гарантии</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="placer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация об организации, разместившей документ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="responsibleOrg" type="zfcs_organizationRef">
+							<xs:annotation>
+								<xs:documentation>Организация, разместившая документ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="responsibleRole" type="zfcs_bankGuaranteeRefusalPlacerOrgType">
+							<xs:annotation>
+								<xs:documentation>Роль организации, разместившей документ
+
+CU - Заказчик;
+OCU - Заказчик в качестве организатора совместного аукциона;
+RA - Уполномоченный орган;
+AI - Уполномоченное учреждение;
+CS - Организация, осуществляющие полномочия заказчика, в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ;
+OA - Организация, осуществляющие полномочия заказчика на осуществление закупок на основании договора (соглашения) в соответствии с частью 6 статьи 15 Федерального закона № 44-ФЗ.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="href" type="zfcs_hrefType" minOccurs="0">
 				<xs:annotation>
@@ -11250,6 +11348,26 @@ C - Внесение исправлений в информацию о  банк
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="majorRepairEnsure">
+					<xs:annotation>
+						<xs:documentation>Обеспечения исполнения договора о проведении капитального ремонта</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="EFNumber">
+								<xs:annotation>
+									<xs:documentation>Номер электронного аукциона</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:minLength value="1"/>
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
 			</xs:choice>
 			<xs:element name="customer" type="zfcs_bankGuaranteeOrganizationType">
 				<xs:annotation>
@@ -11493,6 +11611,26 @@ CAdES-A</xs:documentation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="zfcs_bankGuaranteeRefusalPlacerOrgType">
+		<xs:annotation>
+			<xs:documentation>Роль организации, осуществляющей размещение отказа заказчика в принятии БГ:
+			
+CU - Заказчик;
+OCU - Заказчик в качестве организатора совместного аукциона;
+RA - Уполномоченный орган;
+AI - Уполномоченное учреждение;
+CS - Организация, осуществляющие полномочия заказчика, в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ;
+OA - Организация, осуществляющие полномочия заказчика на осуществление закупок на основании договора (соглашения) в соответствии с частью 6 статьи 15 Федерального закона № 44-ФЗ.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CU"/>
+			<xs:enumeration value="OCU"/>
+			<xs:enumeration value="RA"/>
+			<xs:enumeration value="AI"/>
+			<xs:enumeration value="CS"/>
+			<xs:enumeration value="OA"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="zfcs_bankGaranteeModificationType">
 		<xs:annotation>
 			<xs:documentation>Тип: Тип изменения банковской гарантии </xs:documentation>
@@ -11718,19 +11856,33 @@ processing - обрабатывается.</xs:documentation>
 												<xs:documentation>Номер редакции в рамках версии документа</xs:documentation>
 											</xs:annotation>
 										</xs:element>
-										<xs:element name="control99BeginMessageUid" type="zfcs_guidType" minOccurs="0">
-											<xs:annotation>
-												<xs:documentation>Идентификатор сообщения о начале контроля по 99 статье</xs:documentation>
-											</xs:annotation>
-										</xs:element>
-										<xs:element name="control99ProtocolMismatchUid" type="zfcs_guidType" minOccurs="0">
+										<xs:choice minOccurs="0">
+											<xs:element name="control99BeginMessageUid" type="zfcs_guidType">
+												<xs:annotation>
+													<xs:documentation>Идентификатор сообщения о начале контроля по 99 статье</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="control99RefusalMessageUid" type="zfcs_guidType">
+												<xs:annotation>
+													<xs:documentation>Идентификатор сообщения об отказе в принятии на контроль по 99 статье</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:choice>
+										<xs:choice minOccurs="0">
+											<xs:element name="control99NoticeComplianceUid" type="zfcs_guidType">
+												<xs:annotation>
+													<xs:documentation>Идентификатор уведомления о соответствии контролируемой информации</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="control99ProtocolMismatchUid" type="zfcs_guidType">
+												<xs:annotation>
+													<xs:documentation>Идентификатор протокола о несоответствии контролируемой информации</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:choice>
+										<xs:element name="control99ProtocolMismatchReductFundsUid" type="zfcs_guidType" minOccurs="0">
 											<xs:annotation>
 												<xs:documentation>Идентификатор протокола о несоответствии контролируемой информации (в связи с уменьшением средств)</xs:documentation>
-											</xs:annotation>
-										</xs:element>
-										<xs:element name="control99NoticeComplianceUid" type="zfcs_guidType">
-											<xs:annotation>
-												<xs:documentation>Идентификатор уведомления о соответствии контролируемой информации</xs:documentation>
 											</xs:annotation>
 										</xs:element>
 									</xs:sequence>
@@ -17967,12 +18119,13 @@ OR-обследование в рамках ревизии
 						</xs:element>
 						<xs:element name="responsibleRole" type="zfcs_placerRoleContract2015Type">
 							<xs:annotation>
-								<xs:documentation>Роль организации, организации, разместившей контракт
+								<xs:documentation>Роль организации, разместившей контракт
 
 CU - Заказчик;
 RA - Уполномоченный орган;
 AI - Уполномоченное учреждение;
-OA - Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения)</xs:documentation>
+OA - Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения);
+CS - Заказчик, осуществляющий закупки в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -20855,14 +21008,19 @@ IN	Aннулировано.</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="MNNCode" type="zfcs_contract2015DrugDictCodeType">
+									<xs:element name="MNNExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
 										<xs:annotation>
-											<xs:documentation>Код МНН по справочнику "Международные непатентованные химические или групповые наименования" (МНН)</xs:documentation>
+											<xs:documentation>Уникальный внешний код МНН по справочнику "Лекарственные препараты" (поле MNNInfo\MNNExternalCode документа nsiFarmDrugDictionary)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="MNNDrugCode" type="zfcs_nsiFarmDrugDictExternalCodeType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Уникальный код МНН. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\MNNDrugCode документа nsiFarmDrugDictionary)</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="MNNName" type="zfcs_contract2015DrugDictNameType" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Наименование МНН. Игнорируется при приеме, автоматически заполняется при передаче из справочника МНН</xs:documentation>
+											<xs:documentation>Наименование МНН. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\MNNName документа nsiFarmDrugDictionary)</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -20906,7 +21064,7 @@ IN	Aннулировано.</xs:documentation>
 						</xs:element>
 						<xs:element name="isZNVLP" type="xs:boolean" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Признак включения в реестр жизненно необходимые и важнейших лекарственных препаратов (ЖНВЛП). Игнорируется при приеме, автоматически заполняется при передаче из справочника МНН</xs:documentation>
+								<xs:documentation>Признак включения в реестр жизненно необходимые и важнейших лекарственных препаратов (ЖНВЛП). Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\isZNVLP документа nsiFarmDrugDictionary)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="positionsTradeName">
@@ -20921,33 +21079,25 @@ IN	Aннулировано.</xs:documentation>
 										</xs:annotation>
 										<xs:complexType>
 											<xs:sequence>
-												<xs:element name="drugCode" type="zfcs_contract2015DrugDictCodeType">
+												<xs:element name="positionTradeNameExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
 													<xs:annotation>
-														<xs:documentation>Код ЕИС лекарственного препарата по справочнику "Лекарственные препараты"</xs:documentation>
+														<xs:documentation>Уникальный внешний код лекарственного препарата по справочнику "Лекарственные препараты" (поле MNNInfo\positionsTradeName\positionTradeName\positionTradeNameExternalCode  документа nsiFarmDrugDictionary)</xs:documentation>
 													</xs:annotation>
 												</xs:element>
-												<xs:element name="drugExternalCode" minOccurs="0">
+												<xs:element name="drugCode" type="zfcs_nsiFarmDrugDictExternalCodeType" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Уникальный внешний код лекарственного препарата по справочнику "Лекарственные препараты". Игнорируется при приеме, автоматически заполняется при передаче  значением из справочника "Лекарственные препараты"</xs:documentation>
+														<xs:documentation>Код лекарственного препарата по справочнику "Лекарственные препараты". Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" поле MNNInfo\positionsTradeName\positionTradeName\drugCode документа nsiFarmDrugDictionary)</xs:documentation>
 													</xs:annotation>
-													<xs:simpleType>
-														<xs:restriction base="zfcs_contract2015DrugExternalCodeType"/>
-													</xs:simpleType>
 												</xs:element>
 												<xs:element name="tradeInfo" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Торговое наименование (ТН) лекарственного препарата. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Список торговых наименований лекарственных препаратов" по уникальному коду лекарственного препарата</xs:documentation>
+														<xs:documentation>Торговое наименование (ТН) лекарственного препарата. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (блок MNNInfo\positionsTradeName\positionTradeName\tradeInfo документа nsiFarmDrugDictionary)</xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="tradeCode" type="zfcs_contract2015DrugDictCodeType">
-																<xs:annotation>
-																	<xs:documentation>Код торгового наименования по справочнику  "Список торговых наименований лекарственных препаратов"  </xs:documentation>
-																</xs:annotation>
-															</xs:element>
 															<xs:element name="tradeName" type="zfcs_contract2015DrugDictNameType">
 																<xs:annotation>
-																	<xs:documentation>Торговое наименование (ТН) препарата по справочнику  "Список торговых наименований лекарственных препаратов"  </xs:documentation>
+																	<xs:documentation>Торговое наименование (ТН) препарата </xs:documentation>
 																</xs:annotation>
 															</xs:element>
 														</xs:sequence>
@@ -20955,7 +21105,7 @@ IN	Aннулировано.</xs:documentation>
 												</xs:element>
 												<xs:element name="certificateNumber" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Номер регистрационного удостоверения лекарственного препарата. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Список лекарственных препаратов"</xs:documentation>
+														<xs:documentation>Номер регистрационного удостоверения лекарственного препарата. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\positionsTradeName\positionTradeName\certificateNumber документа nsiFarmDrugDictionary)</xs:documentation>
 													</xs:annotation>
 													<xs:simpleType>
 														<xs:restriction base="xs:string">
@@ -20964,20 +21114,15 @@ IN	Aннулировано.</xs:documentation>
 														</xs:restriction>
 													</xs:simpleType>
 												</xs:element>
-												<xs:element name="dosageFormInfo" minOccurs="0">
+												<xs:element name="medicamentalFormInfo" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Лекарственная форма.  Игнорируется при приеме, автоматически заполняется при передаче из справочника "Список лекарственных форм" по уникальному коду лекарственного препарата</xs:documentation>
+														<xs:documentation>Лекарственная форма.   Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (блок MNNInfo\positionsTradeName\positionTradeName\medicamentalFormInfo документа nsiFarmDrugDictionary)</xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="dosageFormCode" type="zfcs_contract2015DrugDictCodeType">
+															<xs:element name="medicamentalFormName" type="zfcs_contract2015DrugDictNameType">
 																<xs:annotation>
-																	<xs:documentation>Код лекарственной формы по справочнику  "Список лекарственных форм"  </xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="dosageFormName" type="zfcs_contract2015DrugDictNameType">
-																<xs:annotation>
-																	<xs:documentation>Наименование лекарственной формы по справочнику "Список лекарственных форм" </xs:documentation>
+																	<xs:documentation>Наименование лекарственной формы</xs:documentation>
 																</xs:annotation>
 															</xs:element>
 														</xs:sequence>
@@ -20985,34 +21130,28 @@ IN	Aннулировано.</xs:documentation>
 												</xs:element>
 												<xs:element name="dosageInfo" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Дозировка. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Дозировки" по уникальному коду лекарственного препарата</xs:documentation>
+														<xs:documentation>Дозировка. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (блок MNNInfo\positionsTradeName\positionTradeName\dosagesInfo документа nsiFarmDrugDictionary)</xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="dosageCode" type="zfcs_contract2015DrugDictCodeType">
+															<xs:element name="dosageName" type="zfcs_nsiFarmDrugDictNameType" minOccurs="0">
 																<xs:annotation>
-																	<xs:documentation>Код дозировки по справочнику  "Дозировки"  </xs:documentation>
+																	<xs:documentation>Наименование единицы измерения дозировки </xs:documentation>
 																</xs:annotation>
 															</xs:element>
 															<xs:element name="dosageOKEI" type="zfcs_OKEIRef">
 																<xs:annotation>
-																	<xs:documentation>Единица измерения дозировки  по справочнику  "Дозировки". Ссылка на классификатор ОКЕИ (nsiOKEI)</xs:documentation>
+																	<xs:documentation>Единица измерения дозировки. Ссылка на классификатор ОКЕИ (nsiOKEI)</xs:documentation>
 																</xs:annotation>
 															</xs:element>
-															<xs:element name="dosageValue">
+															<xs:element name="dosageValue" type="zfcs_nsiFarmDrugDecimalCodeType">
 																<xs:annotation>
-																	<xs:documentation>Значение дозировки по справочнику  "Дозировки"  </xs:documentation>
+																	<xs:documentation>Значение дозировки</xs:documentation>
 																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="xs:decimal">
-																		<xs:totalDigits value="20"/>
-																		<xs:fractionDigits value="10"/>
-																	</xs:restriction>
-																</xs:simpleType>
 															</xs:element>
 															<xs:element name="dosageGRLSValue" type="zfcs_contract2015DrugDictNameType">
 																<xs:annotation>
-																	<xs:documentation>Полная форма дозировки по справочнику  "Дозировки"</xs:documentation>
+																	<xs:documentation>Полная форма дозировки</xs:documentation>
 																</xs:annotation>
 															</xs:element>
 														</xs:sequence>
@@ -21020,12 +21159,12 @@ IN	Aннулировано.</xs:documentation>
 												</xs:element>
 												<xs:element name="certificateKeeperName" type="zfcs_contract2015DrugDictNameType" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Наименование держателя или владельца регистрационного удостоверения. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Список лекарственных препаратов"</xs:documentation>
+														<xs:documentation>Наименование держателя или владельца регистрационного удостоверения.  Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\positionsTradeName\positionTradeName\owner\certificateKeeperName документа nsiFarmDrugDictionary)</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 												<xs:element name="manufacturerInfo" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Производитель лекарственного препарата. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Список лекарственных препаратов"</xs:documentation>
+														<xs:documentation>Производитель лекарственного препарата. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (блок MNNInfo\positionsTradeName\positionTradeName\manufacturerInfo документа </xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
@@ -21056,18 +21195,13 @@ IN	Aннулировано.</xs:documentation>
 																	<xs:sequence>
 																		<xs:element name="primaryPackagingInfo">
 																			<xs:annotation>
-																				<xs:documentation>Сведения о первичной упаковке по справочнику "Список первичных упаковок лекарственных препаратов"</xs:documentation>
+																				<xs:documentation>Сведения о первичной упаковке по справочнику "Лекарственные препараты" (блок MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo  документа nsiFarmDrugDictionary)</xs:documentation>
 																			</xs:annotation>
 																			<xs:complexType>
 																				<xs:sequence>
-																					<xs:element name="primaryPackagingCode" type="zfcs_contract2015DrugDictCodeType">
+																					<xs:element name="primaryPackagingName" type="zfcs_contract2015DrugDictNameType">
 																						<xs:annotation>
-																							<xs:documentation>Код вида первичной упаковки по справочнику "Список первичных упаковок лекарственных препаратов"</xs:documentation>
-																						</xs:annotation>
-																					</xs:element>
-																					<xs:element name="primaryPackagingName" type="zfcs_contract2015DrugDictNameType" minOccurs="0">
-																						<xs:annotation>
-																							<xs:documentation>Наименование вида первичной упаковки. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Список первичных упаковок лекарственных препаратов"</xs:documentation>
+																							<xs:documentation>Наименование вида первичной упаковки по справочнику "Лекарственные препараты" (поле MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo\primaryPackagingName  документа nsiFarmDrugDictionary)</xs:documentation>
 																						</xs:annotation>
 																					</xs:element>
 																				</xs:sequence>
@@ -21103,9 +21237,20 @@ IN	Aннулировано.</xs:documentation>
 																				</xs:restriction>
 																			</xs:simpleType>
 																		</xs:element>
-																		<xs:element name="drugQuantity">
+																		<xs:element name="completeness" minOccurs="0">
 																			<xs:annotation>
-																				<xs:documentation>Количество товара  </xs:documentation>
+																				<xs:documentation>Комплектность упаковки</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="500"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="drugQuantity" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Количество товара</xs:documentation>
 																			</xs:annotation>
 																			<xs:simpleType>
 																				<xs:restriction base="xs:decimal">
@@ -21247,7 +21392,12 @@ IN	Aннулировано.</xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="dosageOKEI" type="zfcs_OKEIRef">
+															<xs:element name="dosageName" type="zfcs_nsiFarmDrugDictNameType" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Наименование единицы измерения дозировки </xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="dosageOKEI" type="zfcs_OKEIRef" minOccurs="0">
 																<xs:annotation>
 																	<xs:documentation>Единица измерения дозировки. Ссылка на классификатор ОКЕИ (nsiOKEI)</xs:documentation>
 																</xs:annotation>
@@ -21262,11 +21412,6 @@ IN	Aннулировано.</xs:documentation>
 																		<xs:fractionDigits value="10"/>
 																	</xs:restriction>
 																</xs:simpleType>
-															</xs:element>
-															<xs:element name="dosageGRLSValue" type="zfcs_contract2015DrugDictNameType">
-																<xs:annotation>
-																	<xs:documentation>Полная форма дозировки</xs:documentation>
-																</xs:annotation>
 															</xs:element>
 														</xs:sequence>
 													</xs:complexType>
@@ -21351,7 +21496,18 @@ IN	Aннулировано.</xs:documentation>
 																				</xs:restriction>
 																			</xs:simpleType>
 																		</xs:element>
-																		<xs:element name="drugQuantity">
+																		<xs:element name="completeness" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Комплектность упаковки</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="500"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="drugQuantity" minOccurs="0">
 																			<xs:annotation>
 																				<xs:documentation>Количество товара  </xs:documentation>
 																			</xs:annotation>
@@ -21383,8 +21539,9 @@ IN	Aннулировано.</xs:documentation>
 		<xs:annotation>
 			<xs:documentation>Тип: Код  в справочнике для справочников лекарственных препаратов</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:int">
-			<xs:totalDigits value="10"/>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_contract2015DrugDictNameType">
@@ -21552,13 +21709,15 @@ CPWWCS - Подписанный контракт (с подписью заказ
 CU - Заказчик;
 RA - Уполномоченный орган;
 AI - Уполномоченное учреждение;
-OA - Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения);</xs:documentation>
+OA - Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения);
+CS - Заказчик, осуществляющий закупки в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="CU"/>
 			<xs:enumeration value="RA"/>
 			<xs:enumeration value="AI"/>
 			<xs:enumeration value="OA"/>
+			<xs:enumeration value="CS"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_schemeVersionContract2015Type">
@@ -35345,7 +35504,7 @@ OAU - Заказчик, осуществляющий закупку на про�
 					<xs:sequence>
 						<xs:element name="lotNumber" type="xs:positiveInteger" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Номер лота в извещении (для однолотовых закупок может не указываться)</xs:documentation>
+								<xs:documentation>Номер лота в извещении (Если номер указан, то проверяется что закупка данного протокола многолотовая)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="lotInfo" type="zfcs_lotInfoType" minOccurs="0">
@@ -35653,7 +35812,7 @@ OAU - Заказчик, осуществляющий закупку на про�
 					<xs:sequence>
 						<xs:element name="lotNumber" type="xs:positiveInteger" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Номер лота в извещении (для однолотовых закупок может не указываться)</xs:documentation>
+								<xs:documentation>Номер лота в извещении (Если номер указан, то проверяется что закупка данного протокола многолотовая)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="lotInfo" type="zfcs_lotInfoType" minOccurs="0">
@@ -44385,615 +44544,31 @@ Publish - Размещение (публикация) документа</xs:doc
 			<xs:documentation>Справочник: "Лекарственные препараты"</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="groupCode" type="zfcs_nsiFarmDrugDictCodeType">
+			<xs:element name="MNNInfo">
 				<xs:annotation>
-					<xs:documentation>Бизнес-код группы международных, группировочных или химических наименований лекарственных препаратов (МНН) по справочнику "Группы Справочника МНН"</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="parentGroupCode" type="zfcs_nsiFarmDrugDictCodeType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Идентификатор родительской группы МНН по справочнику "Группы Справочника МНН"</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="groupName" type="zfcs_nsiFarmDrugDictNameType">
-				<xs:annotation>
-					<xs:documentation>Наименование группы МНН по справочнику "Группы Справочника МНН"</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="MNNsInfo" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Международные, группировочные или химические наименования лекарственных препаратов (МНН)</xs:documentation>
+					<xs:documentation>Международное, группировочное или химическое наименование лекарственного препарата (МНН)</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="MNNInfo" maxOccurs="unbounded">
+						<xs:element name="groupInfo" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Международное, группировочное или химическое наименование лекарственного препарата (МНН)</xs:documentation>
+								<xs:documentation>Информация о группе международных, группировочных или химических наименований лекарственных препаратов (МНН) по справочнику "Группы Справочника МНН"</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="MNNCode" type="zfcs_nsiFarmDrugDictCodeType">
+									<xs:element name="groupCode" type="zfcs_nsiFarmDrugDictCodeType">
 										<xs:annotation>
-											<xs:documentation>Бизнес-код МНН по справочнику "Международные непатентованные химические или групповые наименования"</xs:documentation>
+											<xs:documentation>Бизнес-код группы международных, группировочных или химических наименований лекарственных препаратов (МНН) по справочнику "Группы Справочника МНН"</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="MNNDrugCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
+									<xs:element name="parentGroupCode" type="zfcs_nsiFarmDrugDictCodeType" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Уникальный код МНН по справочнику "Международные непатентованные химические или групповые наименования"</xs:documentation>
+											<xs:documentation>Идентификатор родительской группы МНН по справочнику "Группы Справочника МНН"</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="MNNExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
+									<xs:element name="groupName" type="zfcs_nsiFarmDrugDictNameType">
 										<xs:annotation>
-											<xs:documentation>Уникальный внешний код МНН по справочнику "Международные непатентованные химические или групповые наименования"</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="MNNHash" type="zfcs_nsiFarmDrugDictExternalCodeType">
-										<xs:annotation>
-											<xs:documentation>Код МНН в ИАС</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="MNNName" type="zfcs_nsiFarmDrugDictNameType">
-										<xs:annotation>
-											<xs:documentation>Наименование МНН по справочнику "Международные непатентованные химические или групповые наименования"</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="ftgInfo">
-										<xs:annotation>
-											<xs:documentation>Фармакотерапевтическая группа</xs:documentation>
-										</xs:annotation>
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="ftgCode" type="zfcs_nsiFarmDrugDictCodeType">
-													<xs:annotation>
-														<xs:documentation>Бизнес-код фармакотерапевтической группы по справочнику "Список фармакотерапевтических групп"</xs:documentation>
-													</xs:annotation>
-												</xs:element>
-												<xs:element name="ftgName" type="zfcs_nsiFarmDrugDictNameType">
-													<xs:annotation>
-														<xs:documentation>Наименование фармакотерапевтической группы по справочнику "Список фармакотерапевтических групп"</xs:documentation>
-													</xs:annotation>
-												</xs:element>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
-									<xs:element name="medicamentalFormInfo">
-										<xs:annotation>
-											<xs:documentation>Лекарственная форма</xs:documentation>
-										</xs:annotation>
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="medicamentalFormCode" type="zfcs_nsiFarmDrugDictCodeType">
-													<xs:annotation>
-														<xs:documentation>Бизнес-код лекарственной формы по справочнику "Список лекарственных форм"  </xs:documentation>
-													</xs:annotation>
-												</xs:element>
-												<xs:element name="medicamentalFormName" type="zfcs_nsiFarmDrugDictNameType">
-													<xs:annotation>
-														<xs:documentation>Наименование лекарственной формы по справочнику "Список лекарственных форм" </xs:documentation>
-													</xs:annotation>
-												</xs:element>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
-									<xs:element name="dosagesInfo" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>Дозировки</xs:documentation>
-										</xs:annotation>
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="dosageInfo" type="zfcs_nsiFarmDrugDosageInfoType" maxOccurs="unbounded">
-													<xs:annotation>
-														<xs:documentation>Дозировка</xs:documentation>
-													</xs:annotation>
-												</xs:element>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
-									<xs:element name="athsInfo">
-										<xs:annotation>
-											<xs:documentation>Анатомо-терапевтически-химические классификации (АТХ)</xs:documentation>
-										</xs:annotation>
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="athInfo" maxOccurs="unbounded">
-													<xs:annotation>
-														<xs:documentation>Анатомо-терапевтически-химическая классификация (АТХ)</xs:documentation>
-													</xs:annotation>
-													<xs:complexType>
-														<xs:sequence>
-															<xs:element name="athCode" type="zfcs_nsiFarmDrugDictCodeType">
-																<xs:annotation>
-																	<xs:documentation>Бизнес-код анатомо-терапевтически-химической классификации по справочнику "Список анатомо-терапевтически-химических классификаций"</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="athExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
-																<xs:annotation>
-																	<xs:documentation>Уникальный внешний код анатомо-терапевтически-химической классификации по справочнику "Список анатомо-терапевтически-химических классификаций"</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="athName" type="zfcs_nsiFarmDrugDictNameType">
-																<xs:annotation>
-																	<xs:documentation>Наименование анатомо-терапевтически-химической классификации по справочнику "Список анатомо-терапевтически-химических </xs:documentation>
-																</xs:annotation>
-															</xs:element>
-														</xs:sequence>
-													</xs:complexType>
-												</xs:element>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
-									<xs:element name="isZNVLP" type="xs:boolean">
-										<xs:annotation>
-											<xs:documentation>Признак включения в реестр жизненно необходимые и важнейших лекарственных препаратов (ЖНВЛП)</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="isNarcotiс" type="xs:boolean">
-										<xs:annotation>
-											<xs:documentation>Признак наличия в лекарственном препарате наркотических средств, психотропных веществ и их прекурсоров</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="OKPD2" type="zfcs_OKPDRef">
-										<xs:annotation>
-											<xs:documentation>Классификация по ОКПД2. Ссылка на классификатор ОКПД2 (nsiOKPD)</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="createDate" type="xs:dateTime">
-										<xs:annotation>
-											<xs:documentation>Дата создания записи</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="startDate" type="xs:dateTime">
-										<xs:annotation>
-											<xs:documentation>Дата начала действия записи</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>Дата окончания действия записи</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="pricesInfo" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>Референтные цены</xs:documentation>
-										</xs:annotation>
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="priceInfo" maxOccurs="unbounded">
-													<xs:annotation>
-														<xs:documentation>Референтная цена</xs:documentation>
-													</xs:annotation>
-													<xs:complexType>
-														<xs:sequence>
-															<xs:element name="priceCode" type="zfcs_nsiFarmDrugDictCodeType">
-																<xs:annotation>
-																	<xs:documentation>Бизнес-код референтной цены по справочнику "Референтные цены по МНН"</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="priceValue">
-																<xs:annotation>
-																	<xs:documentation>Значение референтной цены по справочнику "Референтные цены по МНН"</xs:documentation>
-																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="xs:decimal">
-																		<xs:totalDigits value="18"/>
-																		<xs:fractionDigits value="8"/>
-																	</xs:restriction>
-																</xs:simpleType>
-															</xs:element>
-															<xs:element name="priceType">
-																<xs:annotation>
-																	<xs:documentation>Тип референтной цены по справочнику "Референтные цены по МНН".
-1 - рассчитана по Методике с использованием исторических данных
-2 - рассчитана по Методике с использованием исторических данных и последующей ручной корректировкой
-3 - задана путем проведения переговоров</xs:documentation>
-																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="xs:int">
-																		<xs:enumeration value="1"/>
-																		<xs:enumeration value="2"/>
-																		<xs:enumeration value="3"/>
-																	</xs:restriction>
-																</xs:simpleType>
-															</xs:element>
-															<xs:element name="priceSigmaValue">
-																<xs:annotation>
-																	<xs:documentation>Значение стандартного отклонения для ценовой подвыборки по справочнику "Референтные цены по МНН"</xs:documentation>
-																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="xs:decimal">
-																		<xs:totalDigits value="18"/>
-																		<xs:fractionDigits value="8"/>
-																	</xs:restriction>
-																</xs:simpleType>
-															</xs:element>
-															<xs:element name="usageMin" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Минимальное количество закупаемых единиц лекарственного препарата, для которых примени данная цена, по справочнику "Референтные цены по МНН"</xs:documentation>
-																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="xs:int"/>
-																</xs:simpleType>
-															</xs:element>
-															<xs:element name="usageMax" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Максимальное количество закупаемых единиц лекарственного препарата, для которых примени данная цена, по справочнику "Референтные цены по МНН"</xs:documentation>
-																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="xs:int"/>
-																</xs:simpleType>
-															</xs:element>
-															<xs:element name="author">
-																<xs:annotation>
-																	<xs:documentation>СНИЛС оператора по справочнику "Референтные цены по МНН"</xs:documentation>
-																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="xs:string">
-																		<xs:pattern value="\d{3}-\d{3}-\d{3} \d{2}"/>
-																	</xs:restriction>
-																</xs:simpleType>
-															</xs:element>
-															<xs:element name="createDate" type="xs:dateTime">
-																<xs:annotation>
-																	<xs:documentation>Дата создания записи</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="startDate" type="xs:dateTime">
-																<xs:annotation>
-																	<xs:documentation>Дата начала действия записи</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Дата окончания действия записи</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-														</xs:sequence>
-													</xs:complexType>
-												</xs:element>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
-									<xs:element name="positionsTradeName">
-										<xs:annotation>
-											<xs:documentation>Позиции по торговому наименованию лекарственного средства</xs:documentation>
-										</xs:annotation>
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="positionTradeName" maxOccurs="unbounded">
-													<xs:annotation>
-														<xs:documentation>Позиция по торговому наименованию лекарственного средства</xs:documentation>
-													</xs:annotation>
-													<xs:complexType>
-														<xs:sequence>
-															<xs:element name="positionTradeNameCode" type="zfcs_nsiFarmDrugDictCodeType">
-																<xs:annotation>
-																	<xs:documentation>Бизнес-код позиции по торговому наименованию лекарственного средства по справочнику "Лекарственные препараты"</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="positionTradeNameExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
-																<xs:annotation>
-																	<xs:documentation>Уникальный внешний код лекарственного препарата по справочнику "Лекарственные препараты"</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="positionTradeNameHash" type="zfcs_nsiFarmDrugDictExternalCodeType">
-																<xs:annotation>
-																	<xs:documentation>Код лекарственного препарата в ИАС</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="drugCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
-																<xs:annotation>
-																	<xs:documentation>Код лекарственного препарата по справочнику "Лекарственные препараты"</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="conv" type="zfcs_nsiFarmDrugDictExternalCodeType">
-																<xs:annotation>
-																	<xs:documentation>Свертка кода каталога</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="tradeInfo">
-																<xs:annotation>
-																	<xs:documentation>Торговое наименование лекарственного препарата</xs:documentation>
-																</xs:annotation>
-																<xs:complexType>
-																	<xs:sequence>
-																		<xs:element name="tradeCode" type="zfcs_nsiFarmDrugDictCodeType">
-																			<xs:annotation>
-																				<xs:documentation>Бизнес-код торгового наименования лекарственного препарата по справочнику "Лекарственные препараты"</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																		<xs:element name="tradeName" type="zfcs_nsiFarmDrugDictNameType">
-																			<xs:annotation>
-																				<xs:documentation>Торговое наименование (ТН) лекарственного препарата по справочнику "Лекарственные препараты"</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																	</xs:sequence>
-																</xs:complexType>
-															</xs:element>
-															<xs:element name="dosageFormInfo">
-																<xs:annotation>
-																	<xs:documentation>Лекарственная форма</xs:documentation>
-																</xs:annotation>
-																<xs:complexType>
-																	<xs:sequence>
-																		<xs:element name="dosageFormCode" type="zfcs_nsiFarmDrugDictCodeType">
-																			<xs:annotation>
-																				<xs:documentation>Бизнес-код лекарственной формы по справочнику "Лекарственные препараты"</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																		<xs:element name="dosageFormName" type="zfcs_nsiFarmDrugDictNameType">
-																			<xs:annotation>
-																				<xs:documentation>Наименование лекарственной формы по справочнику "Лекарственные препараты"</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																	</xs:sequence>
-																</xs:complexType>
-															</xs:element>
-															<xs:element name="packagingsInfo">
-																<xs:annotation>
-																	<xs:documentation>Сведения об упаковках</xs:documentation>
-																</xs:annotation>
-																<xs:complexType>
-																	<xs:sequence>
-																		<xs:element name="packagingInfo" maxOccurs="unbounded">
-																			<xs:annotation>
-																				<xs:documentation>Сведения об упаковке</xs:documentation>
-																			</xs:annotation>
-																			<xs:complexType>
-																				<xs:sequence>
-																					<xs:element name="primaryPackagingInfo">
-																						<xs:annotation>
-																							<xs:documentation>Сведения о первичной упаковке по справочнику "Сведения об упаковке"</xs:documentation>
-																						</xs:annotation>
-																						<xs:complexType>
-																							<xs:sequence>
-																								<xs:element name="primaryPackagingCode" type="zfcs_nsiFarmDrugDictCodeType">
-																									<xs:annotation>
-																										<xs:documentation>Бизнес-код вида первичной упаковки по справочнику "Список первичных упаковок лекарственных препаратов"</xs:documentation>
-																									</xs:annotation>
-																								</xs:element>
-																								<xs:element name="primaryPackagingName" type="zfcs_nsiFarmDrugDictNameType">
-																									<xs:annotation>
-																										<xs:documentation>Наименование вида первичной упаковки по справочнику "Список первичных упаковок лекарственных препаратов"</xs:documentation>
-																									</xs:annotation>
-																								</xs:element>
-																							</xs:sequence>
-																						</xs:complexType>
-																					</xs:element>
-																					<xs:element name="packaging1Quantity" type="xs:int">
-																						<xs:annotation>
-																							<xs:documentation>Количество лекарственных форм в первичной упаковке по справочнику "Сведения об упаковке"</xs:documentation>
-																						</xs:annotation>
-																					</xs:element>
-																					<xs:element name="packaging2Quantity" type="xs:int">
-																						<xs:annotation>
-																							<xs:documentation>Количество первичных упаковок во вторичной (потребительской) упаковке по справочнику "Сведения об упаковке"</xs:documentation>
-																						</xs:annotation>
-																					</xs:element>
-																					<xs:element name="consumerPackagingInfo">
-																						<xs:annotation>
-																							<xs:documentation>Сведения о потребительской упаковке по справочнику "Сведения об упаковке"</xs:documentation>
-																						</xs:annotation>
-																						<xs:complexType>
-																							<xs:sequence>
-																								<xs:element name="consumerPackagingCode" type="zfcs_nsiFarmDrugDictCodeType">
-																									<xs:annotation>
-																										<xs:documentation>Бизнес-код вида потребительской упаковки по справочнику "Сведения об упаковке"</xs:documentation>
-																									</xs:annotation>
-																								</xs:element>
-																								<xs:element name="consumerPackagingName" type="zfcs_nsiFarmDrugDictNameType" minOccurs="0">
-																									<xs:annotation>
-																										<xs:documentation>Наименование вида потребительской упаковки по справочнику "Сведения об упаковке"</xs:documentation>
-																									</xs:annotation>
-																								</xs:element>
-																							</xs:sequence>
-																						</xs:complexType>
-																					</xs:element>
-																				</xs:sequence>
-																			</xs:complexType>
-																		</xs:element>
-																	</xs:sequence>
-																</xs:complexType>
-															</xs:element>
-															<xs:element name="owner">
-																<xs:annotation>
-																	<xs:documentation>Держатель или владелец регистрационного удостоверения</xs:documentation>
-																</xs:annotation>
-																<xs:complexType>
-																	<xs:sequence>
-																		<xs:element name="certificateKeeperName" type="zfcs_nsiFarmDrugDictNameType">
-																			<xs:annotation>
-																				<xs:documentation>Наименование держателя или владельца регистрационного удостоверения</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																		<xs:element name="certificateKeeperCountry" type="countryType" minOccurs="0">
-																			<xs:annotation>
-																				<xs:documentation>Страна держателя или владельца регистрационного удостоверения. Ссылка на классификатор ОКСМ (nsiOKSM)</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																	</xs:sequence>
-																</xs:complexType>
-															</xs:element>
-															<xs:element name="certificateNumber">
-																<xs:annotation>
-																	<xs:documentation>Номер регистрационного удостоверения лекарственного препарата</xs:documentation>
-																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="xs:string">
-																		<xs:minLength value="1"/>
-																		<xs:maxLength value="50"/>
-																	</xs:restriction>
-																</xs:simpleType>
-															</xs:element>
-															<xs:element name="certificateDate" type="xs:dateTime">
-																<xs:annotation>
-																	<xs:documentation>Дата регистрационного удостоверения лекарственного препарата</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="certificateUpdateDate" type="xs:dateTime" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Дата обновления регистрационного удостоверения лекарственного препарата</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="EAN13">
-																<xs:annotation>
-																	<xs:documentation>Международный товарный номер в формате EAN 13</xs:documentation>
-																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="xs:string">
-																		<xs:pattern value="\d{13}"/>
-																	</xs:restriction>
-																</xs:simpleType>
-															</xs:element>
-															<xs:element name="manufacturerInfo">
-																<xs:annotation>
-																	<xs:documentation>Производитель лекарственного препарата</xs:documentation>
-																</xs:annotation>
-																<xs:complexType>
-																	<xs:sequence>
-																		<xs:element name="manufacturerOKSM" type="zfcs_OKSMRef">
-																			<xs:annotation>
-																				<xs:documentation>Страна производителя. Ссылка на классификатор ОКСМ (nsiOKSM)</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																		<xs:element name="manufacturerAdress" type="zfcs_nsiFarmDrugDictNameType">
-																			<xs:annotation>
-																				<xs:documentation>Адрес прозводителя</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																		<xs:element name="manufacturerName" type="zfcs_nsiFarmDrugDictNameType">
-																			<xs:annotation>
-																				<xs:documentation>Наименование прозводителя</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																	</xs:sequence>
-																</xs:complexType>
-															</xs:element>
-															<xs:element name="pricesInfo" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Референтные цены</xs:documentation>
-																</xs:annotation>
-																<xs:complexType>
-																	<xs:sequence>
-																		<xs:element name="priceInfo" maxOccurs="unbounded">
-																			<xs:annotation>
-																				<xs:documentation>Референтная цена</xs:documentation>
-																			</xs:annotation>
-																			<xs:complexType>
-																				<xs:sequence>
-																					<xs:element name="priceCode" type="zfcs_nsiFarmDrugDictCodeType">
-																						<xs:annotation>
-																							<xs:documentation>Бизнес-код референтной цены по справочнику "Референтные цены по МНН"</xs:documentation>
-																						</xs:annotation>
-																					</xs:element>
-																					<xs:element name="priceValue">
-																						<xs:annotation>
-																							<xs:documentation>Значение референтной цены по справочнику "Референтные цены по МНН"</xs:documentation>
-																						</xs:annotation>
-																						<xs:simpleType>
-																							<xs:restriction base="xs:decimal">
-																								<xs:totalDigits value="18"/>
-																								<xs:fractionDigits value="8"/>
-																							</xs:restriction>
-																						</xs:simpleType>
-																					</xs:element>
-																					<xs:element name="priceType">
-																						<xs:annotation>
-																							<xs:documentation>Тип референтной цены по справочнику "Референтные цены по МНН".
-1 - рассчитана по Методике с использованием исторических данных
-2 - рассчитана по Методике с использованием исторических данных и последующей ручной корректировкой</xs:documentation>
-																						</xs:annotation>
-																						<xs:simpleType>
-																							<xs:restriction base="xs:int">
-																								<xs:enumeration value="1"/>
-																								<xs:enumeration value="2"/>
-																							</xs:restriction>
-																						</xs:simpleType>
-																					</xs:element>
-																					<xs:element name="priceSigmaValue">
-																						<xs:annotation>
-																							<xs:documentation>Значение стандартного отклонения для ценовой подвыборки по справочнику "Референтные цены по МНН"</xs:documentation>
-																						</xs:annotation>
-																						<xs:simpleType>
-																							<xs:restriction base="xs:decimal">
-																								<xs:totalDigits value="18"/>
-																								<xs:fractionDigits value="8"/>
-																							</xs:restriction>
-																						</xs:simpleType>
-																					</xs:element>
-																					<xs:element name="createDate" type="xs:dateTime">
-																						<xs:annotation>
-																							<xs:documentation>Дата создания записи</xs:documentation>
-																						</xs:annotation>
-																					</xs:element>
-																					<xs:element name="startDate" type="xs:dateTime">
-																						<xs:annotation>
-																							<xs:documentation>Дата начала действия записи</xs:documentation>
-																						</xs:annotation>
-																					</xs:element>
-																					<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
-																						<xs:annotation>
-																							<xs:documentation>Дата окончания действия записи</xs:documentation>
-																						</xs:annotation>
-																					</xs:element>
-																				</xs:sequence>
-																			</xs:complexType>
-																		</xs:element>
-																	</xs:sequence>
-																</xs:complexType>
-															</xs:element>
-															<xs:element name="dosagesInfo" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Дозировки</xs:documentation>
-																</xs:annotation>
-																<xs:complexType>
-																	<xs:sequence>
-																		<xs:element name="dosageInfo" type="zfcs_nsiFarmDrugDosageInfoType" maxOccurs="unbounded">
-																			<xs:annotation>
-																				<xs:documentation>Дозировка</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																	</xs:sequence>
-																</xs:complexType>
-															</xs:element>
-															<xs:element name="createDate" type="xs:dateTime">
-																<xs:annotation>
-																	<xs:documentation>Дата создания записи</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="startDate" type="xs:dateTime">
-																<xs:annotation>
-																	<xs:documentation>Дата начала действия записи</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Дата окончания действия записи</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="changeDate" type="xs:dateTime">
-																<xs:annotation>
-																	<xs:documentation>Дата изменения записи в ИАС</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="actual" type="xs:boolean">
-																<xs:annotation>
-																	<xs:documentation>Признак актуальности</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="lastChangeDate" type="xs:dateTime" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Дата последнего изменения записи</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-														</xs:sequence>
-													</xs:complexType>
-												</xs:element>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
-									<xs:element name="changeDate" type="xs:dateTime">
-										<xs:annotation>
-											<xs:documentation>Дата изменения записи в ИАС</xs:documentation>
+											<xs:documentation>Наименование группы МНН по справочнику "Группы Справочника МНН"</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="actual" type="xs:boolean">
@@ -45001,21 +44576,559 @@ Publish - Размещение (публикация) документа</xs:doc
 											<xs:documentation>Признак актуальности</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="lastChangeDate" type="xs:dateTime" minOccurs="0">
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="MNNCode" type="zfcs_nsiFarmDrugDictCodeType">
+							<xs:annotation>
+								<xs:documentation>Бизнес-код МНН по справочнику "Международные непатентованные химические или групповые наименования"</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MNNDrugCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
+							<xs:annotation>
+								<xs:documentation>Уникальный код МНН по справочнику "Международные непатентованные химические или групповые наименования"</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MNNExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
+							<xs:annotation>
+								<xs:documentation>Уникальный внешний код МНН по справочнику "Международные непатентованные химические или групповые наименования"</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MNNHash" type="zfcs_nsiFarmDrugDictExternalCodeType">
+							<xs:annotation>
+								<xs:documentation>Код МНН в ИАС</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MNNName" type="zfcs_nsiFarmDrugDictNameType">
+							<xs:annotation>
+								<xs:documentation>Наименование МНН по справочнику "Международные непатентованные химические или групповые наименования"</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ftgInfo">
+							<xs:annotation>
+								<xs:documentation>Фармакотерапевтическая группа</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ftgCode" type="zfcs_nsiFarmDrugDictCodeType">
 										<xs:annotation>
-											<xs:documentation>Дата последнего изменения записи</xs:documentation>
+											<xs:documentation>Бизнес-код фармакотерапевтической группы по справочнику "Список фармакотерапевтических групп"</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="ftgName" type="zfcs_nsiFarmDrugDictNameType">
+										<xs:annotation>
+											<xs:documentation>Наименование фармакотерапевтической группы по справочнику "Список фармакотерапевтических групп"</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
+						<xs:element name="medicamentalFormInfo">
+							<xs:annotation>
+								<xs:documentation>Лекарственная форма</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="medicamentalFormCode" type="zfcs_nsiFarmDrugDictCodeType">
+										<xs:annotation>
+											<xs:documentation>Бизнес-код лекарственной формы по справочнику "Список лекарственных форм"  </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="medicamentalFormName" type="zfcs_nsiFarmDrugDictNameType">
+										<xs:annotation>
+											<xs:documentation>Наименование лекарственной формы по справочнику "Список лекарственных форм" </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="dosagesInfo">
+							<xs:annotation>
+								<xs:documentation>Дозировки</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="dosageInfo" type="zfcs_nsiFarmDrugDosageInfoType" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Дозировка</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="athsInfo">
+							<xs:annotation>
+								<xs:documentation>Анатомо-терапевтически-химические классификации (АТХ)</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="athInfo" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Анатомо-терапевтически-химическая классификация (АТХ)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="athCode" type="zfcs_nsiFarmDrugDictCodeType">
+													<xs:annotation>
+														<xs:documentation>Бизнес-код анатомо-терапевтически-химической классификации по справочнику "Список анатомо-терапевтически-химических классификаций"</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="athExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
+													<xs:annotation>
+														<xs:documentation>Уникальный внешний код анатомо-терапевтически-химической классификации по справочнику "Список анатомо-терапевтически-химических классификаций"</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="athName" type="zfcs_nsiFarmDrugDictNameType">
+													<xs:annotation>
+														<xs:documentation>Наименование анатомо-терапевтически-химической классификации по справочнику "Список анатомо-терапевтически-химических </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="isZNVLP" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>Признак включения в реестр жизненно необходимые и важнейших лекарственных препаратов (ЖНВЛП)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="isNarcotic" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>Признак наличия в лекарственном препарате наркотических средств, психотропных веществ и их прекурсоров</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="OKPD2" type="zfcs_OKPDRef">
+							<xs:annotation>
+								<xs:documentation>Классификация по ОКПД2. Ссылка на классификатор ОКПД2 (nsiOKPD)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="createDate" type="xs:dateTime">
+							<xs:annotation>
+								<xs:documentation>Дата создания записи</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="startDate" type="xs:dateTime">
+							<xs:annotation>
+								<xs:documentation>Дата начала действия записи</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата окончания действия записи</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="pricesInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Референтные цены</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="priceInfo" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Референтная цена</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="priceCode" type="zfcs_nsiFarmDrugDictCodeType">
+													<xs:annotation>
+														<xs:documentation>Бизнес-код референтной цены по справочнику "Референтные цены по МНН"</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="priceValue" type="zfcs_nsiFarmDrugDecimalCodeType">
+													<xs:annotation>
+														<xs:documentation>Значение референтной цены по справочнику "Референтные цены по МНН"</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="priceType">
+													<xs:annotation>
+														<xs:documentation>Тип референтной цены по справочнику "Референтные цены по МНН".
+1 - рассчитана по Методике с использованием исторических данных
+2 - рассчитана по Методике с использованием исторических данных и последующей ручной корректировкой
+3 - задана путем проведения переговоров</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:int">
+															<xs:enumeration value="1"/>
+															<xs:enumeration value="2"/>
+															<xs:enumeration value="3"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="priceSigmaValue" type="zfcs_nsiFarmDrugDecimalCodeType">
+													<xs:annotation>
+														<xs:documentation>Значение стандартного отклонения для ценовой подвыборки по справочнику "Референтные цены по МНН"</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="usageMin" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Минимальное количество закупаемых единиц лекарственного препарата, для которых примени данная цена, по справочнику "Референтные цены по МНН"</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:int"/>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="usageMax" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Максимальное количество закупаемых единиц лекарственного препарата, для которых примени данная цена, по справочнику "Референтные цены по МНН"</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:int"/>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="author">
+													<xs:annotation>
+														<xs:documentation>СНИЛС оператора по справочнику "Референтные цены по МНН"</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:pattern value="\d{3}-\d{3}-\d{3} \d{2}"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="createDate" type="xs:dateTime">
+													<xs:annotation>
+														<xs:documentation>Дата создания записи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="startDate" type="xs:dateTime">
+													<xs:annotation>
+														<xs:documentation>Дата начала действия записи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Дата окончания действия записи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="positionsTradeName">
+							<xs:annotation>
+								<xs:documentation>Позиции по торговому наименованию лекарственного средства</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="positionTradeName" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Позиция по торговому наименованию лекарственного средства</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="positionTradeNameCode" type="zfcs_nsiFarmDrugDictCodeType">
+													<xs:annotation>
+														<xs:documentation>Бизнес-код позиции по торговому наименованию лекарственного средства по справочнику "Лекарственные препараты"</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="positionTradeNameExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
+													<xs:annotation>
+														<xs:documentation>Уникальный внешний код лекарственного препарата по справочнику "Лекарственные препараты"</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="positionTradeNameHash" type="zfcs_nsiFarmDrugDictExternalCodeType">
+													<xs:annotation>
+														<xs:documentation>Код лекарственного препарата в ИАС</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="drugCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
+													<xs:annotation>
+														<xs:documentation>Код лекарственного препарата по справочнику "Лекарственные препараты"</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="conv" type="zfcs_nsiFarmDrugDictExternalCodeType">
+													<xs:annotation>
+														<xs:documentation>Свертка кода каталога</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="tradeInfo">
+													<xs:annotation>
+														<xs:documentation>Торговое наименование лекарственного препарата</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="tradeCode" type="zfcs_nsiFarmDrugDictCodeType">
+																<xs:annotation>
+																	<xs:documentation>Бизнес-код торгового наименования лекарственного препарата по справочнику "Лекарственные препараты"</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="tradeName" type="zfcs_nsiFarmDrugDictNameType">
+																<xs:annotation>
+																	<xs:documentation>Торговое наименование (ТН) лекарственного препарата по справочнику "Лекарственные препараты"</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="packagingsInfo">
+													<xs:annotation>
+														<xs:documentation>Сведения об упаковках</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="packagingInfo" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation>Сведения об упаковке</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="primaryPackagingInfo">
+																			<xs:annotation>
+																				<xs:documentation>Сведения о первичной упаковке по справочнику "Сведения об упаковке"</xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="primaryPackagingCode" type="zfcs_nsiFarmDrugDictCodeType">
+																						<xs:annotation>
+																							<xs:documentation>Бизнес-код вида первичной упаковки по справочнику "Список первичных упаковок лекарственных препаратов"</xs:documentation>
+																						</xs:annotation>
+																					</xs:element>
+																					<xs:element name="primaryPackagingName" type="zfcs_nsiFarmDrugDictNameType">
+																						<xs:annotation>
+																							<xs:documentation>Наименование вида первичной упаковки по справочнику "Список первичных упаковок лекарственных препаратов"</xs:documentation>
+																						</xs:annotation>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="packaging1Quantity" type="xs:int">
+																			<xs:annotation>
+																				<xs:documentation>Количество лекарственных форм в первичной упаковке по справочнику "Сведения об упаковке"</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="packaging2Quantity" type="xs:int">
+																			<xs:annotation>
+																				<xs:documentation>Количество первичных упаковок во вторичной (потребительской) упаковке по справочнику "Сведения об упаковке"</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="consumerPackagingInfo">
+																			<xs:annotation>
+																				<xs:documentation>Сведения о потребительской упаковке по справочнику "Сведения об упаковке"</xs:documentation>
+																			</xs:annotation>
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="consumerPackagingCode" type="zfcs_nsiFarmDrugDictCodeType">
+																						<xs:annotation>
+																							<xs:documentation>Бизнес-код вида потребительской упаковки по справочнику "Сведения об упаковке"</xs:documentation>
+																						</xs:annotation>
+																					</xs:element>
+																					<xs:element name="consumerPackagingName" type="zfcs_nsiFarmDrugDictNameType" minOccurs="0">
+																						<xs:annotation>
+																							<xs:documentation>Наименование вида потребительской упаковки по справочнику "Сведения об упаковке"</xs:documentation>
+																						</xs:annotation>
+																					</xs:element>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="completeness" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Комплектность упаковки</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="500"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="owner">
+													<xs:annotation>
+														<xs:documentation>Держатель или владелец регистрационного удостоверения</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="certificateKeeperName" type="zfcs_nsiFarmDrugDictNameType">
+																<xs:annotation>
+																	<xs:documentation>Наименование держателя или владельца регистрационного удостоверения</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="certificateKeeperCountry" type="countryType" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Страна держателя или владельца регистрационного удостоверения. Ссылка на классификатор ОКСМ (nsiOKSM)</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="certificateNumber">
+													<xs:annotation>
+														<xs:documentation>Номер регистрационного удостоверения лекарственного препарата</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:minLength value="1"/>
+															<xs:maxLength value="50"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="certificateDate" type="xs:dateTime">
+													<xs:annotation>
+														<xs:documentation>Дата регистрационного удостоверения лекарственного препарата</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="certificateUpdateDate" type="xs:dateTime" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Дата обновления регистрационного удостоверения лекарственного препарата</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="barcode">
+													<xs:annotation>
+														<xs:documentation>Товарный номер</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:pattern value="\d{8,14}"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="manufacturerInfo">
+													<xs:annotation>
+														<xs:documentation>Производитель лекарственного препарата</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="manufacturerOKSM" type="zfcs_OKSMRef">
+																<xs:annotation>
+																	<xs:documentation>Страна производителя. Ссылка на классификатор ОКСМ (nsiOKSM)</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="manufacturerAdress" type="zfcs_nsiFarmDrugDictNameType">
+																<xs:annotation>
+																	<xs:documentation>Адрес прозводителя</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="manufacturerName" type="zfcs_nsiFarmDrugDictNameType">
+																<xs:annotation>
+																	<xs:documentation>Наименование прозводителя</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="pricesInfo" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Референтные цены</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="priceInfo" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation>Референтная цена</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="priceCode" type="zfcs_nsiFarmDrugDictCodeType">
+																			<xs:annotation>
+																				<xs:documentation>Бизнес-код референтной цены по справочнику "Референтные цены по МНН"</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="priceValue" type="zfcs_nsiFarmDrugDecimalCodeType">
+																			<xs:annotation>
+																				<xs:documentation>Значение референтной цены по справочнику "Референтные цены по МНН"</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="priceType">
+																			<xs:annotation>
+																				<xs:documentation>Тип референтной цены по справочнику "Референтные цены по МНН".
+1 - рассчитана по Методике с использованием исторических данных
+2 - рассчитана по Методике с использованием исторических данных и последующей ручной корректировкой</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:int">
+																					<xs:enumeration value="1"/>
+																					<xs:enumeration value="2"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="priceSigmaValue" type="zfcs_nsiFarmDrugDecimalCodeType">
+																			<xs:annotation>
+																				<xs:documentation>Значение стандартного отклонения для ценовой подвыборки по справочнику "Референтные цены по МНН"</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="createDate" type="xs:dateTime">
+																			<xs:annotation>
+																				<xs:documentation>Дата создания записи</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="startDate" type="xs:dateTime">
+																			<xs:annotation>
+																				<xs:documentation>Дата начала действия записи</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Дата окончания действия записи</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="createDate" type="xs:dateTime">
+													<xs:annotation>
+														<xs:documentation>Дата создания записи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="startDate" type="xs:dateTime">
+													<xs:annotation>
+														<xs:documentation>Дата начала действия записи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Дата окончания действия записи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="changeDate" type="xs:dateTime">
+													<xs:annotation>
+														<xs:documentation>Дата изменения записи в ИАС</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="actual" type="xs:boolean">
+													<xs:annotation>
+														<xs:documentation>Признак актуальности</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="lastChangeDate" type="xs:dateTime" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Дата последнего изменения записи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="changeDate" type="xs:dateTime">
+							<xs:annotation>
+								<xs:documentation>Дата изменения записи в ИАС</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="actual" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>Признак актуальности</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="lastChangeDate" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата последнего изменения записи</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="actual" type="xs:boolean">
-				<xs:annotation>
-					<xs:documentation>Признак актуальности</xs:documentation>
-				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -45031,7 +45144,7 @@ Publish - Размещение (публикация) документа</xs:doc
 			</xs:element>
 			<xs:element name="dosageName" type="zfcs_nsiFarmDrugDictNameType">
 				<xs:annotation>
-					<xs:documentation>Наименование дозировки по справочнику "Дозировки лекарственных препаратов"</xs:documentation>
+					<xs:documentation>Наименование единицы измерения дозировки дозировки по справочнику "Дозировки лекарственных препаратов"</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="dosageGRLSValue" type="zfcs_nsiFarmDrugDictNameType">
@@ -45044,16 +45157,10 @@ Publish - Размещение (публикация) документа</xs:doc
 					<xs:documentation>Единица измерения дозировки  по справочнику  "Дозировки лекарственных препаратов". Ссылка на классификатор ОКЕИ (nsiOKEI)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dosageValue">
+			<xs:element name="dosageValue" type="zfcs_nsiFarmDrugDecimalCodeType">
 				<xs:annotation>
 					<xs:documentation>Значение дозировки по справочнику "Дозировки лекарственных препаратов"</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:decimal">
-						<xs:totalDigits value="30"/>
-						<xs:fractionDigits value="10"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element name="dosageUser">
 				<xs:annotation>
@@ -45091,16 +45198,10 @@ Publish - Размещение (публикация) документа</xs:doc
 											<xs:documentation>Бизнес-код кратности поставки потребительской единицы дозировки по справочнику "Значения кратности поставки потребительских единиц"</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="dosageFactorValue">
+									<xs:element name="dosageFactorValue" type="zfcs_nsiFarmDrugDecimalCodeType">
 										<xs:annotation>
 											<xs:documentation>Значение кратности поставки потребительской единицы дозировки по справочнику "Значения кратности поставки потребительских единиц"</xs:documentation>
 										</xs:annotation>
-										<xs:simpleType>
-											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="6"/>
-												<xs:fractionDigits value="2"/>
-											</xs:restriction>
-										</xs:simpleType>
 									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
@@ -45125,38 +45226,20 @@ Publish - Размещение (публикация) документа</xs:doc
 											<xs:documentation>Бизнес-код диапазона значений кратности поставки потребительской единицы дозировки по справочнику "Диапазон значений кратности поставки потребительских единиц"</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="dosageFactorRangeMin">
+									<xs:element name="dosageFactorRangeMin" type="zfcs_nsiFarmDrugDecimalCodeType">
 										<xs:annotation>
 											<xs:documentation>Нижняя граница диапазона значений кратности поставки потребительской единицы дозировки по справочнику "Диапазон значений кратности поставки потребительских единиц"</xs:documentation>
 										</xs:annotation>
-										<xs:simpleType>
-											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="6"/>
-												<xs:fractionDigits value="2"/>
-											</xs:restriction>
-										</xs:simpleType>
 									</xs:element>
-									<xs:element name="dosageFactorRangeMax">
+									<xs:element name="dosageFactorRangeMax" type="zfcs_nsiFarmDrugDecimalCodeType">
 										<xs:annotation>
 											<xs:documentation>Верхняя граница диапазона значений кратности поставки потребительской единицы дозировки по справочнику "Диапазон значений кратности поставки потребительских единиц"</xs:documentation>
 										</xs:annotation>
-										<xs:simpleType>
-											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="6"/>
-												<xs:fractionDigits value="2"/>
-											</xs:restriction>
-										</xs:simpleType>
 									</xs:element>
-									<xs:element name="dosageFactorRangeStep">
+									<xs:element name="dosageFactorRangeStep" type="zfcs_nsiFarmDrugDecimalCodeType">
 										<xs:annotation>
 											<xs:documentation>Шаг изменения значений кратности в диапазоне поставки потребительской единицы дозировки по справочнику "Диапазон значений кратности поставки потребительских единиц"</xs:documentation>
 										</xs:annotation>
-										<xs:simpleType>
-											<xs:restriction base="xs:decimal">
-												<xs:totalDigits value="6"/>
-												<xs:fractionDigits value="2"/>
-											</xs:restriction>
-										</xs:simpleType>
 									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
@@ -45166,12 +45249,22 @@ Publish - Размещение (публикация) документа</xs:doc
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="zfcs_nsiFarmDrugDecimalCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Decimal для справочника "Лекарственные препараты"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="20"/>
+			<xs:fractionDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="zfcs_nsiFarmDrugDictCodeType">
 		<xs:annotation>
 			<xs:documentation>Тип: Бизнес-код для справочника "Лекарственные препараты"</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:int">
-			<xs:totalDigits value="10"/>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_nsiFarmDrugDictExternalCodeType">
@@ -45869,7 +45962,7 @@ OA - Организация, осуществляющая полномочия �
 						</xs:element>
 						<xs:element name="IKU" type="zfcs_ikuType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Идентификационный код заказчика (ИКУ). Игнорируется при приеме. Автоматически загружается из сведений об организации-заказчике.</xs:documentation>
+								<xs:documentation>Идентификационный код организации-владельца версии плана закупок (ИКУ). При приеме, в случае если поле заполнено, значение контролируется на соответствие  значению ИКУ организации-владельца версии плана закупок в справочнике организаций ЕИС. В случае если поле не заполнено, в ИКЗ автоматически подставляется ИКУ организации из справочника организаций ЕИС</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="purchaseNumber" type="zfcs_purchasePlanPurchaseNumberType">
@@ -45964,7 +46057,7 @@ Y - один раз в год.</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="addComplexityText">
+									<xs:element name="addComplexityText" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Дополнительная информация о 
 технической сложности, инновационности, 
@@ -46152,6 +46245,11 @@ E - Данные позиции отредактированы.</xs:documentatio
 											<xs:restriction base="zfcs_yearType"/>
 										</xs:simpleType>
 									</xs:element>
+									<xs:element name="IKU" type="zfcs_ikuType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Идентификационный код организации-владельца версии плана закупок (ИКУ). При приеме, в случае если поле заполнено, значение контролируется на соответствие  значению ИКУ организации-владельца версии плана закупок в справочнике организаций ЕИС. В случае если поле не заполнено, в ИКЗ автоматически подставляется ИКУ организации из справочника организаций ЕИС</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 									<xs:element name="KVRInfo" type="zfcs_purchasePlanKVRRefType">
 										<xs:annotation>
 											<xs:documentation>Классификация по КВР</xs:documentation>
@@ -46187,20 +46285,26 @@ E - Данные закупки отредактированы.</xs:documentatio
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="programStateName" type="zfcs_longTextType" minOccurs="0">
+						<xs:element name="programStateName" type="zfcs_longTextMinType" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Наименование государственной программы или программы субъекта Российской Федерации, муниципальной программы</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="eventName" type="zfcs_longTextType">
+						<xs:element name="eventName" type="zfcs_longTextMinType">
 							<xs:annotation>
 								<xs:documentation>Наименование мероприятия программы или функции (полномочия) или договора РФ</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="basement" type="zfcs_longTextMinType">
+						<xs:element name="basement">
 							<xs:annotation>
 								<xs:documentation>Обоснование соответствия объекта (в соответствии с решением врачебной комиссии)</xs:documentation>
 							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="6000"/>
+								</xs:restriction>
+							</xs:simpleType>
 						</xs:element>
 						<xs:choice>
 							<xs:element name="noLegalAct" type="xs:boolean" fixed="true">
@@ -47334,12 +47438,12 @@ OA - Организация, осуществляющая полномочия �
 									</xs:element>
 									<xs:element name="planPaymentsChange" type="xs:boolean" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Изменить планируемые платежи</xs:documentation>
+											<xs:documentation>Изменить планируемые платежи. Если значение поля= true, то значение поля "НМЦК" (maxPrice) определяется из предыдущей размещенной версии позиции ПГ, если значение поля = false, то в поле "НМЦК" (maxPrice) проставляется автоматически подсчитанное значение поля planPayments\total. Если поле не указано, то считаем, что его значение =false. Не принимается позиция со значением поля =true, если отсутствует предыдущая размещенная версия позиции</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="maxPrice" type="zfcs_moneyMaxLengthToPoint18Type" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Начальная (максимальная) цена контракта. Игнорируется при приеме. Заполняется значением поля total блока planPayments</xs:documentation>
+											<xs:documentation>Начальная (максимальная) цена контракта (НМЦК). Игнорируется при приеме. Правила заполнения см. описание поля planPaymentsChange</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="maxSizeContractPayment" type="zfcs_moneyMaxLengthToPoint18Type" minOccurs="0">
@@ -47504,16 +47608,12 @@ E - Данные позиции отредактированы.</xs:documentatio
 							</xs:complexType>
 						</xs:element>
 						<xs:sequence minOccurs="0">
-							<xs:annotation>
-								<xs:documentation>Обязательно в случае если не заполнен блок quantityUndefined.
-Необязательно в случае если заполнен блок quantityUndefined.</xs:documentation>
-							</xs:annotation>
-							<xs:element name="OKEI" type="zfcs_OKEIRef">
+							<xs:element name="OKEI" type="zfcs_OKEIRef" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Единица измерения</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="productsQuantityInfo" type="zfcs_tenderPlan2017NumberType">
+							<xs:element name="productsQuantityInfo" type="zfcs_tenderPlan2017NumberType" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Количество (объем) закупаемых товаров, работ, услуг</xs:documentation>
 								</xs:annotation>

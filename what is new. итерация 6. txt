@@ -1,0 +1,134 @@
+Версия 7.1 итерация 6
+
+   IntegrationTypes.xsd
+
+https://jira.lanit.ru/browse/FCS-59075
+
+1. В типе "Информация об объекте закупки -  лекарственном препарате" (zfcs_contract2015DrugPurchaseInfoType) 
+
+   поле "Количество товара" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\drugQuantity) сделано необязательным
+   поле "Количество товара" (drugInfoUsingTextForm\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\drugQuantity) сделано необязательным
+
+
+2. В типе "Информация об объекте закупки -  лекарственном препарате" (zfcs_contract2015DrugPurchaseInfoType) 
+
+   расширена аннотация к полям:
+ 
+   drugInfoUsingReferenceInfo\MNNInfo\MNNCode
+   drugInfoUsingReferenceInfo\MNNInfo\MNNName
+   drugInfoUsingReferenceInfoisZNVLP
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\drugCode
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\drugExternalCode
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\tradeInfo
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\certificateNumber
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\dosageFormInfo
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\dosageInfo
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\certificateKeeperName
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\manufacturerInfo
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo\primaryPackagingCode
+   drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo\primaryPackagingName
+  
+   
+https://jira.lanit.ru/browse/FCS-59019
+
+3. В типе "Информация об объекте закупки -  лекарственном препарате" (zfcs_contract2015DrugPurchaseInfoType) 
+   добавлены необязательные поля 
+   "Наименование единицы измерения дозировки" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\dosageInfo\dosageName)
+   "Наименование единицы измерения дозировки" (drugInfoUsingTextForm\positionsTradeName\positionTradeName\dosageInfo\dosageName)
+
+FCSNF-4080 Доработки интеграции РК лекарства - изменение кодировок МНН, ТН и упаковки
+
+4. В типе "Информация об объекте закупки -  лекарственном препарате" (zfcs_contract2015DrugPurchaseInfoType) 
+
+   - удалено поле "Код МНН по справочнику "Лекарственные препараты" (поле MNNInfo\MNNCode документа nsiFarmDrugDictionary)" (drugInfoUsingReferenceInfo\MNNInfo\MNNCode)
+   - добавлено поле "Уникальный внешний код МНН по справочнику "Лекарственные препараты" (поле MNNInfo\MNNExternalCode документа nsiFarmDrugDictionary)" (drugInfoUsingReferenceInfo\MNNInfo\MNNExternalCode)
+   - добавлено необязательное поле "Уникальный код МНН. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\MNNDrugCode документа nsiFarmDrugDictionary)" (drugInfoUsingReferenceInfo\MNNInfo\MNNDrugCode)
+
+  - удалено поле "Код лекарственного препарата по справочнику "Лекарственные препараты"" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\drugCode)
+  - добавлено поле "Уникальный внешний код лекарственного препарата по справочнику "Лекарственные препараты"" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\drugExternalCode)
+  - добавлено необязательное поле "Код лекарственного препарата по справочнику "Лекарственные препараты"Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" поле MNNInfo\positionsTradeName\positionTradeName\drugCode документа nsiFarmDrugDictionary)" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\drugCode)
+
+
+  - удалено поле "Код вида первичной упаковки  по справочнику "Лекарственные препараты"" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo\primaryPackagingCode)
+  - поле (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo\primaryPackagingName) сделано обязательным
+    и изменена аннотация на "Наименование вида первичной упаковки по справочнику "Лекарственные препараты" (поле MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo\primaryPackagingName  документа nsiFarmDrugDictionary)" 
+  
+
+  - удалено поле "Код торгового наименования" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\tradeInfo\tradeCode)
+  - удалено поле "Код лекарственной формы" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\dosageFormInfo\dosageFormCode)
+  - удалено поле "Код дозировки по справочнику  "Дозировки"" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\dosageInfo\dosageCode)
+
+  - блок "Лекарственная форма" (positionsTradeName\positionTradeName\dosageFormInfo) переименован в medicamentalFormInfo
+  - поле "Наименование лекарственной формы" (positionsTradeName\positionTradeName\medicamentalFormInfo) переименован в medicamentalFormName
+
+  - удалено поле "Полная форма дозировки " (drugInfoUsingTextForm\positionsTradeName\positionTradeName\dosageInfo\dosageGRLSValue)
+  -  блок "Единица измерения дозировки. Ссылка на классификатор ОКЕИ (nsiOKEI)" (drugInfoUsingTextForm\positionsTradeName\positionTradeName\dosageInfo\dosageOKEI) сделан необязательным
+
+FCSNF-4082 Доработка выгрузки справочника лекарств на 7.1 часть 3
+
+5.В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary) удалены блоки 
+
+   "Дозировки" (MNNInfo\positionsTradeName\positionTradeName\dosagesInfo)
+   "Лекарственная форма" (MNNInfo\positionsTradeName\positionTradeName\medicamentalFormInfo)
+
+   
+  
+https://jira.lanit.ru/browse/FCS-58495
+https://jira.lanit.ru/browse/FCS-58768
+
+6. В типе "Позиция плана-графика с 01.01.2017" (zfcs_tenderPlan2017PositionType) 
+   блоки
+   "Единица измерения" (purchaseObjectInfo\OKEI)
+   "Количество (объем) закупаемых товаров, работ, услуг" (purchaseObjectInfo\productsQuantityInfo)
+   сделаны необязательным
+
+   удалена аннотация "Обязательно в случае если не заполнен блок quantityUndefined.Необязательно в случае если заполнен блок quantityUndefined."
+   к sequence, объединяющим блоки purchaseObjectInfo\OKEI и purchaseObjectInfo\productsQuantityInfo
+      
+
+   изменена аннотация к полю commonInfo\financeInfo\planPaymentsChange на "Изменить планируемые платежи. Если значение поля= true, то значение поля "НМЦК" (maxPrice) определяется из предыдущей размещенной версии позиции ПГ, если значение поля = false, то в поле "НМЦК" (maxPrice) проставляется автоматически подсчитанное значение поля planPayments\total. Если поле не указано, то считаем, что его значение =false. Не принимается позиция со значением поля =true, если отсутствует  предыдущая версия позиции"
+
+   изменена аннотация к полю commonInfo\financeInfo\maxPrice на "Начальная (максимальная) цена контракта (НМЦК). Игнорируется при приеме. Правила заполнения см. описание поля planPaymentsChange"
+
+
+
+
+
+   fcsPrintForm.xsd 
+
+
+
+   fcsExport.xsd 
+
+
+
+
+   fcsIntegration.xsd
+
+
+
+   fcsExtegration.xsd
+
+
+
+
+   fcsEisSignIncoming.xsd
+
+
+
+   fcsInternal.xsd
+
+
+   docs-ws-api.xsd
+
+
+
+   eis-fs-ws-api.xsd
+
+
+
+   fcsControl99.xsd
+
+
+   eisSigningSOAPMessages.xsd
