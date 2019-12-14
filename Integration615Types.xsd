@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.2.3, create date 23.07.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3, create date 11.09.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/pprf615types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -3724,7 +3724,7 @@ TC - Орган местного самоуправления и (или) гос
 					</xs:element>
 					<xs:element name="signDate" type="xs:date" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Дата подписания документа. Игнорируется при приёме. Заполняется при передаче</xs:documentation>
+							<xs:documentation>Дата подписания документа. Для документов actEvasion, actDeviation содержимое поля принимается в ЕИС, для документа actCancel игнорируется при приёме в ЕИС, заполняется при передаче</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>

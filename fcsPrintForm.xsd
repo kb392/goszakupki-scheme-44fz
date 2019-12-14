@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS PRINT_FORM Integration Scheme, version 9.2.3, create date 23.07.2019 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/printform/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS PRINT_FORM Integration Scheme, version 9.3, create date 11.09.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/printform/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1"  xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/EPtypes/1" schemaLocation="IntegrationEPTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/CPtypes/1" schemaLocation="IntegrationCPTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/TPtypes/1" schemaLocation="IntegrationTPTypes.xsd"/>
 	<xs:simpleType name="zfcs_accountNumType">
 		<xs:annotation>
 			<xs:documentation>Номер лицевого счета заказчика</xs:documentation>
@@ -1452,6 +1453,11 @@ PUBL - Размещено
 			<xs:documentation>План-график в структурированной форме с 01.01.2017</xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<xs:element name="tenderPlan2020" type="tp:tenderPlan2020Type">
+		<xs:annotation>
+			<xs:documentation>План-график закупок с 01.01.2020</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 	<xs:element name="nsiRMIS" type="oos:zfcs_nsiRMISType">
 		<xs:annotation>
 			<xs:documentation>Перечень информационных систем (для формирования печатной формы)</xs:documentation>
@@ -2131,6 +2137,11 @@ PUBL - Размещено.</xs:documentation>
 	<xs:element name="control99TenderPlan2017Extract" type="oos:zfcs_control99TenderPlan2017ExtractType">
 		<xs:annotation>
 			<xs:documentation>Информация из плана-графика с 01.01.2017 (РПГ), направляемая на контроль по 99 статье в орган контроля</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="control99TenderPlan2020Extract" type="tp:control99TenderPlan2020ExtractType">
+		<xs:annotation>
+			<xs:documentation>Информация из плана-графика закупок с 01.01.2020, направляемая на контроль по 99 статье в орган контроля</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="control99ContractExtract" type="oos:zfcs_control99ContractExtractType">

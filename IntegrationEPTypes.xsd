@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.2.3, create date 23.07.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3, create date 11.09.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -95,8 +95,8 @@ AU - Заказчик, осуществляющий закупку на пров
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
 CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
-OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.
-</xs:documentation>
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CU5CH26 - Заказчик как орган исполнительной власти по ч.5 ст.26 Закона № 44-ФЗ.</xs:documentation>
 														</xs:annotation>
 													</xs:element>
 												</xs:sequence>
@@ -316,10 +316,23 @@ OCN - Заказчик, осуществляющий закупки в соот�
 													</xs:complexContent>
 												</xs:complexType>
 											</xs:element>
-											<xs:element name="drugPurchaseObjectsInfo" type="cmn:purchaseDrugObjectsInfoType">
+											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
 													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
 												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
+															<xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
 											</xs:element>
 										</xs:choice>
 									</xs:complexType>
@@ -686,10 +699,23 @@ OCN - Заказчик, осуществляющий закупки в соот�
 													</xs:complexContent>
 												</xs:complexType>
 											</xs:element>
-											<xs:element name="drugPurchaseObjectsInfo" type="cmn:purchaseDrugObjectsInfoType">
+											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
 													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
 												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
+															<xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
 											</xs:element>
 										</xs:choice>
 									</xs:complexType>
@@ -1056,10 +1082,23 @@ OCN - Заказчик, осуществляющий закупки в соот�
 													</xs:complexContent>
 												</xs:complexType>
 											</xs:element>
-											<xs:element name="drugPurchaseObjectsInfo" type="cmn:purchaseDrugObjectsInfoType">
+											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
 													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
 												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
+															<xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
 											</xs:element>
 										</xs:choice>
 									</xs:complexType>
@@ -1619,10 +1658,23 @@ OCN - Заказчик, осуществляющий закупки в соот�
 													</xs:complexContent>
 												</xs:complexType>
 											</xs:element>
-											<xs:element name="drugPurchaseObjectsInfo" type="cmn:purchaseDrugObjectsInfoType">
+											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
 													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
 												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
+															<xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
 											</xs:element>
 										</xs:choice>
 									</xs:complexType>
@@ -1851,9 +1903,9 @@ OCN - Заказчик, осуществляющий закупки в соот�
 																<xs:documentation>Общая информация</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="finalPrice" type="base:moneyType">
+														<xs:element name="finalPrice" type="base:moneyLongType">
 															<xs:annotation>
-																<xs:documentation>Сумма предложения участника</xs:documentation>
+																<xs:documentation>Сумма предложения участника. Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 														<xs:element name="appParticipantInfo" type="cmn:participantType">
@@ -2057,21 +2109,28 @@ PASS_OFFER - Все остальные заявки</xs:documentation>
 												<xs:complexType>
 													<xs:complexContent>
 														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
-															<xs:sequence minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
-																</xs:annotation>
-																<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+															<xs:choice minOccurs="0">
+																<xs:sequence minOccurs="0">
 																	<xs:annotation>
-																		<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
+																	</xs:annotation>
+																	<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+																		<xs:annotation>
+																			<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
+																		<xs:annotation>
+																			<xs:documentation>Решение врачебной комиссии</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 																	</xs:annotation>
 																</xs:element>
-																<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
-																	<xs:annotation>
-																		<xs:documentation>Решение врачебной комиссии</xs:documentation>
-																	</xs:annotation>
-																</xs:element>
-															</xs:sequence>
+															</xs:choice>
 														</xs:extension>
 													</xs:complexContent>
 												</xs:complexType>
@@ -2212,7 +2271,8 @@ AU - Заказчик, осуществляющий закупку на пров
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
 CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
-OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CU5CH26 - Заказчик как орган исполнительной власти по ч.5 ст.26 Закона № 44-ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -2323,9 +2383,15 @@ OCN - Заказчик, осуществляющий закупки в соот�
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
-						<xs:element name="bestPrice" type="base:moneyType">
+						<xs:element name="bestPrice" type="base:moneyLongType">
 							<xs:annotation>
-								<xs:documentation>Предлагаемая цена лучшей или единственной заявки</xs:documentation>
+								<xs:documentation>Предлагаемая цена лучшей или единственной заявки.
+Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="rightConcludeContractPrice" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Цена за право заключения контракта. Обязательно и допустимо указание значения true при отрицательном значении цены лучшей или единственной заявки</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
@@ -2435,9 +2501,15 @@ OCN - Заказчик, осуществляющий закупки в соот�
 																						<xs:documentation>Заявка допущена (только для единственной допущенной заявки)</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="price" type="base:moneyType">
+																				<xs:element name="price" type="base:moneyLongType">
 																					<xs:annotation>
-																						<xs:documentation>Cумма предложения участника</xs:documentation>
+																						<xs:documentation>Cумма предложения участника.
+Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="rightConcludeContractPrice" type="xs:boolean" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation>Цена за право заключения контракта. Обязательно и допустимо указание значения true при отрицательном значении ценового предложения участника</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
 																			</xs:sequence>
@@ -2473,9 +2545,15 @@ OCN - Заказчик, осуществляющий закупки в соот�
 																						</xs:sequence>
 																					</xs:complexType>
 																				</xs:element>
-																				<xs:element name="price" type="base:moneyType">
+																				<xs:element name="price" type="base:moneyLongType">
 																					<xs:annotation>
-																						<xs:documentation>Cумма предложения участника</xs:documentation>
+																						<xs:documentation>Cумма предложения участника.
+Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="rightConcludeContractPrice" type="xs:boolean" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation>Цена за право заключения контракта. Обязательно и допустимо указание значения true при отрицательном значении ценового предложения участника</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
 																			</xs:sequence>
@@ -2621,9 +2699,15 @@ OCN - Заказчик, осуществляющий закупки в соот�
 																						<xs:documentation>Дата и время подачи окончательного предложения</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="price" type="base:moneyType">
+																				<xs:element name="price" type="base:moneyLongType">
 																					<xs:annotation>
-																						<xs:documentation>Cумма предложения участника</xs:documentation>
+																						<xs:documentation>Cумма предложения участника.
+Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="rightConcludeContractPrice" type="xs:boolean" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation>Цена за право заключения контракта. Обязательно и допустимо указание значения true при отрицательном значении ценового предложения участника</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
 																			</xs:sequence>
@@ -2664,9 +2748,15 @@ OCN - Заказчик, осуществляющий закупки в соот�
 																						<xs:documentation>Дата и время подачи окончательного предложения</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="price" type="base:moneyType">
+																				<xs:element name="price" type="base:moneyLongType">
 																					<xs:annotation>
-																						<xs:documentation>Cумма предложения участника</xs:documentation>
+																						<xs:documentation>Cумма предложения участника.
+Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="rightConcludeContractPrice" type="xs:boolean" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation>Цена за право заключения контракта. Обязательно и допустимо указание значения true при отрицательном значении ценового предложения участника</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
 																			</xs:sequence>
@@ -2771,21 +2861,28 @@ OCN - Заказчик, осуществляющий закупки в соот�
 												<xs:complexType>
 													<xs:complexContent>
 														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
-															<xs:sequence minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
-																</xs:annotation>
-																<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+															<xs:choice minOccurs="0">
+																<xs:sequence minOccurs="0">
 																	<xs:annotation>
-																		<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
+																	</xs:annotation>
+																	<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+																		<xs:annotation>
+																			<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
+																		<xs:annotation>
+																			<xs:documentation>Решение врачебной комиссии</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 																	</xs:annotation>
 																</xs:element>
-																<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
-																	<xs:annotation>
-																		<xs:documentation>Решение врачебной комиссии</xs:documentation>
-																	</xs:annotation>
-																</xs:element>
-															</xs:sequence>
+															</xs:choice>
 														</xs:extension>
 													</xs:complexContent>
 												</xs:complexType>
@@ -2916,21 +3013,28 @@ OCN - Заказчик, осуществляющий закупки в соот�
 												<xs:complexType>
 													<xs:complexContent>
 														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
-															<xs:sequence minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
-																</xs:annotation>
-																<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+															<xs:choice minOccurs="0">
+																<xs:sequence minOccurs="0">
 																	<xs:annotation>
-																		<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
+																	</xs:annotation>
+																	<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+																		<xs:annotation>
+																			<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
+																		<xs:annotation>
+																			<xs:documentation>Решение врачебной комиссии</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 																	</xs:annotation>
 																</xs:element>
-																<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
-																	<xs:annotation>
-																		<xs:documentation>Решение врачебной комиссии</xs:documentation>
-																	</xs:annotation>
-																</xs:element>
-															</xs:sequence>
+															</xs:choice>
 														</xs:extension>
 													</xs:complexContent>
 												</xs:complexType>
@@ -3061,21 +3165,28 @@ OCN - Заказчик, осуществляющий закупки в соот�
 												<xs:complexType>
 													<xs:complexContent>
 														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
-															<xs:sequence minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
-																</xs:annotation>
-																<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+															<xs:choice minOccurs="0">
+																<xs:sequence minOccurs="0">
 																	<xs:annotation>
-																		<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
+																	</xs:annotation>
+																	<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+																		<xs:annotation>
+																			<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
+																		<xs:annotation>
+																			<xs:documentation>Решение врачебной комиссии</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 																	</xs:annotation>
 																</xs:element>
-																<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
-																	<xs:annotation>
-																		<xs:documentation>Решение врачебной комиссии</xs:documentation>
-																	</xs:annotation>
-																</xs:element>
-															</xs:sequence>
+															</xs:choice>
 														</xs:extension>
 													</xs:complexContent>
 												</xs:complexType>
@@ -3206,21 +3317,28 @@ OCN - Заказчик, осуществляющий закупки в соот�
 												<xs:complexType>
 													<xs:complexContent>
 														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
-															<xs:sequence minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
-																</xs:annotation>
-																<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+															<xs:choice minOccurs="0">
+																<xs:sequence minOccurs="0">
 																	<xs:annotation>
-																		<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
+																	</xs:annotation>
+																	<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+																		<xs:annotation>
+																			<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
+																		<xs:annotation>
+																			<xs:documentation>Решение врачебной комиссии</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 																	</xs:annotation>
 																</xs:element>
-																<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
-																	<xs:annotation>
-																		<xs:documentation>Решение врачебной комиссии</xs:documentation>
-																	</xs:annotation>
-																</xs:element>
-															</xs:sequence>
+															</xs:choice>
 														</xs:extension>
 													</xs:complexContent>
 												</xs:complexType>
@@ -3435,7 +3553,8 @@ AU - Заказчик, осуществляющий закупку на пров
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
 CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
-OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CU5CH26 - Заказчик как орган исполнительной власти по ч.5 ст.26 Закона № 44-ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="responsibleInfo" type="contactInfoType">
@@ -3876,7 +3995,7 @@ maxPrice / currencyRate/rate, где  currencyRate/rate - курс валюты 
 					<xs:documentation>Дата и время окончания подачи заявок</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="place" type="base:text2000Type">
+			<xs:element name="place" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Место подачи заявок. Игнорируется при приеме. Заполняется автоматически наименованием электронной площадки, указанной на вкладке «Общая информация»</xs:documentation>
 				</xs:annotation>
@@ -4980,7 +5099,8 @@ AU - Заказчик, осуществляющий закупку на пров
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
 CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
-OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CU5CH26 - Заказчик как орган исполнительной власти по ч.5 ст.26 Закона № 44-ФЗ.</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 													</xs:sequence>
@@ -5444,9 +5564,10 @@ OCN - Заказчик, осуществляющий закупки в соот�
 											<xs:documentation>Заявка допущена</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="finalPrice" type="base:moneyType">
+									<xs:element name="finalPrice" type="base:moneyLongType">
 										<xs:annotation>
-											<xs:documentation>Сумма предложения участника</xs:documentation>
+											<xs:documentation>Сумма предложения участника.
+Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="qualitativeCriterionInfo" type="qualitativeCriterionProtocolOK1Type" minOccurs="0">
@@ -5457,6 +5578,11 @@ OCN - Заказчик, осуществляющий закупки в соот�
 									<xs:element name="finalDT" type="xs:dateTime" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Дата и время подачи окончательного предложения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="rightConcludeContractPrice" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Цена за право заключения контракта. Обязательно и допустимо указание значения true при отрицательном значении ценового предложения участника</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -5549,7 +5675,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 	</xs:complexType>
 	<xs:complexType name="customerRequirementType">
 		<xs:annotation>
-			<xs:documentation>Тип: Реквизиты находящиеся на уровне требований заказчиков</xs:documentation>
+			<xs:documentation>Тип: Реквизиты, находящиеся на уровне требований заказчиков</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="customer" type="base:organizationRef">
@@ -5564,7 +5690,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="contractGuarantee" type="paymentInfoType" minOccurs="0">
+			<xs:element name="contractGuarantee" type="contractGuaranteePaymentInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Обеспечение исполнения контракта</xs:documentation>
 				</xs:annotation>
@@ -5577,6 +5703,11 @@ OCN - Заказчик, осуществляющий закупки в соот�
 -не заполнен блок "Обеспечение исполнения контракта" (contractGuarantee);
 -заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
 Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="provisionWarranty" type="cmn:paymentGuaranteeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Обеспечение гарантийных обязательств</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="contractConditionsInfo">
@@ -5596,6 +5727,20 @@ OCN - Заказчик, осуществляющий закупки в соот�
  Заполняется автоматически по формуле:
 «Начальная (максимальная) цена контракта» / «Курс конвертации»</xs:documentation>
 							</xs:annotation>
+						</xs:element>
+						<xs:element name="advancePaymentSum" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Предусмотрена выплата аванса</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="sumInPercents" type="base:percentRestr0100Type">
+										<xs:annotation>
+											<xs:documentation>Размер аванса в процентах</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 							<xs:annotation>
@@ -5670,7 +5815,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="contractGuarantee" type="paymentInfoType" minOccurs="0">
+			<xs:element name="contractGuarantee" type="contractGuaranteePaymentInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Обеспечение исполнения контракта</xs:documentation>
 				</xs:annotation>
@@ -5683,6 +5828,11 @@ OCN - Заказчик, осуществляющий закупки в соот�
 -не заполнен блок "Обеспечение исполнения контракта" (contractGuarantee);
 -заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
 Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="provisionWarranty" type="cmn:paymentGuaranteeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Обеспечение гарантийных обязательств</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="contractConditionsInfo">
@@ -5702,6 +5852,20 @@ OCN - Заказчик, осуществляющий закупки в соот�
  Заполняется автоматически по формуле:
 «Начальная (максимальная) цена контракта» / «Курс конвертации»</xs:documentation>
 							</xs:annotation>
+						</xs:element>
+						<xs:element name="advancePaymentSum" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Предусмотрена выплата аванса</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="sumInPercents" type="base:percentRestr0100Type">
+										<xs:annotation>
+											<xs:documentation>Размер аванса в процентах</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 							<xs:annotation>
@@ -5779,7 +5943,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 					<xs:documentation>Обеспечение исполнения контракта</xs:documentation>
 				</xs:annotation>
 			</xs:element> -->
-			<xs:element name="contractGuarantee" type="paymentInfoType" minOccurs="0">
+			<xs:element name="contractGuarantee" type="contractGuaranteePaymentInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Обеспечение исполнения контракта</xs:documentation>
 				</xs:annotation>
@@ -5801,6 +5965,20 @@ OCN - Заказчик, осуществляющий закупки в соот�
  Заполняется автоматически по формуле:
 «Начальная (максимальная) цена контракта» / «Курс конвертации»</xs:documentation>
 							</xs:annotation>
+						</xs:element>
+						<xs:element name="advancePaymentSum" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Предусмотрена выплата аванса</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="sumInPercents" type="base:percentRestr0100Type">
+										<xs:annotation>
+											<xs:documentation>Размер аванса в процентах</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 							<xs:annotation>
@@ -5853,6 +6031,11 @@ OCN - Заказчик, осуществляющий закупки в соот�
 -не заполнен блок "Обеспечение исполнения контракта" (contractGuarantee);
 -заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
 Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="provisionWarranty" type="cmn:paymentGuaranteeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Обеспечение гарантийных обязательств</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="purchaseObjectDescription" type="base:text4000Type" minOccurs="0">
@@ -5963,6 +6146,48 @@ OCN - Заказчик, осуществляющий закупки в соот�
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="contractGuaranteePaymentInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация о платеже для обеспечения исполнения контракта, начиная с версии ЕИС 9.3</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="amount" type="base:moneyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Размер обеспечения. 
+
+Начиная с версии ЕИС 9.3:
+1) Контролируется обязательность заполнения, кроме варианта, для которого установлено ограничение «Закупка у субъектов малого предпринимательства и социально ориентированных некоммерческих организаций» в notificationInfo/restrictionsInfo/restrictionInfo/preferenseRequirementInfo/shortName в соответствии со справочником "Преимущества (требования, ограничения) к участникам закупки" (nsiPurchasePreferences). 
+2) Если установлено ограничение «Закупка у субъектов малого предпринимательства и социально ориентированных некоммерческих организаций», то контролируется недопустимость указания размера обеспечения.
+3) Если задан блок customerRequirement/contractConditionsInfo/tenderPlanInfo и в связанной ППГ  ограничение «Закупка у субъектов малого предпринимательства и социально ориентированных некоммерческих организаций» = TRUE и для данного извещения такое ограничение не указано, то  принимается значение из пакета, если задано.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="account" type="cmn:paymentPropertysType">
+				<xs:annotation>
+					<xs:documentation>Платежные реквизиты. При приеме контролируется наличие у организации заказчика  счетов с  указанным БИК  и расчетным счетом</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="procedureInfo" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Порядок внесения денежных средств в качестве обеспечения заявки (порядок предоставления обеспечения исполнения контракта)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="part" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Доля от начальной (максимальной) цены контракта. 
+Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (amount) к НМЦК (contractConditionsInfo/maxPriceInfo/maxPrice).
+
+Начиная с версии ЕИС 9.3:
+1) При установленом ограничении «Закупка у субъектов малого предпринимательства и социально ориентированных некоммерческих организаций» в notificationInfo/restrictionsInfo/restrictionInfo/preferenseRequirementInfo/shortName в соответствии со справочником "Преимущества (требования, ограничения) к участникам закупки" (nsiPurchasePreferences) не игнорируется при приеме и контролируется обязательность заполнения</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:double">
+						<xs:minInclusive value="0"/>
+						<xs:maxExclusive value="1000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="protocolType">
 		<xs:annotation>
 			<xs:documentation>Тип: Общие поля протоколов</xs:documentation>
@@ -6025,7 +6250,8 @@ AU - Заказчик, осуществляющий закупку на пров
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
 CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
-OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CU5CH26 - Заказчик как орган исполнительной власти по ч.5 ст.26 Закона № 44-ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -6149,7 +6375,8 @@ AU - Заказчик, осуществляющий закупку на пров
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
 CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
-OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CU5CH26 - Заказчик как орган исполнительной власти по ч.5 ст.26 Закона № 44-ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -6301,7 +6528,8 @@ AU - Заказчик, осуществляющий закупку на пров
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
 CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
-OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CU5CH26 - Заказчик как орган исполнительной власти по ч.5 ст.26 Закона № 44-ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -6477,7 +6705,8 @@ AU - Заказчик, осуществляющий закупку на пров
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор
 CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
-OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CU5CH26 - Заказчик как орган исполнительной власти по ч.5 ст.26 Закона № 44-ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -6603,9 +6832,15 @@ OCN - Заказчик, осуществляющий закупки в соот�
 		<xs:complexContent>
 			<xs:extension base="singlePartType">
 				<xs:sequence>
-					<xs:element name="offerPrice" type="base:moneyType">
+					<xs:element name="offerPrice" type="base:moneyLongType">
 						<xs:annotation>
-							<xs:documentation>Сумма предложения участника</xs:documentation>
+							<xs:documentation>Сумма предложения участника.
+Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="rightConcludeContractPrice" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Цена за право заключения контракта. Обязательно и допустимо указание значения true при отрицательном значении ценового предложения участника</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -6749,14 +6984,20 @@ EN - Предложение о сумме соответствующих рас�
 					<xs:documentation>Оценка с учётом значимости </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="offer" type="base:moneyType">
+			<xs:element name="offer" type="base:moneyLongType">
 				<xs:annotation>
-					<xs:documentation>Предложение участника </xs:documentation>
+					<xs:documentation>Предложение участника.
+Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="offerText" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Информация о предложении участника</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rightConcludeContractPrice" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Цена за право заключения контракта. Обязательно и допустимо указание значения true при отрицательном значении ценового предложения участника</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -7126,14 +7367,20 @@ EN - Предложение о сумме соответствующих рас�
 					<xs:documentation>Оценка с учётом значимости </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="offer" type="base:moneyType">
+			<xs:element name="offer" type="base:moneyLongType">
 				<xs:annotation>
-					<xs:documentation>Предложение участника </xs:documentation>
+					<xs:documentation>Предложение участника. 
+Указание 11 знаков после запятой допускается только в случае, если в исходном извещении установлены признаки: “Лекарственные препараты” = TRUE и “Невозможно определить количество (объем) закупаемых товаров, работ, услуг” = TRUE</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="offerText" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Информация о предложении участника</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rightConcludeContractPrice" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Цена за право заключения контракта. Обязательно и допустимо указание значения true при отрицательном значении ценового предложения участника</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

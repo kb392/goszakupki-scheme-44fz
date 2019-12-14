@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION Integration Scheme, version 9.2.3, create date 23.07.2019 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS INTEGRATION Integration Scheme, version 9.3, create date 11.09.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1"  targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/EPtypes/1" schemaLocation="IntegrationEPTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/CPtypes/1" schemaLocation="IntegrationCPTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/TPtypes/1" schemaLocation="IntegrationTPTypes.xsd"/>
 	<xs:element name="accreditedEPSupplier">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
@@ -2317,6 +2318,25 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="tenderPlan2020">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+План-график закупок с 01.01.2020; внесение изменений</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="tp:tenderPlan2020Type">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="tenderPlanChange">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
@@ -2346,6 +2366,25 @@
 				<xs:extension base="as2PacketType">
 					<xs:sequence>
 						<xs:element name="data" type="oos:zfcs_tenderPlanChange2017Type">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tenderPlan2020Change">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Изменение плана-графика закупок с 01.01.2020</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="tp:tenderPlan2020ChangeType">
 							<xs:annotation>
 								<xs:documentation>Данные информационного пакета</xs:documentation>
 							</xs:annotation>
@@ -3978,7 +4017,8 @@ EZAKKD - ЭП Закрытый конкурс, двухэтапный в эле�
 EZAKKOU - ЭП Закрытый конкурс с ограниченным участием в электронной форме;
 EZAKK - ЭП Закрытый конкурс в электронной форме;
 EP_DD - ЭП Разные документы;
-CP - Проекты контрактов.</xs:documentation>
+CP - Проекты контрактов;
+TP2020 - План-график закупок с 01.01.2020.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="objectId" minOccurs="0">
@@ -4093,7 +4133,8 @@ EOKD - ЭП Двухэтапный конкурс в электронной фо
 EZK - ЭП Запрос котировок в электронной форме;
 EZP - ЭП Запрос предложений в электронной форме;
 EP_DD - ЭП Разные документы;
-CP - Проекты контрактов.
+CP - Проекты контрактов;
+TP2020 - План-график закупок с 01.01.2020.
 </xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -4153,6 +4194,7 @@ CP - Проекты контрактов.
 			<xs:enumeration value="EZAKK"/>
 			<xs:enumeration value="EP_DD"/>
 			<xs:enumeration value="CP"/>
+			<xs:enumeration value="TP2020"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

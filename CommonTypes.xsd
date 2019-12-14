@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- COMMON_TYPES Integration Scheme, version 9.2.3, create date 23.07.2019 -->
+<!-- COMMON_TYPES Integration Scheme, version 9.3, create date 11.09.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -841,7 +841,9 @@ CAdES-A</xs:documentation>
 												<xs:element name="characteristics" minOccurs="0">
 													<xs:annotation>
 														<xs:documentation>Характеристики товара, работы, услуги позиции КТРУ.
-Контролируется обязательное заполнение хотя бы одного из дочерних блоков characteristicsUsingReferenceInfo и/или characteristicsUsingTextForm</xs:documentation>
+Если извещение создано на основании позиции плана-графика (ППГ) и в ППГ заполнен код по КТРУ, указанный в поле «Код товара, работы или услуги в справочнике Каталог товаров, работ, услуг (КТРУ) (nsiKTRU)» (KTRU/code), то значение блока игнорируется и заполняется соответствующим значением характеристик для позиции КТРУ из связанной ППГ.
+В других случаях блок принимается и сохраняется, если заполнен, и при этом контролируется обязательное заполнение хотя бы одного из дочерних блоков characteristicsUsingReferenceInfo и/или characteristicsUsingTextForm.
+Также контролируется принадлежность набора характеристик и их значений версии позиции КТРУ, которая была указана в предыдущей размещенной версии  извещения или к актуальной версии позиции КТРУ</xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
@@ -938,11 +940,8 @@ CAdES-A</xs:documentation>
 						</xs:element>
 						<xs:element name="isMedicalProduct" type="xs:boolean" fixed="true" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Объектом закупки является медицинское изделие. 
-При приеме контролируется обязательность заполнения, если 
-позиция КТРУ, указанная в блоке products/product/KTRU, включает в себя позицию номенклатурной классификации медицинских изделий по видам (НКМИ)
-(т.е в выгрузке справочника nsiKTRU для данной позиции как минимум в одном поле classifiers\classifier\name указано значение
-"Номенклатурная классификация медицинских изделий по видам")</xs:documentation>
+								<xs:documentation>Объектом закупки является медицинское изделие.
+Указание доступно и обязательно, если код КТРУ(lot/purchaseObjects/purchaseObject/KTRU/code) включает в себя позицию номенклатурной классификации медицинских изделий по видам</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -1339,6 +1338,136 @@ CAdES-A</xs:documentation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="control99ControlObjectWithMandatoryDocsInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения об объектах контроля по 99 статье с обязательным блоком controlDocumentsInfo</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="control99DocumentObjectType">
+				<xs:sequence>
+					<xs:element name="controlDocumentsInfo">
+						<xs:annotation>
+							<xs:documentation>Сведения о документах, содержащих информацию для осуществления контроля</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="controlDocumentInfo" type="control99DocumentObjectType" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Сведения о документе</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="control99DocumentObjectType">
+		<xs:annotation>
+			<xs:documentation>Тип: Документ, содержащий информацию об объекте контроля по 99 статье</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="date" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="number" type="base:control99ControlDocNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="control99ResponsibleType">
+		<xs:annotation>
+			<xs:documentation>Тип: Ответственный исполнитель для контроля по 99 статье</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="base:control99HeadNameType">
+				<xs:annotation>
+					<xs:documentation>ФИО ответственного исполнителя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="position" type="base:positionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Должность ответственного исполнителя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата подписания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="control99NoticeComplianceForRMISType">
+		<xs:annotation>
+			<xs:documentation>Тип: Уведомление о соответствии контролируемой информации, принятое от РМИС вместе с контролируемым документом</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="docNumber" type="base:control99DocNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="docDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата/время формирования результата контроля</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата/время подписания результата контроля</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="controlAuthorityInfo" type="cmn:control99ControlAuthorityInfoType">
+				<xs:annotation>
+					<xs:documentation>Сведения об органе контроля</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customerInfo" type="cmn:control99CustomerInfoType">
+				<xs:annotation>
+					<xs:documentation>Сведения о заказчике (организации, размещающей закупку)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="controlObjectsInfo">
+				<xs:annotation>
+					<xs:documentation>Сведения об объектах контроля</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="controlObjectInfo" type="control99ControlObjectWithMandatoryDocsInfoType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Сведения об объекте контроля</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="responsibleInfo" type="control99ResponsibleType">
+				<xs:annotation>
+					<xs:documentation>Сведения об ответственном исполнителе</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="extPrintForm" type="cmn:extPrintFormType">
+				<xs:annotation>
+					<xs:documentation>Электронный документ. При приеме контролируется обязательность заполнения блока content</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bNeedGIISPURCheck" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Необходима проверка в ГИИС ПУР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Типы лекарственных препаратов-->
 	<xs:complexType name="drugInfoType">
 		<xs:annotation>
@@ -1576,9 +1705,9 @@ CAdES-A</xs:documentation>
 															<xs:complexContent>
 																<xs:extension base="drugInfoType">
 																	<xs:sequence>
-																		<xs:element name="drugQuantity" type="base:quantity18p11Type">
+																		<xs:element name="drugQuantity" type="base:quantity18p11Type" minOccurs="0">
 																			<xs:annotation>
-																				<xs:documentation>Количество (объем) закупаемого лекарственного препарата</xs:documentation>
+																				<xs:documentation>Количество (объем) закупаемого лекарственного препарата. Игнорируется при приеме и не выгружается при наличии признака «Невозможно определить количество» (notificationInfo/purchaseObjectsInfo/drugPurchaseObjectsInfo/quantityUndefined)</xs:documentation>
 																			</xs:annotation>
 																		</xs:element>
 																	</xs:sequence>
@@ -1626,9 +1755,9 @@ CAdES-A</xs:documentation>
 															<xs:complexContent>
 																<xs:extension base="drugInfoUsingTextFormType">
 																	<xs:sequence>
-																		<xs:element name="drugQuantity" type="base:quantity18p11Type">
+																		<xs:element name="drugQuantity" type="base:quantity18p11Type" minOccurs="0">
 																			<xs:annotation>
-																				<xs:documentation>Количество (объем) закупаемого лекарственного препарата</xs:documentation>
+																				<xs:documentation>Количество (объем) закупаемого лекарственного препарата. Игнорируется при приеме и не выгружается при наличии признака «Невозможно определить количество» (notificationInfo/purchaseObjectsInfo/drugPurchaseObjectsInfo/quantityUndefined)</xs:documentation>
 																			</xs:annotation>
 																		</xs:element>
 																	</xs:sequence>
@@ -1662,55 +1791,107 @@ CAdES-A</xs:documentation>
 								<xs:documentation>Признак включения в реестр жизненно необходимые и важнейших лекарственных препаратов (ЖНВЛП)  для основного варианта поставки. Если поле при приеме в ЕИС заполнено, считается, что признак заполнен вручную, иначе заполняется автоматически из справочника "Лекарственные препараты" (поле MNNInfo\isZNVLP документа nsiFarmDrugDictionary) для того лекарственного препарата из блока drugsInfo, у которого в поле basicUnit установлено true</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="drugQuantityCustomersInfo">
-							<xs:annotation>
-								<xs:documentation>Количество (объем) закупаемого лекарственного препарата в разбивке по заказчикам в основном варианте поставки. Поле total в составе блока рассчитывается автоматически</xs:documentation>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="drugQuantityCustomerInfo" maxOccurs="unbounded">
-										<xs:annotation>
-											<xs:documentation>Количество (объем) закупаемого лекарственного препарата для заказчика</xs:documentation>
-										</xs:annotation>
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="customer" type="base:organizationRef">
-													<xs:annotation>
-														<xs:documentation>Организация заказчика</xs:documentation>
-													</xs:annotation>
-												</xs:element>
-												<xs:element name="quantity" type="base:quantity18p11Type">
-													<xs:annotation>
-														<xs:documentation>Количество</xs:documentation>
-													</xs:annotation>
-												</xs:element>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
-									<xs:element name="total" type="base:quantity18p11Type" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>Всего. Значение игнорируется при приеме. автоматически рассчитывается как сумма количества по всем заказчикам.</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-								</xs:sequence>
-							</xs:complexType>
-						</xs:element>
-						<xs:element name="pricePerUnit" type="base:moneyType">
-							<xs:annotation>
-								<xs:documentation>Цена за единицу в основном варианте поставки</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="positionPrice" type="base:moneyType">
-							<xs:annotation>
-								<xs:documentation>Стоимость позиции в основном варианте поставки. Заполняется внешней системой как произведение количества (объема) закупаемого лекарственного препарата в основном варианте поставки (drugsInfo\drugInfo\drugQuantity) на цену за единицу в основном варианте поставки (pricePerUnit)</xs:documentation>
-							</xs:annotation>
-						</xs:element>
+						<xs:choice>
+							<xs:sequence>
+								<xs:element name="drugQuantityCustomersInfo">
+									<xs:annotation>
+										<xs:documentation>Количество (объем) закупаемого лекарственного препарата в разбивке по заказчикам в основном варианте поставки. Поле total в составе блока рассчитывается автоматически</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="drugQuantityCustomerInfo" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Количество (объем) закупаемого лекарственного препарата для заказчика</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="customer" type="base:organizationRef">
+															<xs:annotation>
+																<xs:documentation>Организация заказчика</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="quantity" type="base:quantity18p11Type">
+															<xs:annotation>
+																<xs:documentation>Количество</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="total" type="base:quantity18p11Type" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Всего. Значение игнорируется при приеме. автоматически рассчитывается как сумма количества по всем заказчикам.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="pricePerUnit" type="base:moneyLongType">
+									<xs:annotation>
+										<xs:documentation>Цена за единицу в основном варианте поставки</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="positionPrice" type="base:moneyType">
+									<xs:annotation>
+										<xs:documentation>Стоимость позиции в основном варианте поставки. Заполняется внешней системой как произведение количества (объема) закупаемого лекарственного препарата в основном варианте поставки (drugsInfo\drugInfo\drugQuantity) на цену за единицу в основном варианте поставки (pricePerUnit)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+							<xs:element name="quantityUndefined">
+								<xs:annotation>
+									<xs:documentation>Невозможно определить количество (объём)</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="quantityUndefined" type="xs:boolean" fixed="true">
+											<xs:annotation>
+												<xs:documentation>Невозможно определить количество</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="price" type="base:moneyLongType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Начальная цена единицы товара, работы, услуги</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="drugPurchaseObjectCustomersInfo" minOccurs="1">
+											<xs:annotation>
+												<xs:documentation>Информация об участии заказчиков в закупке указанного лекарственного препарата</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="drugPurchaseObjectCustomerInfo" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Информация об участии заказчика в закупке указанного лекарственного препарата</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="customer" type="base:organizationRef">
+																	<xs:annotation>
+																		<xs:documentation>Организация заказчика</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="drugPurchaseObjectIsPurchased" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Признак участия заказчика в закупке указанного лекарственного препарата</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="total" type="base:moneyType" minOccurs="0">
+			<xs:element name="total" type="base:moneyLongType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Всего. Значение игнорируется при приеме. автоматически рассчитывается как сумма стоимости позиций (positionPrice) по всем лекарственным препаратам</xs:documentation>
+					<xs:documentation>Всего. 
+Значение игнорируется при приеме. автоматически рассчитывается как сумма стоимости позиций (positionPrice) по всем лекарственным препаратам</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="totalSumCurrency" type="base:moneyType" minOccurs="0">
@@ -2001,6 +2182,33 @@ A-дополнительный
 			<xs:element name="treasurySupportContractRequired" type="xs:boolean" fixed="true" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Требуется казначейское сопровождение контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="paymentGuaranteeInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация о платеже для гарантийных обязательств в извещении</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="amount" type="base:moneyType">
+				<xs:annotation>
+					<xs:documentation>Размер обеспечения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="part" type="xs:double" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Доля от начальной (максимальной) цены контракта. Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (amount) к НМЦК (maxPrice)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="procedureInfo" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Порядок внесения денежных средств в качестве обеспечения гарантийных обязательств</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="account" type="cmn:paymentPropertysType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Платежные реквизиты. При приеме контролируется наличие у организации заказчика актуальных счетов с  указанным БИК  и расчетным счетом</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

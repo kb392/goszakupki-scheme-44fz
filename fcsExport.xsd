@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 9.2.3, create date 23.07.2019 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS EXPORT Integration Scheme, version 9.3, create date 11.09.2019 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/EPtypes/1" schemaLocation="IntegrationEPTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/CPtypes/1" schemaLocation="IntegrationCPTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/TPtypes/1" schemaLocation="IntegrationTPTypes.xsd"/>
 	<xs:element name="export">
 		<xs:annotation>
 			<xs:documentation>Схема данных подсистемы экспорта</xs:documentation>
@@ -541,6 +542,11 @@
 							<xs:documentation>Аннулирование плана-графика</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="tenderPlan2020" type="tp:tenderPlan2020Type">
+						<xs:annotation>
+							<xs:documentation>План-график закупок с 01.01.2020</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="complaint" type="oos:zfcs_complaintType">
 						<xs:annotation>
 							<xs:documentation>Информация по жалобе для ИС КО</xs:documentation>
@@ -634,6 +640,11 @@
 					<xs:element name="control99TenderPlan2017Extract" type="oos:zfcs_control99TenderPlan2017ExtractType">
 						<xs:annotation>
 							<xs:documentation>Информация из плана-графика с 01.01.2017 (РПГ), направляемая на контроль по 99 статье в орган контроля</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="control99TenderPlan2020Extract" type="tp:control99TenderPlan2020ExtractType">
+						<xs:annotation>
+							<xs:documentation>Информация из плана-графика закупок с 01.01.2020, направляемая на контроль по 99 статье в орган контроля</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="control99ContractExtract" type="oos:zfcs_control99ContractExtractType">
@@ -1181,6 +1192,16 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
+					<xs:element name="nsiTenderPlan2020PositionChangeReasons">
+						<xs:annotation>
+							<xs:documentation>Причины внесения изменений в позицию плана-графика с 01.01.2020</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiTenderPlan2020PositionChangeReason" type="oos:zfcs_nsiTenderPlan2020PositionChangeReasonType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
 					<xs:element name="nsiTenderPlanPurchaseGroups">
 						<xs:annotation>
 							<xs:documentation>Справочник групп преимуществ (требований) для плана-графика</xs:documentation>
@@ -1193,7 +1214,7 @@
 					</xs:element>
 					<xs:element name="nsiSpecialPurchases">
 						<xs:annotation>
-							<xs:documentation>Cправочник: Типы особых закупок для структурированных планов закупок"</xs:documentation>
+							<xs:documentation>Cправочник: Типы особых закупок для планов закупок (планов-графиков закупок с 01.01.2020) и планов-графиков с 01.01.2017"</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
