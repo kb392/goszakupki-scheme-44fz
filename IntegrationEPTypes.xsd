@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.2.2, create date 11.07.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.2.100, create date 13.07.2018 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -891,6 +891,11 @@ RO - Региональный оператор.</xs:documentation>
 										</xs:sequence>
 									</xs:complexType>
 								</xs:element>
+								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Признание открытого конкурса с ограниченным участием в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEOKOU3" в поле objectName</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 								<xs:element name="research" type="xs:boolean">
 									<xs:annotation>
 										<xs:documentation>Выполнение научно-исследовательских, опытно-конструкторских, технологических работ или оказание консультационных услуг</xs:documentation>
@@ -1369,6 +1374,11 @@ RO - Региональный оператор.</xs:documentation>
 											</xs:element>
 										</xs:sequence>
 									</xs:complexType>
+								</xs:element>
+								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Признание двухэтапного конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEOKD4" в поле objectName</xs:documentation>
+									</xs:annotation>
 								</xs:element>
 								<xs:element name="research" type="xs:boolean">
 									<xs:annotation>
@@ -2912,6 +2922,11 @@ RO - Региональный оператор.</xs:documentation>
 					<xs:documentation>Закупка за счет средств бюджета Союзного государства. Принимается только если все заказчики закупки указаны в настройке ЕИС "Настройка перечня организаций, осуществляющих закупки за счет средств союзного государства", иначе игнорируется при приеме</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="isGOZ" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Закупка товар, работ, услуг по государственному оборонному заказу в соответствии с ФЗ № 275-ФЗ от 29 декабря 2012 г. Не может быть задан одновременно с признаком "Закупка за счет средств бюджета Союзного государства" (isBudgetUnionState). Проверяется принадлежность всех Заказчиков к перечню настройки "Настройка дополнительного перечня организаций для ГОЗ" или "Настройка перечня кодов ОКФС для ГОЗ"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="purchaseObjectInfo" type="base:text2000Type">
 				<xs:annotation>
 					<xs:documentation>Наименование объекта закупки</xs:documentation>
@@ -2925,6 +2940,15 @@ RO - Региональный оператор.</xs:documentation>
 			<xs:element name="ETP" type="base:ETPRef">
 				<xs:annotation>
 					<xs:documentation>Электронная торговая площадка. При приеме код контролируется на  присутствие в справочнике "Справочник: Электронные торговые площадки по ПП РФ № 615" (nsiETP)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="article15FeaturesInfo" type="base:article15PartsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация об особенностях осуществления закупки в соответствии с ч. 4-6 ст. 15 Закона № 44-ФЗ:
+
+P4 - В соответствии с ч. 4 ст. 15 Закона № 44-ФЗ;
+P5 - В соответствии с ч. 5 ст. 15 Закона № 44-ФЗ;
+P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

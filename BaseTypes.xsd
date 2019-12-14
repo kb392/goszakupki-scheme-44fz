@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 8.2.2, create date 11.07.2018 -->
+<!-- BASE_TYPES Integration Scheme, version 8.2.100, create date 13.07.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -523,6 +523,21 @@ PASS_OFFER – Все остальные заявки
 			<xs:enumeration value="PASS_OFFER"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="article15PartsType">
+		<xs:annotation>
+			<xs:documentation>Тип: Особенности осуществления закупки в соответствии с ч. 4-6 ст. 15 Закона № 44-ФЗ:
+			
+P4 - В соответствии с ч. 4 ст. 15 Закона № 44-ФЗ;
+P5 - В соответствии с ч. 5 ст. 15 Закона № 44-ФЗ;
+P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ.
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="P4"/>
+			<xs:enumeration value="P5"/>
+			<xs:enumeration value="P6"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="authorityType">
 		<xs:annotation>
 			<xs:documentation>Тип: Вид органа, возможные значения:
@@ -539,7 +554,6 @@ M - Орган местного самоуправления муниципал�
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="attachedDocumentKindCodeType">
-		<xs:annotation/>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="10"/>
