@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- COMMON_TYPES Integration Scheme, version 10.0, create date 23.10.2019 -->
+<!-- COMMON_TYPES Integration Scheme, version 10.0, create date 21.11.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -814,7 +814,10 @@ CAdES-A</xs:documentation>
 						<xs:choice>
 							<xs:element name="OKPD2">
 								<xs:annotation>
-									<xs:documentation>Классификация по ОКПД2</xs:documentation>
+									<xs:documentation>Классификация по ОКПД2.
+
+В случае, если извещение сформировано на основании позиции плана-графика закупок с 01.01.2020, то контролируется на соответствие коду ОКПД2 в соответствующей позиции ПГ.
+Допускается указание кода-потомка расширенной разрядности</xs:documentation>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:complexContent>
@@ -832,7 +835,12 @@ CAdES-A</xs:documentation>
 							</xs:element>
 							<xs:element name="KTRU">
 								<xs:annotation>
-									<xs:documentation>Классификация по КТРУ</xs:documentation>
+									<xs:documentation>Классификация по КТРУ.
+
+В случае, если извещение сформировано на основании позиции плана-графика закупок с 01.01.2020, то контролируется указание кода КТРУ, расширяющего код ОКПД2 из позиции ПГ.
+Поле "Номер версии позиции" (versionNumber) игнорируется при приеме первой версии извещения, заполняется при передаче актуальным номером позиции КТРУ. При приеме последующих версий извещения допустимо указание:
+-версии позиции КТРУ из предыдущей версии размещенного извещения
+-актуальной версии позиции КТРУ (если при приеме поле не заполнено, то при передаче заполнится значением версии позиции КТРУ из последней размещенной версии извещения)</xs:documentation>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:complexContent>
@@ -2168,6 +2176,69 @@ A-дополнительный
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<!--Планы-графика закупок с 01.01.2020. Типы-->
+	<xs:complexType name="tenderPlan2020InfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация о плане-графике закупок с 01.01.2020</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="plan2020Number" type="base:tenderPlan2020RegNumberType">
+				<xs:annotation>
+					<xs:documentation>Реестровый номер плана-графика закупок с 01.01.2020</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="position2020Number" type="base:tenderPlan2020PositionNumberType">
+					<xs:annotation>
+						<xs:documentation>Номер позиции в плане-графике закупок с 01.01.2020 (уникальный реестровый номер закупки)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="position2020ExtNumber" type="base:documentNumberType">
+					<xs:annotation>
+						<xs:documentation>Внешний номер позиции в плане-графике закупок с 01.01.2020</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tenderPlan2020OKPD2RefType">
+		<xs:annotation>
+			<xs:documentation>Тип: Классификация по ОКПД2 в планах графиках с 01.01.2020</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="OKPD2" type="base:OKPD2Ref">
+				<xs:annotation>
+					<xs:documentation>ОКПД2.
+При выгрузке поле OKPDCode заполняется 30-33 разрядами ИКЗ, если в соответствующих разрядах указано значение отличное от '0000'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="undefined" type="xs:string" default="0000">
+				<xs:annotation>
+					<xs:documentation>Закупка за счет нескольких ОКПД2.
+При выгрузке заполняется 30-33 разрядами ИКЗ, если в соответствующих разрядах указано значение '0000'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="tenderPlan2020KVRRefType">
+		<xs:annotation>
+			<xs:documentation>Тип: Классификация по КВР в планах графиках с 01.01.2020</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="KVR" type="base:KVRRef">
+				<xs:annotation>
+					<xs:documentation>КВР.
+При выгрузке поле code заполняется 34-36 разрядами ИКЗ, если в соответствующих разрядах указано значение отличное от '000'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="undefined" type="xs:string" default="000">
+				<xs:annotation>
+					<xs:documentation>Закупка за счет нескольких КВР либо КВР отсутствует.
+При выгрузке заполняется 34-36 разрядами ИКЗ, если в соответствующих разрядах указано значение '000'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
 	<!--Разные реестры. Типы-->
 	<xs:complexType name="bankSupportContractRequiredInfoType">
 		<xs:annotation>
@@ -2196,9 +2267,9 @@ A-дополнительный
 					<xs:documentation>Размер обеспечения</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="part" type="xs:double" minOccurs="0">
+			<xs:element name="part" type="base:percentRestr0100D2Type" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Доля от начальной (максимальной) цены контракта. Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (amount) к НМЦК (maxPrice)</xs:documentation>
+					<xs:documentation>Доля от начальной (максимальной) цены контракта. Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (amount) к НМЦК (maxPrice) в виде процента. Округляется до двух знаков в дробной части</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="procedureInfo" type="base:text2000Type" minOccurs="0">

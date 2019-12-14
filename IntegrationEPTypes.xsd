@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 23.10.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 21.11.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -300,7 +300,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:choice>
 											<xs:element name="notDrugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты.
+Не все позиции ТРУ по ОКПД2 из базовой позиции плана-графика закупок с 01.01.2020 должны быть представлены в полном объеме. Позиция ТРУ по ОКПД2 из базовой позиции плана-графика может иметь несколько потомков</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -318,7 +319,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 											</xs:element>
 											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты.
+Контролируется обязательность заполнения, если извещение сформировано на основании позиции плана-графика с 01.01.2020 и в такой позиции  указан код ОКПД2 21.20</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -683,7 +685,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:choice>
 											<xs:element name="notDrugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты.
+Не все позиции ТРУ по ОКПД2 из базовой позиции плана-графика закупок с 01.01.2020 должны быть представлены в полном объеме. Позиция ТРУ по ОКПД2 из базовой позиции ПГ может иметь несколько потомков</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -701,7 +704,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 											</xs:element>
 											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты.
+Контролируется обязательность заполнения, если извещение сформировано на основании позиции плана-графика с 01.01.2020 и в такой ППГ указан код ОКПД2 21.20</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -1006,7 +1010,7 @@ CU5CH26 - Заказчик как орган исполнительной вла
 	</xs:complexType>
 	<xs:complexType name="prolongationEOKOUType">
 		<xs:annotation>
-			<xs:documentation>Тип: Извещение о продлении срока рассмотрения и оценки заявок в ЭOK-ОУ (открытый конкурс с ограниченным участием в электронной форме)</xs:documentation>
+			<xs:documentation>Тип: Извещение о продлении срока подачи заявок в ЭOK-ОУ (открытый конкурс с ограниченным участием в электронной форме)</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="purchaseDocumentType">
@@ -1066,7 +1070,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:choice>
 											<xs:element name="notDrugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты.
+Не все позиции ТРУ по ОКПД2 из базовой позиции плана-графика закупок с 01.01.2020 должны быть представлены в полном объеме. Позиция ТРУ по ОКПД2 из базовой позиции ПГ может иметь несколько потомков</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -1084,7 +1089,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 											</xs:element>
 											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты.
+Контролируется обязательность заполнения, если извещение сформировано на основании позиции плана-графика с 01.01.2020 и в такой ППГ указан код ОКПД2 21.20</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -1642,7 +1648,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:choice>
 											<xs:element name="notDrugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты.
+Не все позиции ТРУ по ОКПД2 из базовой позиции плана-графика закупок с 01.01.2020 должны быть представлены в полном объеме. Позиция ТРУ по ОКПД2 из базовой позиции плана-графика может иметь несколько потомков</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -1660,7 +1667,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 											</xs:element>
 											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты.
+Контролируется обязательность заполнения, если извещение сформировано на основании позиции плана-графика с 01.01.2020 и в такой позиции указан код ОКПД2 21.20</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -2086,7 +2094,8 @@ PASS_OFFER - Все остальные заявки</xs:documentation>
 										<xs:choice>
 											<xs:element name="notDrugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты.
+Не все позиции ТРУ по ОКПД2 из базовой позиции плана-графика закупок с 01.01.2020 должны быть представлены в полном объеме. Позиция ТРУ по ОКПД2 из базовой позиции плана-графика может иметь несколько потомков</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -2104,7 +2113,8 @@ PASS_OFFER - Все остальные заявки</xs:documentation>
 											</xs:element>
 											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты.
+Контролируется обязательность заполнения, если извещение сформировано на основании позиции плана-графика с 01.01.2020 и в такой позиции указан код ОКПД2 21.20</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -2838,7 +2848,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:choice>
 											<xs:element name="notDrugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты.
+Не все позиции ТРУ по ОКПД2 из базовой позиции плана-графика закупок с 01.01.2020 должны быть представлены в полном объеме. Позиция ТРУ по ОКПД2 из базовой позиции плана-графика может иметь несколько потомков</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -2856,7 +2867,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 											</xs:element>
 											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты.
+Контролируется обязательность заполнения, если извещение сформировано на основании позиции плана-графика с 01.01.2020 и в такой позиции указан код ОКПД2 21.20</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -2990,7 +3002,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:choice>
 											<xs:element name="notDrugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты.
+Не все позиции ТРУ по ОКПД2 из базовой позиции плана-графика закупок с 01.01.2020 должны быть представлены в полном объеме. Позиция ТРУ по ОКПД2 из базовой позиции плана-графика может иметь несколько потомков</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -3008,7 +3021,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 											</xs:element>
 											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты.
+Контролируется обязательность заполнения, если извещение сформировано на основании позиции плана-графика с 01.01.2020 и в такой позиции указан код ОКПД2 21.20</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -3142,7 +3156,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:choice>
 											<xs:element name="notDrugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты.
+Не все позиции ТРУ по ОКПД2 из базовой позиции плана-графика закупок с 01.01.2020 должны быть представлены в полном объеме. Позиция ТРУ по ОКПД2 из базовой позиции плана-графика может иметь несколько потомков</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -3160,7 +3175,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 											</xs:element>
 											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты.
+Контролируется обязательность заполнения, если извещение сформировано на основании позиции плана-графика с 01.01.2020 и в такой позиции указан код ОКПД2 21.20</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -3294,7 +3310,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:choice>
 											<xs:element name="notDrugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются нелекарственные препараты.
+Не все позиции ТРУ по ОКПД2 из базовой позиции плана-графика закупок с 01.01.2020 должны быть представлены в полном объеме. Позиция ТРУ по ОКПД2 из базовой позиции плана-графика может иметь несколько потомков</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -3312,7 +3329,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 											</xs:element>
 											<xs:element name="drugPurchaseObjectsInfo">
 												<xs:annotation>
-													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты.
+Контролируется обязательность заполнения, если извещение сформировано на основании позиции плана-графика с 01.01.2020 и в такой позиции указан код ОКПД2 21.20</xs:documentation>
 												</xs:annotation>
 												<xs:complexType>
 													<xs:complexContent>
@@ -3718,7 +3736,9 @@ manual - ручной ввод.
 					<xs:documentation>Блок «План оплаты исполнения контракта» 
 
 Если признак ручного ввода для данной организации в ЕИС = FALSE, то автоматически заполняется при передаче сведения на основании связанного БО.
-Если признак ручного ввода = TRUE, то в ЕИС принимается содержимое блока</xs:documentation>
+Если признак ручного ввода = TRUE, то в ЕИС принимается содержимое блока.
+
+Устарело. Игнорируется при приеме для извещений, первая версия которых размещена после выхода версии ЕИС 10.0</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="nonbudgetFinancings" minOccurs="0">
@@ -3727,7 +3747,9 @@ manual - ручной ввод.
 Принимается только для следующих организаций:
 • СПЗ организации = 09950000002 (ГОСУДАРСТВЕННАЯ КОРПОРАЦИЯ ПО КОСМИЧЕСКОЙ ДЕЯТЕЛЬНОСТИ "РОСКОСМОС");
 • СПЗ организации = 07731000003 (ГОСУДАРСТВЕННАЯ КОРПОРАЦИЯ ПО АТОМНОЙ ЭНЕРГИИ "РОСАТОМ").
-Контролируется бизнес-контролем ПРИЗ_АК_0000_0679</xs:documentation>
+Контролируется бизнес-контролем ПРИЗ_АК_0000_0679.
+
+Устарело. Игнорируется при приеме для извещений, первая версия которых размещена после выхода версии ЕИС 10.0</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -3807,9 +3829,10 @@ manual - ручной ввод.
 Может быть указано только значение "Российский рубль" (RUR)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="financeSource" type="base:text2000Type">
+						<xs:element name="financeSource" type="base:text2000Type" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Источник финансирования</xs:documentation>
+								<xs:documentation>Источник финансирования.
+Игнорируется при приеме для извещений, первая версия которых размещается после выхода версии ЕИС 10.0</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="interbudgetaryTransfer" type="xs:boolean" minOccurs="0">
@@ -3821,6 +3844,11 @@ manual - ручной ввод.
 							<xs:annotation>
 								<xs:documentation>Указать НМЦК в валюте контракта.
 Требуется и допускается заполнение в случае, если валюта НМЦК контрактов отлична от рубля</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="isContactPriceFormula" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Указать формулу цены и максимальное значение цены контракта</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -5744,14 +5772,143 @@ CU5CH26 - Заказчик как орган исполнительной вла
 						</xs:element>
 						<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Идентификационный код закупки. Заполняется автоматически из плана-графика в случае указания блока tenderPlanInfo. Иначе требуется обязательное заполнение.</xs:documentation>
+								<xs:documentation>Идентификационный код закупки. 
+Заполняется автоматически из плана-графика в случае указания блока tenderPlanInfo. Иначе требуется обязательное заполнение, при этом контролируется на уникальность.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то при приеме значение  контролируется  на соответствие ИКЗ в позиции плана-графика за исключением порядкового номера закупки (27-29 разряды)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="tenderPlanInfo" type="tendePlanEPInfoType" minOccurs="0">
+						<xs:element name="IKZInfo" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Сведения о связи с позицией плана-графика. 
-При приеме контролируется, что все позиции ПГ по требованиям заказчиков в рамках лота либо имеют признак "Невозможно определить количество (объём)" (quantityUndefined) либо не имеют такого признака</xs:documentation>
+								<xs:documentation>Сведения для формирования ИКЗ закупки.
+Блок обязателен для заполнения для извещений, первая версия которых размещается после выхода версии ЕИС 10.0</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="publishYear" type="base:yearType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Планируемый год размещения извещения. Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="OKPD2Info" type="cmn:tenderPlan2020OKPD2RefType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Классификация по ОКПД2.
+Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="KVRInfo" type="cmn:tenderPlan2020KVRRefType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Вид расходов.
+Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="customerCode" type="base:ikuType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Идентификационный код заказчика.
+Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="purchaseNumber" type="base:tenderPlan2020PurchaseNumberType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Номер закупки, включенной в план-график закупок.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то игнорируется при приеме и заполняется из поля purchaseCode
+В других случаях контролируется соответствие 23-26 разрядам ИКЗ, указанного в поле purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="purchaseOrderNumber" type="base:tenderPlan2020PurchaseOrderNumberType">
+										<xs:annotation>
+											<xs:documentation>Порядковый номер закупки.
+При приеме контролируется соответствие 27-29 разрядам ИКЗ, указанного в поле purchaseCode.
+Если извещение сформировано на основании позиции плана-графика закупок с 01.01.2020, то значение в поле должно быть уникальным среди:
+‒размещенных извещений;
+‒удаленных требований заказчика, лотах, которые ранее были включены в размещенные извещения;
+‒отмененных извещений
+‒лотов;
+‒проектов извещений
+‒ сведений о контрактах в Реестре контрактов,
+которые были сформированы на основании данной ППГ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:choice minOccurs="0">
+							<xs:element name="tenderPlanInfo" type="tendePlanEPInfoType">
+								<xs:annotation>
+									<xs:documentation>Сведения о связи с позицией плана-графика. 
+При приеме контролируется, что все позиции ПГ по требованиям заказчиков в рамках лота либо имеют признак "Невозможно определить количество (объём)" (quantityUndefined) либо не имеют такого признака</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="tenderPlan2020Info" type="cmn:tenderPlan2020InfoType">
+								<xs:annotation>
+									<xs:documentation>Сведения о связи с позицией плана-графика закупок с 01.01.2020</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+						<xs:element name="contractExecutionPaymentPlan" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>План оплаты исполнения контракта.
+Блок обязателен для заполнения для извещений, первая версия которых размещается после выхода версии ЕИС 10.0</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="financingSourcesInfo">
+										<xs:annotation>
+											<xs:documentation>Информация об источниках финансирования</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="financingSource" type="base:text4000Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Источник финансирования</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="currentYear" type="base:yearType">
+													<xs:annotation>
+														<xs:documentation>Текущий плановый год</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="financeInfo" type="financeResourcesType">
+													<xs:annotation>
+														<xs:documentation>Финансовое обеспечение.
+Контролируется заполнение одного из полей «Сумма на текущий плановый год» (currentYear), «Сумма на первый плановый год» (firstYear), «Сумма на второй плановый год» (secondYear), «Сумма на последующие годы» (subsecYears)
+</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="budgetFinancings" type="BOBudgetFinancingsType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Блок «План оплаты исполнения контракта».
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="nonbudgetFinancings" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>План оплаты исполнения контракта за счет внебюджетных средств.
+Принимается только для следующих организаций:
+• СПЗ организации = 09950000002 (ГОСУДАРСТВЕННАЯ КОРПОРАЦИЯ ПО КОСМИЧЕСКОЙ ДЕЯТЕЛЬНОСТИ "РОСКОСМОС");
+• СПЗ организации = 07731000003 (ГОСУДАРСТВЕННАЯ КОРПОРАЦИЯ ПО АТОМНОЙ ЭНЕРГИИ "РОСАТОМ")</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="currentYear" type="base:yearType">
+													<xs:annotation>
+														<xs:documentation>Текущий плановый год</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="nonbudgetFinancing" type="financeResourcesType">
+													<xs:annotation>
+														<xs:documentation>План оплаты исполнения контракта за счет внебюджетных средств.
+Контролируется заполнение одного из полей «Сумма на текущий плановый год» (currentYear), «Сумма на первый плановый год» (firstYear), «Сумма на второй плановый год» (secondYear), «Сумма на последующие годы» (subsecYears)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="BOInfo" type="BOInfoType" minOccurs="0">
 							<xs:annotation>
@@ -5794,6 +5951,12 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			<xs:element name="bankSupportContractRequiredInfo" type="cmn:bankSupportContractRequiredInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = FALSE или признак не указан</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -5869,14 +6032,145 @@ CU5CH26 - Заказчик как орган исполнительной вла
 						</xs:element>
 						<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Идентификационный код закупки. Заполняется автоматически из плана-графика в случае указания блока tenderPlanInfo. Иначе требуется обязательное заполнение.</xs:documentation>
+								<xs:documentation>Идентификационный код закупки. 
+Заполняется автоматически из плана-графика в случае указания блока tenderPlanInfo. Иначе требуется обязательное заполнение, при этом контролируется на уникальность.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то при приеме значение  контролируется  на соответствие ИКЗ в позиции плана-графика за исключением порядкового номера закупки (27-29 разряды)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="tenderPlanInfo" type="tendePlanEPInfoType" minOccurs="0">
+						<xs:element name="IKZInfo" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Сведения о связи с позицией плана-графика. 
-При приеме контролируется, что все позиции ПГ по требованиям заказчиков в рамках лота либо имеют признак "Невозможно определить количество (объём)" (quantityUndefined) либо не имеют такого признака</xs:documentation>
+								<xs:documentation>Сведения для формирования ИКЗ закупки.
+Блок обязателен для заполнения для извещений, первая версия которых размещается после выхода версии ЕИС 10.0</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="publishYear" type="base:yearType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Планируемый год размещения извещения. Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="OKPD2Info" type="cmn:tenderPlan2020OKPD2RefType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Классификация по ОКПД2.
+Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="KVRInfo" type="cmn:tenderPlan2020KVRRefType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Вид расходов.
+Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="customerCode" type="base:ikuType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Идентификационный код заказчика.
+Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="purchaseNumber" type="base:tenderPlan2020PurchaseNumberType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Номер закупки, включенной в план-график закупок.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то игнорируется при приеме и заполняется из поля purchaseCode
+В других случаях контролируется соответствие 23-26 разрядам ИКЗ, указанного в поле purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="purchaseOrderNumber" type="base:tenderPlan2020PurchaseOrderNumberType">
+										<xs:annotation>
+											<xs:documentation>Порядковый номер закупки.
+При приеме контролируется соответствие 27-29 разрядам ИКЗ, указанного в поле purchaseCode.
+Если извещение сформировано на основании позиции плана-графика закупок с 01.01.2020, то значение в поле должно быть уникальным среди:
+‒размещенных извещений;
+‒удаленных требований заказчика, лотах, которые ранее были включены в размещенные извещения;
+‒отмененных извещений
+‒лотов;
+‒проектов извещений
+‒ сведений о контрактах в Реестре контрактов,
+которые были сформированы на основании данной ППГ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:choice minOccurs="0">
+							<xs:element name="tenderPlanInfo" type="tendePlanEPInfoType">
+								<xs:annotation>
+									<xs:documentation>Сведения о связи с позицией плана-графика. 
+При приеме контролируется, что все позиции ПГ по требованиям заказчиков в рамках лота либо имеют признак "Невозможно определить количество (объём)" (quantityUndefined) либо не имеют такого признака</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="tenderPlan2020Info" type="cmn:tenderPlan2020InfoType">
+								<xs:annotation>
+									<xs:documentation>Сведения о связи с позицией плана-графика закупок с 01.01.2020</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+						<xs:element name="contractExecutionPaymentPlan" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>План оплаты исполнения контракта.
+Блок обязателен для заполнения для извещений, первая версия которых размещается после выхода версии ЕИС 10.0</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="financingSourcesInfo">
+										<xs:annotation>
+											<xs:documentation>Информация об источниках финансирования</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="financingSource" type="base:text4000Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Источник финансирования</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="currentYear" type="base:yearType">
+													<xs:annotation>
+														<xs:documentation>Текущий плановый год.
+Может принимать значение только текущего года</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="financeInfo" type="financeResourcesType">
+													<xs:annotation>
+														<xs:documentation>Финансовое обеспечение.
+Контролируется заполнение одного из полей «Сумма на текущий плановый год» (currentYear), «Сумма на первый плановый год» (firstYear), «Сумма на второй плановый год» (secondYear), «Сумма на последующие годы» (subsecYears)
+</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="budgetFinancings" type="BOBudgetFinancingsType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Блок «План оплаты исполнения контракта».
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="nonbudgetFinancings" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>План оплаты исполнения контракта за счет внебюджетных средств.
+Принимается только для следующих организаций:
+• СПЗ организации = 09950000002 (ГОСУДАРСТВЕННАЯ КОРПОРАЦИЯ ПО КОСМИЧЕСКОЙ ДЕЯТЕЛЬНОСТИ "РОСКОСМОС");
+• СПЗ организации = 07731000003 (ГОСУДАРСТВЕННАЯ КОРПОРАЦИЯ ПО АТОМНОЙ ЭНЕРГИИ "РОСАТОМ")</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="currentYear" type="base:yearType">
+													<xs:annotation>
+														<xs:documentation>Текущий плановый год.
+Может принимать значение только текущего года</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="nonbudgetFinancing" type="financeResourcesType">
+													<xs:annotation>
+														<xs:documentation>План оплаты исполнения контракта за счет внебюджетных средств.
+Контролируется заполнение одного из полей «Сумма на текущий плановый год» (currentYear), «Сумма на первый плановый год» (firstYear), «Сумма на второй плановый год» (secondYear), «Сумма на последующие годы» (subsecYears)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="BOInfo" type="BOInfoType" minOccurs="0">
 							<xs:annotation>
@@ -5919,6 +6213,12 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			<xs:element name="bankSupportContractRequiredInfo" type="cmn:bankSupportContractRequiredInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = FALSE или признак не указан</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -5982,14 +6282,144 @@ CU5CH26 - Заказчик как орган исполнительной вла
 						</xs:element>
 						<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Идентификационный код закупки. Заполняется автоматически из плана-графика в случае указания блока tenderPlanInfo. Иначе требуется обязательное заполнение.</xs:documentation>
+								<xs:documentation>Идентификационный код закупки. Заполняется автоматически из плана-графика в случае указания блока tenderPlanInfo. Иначе требуется обязательное заполнение, при этом контролируется на уникальность.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то при приеме значение  контролируется  на соответствие ИКЗ в позиции за исключением порядкового номера закупки (27-29 разряды)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="tenderPlanInfo" type="tendePlanEPInfoType" minOccurs="0">
+						<xs:element name="IKZInfo" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Сведения о связи с позицией плана-графика. 
-При приеме контролируется, что все позиции ПГ по требованиям заказчиков в рамках лота либо имеют признак "Невозможно определить количество (объём)" (quantityUndefined) либо не имеют такого признака</xs:documentation>
+								<xs:documentation>Сведения для формирования ИКЗ закупки.
+Блок обязателен для заполнения для извещений, первая версия которых размещается после выхода версии ЕИС 10.0</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="publishYear" type="base:yearType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Планируемый год размещения извещения. Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="OKPD2Info" type="cmn:tenderPlan2020OKPD2RefType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Классификация по ОКПД2.
+Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="KVRInfo" type="cmn:tenderPlan2020KVRRefType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Вид расходов.
+Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="customerCode" type="base:ikuType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Идентификационный код заказчика.
+Игнорируется при приеме. Заполняется из поля purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="purchaseNumber" type="base:tenderPlan2020PurchaseNumberType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Номер закупки, включенной в план-график закупок.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то игнорируется при приеме и заполняется из поля purchaseCode
+В других случаях контролируется соответствие 23-26 разрядам ИКЗ, указанного в поле purchaseCode</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="purchaseOrderNumber" type="base:tenderPlan2020PurchaseOrderNumberType">
+										<xs:annotation>
+											<xs:documentation>Порядковый номер закупки.
+При приеме контролируется соответствие 27-29 разрядам ИКЗ, указанного в поле purchaseCode.
+Если извещение сформировано на основании позиции плана-графика закупок с 01.01.2020, то значение в поле должно быть уникальным среди:
+‒размещенных извещений;
+‒удаленных требований заказчика, лотах, которые ранее были включены в размещенные извещения;
+‒отмененных извещений
+‒лотов;
+‒проектов извещений
+‒ сведений о контрактах в Реестре контрактов,
+которые были сформированы на основании данной ППГ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:choice minOccurs="0">
+							<xs:element name="tenderPlanInfo" type="tendePlanEPInfoType">
+								<xs:annotation>
+									<xs:documentation>Сведения о связи с позицией плана-графика. 
+При приеме контролируется, что все позиции ПГ по требованиям заказчиков в рамках лота либо имеют признак "Невозможно определить количество (объём)" (quantityUndefined) либо не имеют такого признака</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="tenderPlan2020Info" type="cmn:tenderPlan2020InfoType">
+								<xs:annotation>
+									<xs:documentation>Сведения о связи с позицией плана-графика закупок с 01.01.2020</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+						<xs:element name="contractExecutionPaymentPlan" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>План оплаты исполнения контракта.
+Блок обязателен для заполнения для извещений, первая версия которых размещается после выхода версии ЕИС 10.0</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="financingSourcesInfo">
+										<xs:annotation>
+											<xs:documentation>Информация об источниках финансирования</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="financingSource" type="base:text4000Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Источник финансирования</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="currentYear" type="base:yearType">
+													<xs:annotation>
+														<xs:documentation>Текущий плановый год.
+Может принимать значение только текущего года</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="financeInfo" type="financeResourcesType">
+													<xs:annotation>
+														<xs:documentation>Финансовое обеспечение.
+Контролируется заполнение одного из полей «Сумма на текущий плановый год» (currentYear), «Сумма на первый плановый год» (firstYear), «Сумма на второй плановый год» (secondYear), «Сумма на последующие годы» (subsecYears)
+</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="budgetFinancings" type="BOBudgetFinancingsType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Блок «План оплаты исполнения контракта».
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="nonbudgetFinancings" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>План оплаты исполнения контракта за счет внебюджетных средств.
+Принимается только для следующих организаций:
+• СПЗ организации = 09950000002 (ГОСУДАРСТВЕННАЯ КОРПОРАЦИЯ ПО КОСМИЧЕСКОЙ ДЕЯТЕЛЬНОСТИ "РОСКОСМОС");
+• СПЗ организации = 07731000003 (ГОСУДАРСТВЕННАЯ КОРПОРАЦИЯ ПО АТОМНОЙ ЭНЕРГИИ "РОСАТОМ")</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="currentYear" type="base:yearType">
+													<xs:annotation>
+														<xs:documentation>Текущий плановый год.
+Может принимать значение только текущего года</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="nonbudgetFinancing" type="financeResourcesType">
+													<xs:annotation>
+														<xs:documentation>План оплаты исполнения контракта за счет внебюджетных средств.
+Контролируется заполнение одного из полей «Сумма на текущий плановый год» (currentYear), «Сумма на первый плановый год» (firstYear), «Сумма на второй плановый год» (secondYear), «Сумма на последующие годы» (subsecYears)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="BOInfo" type="BOInfoType" minOccurs="0">
 							<xs:annotation>
@@ -6052,6 +6482,12 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			<xs:element name="bankSupportContractRequiredInfo" type="cmn:bankSupportContractRequiredInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = FALSE или признак не указан</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -6139,9 +6575,9 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:documentation>Порядок внесения денежных средств в качестве обеспечения заявки (порядок предоставления обеспечения исполнения контракта)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="part" type="xs:double" minOccurs="0">
+			<xs:element name="part" type="base:percentRestr0100D2Type" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Доля от начальной (максимальной) цены контракта. Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (amount) к НМЦК (contractConditionsInfo/maxPriceInfo/maxPrice)</xs:documentation>
+					<xs:documentation>Доля от начальной (максимальной) цены контракта. Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (amount) к НМЦК (contractConditionsInfo/maxPriceInfo/maxPrice) в виде процента. Округляется до двух знаков в дробной части</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -6170,20 +6606,14 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:documentation>Порядок внесения денежных средств в качестве обеспечения заявки (порядок предоставления обеспечения исполнения контракта)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="part" minOccurs="0">
+			<xs:element name="part" type="base:percentRestr0100D2Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Доля от начальной (максимальной) цены контракта. 
-Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (amount) к НМЦК (contractConditionsInfo/maxPriceInfo/maxPrice).
+Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (amount) к НМЦК (contractConditionsInfo/maxPriceInfo/maxPrice)в виде процента. Округляется до двух знаков в дробной части
 
 Начиная с версии ЕИС 9.3:
 1) При установленом ограничении «Закупка у субъектов малого предпринимательства и социально ориентированных некоммерческих организаций» в notificationInfo/restrictionsInfo/restrictionInfo/preferenseRequirementInfo/shortName в соответствии со справочником "Преимущества (требования, ограничения) к участникам закупки" (nsiPurchasePreferences) не игнорируется при приеме и контролируется обязательность заполнения</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:double">
-						<xs:minInclusive value="0"/>
-						<xs:maxExclusive value="1000"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

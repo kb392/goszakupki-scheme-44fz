@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 10.0, create date 23.10.2019 -->
+<!-- BASE_TYPES Integration Scheme, version 10.0, create date 21.11.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -1242,8 +1242,8 @@ cpProcedureCancelFailure - Отмена извещения об отмене п�
 sentPackageListRequest - Запрос списка отправленных пакетов
 sentPackageList - Список отправленных пакетов
 reSendPackage - Запрос на повторную отправку пакетов
-receivPackageListRequest - Запрос списка полученных пакетов
-receivPackageList - Список полученных пакетов</xs:documentation>
+receivedPackageListRequest - Запрос списка полученных пакетов
+receivedPackageList - Список полученных пакетов</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="bankGuarantee"/>
@@ -1458,8 +1458,8 @@ receivPackageList - Список полученных пакетов</xs:documen
 			<xs:enumeration value="sentPackageListRequest"/>
 			<xs:enumeration value="sentPackageList"/>
 			<xs:enumeration value="reSendPackage"/>
-			<xs:enumeration value="receivPackageListRequest"/>
-			<xs:enumeration value="receivPackageList"/>
+			<xs:enumeration value="receivedPackageListRequest"/>
+			<xs:enumeration value="receivedPackageList"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="drugExternalCodeType">
@@ -2662,6 +2662,38 @@ n-без НДС.</xs:documentation>
 			<xs:length value="22"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="tenderPlan2020PositionNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Реестровый номер позиции (уникальный реестровый номер закупки) в плане-графике закупок с 01.01.2020</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="24"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tenderPlan2020RegNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Реестровый номер плана-графика закупок с 01.01.2020</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tenderPlan2020PurchaseNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер закупки, включенной в план-график закупок с 01.01.2020</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tenderPlan2020PurchaseOrderNumberType">
+		<xs:annotation>
+			<xs:documentation>Тип: Порядковый номер закупки, включенной в план-график с 01.01.2020</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="tenderStageType">
 		<xs:annotation>
 			<xs:documentation>Тип: Этап размещения заказа по 44ФЗ</xs:documentation>
@@ -2753,6 +2785,16 @@ n-без НДС.</xs:documentation>
 		<xs:restriction base="xs:double">
 			<xs:minInclusive value="0"/>
 			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="percentRestr0100D2Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Процент с ограничениеми 0..100 и двумя знаками в дробной части</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="100"/>
+			<xs:pattern value="\d+(\.\d{1,2})?"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<!--Проекты контрактов-->
