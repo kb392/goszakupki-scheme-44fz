@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 10.0, create date 03.12.2019 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- BASE_TYPES Integration Scheme, version 10.0, create date 13.12.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -1153,8 +1153,10 @@ purchasePlanExecution - Проект исполнения плана закуп�
 purchasePlanChange - Изменение плана закупок в структурированной форме;
 tenderPlan - План-график; внесение изменений;
 tenderPlan2017 - План-график с 01.01.2017; внесение изменений;
+tenderPlan2020 - План-график с 01.01.2020; внесение изменений;
 tenderPlanChange - Изменение плана-графика;
 tenderPlanChange2017 - Изменение плана-графика с 01.01.2017;
+tenderPlanChange2020 - Изменение плана-графика с 01.01.2020;
 tenderPlanUnstructured - План-график в неструктурированной форме; внесение изменений;
 tenderPlanCancel - Аннулирование плана-графика;
 tenderSuspension - Информация о приостановке определения поставщика (подрядчика, исполнителя) в части заключения контракта;
@@ -1238,12 +1240,13 @@ cpProtocolDisagreements - Протокол разногласий;
 cpNoticeDeviation - Уведомление об уклонении от заключения контракта;
 cpNoticeEvasion - Уведомление об отказе от заключения контракта;
 cpProcedureCancel - Извещение об отмене процедуры заключения контракта;
-cpProcedureCancelFailure - Отмена извещения об отмене процедуры заключения контракта
-sentPackageListRequest - Запрос списка отправленных пакетов
-sentPackageList - Список отправленных пакетов
-reSendPackage - Запрос на повторную отправку пакетов
-receivedPackageListRequest - Запрос списка полученных пакетов
-receivedPackageList - Список полученных пакетов</xs:documentation>
+cpProcedureCancelFailure - Отмена извещения об отмене процедуры заключения контракта;
+sentPackageListRequest - Запрос списка отправленных пакетов;
+sentPackageList - Список отправленных пакетов;
+reSendPackage - Запрос на повторную отправку пакетов;
+receivedPackageListRequest - Запрос списка полученных пакетов;
+receivedPackageList - Список полученных пакетов;
+notificationRemoveDoc - Уведомление об удалении из ЕИС проекта документа.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="bankGuarantee"/>
@@ -1369,8 +1372,10 @@ receivedPackageList - Список полученных пакетов</xs:docum
 			<xs:enumeration value="purchasePlanChange"/>
 			<xs:enumeration value="tenderPlan"/>
 			<xs:enumeration value="tenderPlan2017"/>
+			<xs:enumeration value="tenderPlan2020"/>
 			<xs:enumeration value="tenderPlanChange"/>
 			<xs:enumeration value="tenderPlanChange2017"/>
+			<xs:enumeration value="tenderPlanChange2020"/>
 			<xs:enumeration value="tenderPlanUnstructured"/>
 			<xs:enumeration value="tenderPlanCancel"/>
 			<xs:enumeration value="tenderSuspension"/>
@@ -1460,6 +1465,7 @@ receivedPackageList - Список полученных пакетов</xs:docum
 			<xs:enumeration value="reSendPackage"/>
 			<xs:enumeration value="receivedPackageListRequest"/>
 			<xs:enumeration value="receivedPackageList"/>
+			<xs:enumeration value="notificationRemoveDoc"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="drugExternalCodeType">

@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 03.12.2019 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 13.12.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -19610,7 +19610,12 @@ MP - максимальное значение цены контракта</xs:d
 									</xs:element>
 									<xs:element name="requirementType" type="base:text10Type" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Вид требования. При приеме игнорируется. Заполняется автоматически на основании справочника "Виды требований на допуск товаров, работ, услуг, происходящих из ино-странных государств" (nsiTRUAdmissionType)</xs:documentation>
+											<xs:documentation>Вид требования. При приеме игнорируется. Заполняется при передаче на основании справочника "Виды требований на допуск товаров, работ, услуг, происходящих из ино-странных государств" (nsiTRUAdmissionType)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="requirementName" type="base:text2000Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Наименование вида. Игнорируется при приеме.  Заполняется  при передаче на основании справочника "Виды требований на допуск товаров, работ, услуг, происходящих из ино-странных государств" (nsiTRUAdmissionType)</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -20077,10 +20082,7 @@ MP - максимальное значение цены контракта</xs:d
 						</xs:choice>
 						<xs:element name="attachments" type="zfcs_contract.attachmentListType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Документы, являющиеся основанием изменения контракта.
-
-Если заполнен блок contractChange, то документы из блока attachments принимаются и сохраняются.
-Если заполнен блок errorCorrection, то содержимое блока attachments игнорируется  при приеме</xs:documentation>
+								<xs:documentation>Документы, являющиеся основанием изменения контракта</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -31851,15 +31853,15 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ.<
 					<xs:documentation>Закупка осуществляется за счет межбюджетного трансферта из бюджета субъекта Российской Федерации. Значение может быть указано только если организация, осуществляющая закупку, имеет муниципальный уровень, в остальных случаях игнорируется при загрузке </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="isContactPriceFormula" type="xs:boolean" minOccurs="0">
+			<xs:element name="isContractPriceFormula" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Указать формулу цены и максимальное значение цены контракта. Игнорируется при приеме для подспособов ПО, ЗК-БИ</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+			<xs:element name="contractPriceFormula" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContactPriceFormula) = TRUE.
-Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContactPriceFormula) = FALSE или признак не указан. Игнорируется при приеме для подспособов ПО, ЗК-БИ</xs:documentation>
+					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = FALSE или признак не указан. Игнорируется при приеме для подспособов ПО, ЗК-БИ</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="purchaseObjects" minOccurs="0">
@@ -32234,7 +32236,7 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ.<
 						<xs:element name="budgetFinancings" type="zfcs_purchaseBOBudgetFinancingsType" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>План оплаты исполнения контракта .
-Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется, что указанные КБК присутствуют в позиции ПГ.
 Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
 							</xs:annotation>
 						</xs:element>
@@ -32712,7 +32714,7 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 									</xs:annotation>
 								</xs:element>
-								<xs:element name="isContactPriceFormula" type="xs:boolean" minOccurs="0">
+								<xs:element name="isContractPriceFormula" type="xs:boolean" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>Указать формулу цены и максимальное значение цены контракта
 
@@ -32931,7 +32933,7 @@ drugPurchaseObjectsInfo\drugPurchaseObjectInfo\quantityUndefined\quantityUndefin
 																	<xs:element name="budgetFinancings" type="zfcs_purchaseBOBudgetFinancingsType" minOccurs="0">
 																		<xs:annotation>
 																			<xs:documentation>План оплаты исполнения контракта за счет бюджетных средств.
-Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется, что указанные КБК присутствуют в позиции ПГ.
 Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
 																		</xs:annotation>
 																	</xs:element>
@@ -32991,10 +32993,10 @@ drugPurchaseObjectsInfo\drugPurchaseObjectInfo\quantityUndefined\quantityUndefin
 																<xs:documentation>Информация о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo и в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+														<xs:element name="contractPriceFormula" type="base:text2000Type" minOccurs="0">
 															<xs:annotation>
-																<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContactPriceFormula) = TRUE.
-Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContactPriceFormula) = FALSE или признак не указан</xs:documentation>
+																<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = FALSE или признак не указан</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 													</xs:sequence>
@@ -37128,7 +37130,7 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="isContactPriceFormula" type="xs:boolean" minOccurs="0">
+			<xs:element name="isContractPriceFormula" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Указать формулу цены и максимальное значение цены контракта
 
@@ -37356,7 +37358,7 @@ drugPurchaseObjectsInfo\drugPurchaseObjectInfo\quantityUndefined\quantityUndefin
 												<xs:element name="budgetFinancings" type="zfcs_purchaseBOBudgetFinancingsType" minOccurs="0">
 													<xs:annotation>
 														<xs:documentation>План оплаты исполнения контракта за счет бюжетных средств.
-Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется, что указанные КБК присутствуют в позиции ПГ.
 Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
 													</xs:annotation>
 												</xs:element>
@@ -37416,10 +37418,10 @@ drugPurchaseObjectsInfo\drugPurchaseObjectInfo\quantityUndefined\quantityUndefin
 											<xs:documentation>Информация о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+									<xs:element name="contractPriceFormula" type="base:text2000Type" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContactPriceFormula) = TRUE.
-Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContactPriceFormula) = FALSE или признак не указан</xs:documentation>
+											<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = FALSE или признак не указан</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -37748,7 +37750,7 @@ drugPurchaseObjectsInfo\drugPurchaseObjectInfo\quantityUndefined\quantityUndefin
 					<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="isContactPriceFormula" type="xs:boolean" minOccurs="0">
+			<xs:element name="isContractPriceFormula" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Указать формулу цены и максимальное значение цены контракта.
 
@@ -37949,7 +37951,7 @@ drugPurchaseObjectsInfo\drugPurchaseObjectInfo\quantityUndefined\quantityUndefin
 												<xs:element name="budgetFinancings" type="zfcs_purchaseBOBudgetFinancingsType" minOccurs="0">
 													<xs:annotation>
 														<xs:documentation>Блок «План оплаты исполнения контракта».
-Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется, что указанные КБК присутствуют в позиции ПГ.
 Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
 													</xs:annotation>
 												</xs:element>
@@ -38009,10 +38011,10 @@ drugPurchaseObjectsInfo\drugPurchaseObjectInfo\quantityUndefined\quantityUndefin
 											<xs:documentation>Информация о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+									<xs:element name="contractPriceFormula" type="base:text2000Type" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContactPriceFormula) = TRUE.
-Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContactPriceFormula) = FALSE или признак не указан</xs:documentation>
+											<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = FALSE или признак не указан</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -38450,7 +38452,7 @@ drugPurchaseObjectsInfo\drugPurchaseObjectInfo\quantityUndefined\quantityUndefin
 					<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="isContactPriceFormula" type="xs:boolean" minOccurs="0">
+			<xs:element name="isContractPriceFormula" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Указать формулу цены и максимальное значение цены контракта</xs:documentation>
 				</xs:annotation>
@@ -45661,7 +45663,7 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ</
 															<xs:element name="budgetFinancings" type="zfcs_purchaseBOBudgetFinancingsType" minOccurs="0">
 																<xs:annotation>
 																	<xs:documentation>Блок «План оплаты исполнения контракта».
-Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется, что указанные КБК присутствуют в позиции ПГ.
 Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
 																</xs:annotation>
 															</xs:element>
@@ -64172,6 +64174,7 @@ contractTerminationGroundDoc - Документ, подтверждающий о
 			<xs:enumeration value="modificationReasonDoc"/>
 			<xs:enumeration value="returnReasonDoc"/>
 			<xs:enumeration value="productExaminationResultDoc"/>
+			<xs:enumeration value="contractTerminationGroundDoc"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_control99ProtocolTypeType">

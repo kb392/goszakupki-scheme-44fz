@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 03.12.2019 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 13.12.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -3858,7 +3858,7 @@ manual - ручной ввод.
 Требуется и допускается заполнение в случае, если валюта НМЦК контрактов отлична от рубля</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="isContactPriceFormula" type="xs:boolean" minOccurs="0">
+						<xs:element name="isContractPriceFormula" type="xs:boolean" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Указать формулу цены и максимальное значение цены контракта
 
@@ -5909,8 +5909,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 									</xs:element>
 									<xs:element name="budgetFinancings" type="BOBudgetFinancingsType" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Блок «План оплаты исполнения контракта».
-Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+											<xs:documentation>План оплаты исполнения контракта.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется, что указанные КБК присутствуют в позиции ПГ.
 Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
 										</xs:annotation>
 									</xs:element>
@@ -5983,10 +5983,10 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+			<xs:element name="contractPriceFormula" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = TRUE.
-Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = FALSE или признак не указан</xs:documentation>
+					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContractPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContractPriceFormula) = FALSE или признак не указан</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -6171,7 +6171,7 @@ CU5CH26 - Заказчик как орган исполнительной вла
 									<xs:element name="budgetFinancings" type="BOBudgetFinancingsType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Блок «План оплаты исполнения контракта».
-Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется, что указанные КБК присутствуют в позиции ПГ.
 Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
 										</xs:annotation>
 									</xs:element>
@@ -6245,10 +6245,10 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+			<xs:element name="contractPriceFormula" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = TRUE.
-Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = FALSE или признак не указан</xs:documentation>
+					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContractPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContractPriceFormula) = FALSE или признак не указан</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -6420,7 +6420,7 @@ CU5CH26 - Заказчик как орган исполнительной вла
 									<xs:element name="budgetFinancings" type="BOBudgetFinancingsType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Блок «План оплаты исполнения контракта».
-Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется указание всех КБК из позиции ПГ.
+Если извещение сформировано на основании позиции плана-графика с 01.01.2020, то контролируется, что указанные КБК присутствуют в позиции ПГ.
 Не допускается указание нулевого КБК (000000000000000000000). Такой КБК должен быть детализирован</xs:documentation>
 										</xs:annotation>
 									</xs:element>
@@ -6514,10 +6514,10 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="contactPriceFormula" type="base:text2000Type" minOccurs="0">
+			<xs:element name="contractPriceFormula" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = TRUE.
-Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContactPriceFormula) = FALSE или признак не указан</xs:documentation>
+					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContractPriceFormula) = TRUE.
+Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (notificationInfo/contractConditionsInfo/maxPriceInfo/isContractPriceFormula) = FALSE или признак не указан</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
