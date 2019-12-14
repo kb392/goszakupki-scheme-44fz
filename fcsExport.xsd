@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 7.0, create date 29.11.2016 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- FCS EXPORT Integration Scheme, version 6.2, version 7.0.6, create date 12.01.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:element name="export">
@@ -648,6 +648,11 @@
 							<xs:documentation>Протокол о несоответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="control99ProtocolMismatchReductFunds" type="oos:zfcs_control99ProtocolMismatchReductFundsType">
+						<xs:annotation>
+							<xs:documentation>Протокол о несоответствии контролируемой информации в связи с уменьшением средств</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="nsiBankGuaranteeRefusalReasonList">
 						<xs:annotation>
 							<xs:documentation>Справочник причин отказа в принятии банковской гарантии</xs:documentation>
@@ -1155,6 +1160,16 @@
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="nsiControl99Subject" type="oos:zfcs_nsiControl99SubjectType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiTenderPlan2017ContractLifeCycleCases">
+						<xs:annotation>
+							<xs:documentation>Справочник: Случаи заключения контракта жизненного цикла</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiTenderPlan2017ContractLifeCycleCase" type="oos:zfcs_nsiTenderPlan2017ContractLifeCycleCaseType" minOccurs="0" maxOccurs="unbounded"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>

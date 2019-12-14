@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 7.0, create date 29.11.2016 -->
+!-- FCS INTEGRATION_TYPES Integration Scheme, version 7.0.24, create date 05.04.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:complexType name="account">
 		<xs:annotation>
@@ -5848,6 +5848,11 @@ O - Иное</xs:documentation>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
+			<xs:element name="docDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата/время прикрепления документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:choice>
 				<xs:element name="url">
 					<xs:annotation>
@@ -5864,10 +5869,13 @@ O - Иное</xs:documentation>
 						<xs:documentation>Уникальный идентификатор контента прикрепленного документа на ЕИС</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="content" type="xs:base64Binary">
+				<xs:element name="content">
 					<xs:annotation>
 						<xs:documentation>Содержимое файла</xs:documentation>
 					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:base64Binary"/>
+					</xs:simpleType>
 				</xs:element>
 			</xs:choice>
 			<xs:element name="cryptoSigns" minOccurs="0">
@@ -6728,11 +6736,6 @@ RESUME - возобновление</xs:documentation>
 								<xs:documentation>Место проведения очных пуличных слушаний</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="access" type="zfcs_longTextMinType" minOccurs="0">
-							<xs:annotation>
-								<xs:documentation>Порядок доступа к участию</xs:documentation>
-							</xs:annotation>
-						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -6811,7 +6814,7 @@ RESUME - возобновление</xs:documentation>
 								<xs:restriction base="zfcs_moneyPositiveType"/>
 							</xs:simpleType>
 						</xs:element>
-						<xs:element name="customer" type="zfcs_purchaseOrganizationType" minOccurs="0">
+						<xs:element name="customer" type="zfcs_purchaseOrganizationType" minOccurs="0" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Заказчик</xs:documentation>
 							</xs:annotation>
@@ -6876,6 +6879,11 @@ RESUME - возобновление</xs:documentation>
 		<xs:sequence>
 			<xs:element name="protocolDate" type="xs:dateTime">
 				<xs:annotation>
+					<xs:documentation>Дата протокола</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="protocolPublishDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
 					<xs:documentation>Дата размещения протокола</xs:documentation>
 				</xs:annotation>
 			</xs:element>
@@ -6928,7 +6936,7 @@ RESUME - возобновление</xs:documentation>
 			<xs:documentation>Сведения о позиции плана закупок в ООКЗ </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="purchasePlanNumber" type="zfcs_sketchPlanNumberType">
+			<xs:element name="purchasePlanNumber" type="zfcs_purchasePlanNumberType">
 				<xs:annotation>
 					<xs:documentation>Реестровый номер плана закупок</xs:documentation>
 				</xs:annotation>
@@ -7000,57 +7008,6 @@ RESUME - возобновление</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="publicDiscussionLargePurchasePhase1" minOccurs="0">
-								<xs:annotation>
-									<xs:documentation>Информация о первом этапе ООКЗ</xs:documentation>
-								</xs:annotation>
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="protocolDate" type="xs:dateTime" minOccurs="0">
-											<xs:annotation>
-												<xs:documentation>Дата размещения протокола</xs:documentation>
-											</xs:annotation>
-										</xs:element>
-										<xs:element name="publicDiscussionPhase1Num" type="zfcs_publicDiscussionNumType" minOccurs="0">
-											<xs:annotation>
-												<xs:documentation>Реестровый номер первого этапа общественного обсуждения</xs:documentation>
-											</xs:annotation>
-										</xs:element>
-										<xs:element name="hrefPhase1" type="zfcs_longTextType" minOccurs="0">
-											<xs:annotation>
-												<xs:documentation>Ссылка на первый этап общественного обсуждения в сети Интернет</xs:documentation>
-											</xs:annotation>
-										</xs:element>
-										<xs:element name="attachments" minOccurs="0">
-											<xs:annotation>
-												<xs:documentation>Протокол этапа</xs:documentation>
-											</xs:annotation>
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element name="attachment" maxOccurs="unbounded">
-														<xs:annotation>
-															<xs:documentation>Документ</xs:documentation>
-														</xs:annotation>
-														<xs:complexType>
-															<xs:complexContent>
-																<xs:extension base="zfcs_attachmentType">
-																	<xs:sequence>
-																		<xs:element name="placingDate" type="xs:dateTime" minOccurs="0">
-																			<xs:annotation>
-																				<xs:documentation>Дата размещения документа. Элемент не используется при приеме данных.</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																	</xs:sequence>
-																</xs:extension>
-															</xs:complexContent>
-														</xs:complexType>
-													</xs:element>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
 							<xs:element name="publicDiscussionLargePurchasePhase2" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Информация о втором этапе ООКЗ</xs:documentation>
@@ -7058,6 +7015,11 @@ RESUME - возобновление</xs:documentation>
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="protocolDate" type="xs:dateTime" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Дата протокола</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="protocolPublishDate" type="xs:dateTime" minOccurs="0">
 											<xs:annotation>
 												<xs:documentation>Дата размещения протокола</xs:documentation>
 											</xs:annotation>
@@ -7323,7 +7285,7 @@ OT - иное общественное обсуждение</xs:documentation>
 			<xs:documentation>Реестровый номер общественного обсуждения</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:pattern value="\d{12}"/>
+			<xs:pattern value="\d{8}|\d{12}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_publicDiscussionProtocolNumType">
@@ -7350,7 +7312,7 @@ OT - иное общественное обсуждение</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
-			<xs:maxLength value="22"/>
+			<xs:maxLength value="26"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_publicDiscussionLevelEnum">
@@ -7409,6 +7371,450 @@ S2 - Этап 2</xs:documentation>
 			<xs:enumeration value="S2"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<!--Общественные обсуждения крупных закупок (ООКЗ) до 01.01.2017. Основные документы-->
+	<xs:complexType name="zfcs_publicDiscussionLargePurchase2016Type">
+		<xs:annotation>
+			<xs:documentation>Информация об обязательном общественном обсуждения крупной закупки (ООКЗ)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="commonInfo" type="zfcs_publicDiscussionCommonInfo2016Type">
+				<xs:annotation>
+					<xs:documentation>Общая информация обсуждения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="topic" type="zfcs_longTextMinType">
+				<xs:annotation>
+					<xs:documentation>Тема обсуждения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ZK-14.112" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Проведение запроса котировок в соответствии с частью 14 статьи 112 Федерального закона 44-ФЗ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="publishOrg" type="zfcs_organizationInfoType">
+				<xs:annotation>
+					<xs:documentation>Организация, разместившая информацию</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phases" type="zfcs_publicDiscussionPhases2016Type">
+				<xs:annotation>
+					<xs:documentation>Этапы обсуждения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attachments" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Документы</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="attachment" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Документ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="zfcs_attachmentType">
+										<xs:sequence>
+											<xs:element name="placingDate" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Дата размещения документа. Элемент не используется при приеме данных.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="extPrintForm" type="zfcs_extPrintFormType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Электронный документ, полученный из внешней системы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="zfcs_schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="zfcs_publicDiscussionSuspension2016Type">
+		<xs:annotation>
+			<xs:documentation>Приостановление/возобновление ООКЗ</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="zfcs_publicDiscussionLargePurchase2016Type">
+				<xs:sequence>
+					<xs:element name="action" type="zfcs_publicDiscussionrSuspensionActionType">
+						<xs:annotation>
+							<xs:documentation>Тип действия
+SUSPENSION - приостановление
+RESUME - возобновление</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="reason" type="zfcs_longTextMinType">
+						<xs:annotation>
+							<xs:documentation>Причина приостановления/возобновления</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Общественные обсуждения крупных закупок (ООКЗ) до 01.01.2017. Типы-->
+	<xs:complexType name="zfcs_publicDiscussionCommonInfo2016Type">
+		<xs:annotation>
+			<xs:documentation>Общая информация в ООКЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="externalId" type="zfcs_externalIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Внешний идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="publicDiscussionNum" type="zfcs_publicDiscussionNumType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Реестровый номер общественного обсуждения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="versionNumber" type="zfcs_revisionNumType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер редакции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="docPublishDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата публикации текущей версии документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstVersionPublishDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата публикации первой версии документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_publicDiscussionPhases2016Type">
+		<xs:annotation>
+			<xs:documentation>Этап ООКЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="phase1" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Первый этап</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="tenderPlanInfo">
+							<xs:annotation>
+								<xs:documentation>Сведения о связи с позицией плана-графика</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="planNumber" type="zfcs_tenderPlanNumberType">
+										<xs:annotation>
+											<xs:documentation>Реестровый номер плана-графика</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="positionNumber" type="zfcs_longTextMinType">
+										<xs:annotation>
+											<xs:documentation>Номер позиции (номер заказа (лота)) в плане-графике</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="planObjectInfo" type="zfcs_longTextMinType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Наименование предмета контракта на основании ПГ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="placingWay" type="zfcs_placingWayType">
+										<xs:annotation>
+											<xs:documentation>Способ определения поставщика на основании ПГ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="year" type="zfcs_yearType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Год плана-графика</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="planContractMaxPrice">
+										<xs:annotation>
+											<xs:documentation>Ориентировочная (начальная) максимальная стоимость контракта на основании ПГ</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="zfcs_moneyPositiveType"/>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="customer" type="zfcs_purchaseOrganizationType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Заказчик</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ZKPart14St112" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Проведение запроса котировок в соответствии с частью 14 статьи 112 Федерального закона 44-ФЗ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="term">
+							<xs:annotation>
+								<xs:documentation>Срок обсуждения в рамках первого этапа</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="startDate" type="xs:date">
+										<xs:annotation>
+											<xs:documentation>Дата начала обсуждения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="endDate" type="xs:date">
+										<xs:annotation>
+											<xs:documentation>Дата окончания обсуждения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="hearing">
+							<xs:annotation>
+								<xs:documentation>Публичные слушания</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="date" type="xs:dateTime">
+										<xs:annotation>
+											<xs:documentation>Дата и время проведения публичных слушаний</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="place" type="zfcs_longTextMinType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Место проведения публичных слушаний, порядок доступа к участию</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="changeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Тип изменений</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="changeCondition" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>Изменение условий первого этапа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="protocolPlacement" type="zfcs_publicDiscussionProtocol2016Type">
+										<xs:annotation>
+											<xs:documentation>Размещение протокола первого этапа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="phase2" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Второй этап</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="purchaseInfo">
+							<xs:annotation>
+								<xs:documentation>Сведения о связи с закупкой</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="purchaseNumber" type="zfcs_purchaseNumberType">
+										<xs:annotation>
+											<xs:documentation>Реестровый номер закупки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="lotNumber" type="xs:integer">
+										<xs:annotation>
+											<xs:documentation>Номер лота в извещении</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="planObjectInfo" type="zfcs_longTextMinType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Наименование предмета контракта на основании ПГ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="placingWay" type="zfcs_longTextMinType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Способ определения поставщика на основании ПГ</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="year" type="zfcs_yearType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Год плана-графика</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="planContractMaxPrice" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Ориентировочная (начальная) максимальная стоимость контракта на основании ПГ</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="zfcs_moneyPositiveType"/>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="customer" type="zfcs_purchaseOrganizationType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Заказчик</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="term">
+							<xs:annotation>
+								<xs:documentation>Срок обсуждения в рамках второго этапа</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="startDate" type="xs:date">
+										<xs:annotation>
+											<xs:documentation>Дата начала обсуждения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="endDate" type="xs:date" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Дата окончания обсуждения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="publicDiscussionPart5St15" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Обязательное общественное обсуждение проводится организацией, размещающей сведения на основании части 5 статьи 15 Федерального закона №44-ФЗ, начиная со 2 этапа</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="changeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Тип изменений</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="placementDiscussion" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>Размещение обязательного  общественного обсуждения второго этапа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="changeTerm" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>Изменение срока второго этапа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="protocolPlacement" type="zfcs_publicDiscussionProtocol2016Type">
+										<xs:annotation>
+											<xs:documentation>Размещение протокола второго этапа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_publicDiscussionProtocol2016Type">
+		<xs:annotation>
+			<xs:documentation>Протокол этапа ООКЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="protocolDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата размещения протокола</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="decision" type="zfcs_publicDiscussionDecisionRef">
+				<xs:annotation>
+					<xs:documentation>Решение по результатам этапа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foundation" type="zfcs_publicDiscussionFoundationRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Основание для решения по результатам этапа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attachments">
+				<xs:annotation>
+					<xs:documentation>Протокол этапа</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="attachment" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Документ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="zfcs_attachmentType">
+										<xs:sequence>
+											<xs:element name="placingDate" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Дата размещения документа. Элемент не используется при приеме данных.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_publicDiscussionPurchaseAddInfo2016Type">
+		<xs:annotation>
+			<xs:documentation>Дополнительные сведения о позиции плана-графика и закупке в ООКЗ </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="planObjectInfo" type="zfcs_longTextMinType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование предмета контракта на основании ПГ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="placingWay" type="zfcs_longTextMinType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Способ определения поставщика на основании ПГ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="year" type="zfcs_yearType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Год плана-графика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="planContractMaxPrice" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ориентировочная (начальная) максимальная стоимость контракта на основании ПГ</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="zfcs_moneyPositiveType"/>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="customer" type="zfcs_purchaseOrganizationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Заказчик</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Дополнительная информация о закупках, контрактах (РДИ, бывш. ДИЗК)-->
 	<xs:complexType name="zfcs_addInfoType">
 		<xs:annotation>
@@ -8298,92 +8704,6 @@ O - Результаты иной деятельности.
 		</xs:attribute>
 	</xs:complexType>
 	<!--Реестр правил нормирования закупок (РПНЗ)-->
-	<xs:simpleType name="zfcs_regulationRulesDocumentsEnum">
-		<xs:annotation>
-			<xs:documentation>Вид документа ПНЗ:
-1 - проект правил нормирования;
-2 - пояснительная записка к проекту правил нормирования;
-3 - предложения общественных объединений, юридических и физических лиц;
-4 - ответы на предложения общественных объединений, юридических и физических лиц;
-5 - протокол решения, принятого общественным советом;
-6 - правила нормирования, принятые после обсуждения;
-7 - утвержденные правила нормирования.
-</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
-			<xs:enumeration value="3"/>
-			<xs:enumeration value="4"/>
-			<xs:enumeration value="5"/>
-			<xs:enumeration value="6"/>
-			<xs:enumeration value="7"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="zfcs_regulationRulesBaseDocumentTypeEnum">
-		<xs:annotation>
-			<xs:documentation>Вид документа-основания для ПНЗ:
-1 - Указ;
-2 - Распоряжение;
-3 - Постановление;
-4 - Приказ;
-5 - Письмо;
-6 - Протокол;
-7 - Иное.
-</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
-			<xs:enumeration value="3"/>
-			<xs:enumeration value="4"/>
-			<xs:enumeration value="5"/>
-			<xs:enumeration value="6"/>
-			<xs:enumeration value="7"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="zfcs_regulationRulesTypeEnum">
-		<xs:annotation>
-			<xs:documentation>Тип правил нормирования:
-
-1. Общие правила нормирования в сфере закупок;
-2. Общие требования к правовым актам по нормированию;
-3. Общие правила определения требований к отдельным видам товаров, работ, услуг;
-4. Общие правила определения нормативных затрат;
-5. Правила нормирования в сфере закупок;
-6. Требования к правовым актам по нормированию;
-7. Требования к отдельным видам товаров, работ, услуг;
-8. Правила определения нормативных затрат;
-9. Нормативные затраты;
-10. Правила определения требований к отдельным видам товаров, работ, услуг.
-
-</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
-			<xs:enumeration value="3"/>
-			<xs:enumeration value="4"/>
-			<xs:enumeration value="5"/>
-			<xs:enumeration value="6"/>
-			<xs:enumeration value="7"/>
-			<xs:enumeration value="8"/>
-			<xs:enumeration value="9"/>
-			<xs:enumeration value="10"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="zfcs_regulationRulesCouncilDecisionEnum">
-		<xs:annotation>
-			<xs:documentation>Решение общественного совета:
-RE - Доработать проект правил нормирования;
-PA - Принять правила нормирования.
-</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="RE"/>
-			<xs:enumeration value="PA"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:complexType name="zfcs_regulationRulesType">
 		<xs:annotation>
 			<xs:documentation>Версия правил нормирования в сфере закупок</xs:documentation>
@@ -8399,7 +8719,7 @@ PA - Принять правила нормирования.
 					<xs:documentation>Дата публикации документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="registryNum" type="oos:zfcs_standardContractNumberType">
+			<xs:element name="registryNum" type="zfcs_regulationRulesNumberType">
 				<xs:annotation>
 					<xs:documentation>Реестровый номер</xs:documentation>
 				</xs:annotation>
@@ -8799,7 +9119,7 @@ PA - Принять правила нормирования.</xs:documentation>
 					<xs:documentation>Идентификатор документа ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="registryNum" type="oos:zfcs_standardContractNumberType">
+			<xs:element name="registryNum" type="zfcs_regulationRulesNumberType">
 				<xs:annotation>
 					<xs:documentation>Реестровый номер</xs:documentation>
 				</xs:annotation>
@@ -9180,6 +9500,101 @@ PA - Принять правила нормирования.</xs:documentation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="zfcs_regulationRulesDocumentsEnum">
+		<xs:annotation>
+			<xs:documentation>Вид документа ПНЗ:
+1 - проект правил нормирования;
+2 - пояснительная записка к проекту правил нормирования;
+3 - предложения общественных объединений, юридических и физических лиц;
+4 - ответы на предложения общественных объединений, юридических и физических лиц;
+5 - протокол решения, принятого общественным советом;
+6 - правила нормирования, принятые после обсуждения;
+7 - утвержденные правила нормирования.
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_regulationRulesBaseDocumentTypeEnum">
+		<xs:annotation>
+			<xs:documentation>Вид документа-основания для ПНЗ:
+1 - Указ;
+2 - Распоряжение;
+3 - Постановление;
+4 - Приказ;
+5 - Письмо;
+6 - Протокол;
+7 - Иное.
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_regulationRulesTypeEnum">
+		<xs:annotation>
+			<xs:documentation>Тип правил нормирования:
+
+1. Общие правила нормирования в сфере закупок;
+2. Общие требования к правовым актам по нормированию;
+3. Общие правила определения требований к отдельным видам товаров, работ, услуг;
+4. Общие правила определения нормативных затрат;
+5. Правила нормирования в сфере закупок;
+6. Требования к правовым актам по нормированию;
+7. Требования к отдельным видам товаров, работ, услуг;
+8. Правила определения нормативных затрат;
+9. Нормативные затраты;
+10. Правила определения требований к отдельным видам товаров, работ, услуг.
+
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_regulationRulesCouncilDecisionEnum">
+		<xs:annotation>
+			<xs:documentation>Решение общественного совета:
+RE - Доработать проект правил нормирования;
+PA - Принять правила нормирования.
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RE"/>
+			<xs:enumeration value="PA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_regulationRulesNumberType">
+		<xs:annotation>
+			<xs:documentation>Реестровый номер правил нормирования</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<!--Банковские гарантии (РБГ). Основные документы-->
 	<xs:complexType name="zfcs_bankGuaranteeRefusalType">
 		<xs:annotation>
@@ -9620,8 +10035,22 @@ PA - Принять правила нормирования.</xs:documentation>
 						</xs:element>
 						<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Идентификационный код закупки</xs:documentation>
+								<xs:documentation>Идентификационный код закупки (Устарело, не применяется)</xs:documentation>
 							</xs:annotation>
+						</xs:element>
+						<xs:element name="purchaseCodes" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Идентификационные коды закупкок (ИКЗ)</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="purchaseCode" type="zfcs_IKZCodeType" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Идентификационный код закупки (ИКЗ)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="guaranteeDate" type="xs:dateTime">
 							<xs:annotation>
@@ -10830,6 +11259,20 @@ C - Внесение исправлений в информацию о  банк
 					<xs:documentation>Сведения о заказчике</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="purchaseCodes" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификационные коды закупкок (ИКЗ)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="purchaseCode" type="zfcs_IKZCodeType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Идентификационный код закупки (ИКЗ)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="guaranteeDate" type="xs:dateTime">
 				<xs:annotation>
 					<xs:documentation>Дата банковской гарантии</xs:documentation>
@@ -11116,27 +11559,15 @@ CAdES-A</xs:documentation>
 								<xs:documentation>Полное наименование</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="shortName" minOccurs="0">
+						<xs:element name="shortName" type="zfcs_longTextMinType" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Сокращенное наименование</xs:documentation>
 							</xs:annotation>
-							<xs:simpleType>
-								<xs:restriction base="xs:string">
-									<xs:maxLength value="250"/>
-									<xs:minLength value="1"/>
-								</xs:restriction>
-							</xs:simpleType>
 						</xs:element>
-						<xs:element name="firmName" minOccurs="0">
+						<xs:element name="firmName" type="zfcs_longTextMinType" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Фирменное наименование</xs:documentation>
 							</xs:annotation>
-							<xs:simpleType>
-								<xs:restriction base="xs:string">
-									<xs:maxLength value="250"/>
-									<xs:minLength value="1"/>
-								</xs:restriction>
-							</xs:simpleType>
 						</xs:element>
 						<xs:element name="status" type="zfcs_participantStatusContract2015Type" minOccurs="0">
 							<xs:annotation>
@@ -11214,27 +11645,15 @@ CAdES-A</xs:documentation>
 								<xs:documentation>Полное наименование</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="shortName" minOccurs="0">
+						<xs:element name="shortName" type="zfcs_longTextMinType" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Сокращенное наименование</xs:documentation>
 							</xs:annotation>
-							<xs:simpleType>
-								<xs:restriction base="xs:string">
-									<xs:maxLength value="250"/>
-									<xs:minLength value="1"/>
-								</xs:restriction>
-							</xs:simpleType>
 						</xs:element>
-						<xs:element name="firmName" minOccurs="0">
+						<xs:element name="firmName" type="zfcs_longTextMinType" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Фирменное наименование</xs:documentation>
 							</xs:annotation>
-							<xs:simpleType>
-								<xs:restriction base="xs:string">
-									<xs:maxLength value="250"/>
-									<xs:minLength value="1"/>
-								</xs:restriction>
-							</xs:simpleType>
 						</xs:element>
 						<xs:element name="fullNameLat" type="zfcs_longTextMinType" minOccurs="0">
 							<xs:annotation>
@@ -11745,6 +12164,17 @@ processing - обрабатывается.</xs:documentation>
 					<xs:documentation>Идентификатор обработанного пакета данных</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="loadId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор загруженных данных</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 			<xs:choice>
 				<xs:element name="success">
 					<xs:annotation>
@@ -11758,9 +12188,9 @@ processing - обрабатывается.</xs:documentation>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="loadId">
+										<xs:element name="loadId" minOccurs="0">
 											<xs:annotation>
-												<xs:documentation>Идентификатор загруженных данных</xs:documentation>
+												<xs:documentation>Идентификатор загруженных данных. Устарело не применяется</xs:documentation>
 											</xs:annotation>
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
@@ -11791,7 +12221,7 @@ processing - обрабатывается.</xs:documentation>
 										</xs:element>
 										<xs:element name="versionNumber" type="xs:int" minOccurs="0">
 											<xs:annotation>
-												<xs:documentation>Номер редакции документа</xs:documentation>
+												<xs:documentation>Номер версии документа</xs:documentation>
 											</xs:annotation>
 										</xs:element>
 									</xs:sequence>
@@ -11822,14 +12252,38 @@ processing - обрабатывается.</xs:documentation>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="control99BeginMessageUid" type="zfcs_guidType">
+										<xs:element name="editionNumber" type="xs:int" minOccurs="0">
 											<xs:annotation>
-												<xs:documentation>Идентификатор сообщения о начале контроля по 99 статье</xs:documentation>
+												<xs:documentation>Номер редакции в рамках версии документа</xs:documentation>
 											</xs:annotation>
 										</xs:element>
-										<xs:element name="control99NoticeComplianceUid" type="zfcs_guidType">
+										<xs:choice minOccurs="0">
+											<xs:element name="control99BeginMessageUid" type="zfcs_guidType">
+												<xs:annotation>
+													<xs:documentation>Идентификатор сообщения о начале контроля по 99 статье</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="control99RefusalMessageUid" type="zfcs_guidType">
+												<xs:annotation>
+													<xs:documentation>Идентификатор сообщения об отказе в принятии на контроль по 99 статье</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:choice>
+										<xs:choice minOccurs="0">
+											<xs:element name="control99NoticeComplianceUid" type="zfcs_guidType">
+												<xs:annotation>
+													<xs:documentation>Идентификатор уведомления о соответствии контролируемой информации</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="control99ProtocolMismatchUid" type="zfcs_guidType">
+												<xs:annotation>
+													<xs:documentation>Идентификатор протокола о несоответствии контролируемой информации</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:choice>
+										<xs:element name="control99ProtocolMismatchReductFundsUid" type="zfcs_guidType" minOccurs="0">
 											<xs:annotation>
-												<xs:documentation>Идентификатор уведомления о соответствии контролируемой информации</xs:documentation>
+												<xs:documentation>Идентификатор протокола о несоответствии контролируемой информации (в связи с уменьшением средств)</xs:documentation>
 											</xs:annotation>
 										</xs:element>
 									</xs:sequence>
@@ -11856,7 +12310,12 @@ processing - обрабатывается.</xs:documentation>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
-										<xs:choice>
+										<xs:element name="editionNumber" type="xs:int" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Номер редакции в рамках версии документа</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:choice minOccurs="0">
 											<xs:element name="control99BeginMessageUid" type="zfcs_guidType">
 												<xs:annotation>
 													<xs:documentation>Идентификатор сообщения о начале контроля по 99 статье</xs:documentation>
@@ -11896,6 +12355,11 @@ processing - обрабатывается.</xs:documentation>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
+										<xs:element name="editionNumber" type="xs:int" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Номер редакции в рамках версии документа</xs:documentation>
+											</xs:annotation>
+										</xs:element>
 										<xs:element name="control99BeginMessageUid" type="zfcs_guidType" minOccurs="0">
 											<xs:annotation>
 												<xs:documentation>Идентификатор сообщения о начале контроля по 99 статье</xs:documentation>
@@ -14200,6 +14664,11 @@ NO_VIOLATIONS - Нарушения не обнаружены.</xs:documentation>
 										<xs:documentation>Дата размещения извещения на Официальном сайте ЕИС (для печатной формы)</xs:documentation>
 									</xs:annotation>
 								</xs:element>
+								<xs:element name="placingWay" type="zfcs_placingWayType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Способ определения поставщика (подрядчика, исполнителя) (для печатной формы)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 							</xs:sequence>
 						</xs:extension>
 					</xs:complexContent>
@@ -14702,6 +15171,18 @@ NO_VIOLATIONS - Нарушения не обнаружены.</xs:documentation>
 				<xs:element name="FC_authorityNew" type="zfcs_organizationControlRegistersRef">
 					<xs:annotation>
 						<xs:documentation>Реквизиты органа государственного (муниципального) финансового контроля  (согласно ПП РФ №1148 )</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:choice>
+				<xs:element name="other" type="zfcs_organizationInfoType">
+					<xs:annotation>
+						<xs:documentation>Иной орган</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="otherNew" type="zfcs_organizationControlRegistersRef">
+					<xs:annotation>
+						<xs:documentation>Реквизиты иного органа (согласно ПП РФ №1148 )</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -16594,6 +17075,11 @@ M - Орган местного самоуправления муниципал�
 						<xs:element name="purchasePlacingDate" type="xs:dateTime" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Дата размещения извещения на Официальном сайте ЕИС (для печатной формы)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="placingWay" type="zfcs_placingWayType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Способ определения поставщика (подрядчика, исполнителя) (для печатной формы)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -19715,13 +20201,13 @@ IN	Aннулировано.</xs:documentation>
 					<xs:documentation>Заказчик</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="price" type="zfcs_moneyType">
+			<xs:element name="price" type="zfcs_moneyPositiveType">
 				<xs:annotation>
 					<xs:documentation>Цена контракта
 (в валюте контракта)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="priceRUR" type="zfcs_moneyType" minOccurs="0">
+			<xs:element name="priceRUR" type="zfcs_moneyPositiveType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Цена контракта (в рублях)</xs:documentation>
 				</xs:annotation>
@@ -20721,6 +21207,11 @@ IN	Aннулировано.</xs:documentation>
 														<xs:documentation>Закупка у единственного поставщика (извещение размещалось на ЕИС)</xs:documentation>
 													</xs:annotation>
 												</xs:element>
+												<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Идентификационный код закупки. Игнорируется при приеме. Заполняется автоматически из закупки</xs:documentation>
+													</xs:annotation>
+												</xs:element>
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
@@ -20730,7 +21221,15 @@ IN	Aннулировано.</xs:documentation>
 										</xs:annotation>
 										<xs:complexType>
 											<xs:complexContent>
-												<xs:extension base="zfcs_contract2015SingleCustomerType"/>
+												<xs:extension base="zfcs_contract2015SingleCustomerType">
+													<xs:sequence>
+														<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Идентификационный код закупки</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:extension>
 											</xs:complexContent>
 										</xs:complexType>
 									</xs:element>
@@ -20770,6 +21269,11 @@ IN	Aннулировано.</xs:documentation>
 															</xs:element>
 														</xs:sequence>
 													</xs:complexType>
+												</xs:element>
+												<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Идентификационный код закупки</xs:documentation>
+													</xs:annotation>
 												</xs:element>
 											</xs:sequence>
 										</xs:complexType>
@@ -20876,7 +21380,8 @@ OA - Организация, осуществляющая полномочия �
 									</xs:element>
 									<xs:element name="budgetLevel" type="zfcs_budgetLevelContract2015Type" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Уровень бюджета:
+											<xs:documentation>Уровень бюджета. Игнорируется при приеме. Рассчитывается автоматически:
+
 10 - федеральный бюджет;
 20 - бюджет субъекта Российской Федерации;
 30 - местный бюджет;
@@ -20891,6 +21396,16 @@ OA - Организация, осуществляющая полномочия �
 15 - бюджет Федерального фонда обязательного медицинского страхования (устарело, не применяется);
 16 - бюджет Фонда социального страхования Российской Федерации (устарело, не применяется);
 17 - бюджет территориального государственного внебюджетного фонда (устарело, не применяется).</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="fundsBudgetLevel" type="zfcs_fundsBudgetLevelContract2015Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Уровень бюджета фонда. Требуется явно указывать для бюджетов ПФР, ФСС, ФОМС, ТГВФ:
+
+41 - бюджет Пенсионного фонда Российской Федерации;
+42 - бюджет Фонда социального страхования Российской Федерации;
+43 - бюджет Федерального фонда обязательного медицинского страхования;
+50 - бюджет территориального государственного внебюджетного фонда.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="stages" maxOccurs="unbounded">
@@ -21440,6 +21955,11 @@ MP - максимальное значение цены контракта</xs:d
 			<xs:element name="medicalDocuments" type="zfcs_contract.attachmentListType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Документы решения врачебной комиссии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="budgetObligations" type="zfcs_contract.attachmentListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о бюджетном обязательстве (БО)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="attachments" type="zfcs_contract.attachmentListType" minOccurs="0">
@@ -23288,15 +23808,15 @@ Ro5 - Ненадлежащее исполнение обязательств б�
 									<xs:annotation>
 										<xs:documentation>Направление реализации инвестиционного проекта.
 Допустимые значения:
-IT1 - строительство,
-IT2 - реконструкция объекта капитального строительства,
-IT3 - иные инвестиции в основной капитал</xs:documentation>
+IT1 - строительство;
+IT2 - реконструкция объекта капитального строительства;
+IT3 - иные инвестиции в основной капитал.</xs:documentation>
 									</xs:annotation>
 									<xs:simpleType>
 										<xs:restriction base="xs:string">
-											<xs:enumeration value="1"/>
-											<xs:enumeration value="2"/>
-											<xs:enumeration value="3"/>
+											<xs:enumeration value="IT1"/>
+											<xs:enumeration value="IT2"/>
+											<xs:enumeration value="IT3"/>
 										</xs:restriction>
 									</xs:simpleType>
 								</xs:element>
@@ -23316,10 +23836,10 @@ FP4 - иной механизм с его указанием</xs:documentation>
 									</xs:annotation>
 									<xs:simpleType>
 										<xs:restriction base="xs:string">
-											<xs:enumeration value="1"/>
-											<xs:enumeration value="2"/>
-											<xs:enumeration value="3"/>
-											<xs:enumeration value="4"/>
+											<xs:enumeration value="FP1"/>
+											<xs:enumeration value="FP2"/>
+											<xs:enumeration value="FP3"/>
+											<xs:enumeration value="FP4"/>
 										</xs:restriction>
 									</xs:simpleType>
 								</xs:element>
@@ -25262,7 +25782,7 @@ OAU - Заказчик, осуществляющий закупку на про�
 					<xs:documentation>Начальная (максимальная) цена контрактов. Отсутствие элемента в извещении означает, что НМЦК не установлена.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="currency" type="zfcs_currencyRef">
+			<xs:element name="currency" type="zfcs_currencyRef" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Валюта</xs:documentation>
 				</xs:annotation>
@@ -25324,6 +25844,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 			<xs:element name="tenderPlanInfo" type="zfcs_tendePlanInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Сведения о связи с позицией плана-графика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -25798,6 +26323,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 																<xs:documentation>План исполнения контракта за счет внебюджетных средств</xs:documentation>
 															</xs:annotation>
 														</xs:element>
+														<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
+															</xs:annotation>
+														</xs:element>
 													</xs:sequence>
 												</xs:complexType>
 											</xs:element>
@@ -25939,6 +26469,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 										<xs:documentation>Дополнительная информация</xs:documentation>
 									</xs:annotation>
 								</xs:element>
+								<xs:element name="noPublicDiscussion" type="xs:boolean" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Закупка не подлежит обязательному общественному обсуждению в соответствии с подпунктами 2) и 3) пункта 1.4 Приказа Минэкономразвития от  30.10.2015г. № 795 (Устарело, не применяется)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 								<xs:element name="publicDiscussion" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
@@ -25951,7 +26486,7 @@ OAU - Заказчик, осуществляющий закупку на про�
 								</xs:element>
 								<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Игнорируется при приеме и заполняется автоматически из плана закупки в случае создания закупки на основании позиции плана-графика</xs:documentation>
+										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Требуется обязательное заполнение</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -26444,6 +26979,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 														<xs:documentation>План исполнения контракта за счет бюджетных средств</xs:documentation>
 													</xs:annotation>
 												</xs:element>
+												<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
+													</xs:annotation>
+												</xs:element>
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
@@ -26585,9 +27125,14 @@ OAU - Заказчик, осуществляющий закупку на про�
 								</xs:complexContent>
 							</xs:complexType>
 						</xs:element>
+						<xs:element name="noPublicDiscussion" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Закупка не подлежит обязательному общественному обсуждению в соответствии с подпунктами 2) и 3) пункта 1.4 Приказа Минэкономразвития от  30.10.2015г. № 795 (Устарело, не применяется )</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 						<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Игнорируется при приеме и заполняется автоматически из плана закупки в случае создания закупки на основании позиции плана-графика</xs:documentation>
+								<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Требуется обязательное заполнение</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -26804,9 +27349,14 @@ OAU - Заказчик, осуществляющий закупку на про�
 							<xs:complexContent>
 								<xs:extension base="oos:zfcs_lotOKType">
 									<xs:sequence>
+										<xs:element name="noPublicDiscussion" type="xs:boolean" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Закупка не подлежит обязательному общественному обсуждению в соответствии с подпунктами 2) и 3) пункта 1.4 Приказа Минэкономразвития от  30.10.2015г. № 795 (Устарело, не применяется)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
 										<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 											<xs:annotation>
-												<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Игнорируется при приеме и заполняется автоматически из плана закупки в случае создания закупки на основании позиции плана-графика</xs:documentation>
+												<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Требуется обязательное заполнение</xs:documentation>
 											</xs:annotation>
 										</xs:element>
 									</xs:sequence>
@@ -27089,9 +27639,14 @@ OAU - Заказчик, осуществляющий закупку на про�
 										<xs:complexContent>
 											<xs:extension base="zfcs_lotOKType">
 												<xs:sequence>
+													<xs:element name="noPublicDiscussion" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Закупка не подлежит обязательному общественному обсуждению в соответствии с подпунктами 2) и 3) пункта 1.4 Приказа Минэкономразвития от  30.10.2015г. № 795 (Устарело, не применяется)</xs:documentation>
+														</xs:annotation>
+													</xs:element>
 													<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 														<xs:annotation>
-															<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Игнорируется при приеме и заполняется автоматически из плана закупки в случае создания закупки на основании позиции плана-графика</xs:documentation>
+															<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Требуется обязательное заполнение</xs:documentation>
 														</xs:annotation>
 													</xs:element>
 												</xs:sequence>
@@ -27147,9 +27702,14 @@ OAU - Заказчик, осуществляющий закупку на про�
 										<xs:complexContent>
 											<xs:extension base="zfcs_lotOKType">
 												<xs:sequence>
+													<xs:element name="noPublicDiscussion" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Закупка не подлежит обязательному общественному обсуждению в соответствии с подпунктами 2) и 3) пункта 1.4 Приказа Минэкономразвития от  30.10.2015г. № 795 (Устарело, не применяется)</xs:documentation>
+														</xs:annotation>
+													</xs:element>
 													<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 														<xs:annotation>
-															<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Игнорируется при приеме и заполняется автоматически из плана закупки в случае создания закупки на основании позиции плана-графика</xs:documentation>
+															<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Требуется обязательное заполнение</xs:documentation>
 														</xs:annotation>
 													</xs:element>
 												</xs:sequence>
@@ -27206,9 +27766,14 @@ OAU - Заказчик, осуществляющий закупку на про�
 										<xs:complexContent>
 											<xs:extension base="zfcs_lotOKType">
 												<xs:sequence>
+													<xs:element name="noPublicDiscussion" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Закупка не подлежит обязательному общественному обсуждению в соответствии с подпунктами 2) и 3) пункта 1.4 Приказа Минэкономразвития от  30.10.2015г. № 795 (Устарело, не применяется)</xs:documentation>
+														</xs:annotation>
+													</xs:element>
 													<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 														<xs:annotation>
-															<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Игнорируется при приеме и заполняется автоматически из плана закупки в случае создания закупки на основании позиции плана-графика</xs:documentation>
+															<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Требуется обязательное заполнение</xs:documentation>
 														</xs:annotation>
 													</xs:element>
 												</xs:sequence>
@@ -27378,6 +27943,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 														<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
 															<xs:annotation>
 																<xs:documentation>Идентификационный код закупки. Требуется обязательное заполнение</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 													</xs:sequence>
@@ -27764,9 +28334,14 @@ OAU - Заказчик, осуществляющий закупку на про�
 							<xs:complexContent>
 								<xs:extension base="zfcs_lotZKType">
 									<xs:sequence>
+										<xs:element name="noPublicDiscussion" type="xs:boolean" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Закупка не подлежит обязательному общественному обсуждению в соответствии с подпунктами 2) и 3) пункта 1.4 Приказа Минэкономразвития от  30.10.2015г. № 795 (Устарело, не применяется)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
 										<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 											<xs:annotation>
-												<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Игнорируется при приеме и заполняется автоматически из плана закупки в случае создания закупки на основании позиции плана-графика</xs:documentation>
+												<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ.  Требуется обязательное заполнение</xs:documentation>
 											</xs:annotation>
 										</xs:element>
 									</xs:sequence>
@@ -27936,6 +28511,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 																<xs:documentation>План исполнения контракта за счет бюджетных средств</xs:documentation>
 															</xs:annotation>
 														</xs:element>
+														<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
+															</xs:annotation>
+														</xs:element>
 													</xs:sequence>
 												</xs:complexType>
 											</xs:element>
@@ -28077,9 +28657,14 @@ OAU - Заказчик, осуществляющий закупку на про�
 										<xs:documentation>Общественное обсуждение (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
 									</xs:annotation>
 								</xs:element>
+								<xs:element name="noPublicDiscussion" type="xs:boolean" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Закупка не подлежит обязательному общественному обсуждению в соответствии с подпунктами 2) и 3) пункта 1.4 Приказа Минэкономразвития от  30.10.2015г. № 795 (Устарело, не применяется)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 								<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ. Игнорируется при приеме и заполняется автоматически из плана закупки в случае создания закупки на основании позиции плана-графика</xs:documentation>
+										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ.  Требуется обязательное заполнение</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -28602,6 +29187,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 											<xs:documentation>План исполнения контракта за счет бюджетных средств</xs:documentation>
 										</xs:annotation>
 									</xs:element>
+									<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
@@ -28859,6 +29449,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 									<xs:element name="budgetFinancings" type="zfcs_budgetFinancingsType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>План исполнения контракта за счет бюджетных средств</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -29145,6 +29740,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 			<xs:element name="spelledValidAppCount" type="zfcs_longTextType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Количество заявок, соответствующих установленным единым и дополнительным требованиям прописью</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -29710,6 +30310,56 @@ M - Орган местного самоуправления муниципал�
 									<xs:annotation>
 										<xs:documentation>Основание внесения изменений</xs:documentation>
 									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="purchaseInfo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Информация о закупке (для печатной формы)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="lots" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Лоты извещения</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="lot" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Лот извещения</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="customerRequirements" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Требования заказчиков</xs:documentation>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="customerRequirement" minOccurs="0" maxOccurs="unbounded">
+																		<xs:annotation>
+																			<xs:documentation>Требование заказчика</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation>Идентификационный код закупки</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
 								</xs:element>
 							</xs:sequence>
 						</xs:complexType>
@@ -30848,6 +31498,47 @@ OAU - Заказчик, осуществляющий закупку на про�
 								<xs:documentation>Полное наименвоание извещения</xs:documentation>
 							</xs:annotation>
 						</xs:element>
+						<xs:element name="lots" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Лоты извещения</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="lot" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Лот извещения</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="customerRequirements" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Требования заказчиков</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="customerRequirement" minOccurs="0" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation>Требование заказчика</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Идентификационный код закупки</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -31225,42 +31916,6 @@ O - оценка производится по шкале оценки или д
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="zfcs_appRejectedReasonType">
-		<xs:annotation>
-			<xs:documentation>Причины отказа рассмотения заявки</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="nsiRejectReason">
-				<xs:annotation>
-					<xs:documentation>Причина отказа</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="id" type="xs:long">
-							<xs:annotation>
-								<xs:documentation>Идентификатор</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="reason" minOccurs="0">
-							<xs:annotation>
-								<xs:documentation>Название</xs:documentation>
-							</xs:annotation>
-							<xs:simpleType>
-								<xs:restriction base="xs:string">
-									<xs:maxLength value="350"/>
-								</xs:restriction>
-							</xs:simpleType>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="explanation" type="zfcs_longTextType">
-				<xs:annotation>
-					<xs:documentation>Объяснение</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="zfcs_appRejectedReasonNotIDType">
 		<xs:annotation>
 			<xs:documentation>Причины отказа рассмотрения заявки без указания причины отказа из справочника</xs:documentation>
@@ -31507,6 +32162,42 @@ QO - Квалификация участников закупки, в том ч�
 F - лучшим условием исполнения контракта является наибольшее значение,
 L - лучшим условием исполнения контракта является наименьшее значение,
 O - оценка производится по шкале оценки или другому порядку, указанному в документации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_appRejectedReasonType">
+		<xs:annotation>
+			<xs:documentation>Причины отказа рассмотения заявки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="nsiRejectReason">
+				<xs:annotation>
+					<xs:documentation>Причина отказа</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long">
+							<xs:annotation>
+								<xs:documentation>Идентификатор</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="reason" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Название</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="350"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="explanation" type="zfcs_longTextType">
+				<xs:annotation>
+					<xs:documentation>Объяснение</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -32601,6 +33292,47 @@ OAU - Заказчик, осуществляющий закупку на про�
 								<xs:documentation>Полное наименвоание извещения</xs:documentation>
 							</xs:annotation>
 						</xs:element>
+						<xs:element name="lots" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Лоты извещения</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="lot" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Лот извещения</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="customerRequirements" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Требования заказчиков</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="customerRequirement" minOccurs="0" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation>Требование заказчика</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Идентификационный код закупки</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -32867,6 +33599,47 @@ OAU - Заказчик, осуществляющий закупку на про�
 							<xs:annotation>
 								<xs:documentation>Полное наименвоание извещения</xs:documentation>
 							</xs:annotation>
+						</xs:element>
+						<xs:element name="lots" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Лоты извещения</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="lot" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Лот извещения</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="customerRequirements" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Требования заказчиков</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="customerRequirement" minOccurs="0" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation>Требование заказчика</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Идентификационный код закупки</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
@@ -35585,6 +36358,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 														<xs:documentation>Информация о возможности одностороннего отказа от исполнения контракта в соответствии с положениями чч. 8–26 ст. 95 44-ФЗ</xs:documentation>
 													</xs:annotation>
 												</xs:element>
+												<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Идентификационный код закупки. Заполняется автоматически из плана-графика в случае указания блока tenderPlanInfo. Иначе требуется обязательное заполнение.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
 												<xs:element name="tenderPlanInfo" type="zfcs_tendePlanInfoType" minOccurs="0">
 													<xs:annotation>
 														<xs:documentation>Сведения о связи с позицией плана-графика</xs:documentation>
@@ -35598,6 +36376,11 @@ OAU - Заказчик, осуществляющий закупку на про�
 												<xs:element name="budgetFinancings" type="zfcs_budgetFinancingsType" minOccurs="0">
 													<xs:annotation>
 														<xs:documentation>План исполнения контракта за счет бюджетных средств</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 											</xs:sequence>
@@ -35738,12 +36521,17 @@ OAU - Заказчик, осуществляющий закупку на про�
 						</xs:element>
 						<xs:element name="publicDiscussion" type="zfcs_publicDiscussionType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Информация об общественных слушаниях по лоту закупки (для печатной формы)</xs:documentation>
+								<xs:documentation>Информация об общественных слушаниях по лоту закупки (для печатной формы). Игнорируется приеме, заполняется при передаче</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="noPublicDiscussion" type="xs:boolean" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Закупка не подлежит обязательному общественному обсуждению в соответствии с подпунктами 2) и 3) пункта 1.4 Приказа Минэкономразвития от  30.10.2015г. № 795 </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ.  Требуется обязательное заполнение</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -36073,6 +36861,47 @@ PASS_OFFER – Все остальные заявки		</xs:documentation>
 				<xs:annotation>
 					<xs:documentation>Признание запроса котировок несостоявшимся</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="lots" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Лоты извещения</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="lot" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Лот извещения</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="customerRequirements" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Требования заказчиков</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="customerRequirement" minOccurs="0" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Требование заказчика</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Идентификационный код закупки</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -36524,6 +37353,47 @@ OAU - Заказчик, осуществляющий закупку на про�
 							<xs:annotation>
 								<xs:documentation>Полное наименвоание извещения</xs:documentation>
 							</xs:annotation>
+						</xs:element>
+						<xs:element name="lots" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Лоты извещения</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="lot" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Лот извещения</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="customerRequirements" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Требования заказчиков</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="customerRequirement" minOccurs="0" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation>Требование заказчика</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="purchaseCode" type="zfcs_IKZCodeType" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Идентификационный код закупки</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
@@ -37453,7 +38323,7 @@ B - Заблокировано.				</xs:documentation>
 					<xs:documentation>КПП</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="registrationDate" type="xs:date">
+			<xs:element name="registrationDate" type="xs:date" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
 				</xs:annotation>
@@ -37521,7 +38391,7 @@ B - Заблокировано.				</xs:documentation>
 	</xs:complexType>
 	<xs:complexType name="zfcs_publicDiscussionDecisionRef">
 		<xs:annotation>
-			<xs:documentation>Ссылка на решениt общественного обсуждения</xs:documentation>
+			<xs:documentation>Ссылка на решение общественного обсуждения</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="code">
@@ -37833,6 +38703,11 @@ BO - Заблокировано создание новых извещений.<
 			<xs:element name="nsiAbandonedReason" type="zfcs_nsiAbandonedReasonType">
 				<xs:annotation>
 					<xs:documentation>Справочник оснований признания процедуры несостоявшейся</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nsiTenderPlan2017ContractLifeCycleCases" type="zfcs_nsiTenderPlan2017ContractLifeCycleCaseType">
+				<xs:annotation>
+					<xs:documentation>Справочник: Случаи заключения контракта жизненного цикла</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:choice>
@@ -39814,7 +40689,7 @@ FZ44 - 44ФЗ.</xs:documentation>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="OKOPF">
+			<xs:element name="OKOPF" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Код по классификатору ОКОПФ</xs:documentation>
 				</xs:annotation>
@@ -41992,7 +42867,7 @@ Publish - Размещение (публикация) документа</xs:doc
 					<xs:documentation>Внешний идентификатор документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="planNumber" type="zfcs_sketchPlanNumberType" minOccurs="0">
+			<xs:element name="planNumber" type="zfcs_purchasePlanNumberType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Реестровый номер плана закупок в ЕИС</xs:documentation>
 				</xs:annotation>
@@ -42041,9 +42916,9 @@ Publish - Размещение (публикация) документа</xs:doc
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="KVRTotalsInfo">
+						<xs:element name="KVRTotalsInfo" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Итоговые показатели плана закупок в разбивке по кодам видов расходов</xs:documentation>
+								<xs:documentation>Итоговые показатели плана закупок в разбивке по кодам видов расходов.Устарел. не применяется. Оставлен для обратной совместимости схем</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -42104,9 +42979,24 @@ Publish - Размещение (публикация) документа</xs:doc
 			<xs:documentation>Исполнение плана закупок в структурированной форме</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="planNumber" type="zfcs_sketchPlanNumberType">
+			<xs:element name="id" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор исполнения плана закупок в ЕИС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="externalId" type="zfcs_externalIdType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Внешний идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="planNumber" type="zfcs_purchasePlanNumberType">
 				<xs:annotation>
 					<xs:documentation>Реестровый номер плана закупок в ЕИС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="versionNumber" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер версии исполнения плана закупок</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="createDate" type="xs:dateTime">
@@ -42161,9 +43051,9 @@ Publish - Размещение (публикация) документа</xs:doc
 					<xs:documentation>Идентификатор плана закупок в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="planNumber" type="zfcs_sketchPlanNumberType">
+			<xs:element name="planNumber" type="zfcs_purchasePlanNumberType">
 				<xs:annotation>
-					<xs:documentation>Реестровый номер плана закупок на ЕИС</xs:documentation>
+					<xs:documentation>Реестровый номер плана закупок в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="versionNumber" type="xs:int" minOccurs="0">
@@ -42263,6 +43153,11 @@ PPF1043 - Постановление правительства РФ №1043 о�
 					<xs:documentation>Дата утверждения плана закупок</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="approveDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата утверждения обоснования закупок. Требуется обязательное заполнение при приеме в ЕИС.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="directDate" type="xs:dateTime" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Дата направления на размещение плана закупок Игнорируется при приеме. Заполняется автоматически датой направления на размещение текущей версии</xs:documentation>
@@ -42294,7 +43189,7 @@ PPF1043 - Постановление правительства РФ №1043 о�
 								</xs:element>
 								<xs:element name="OKTMOPPO" type="zfcs_OKTMOPPORef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Территориально-муниципальное образование публично-правового образования (ППО) организации. В случае если не заполнено при приеме, то заполняется автоматически значением по Коду по СПЗ/Коду по СвР из справочника организаций ЕИС</xs:documentation>
+										<xs:documentation>Территориально-муниципальное образование публично-правового образования (ППО) организации. В случае если не заполнено при приеме, то заполняется автоматически значением по Коду по СПЗ /Коду по СвР из справочника организаций ЕИС</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -42390,7 +43285,7 @@ OA - Организация, осуществляющая полномочия �
 						</xs:element>
 						<xs:element name="IKU" type="zfcs_ikuType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Идентификационный код заказчика (ИКУ). Игнорируется при приеме. Автоматически загружается из сведений об организации-заказчике.</xs:documentation>
+								<xs:documentation>Идентификационный код организации-владельца версии плана закупок (ИКУ). При приеме, в случае если поле заполнено, значение контролируется на соответствие  значению ИКУ организации-владельца версии плана закупок в справочнике организаций ЕИС. В случае если поле не заполнено, в ИКЗ автоматически подставляется ИКУ организации из справочника организаций ЕИС</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="purchaseNumber" type="zfcs_purchasePlanPurchaseNumberType">
@@ -42463,8 +43358,7 @@ B - два раза в месяц;
 M - ежемесячно;
 Q - ежеквартально;
 S - один раз в полгода;
-Y - один раз в год;
-T - к указанному сроку.</xs:documentation>
+Y - один раз в год/</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 												<xs:element name="otherPeriodicityText">
@@ -42509,8 +43403,12 @@ T - к указанному сроку.</xs:documentation>
 						</xs:element>
 						<xs:element name="publicDiscussion" type="xs:boolean">
 							<xs:annotation>
-								<xs:documentation>Сведения об обязательном общественном обсуждении закупки 
-(да или нет) в соответствии со статьей 20 Федерального закона №44</xs:documentation>
+								<xs:documentation>Необходимо обязательное общественное обсуждение  (да или нет) в соответствии со статьей 20 Федерального закона №44</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="publicDiscussionPhase1Num" type="zfcs_publicDiscussionNumType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Реестровый номер первого этапа общественного обсуждения. Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="positionCanceled" type="xs:boolean" minOccurs="0">
@@ -42681,6 +43579,19 @@ E - Данные позиции отредактированы.</xs:documentatio
 											<xs:documentation>Идентификационный код закупки. Игнорируется при приеме. Рассчитывается автоматически.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
+									<xs:element name="publishYear">
+										<xs:annotation>
+											<xs:documentation>Планируемый год размещения извещения</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="zfcs_yearType"/>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="IKU" type="zfcs_ikuType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Идентификационный код организации-владельца версии плана закупок (ИКУ). При приеме, в случае если поле заполнено, значение контролируется на соответствие  значению ИКУ организации-владельца версии плана закупок в справочнике организаций ЕИС. В случае если поле не заполнено, в ИКЗ автоматически подставляется ИКУ организации из справочника организаций ЕИС</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 									<xs:element name="KVRInfo" type="zfcs_purchasePlanKVRRefType">
 										<xs:annotation>
 											<xs:documentation>Классификация по КВР</xs:documentation>
@@ -42812,7 +43723,7 @@ E - Данные закупки отредактированы.</xs:documentatio
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:maxLength value="256"/>
+						<xs:maxLength value="30"/>
 						<xs:minLength value="1"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -42827,6 +43738,11 @@ E - Данные закупки отредактированы.</xs:documentatio
 						<xs:minLength value="1"/>
 					</xs:restriction>
 				</xs:simpleType>
+			</xs:element>
+			<xs:element name="controlAuthorityInfo" type="zfcs_organizationRef" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Орган контроля, осуществляющий контроль по части 5 статьи 99. Игнорируется при приеме, заполняется автоматически</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -42937,7 +43853,7 @@ E - Данные закупки отредактированы.</xs:documentatio
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="registryNum" type="zfcs_standardContractNumberType">
+						<xs:element name="registryNum" type="zfcs_regulationRulesNumberType">
 							<xs:annotation>
 								<xs:documentation>Реестровый номер НПА в реестре</xs:documentation>
 							</xs:annotation>
@@ -43250,8 +44166,7 @@ B - два раза в месяц;
 M - ежемесячно;
 Q - ежеквартально;
 S - один раз в полгода;
-Y - один раз в год;
-T - к указанному сроку.
+Y - один раз в год.
 </xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -43261,7 +44176,6 @@ T - к указанному сроку.
 			<xs:enumeration value="Q"/>
 			<xs:enumeration value="S"/>
 			<xs:enumeration value="Y"/>
-			<xs:enumeration value="T"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_purchasePlanBasementEnum">
@@ -43501,10 +44415,13 @@ E - Данные позиции отредактированы;
 					<xs:documentation>НПА, на основании которого составлен план -график. Игнорируется при приеме. Рассчитывается автоматически на основании соответствующего поля плана закупок:
 
 PPF553 - Постановление правительства РФ № 553 от 05.06.2015 (федеральное);
-PPF1043 - Постановление правительства РФ №1043 от 21.11.2013 (региональное и муниципальное).</xs:documentation>
+PPF554 - Постановление правительства РФ № 554 от 05.06.2015 (региональное и муниципальное).
+PPF552 - Ошибочное значение, не применяется. Оставлено для обратной совместимости схем;
+PPF1043 -  Ошибочное значение, не применяется. Оставлено для обратной совместимости схем.
+</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="purchasePlanNumber" type="zfcs_sketchPlanNumberType">
+			<xs:element name="purchasePlanNumber" type="zfcs_purchasePlanNumberType">
 				<xs:annotation>
 					<xs:documentation>Реестровый номер плана закупок, на основании которого сформирован план-график</xs:documentation>
 				</xs:annotation>
@@ -43527,6 +44444,11 @@ PPF1043 - Постановление правительства РФ №1043 о�
 			<xs:element name="confirmDate" type="xs:dateTime">
 				<xs:annotation>
 					<xs:documentation>Дата утверждения плана-графика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="approveDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата утверждения обоснования закупок  (Обязательно для заполнения при приеме в ЕИС)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="directDate" type="xs:dateTime" minOccurs="0">
@@ -43802,9 +44724,19 @@ OA - Организация, осуществляющая полномочия �
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="planPayments" type="zfcs_tenderPlan2017FinanceResourcesType">
+									<xs:element name="planPayments">
 										<xs:annotation>
 											<xs:documentation>Планируемые платежи</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="zfcs_tenderPlan2017FinanceResourcesType"/>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="planPaymentsChange" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Изменить планируемые платежи</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="maxPrice" type="zfcs_moneyPositiveType" minOccurs="0">
@@ -43827,13 +44759,38 @@ OA - Организация, осуществляющая полномочия �
 						</xs:element>
 						<xs:element name="publicDiscussionInfo" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Обязательное общественное обсуждение</xs:documentation>
+								<xs:documentation>Обязательное общественное обсуждение. В случае если при приеме блок не указан, признак необходимости ООКЗ определяется из позиции плана закупок </xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="publicDiscussionText" type="zfcs_longTextMinType">
+									<xs:element name="publicDiscussionText" type="zfcs_longTextMinType" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Сведения об обязательном общественном обсуждении</xs:documentation>
+											<xs:documentation>Сведения об обязательном общественном обсуждении (Устарело, не применяется)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="publicDiscussion" type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>Необходимо обязательное общественное обсуждение  (да или нет) в соответствии со статьей 20 Федерального закона №44</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="publicDiscussionPhase1Num" type="zfcs_publicDiscussionNumType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Реестровый номер первого этапа общественного обсуждения. Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="protocolNumberPhase1" type="zfcs_publicDiscussionProtocolNumType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Номер протокола первого этапа общественного обсуждения. Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="protocolDatePhase1" type="xs:dateTime" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Дата протокола первого этапа общественного обсуждения. Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="protocolPublishDatePhase1" type="xs:dateTime" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Дата размещения протокола первого этапа общественного обсуждения. Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -43919,8 +44876,36 @@ E - Данные позиции отредактированы;
 						</xs:element>
 						<xs:element name="contractLifeCycle" type="xs:boolean" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>C поставщиком (подрядчиком, исполнителем) будет заключен контракт жизненного цикла</xs:documentation>
+								<xs:documentation>C поставщиком (подрядчиком, исполнителем) будет заключен контракт жизненного цикла (Устарело, не применяется)</xs:documentation>
 							</xs:annotation>
+						</xs:element>
+						<xs:element name="contractLifeCycleInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Информация о заключении с поставщиком (подрядчиком, исполнителем) контракта жизненного цикла</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="contractLifeCycle" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>C поставщиком (подрядчиком, исполнителем) будет заключен контракт жизненного цикла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contractLifeCycleCases">
+										<xs:annotation>
+											<xs:documentation>Причины заключения контракта жизненного цикла. Ссылка на значения справочника: "Случаи заключения контракта жизненного цикла" (nsiTenderPlan2017ContractLifeCycleCase)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="contractLifeCycleCase" type="zfcs_tenderPlan2017ContractLifeCycleCaseRef" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Причина заключения контракта жизненного цикла</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="quantityUndefined" minOccurs="0">
 							<xs:annotation>
@@ -43937,6 +44922,10 @@ E - Данные позиции отредактированы;
 							</xs:complexType>
 						</xs:element>
 						<xs:sequence minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Обязательно в случае если не заполнен блок quantityUndefined.
+Необязательно в случае если заполнен блок quantityUndefined.</xs:documentation>
+							</xs:annotation>
 							<xs:element name="OKEI" type="zfcs_OKEIRef">
 								<xs:annotation>
 									<xs:documentation>Единица измерения</xs:documentation>
@@ -43999,7 +44988,7 @@ E - Данные позиции отредактированы;
 													<xs:sequence>
 														<xs:element name="OKEI" type="zfcs_OKEIRef">
 															<xs:annotation>
-																<xs:documentation>Единица измерения</xs:documentation>
+																<xs:documentation>Единица измерения. Ссылка на классификатор ОКЕИ (nsiOKEI)</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 														<xs:element name="productsQuantityInfo" type="zfcs_tenderPlan2017NumberType">
@@ -44007,9 +44996,9 @@ E - Данные позиции отредактированы;
 																<xs:documentation>Количество (объем) закупаемых товаров, работ, услуг</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="productsAveragePriceInfo">
+														<xs:element name="productsAveragePriceInfo" minOccurs="0">
 															<xs:annotation>
-																<xs:documentation>Средние цены за единицу товара, работы, услуги</xs:documentation>
+																<xs:documentation>Средние цены за единицу товара, работы, услуги (Устарело, не применяется)</xs:documentation>
 															</xs:annotation>
 															<xs:complexType>
 																<xs:sequence>
@@ -44036,9 +45025,14 @@ E - Данные позиции отредактированы;
 																</xs:sequence>
 															</xs:complexType>
 														</xs:element>
+														<xs:element name="productsAveragePrice" type="zfcs_moneyPositiveType" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Средняя цена за единицу товара, работы, услуги</xs:documentation>
+															</xs:annotation>
+														</xs:element>
 														<xs:element name="productsSumPaymentsInfo" type="zfcs_tenderPlan2017FinanceResourcesType" minOccurs="0">
 															<xs:annotation>
-																<xs:documentation>Сумма выплат по товару, работе, услуге. Игнорируется при приеме.  Заполняется автоматически на основании блоков  productsQuantityInfo и productsAveragePriceInfo</xs:documentation>
+																<xs:documentation>Сумма выплат по товару, работе, услуге. Игнорируется при приеме.  Заполняется автоматически на основании блоков  productsQuantityInfo и productsAveragePrice</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 													</xs:sequence>
@@ -44071,7 +45065,7 @@ E - Данные позиции отредактированы;
 									</xs:element>
 									<xs:element name="amountInPercents" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Размер обеспечения заявки в % от начальной (максимальной) цены контракта (financeInfo\maxPrice). Игнорируется при приеме. Рассчитывается автоматически</xs:documentation>
+											<xs:documentation>Размер обеспечения заявки в % от начальной (максимальной) цены контракта (financeInfo\maxPrice). Игнорируется при приеме. Рассчитывается автоматически. Если рассчитанное значение превышает 999.99%, в поле записывается 999.99%</xs:documentation>
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:double">
@@ -44095,7 +45089,7 @@ E - Данные позиции отредактированы;
 									</xs:element>
 									<xs:element name="amountInPercents" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Размер обеспечения исполнения контракта в % от начальной (максимальной) цены контракта (financeInfo\maxPrice). Игнорируется при приеме. Рассчитывается автоматически</xs:documentation>
+											<xs:documentation>Размер обеспечения исполнения контракта в % от начальной (максимальной) цены контракта (financeInfo\maxPrice). Игнорируется при приеме. Рассчитывается автоматически. Если рассчитанное значение превышает 999.99%, в поле записывается 999.99%</xs:documentation>
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:double">
@@ -44119,7 +45113,7 @@ E - Данные позиции отредактированы;
 									</xs:element>
 									<xs:element name="amountInPercents" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Размер аванса в % от начальной (максимальной) цены контракта (financeInfo\maxPrice). Игнорируется при приеме. Рассчитывается автоматически</xs:documentation>
+											<xs:documentation>Размер аванса в % от начальной (максимальной) цены контракта (financeInfo\maxPrice). Игнорируется при приеме. Рассчитывается автоматически. Если рассчитанное значение превышает999.99%, в поле записывается 999.99%</xs:documentation>
 										</xs:annotation>
 										<xs:simpleType>
 											<xs:restriction base="xs:double">
@@ -44490,7 +45484,7 @@ E - затратный метод.</xs:documentation>
 			</xs:choice>
 			<xs:element name="methodPriceFoundationText">
 				<xs:annotation>
-					<xs:documentation>Обоснование метода определения НМЦК</xs:documentation>
+					<xs:documentation>Обоснование начальной (максимальной) цены контракта, цены контракта, заключаемого с единственным поставщиком (подрядчиком, исполнителем)</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -44651,10 +45645,14 @@ E - затратный метод.</xs:documentation>
 		<xs:annotation>
 			<xs:documentation>НПА, на основании которого составлен план-график с 01.01.2017: 
 PPF553 - Постановление правительства РФ № 553 от 05.06.2015 (федеральное);
-PPF1043 - Постановление правительства РФ №1043 от 21.11.2013 (региональное и муниципальное).
+PPF554 - Постановление правительства РФ № 554 от 05.06.2015 (региональное и муниципальное);
+PPF552 - Ошибочное значение, не применяется. Оставлено для обратной совместимости схем;
+PPF1043 -  Ошибочное значение, не применяется. Оставлено для обратной совместимости схем.
 </xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
+			<xs:enumeration value="PPF553"/>
+			<xs:enumeration value="PPF554"/>
 			<xs:enumeration value="PPF552"/>
 			<xs:enumeration value="PPF1043"/>
 		</xs:restriction>
@@ -44744,6 +45742,74 @@ PPF1043 - Постановление правительства РФ №1043 о�
 				<xs:annotation>
 					<xs:documentation>Признак актуальности</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_nsiTenderPlan2017ContractLifeCycleCaseType">
+		<xs:annotation>
+			<xs:documentation>Справочник: Случаи заключения контракта жизненного цикла</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>Идентификатор</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="name">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="actual" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Признак актуальности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_tenderPlan2017ContractLifeCycleCaseRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник: Случаи заключения контракта жизненного цикла</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="name" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="500"/>
+					</xs:restriction>
+				</xs:simpleType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -46838,7 +47904,7 @@ ROLLBACK - Решение суда об отмене решения ФАС.</xs:
 			<xs:documentation>Информация из плана закупок (РПЗ), направляемая на контроль по 99 статье в орган контроля</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="planNumber" type="zfcs_sketchPlanNumberType" minOccurs="0">
+			<xs:element name="planNumber" type="zfcs_purchasePlanNumberType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Реестровый номер плана закупок в ЕИС</xs:documentation>
 				</xs:annotation>
@@ -46875,6 +47941,11 @@ protocol - Итоговый протокол определения постав
 			<xs:element name="externalId" type="zfcs_externalIdType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Внешний идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refPacketUid" type="zfcs_guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор принятого извне пакета данных</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="controlAuthorityInfo" type="zfcs_control99ControlAuthorityInfoType">
@@ -46998,9 +48069,9 @@ protocol - Итоговый протокол определения постав
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="KVRTotalsInfo">
+						<xs:element name="KVRTotalsInfo" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Итоговые показатели плана закупок в разбивке по кодам видов расходов</xs:documentation>
+								<xs:documentation>Итоговые показатели плана закупок в разбивке по кодам видов расходов.Устарел. не применяется. Оставлен для обратной совместимости схем</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -47039,7 +48110,7 @@ protocol - Итоговый протокол определения постав
 					<xs:documentation>Ссылка на карточку документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType">
+			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Электронный документ</xs:documentation>
 				</xs:annotation>
@@ -47093,6 +48164,11 @@ protocol - Итоговый протокол определения постав
 			<xs:element name="externalId" type="zfcs_externalIdType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Внешний идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refPacketUid" type="zfcs_guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор принятого извне пакета данных</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="controlAuthorityInfo" type="zfcs_control99ControlAuthorityInfoType">
@@ -47167,7 +48243,7 @@ protocol - Итоговый протокол определения постав
 					<xs:documentation>Ссылка на карточку документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType">
+			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Электронный документ</xs:documentation>
 				</xs:annotation>
@@ -47221,6 +48297,11 @@ protocol - Итоговый протокол определения постав
 			<xs:element name="externalId" type="zfcs_externalIdType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Внешний идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refPacketUid" type="zfcs_guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор принятого извне пакета данных</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="number" type="zfcs_contract.Number2015Type" minOccurs="0">
@@ -47367,7 +48448,7 @@ protocol - Итоговый протокол определения постав
 					<xs:documentation>Информация о прикрепленных документах</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType">
+			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Электронный документ</xs:documentation>
 				</xs:annotation>
@@ -47421,6 +48502,11 @@ protocol - Итоговый протокол определения постав
 			<xs:element name="externalId" type="zfcs_externalIdType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Внешний идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refPacketUid" type="zfcs_guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор принятого извне пакета данных</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="controlAuthorityInfo" type="zfcs_control99ControlAuthorityInfoType">
@@ -47707,7 +48793,7 @@ auto - автоматический.</xs:documentation>
 					<xs:documentation>Ссылка на карточку документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType">
+			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Электронный документ</xs:documentation>
 				</xs:annotation>
@@ -47766,6 +48852,11 @@ protocol - Итоговый протокол определения постав
 			<xs:element name="externalId" type="zfcs_externalIdType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Внешний идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refPacketUid" type="zfcs_guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор принятого извне пакета данных</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="controlAuthorityInfo" type="zfcs_control99ControlAuthorityInfoType">
@@ -47926,7 +49017,7 @@ OAU - Заказчик, осуществляющий закупку на про�
 					<xs:documentation>Ссылка на карточку документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType">
+			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Электронный документ</xs:documentation>
 				</xs:annotation>
@@ -47961,7 +49052,7 @@ OAU - Заказчик, осуществляющий закупку на про�
 		<xs:complexContent>
 			<xs:extension base="zfcs_control99ConfirmType">
 				<xs:sequence>
-					<xs:element name="createlDate" type="xs:dateTime">
+					<xs:element name="createDate" type="xs:dateTime">
 						<xs:annotation>
 							<xs:documentation>Дата/время формирования сообщения</xs:documentation>
 						</xs:annotation>
@@ -48013,6 +49104,22 @@ OAU - Заказчик, осуществляющий закупку на про�
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="zfcs_control99ProtocolMismatchReductFundsType">
+		<xs:annotation>
+			<xs:documentation>Протокол о несоответствии контролируемой информации в связи с уменьшением средств</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="zfcs_control99NoticeProtocolCommonInfoType">
+				<xs:sequence>
+					<xs:element name="controlResults" type="zfcs_control99ControlResultsIKZType">
+						<xs:annotation>
+							<xs:documentation>Результаты контроля</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<!--Контроль по 99 статье. Общие типы-->
 	<xs:complexType name="zfcs_control99NoticeProtocolCommonInfoType">
 		<xs:annotation>
@@ -48029,7 +49136,22 @@ OAU - Заказчик, осуществляющий закупку на про�
 					<xs:documentation>Внешний идентификатор документа, направленного на контроль</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="documentType">
+			<xs:element name="refPacketUid" type="zfcs_guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор принятого извне пакета данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refVersionNumber" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер версии документа, направленного на контроль</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refEditionNumber" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер редакции в рамках версии документа, направленного на контроль</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Тип документа, направленного на контроль:
 contract - Сведения о контракте;
@@ -48043,29 +49165,29 @@ protocol - Итоговый протокол определения постав
 					<xs:restriction base="zfcs_control99DocumentType"/>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="docNumber" type="zfcs_control99DocNumberType">
+			<xs:element name="docNumber" type="zfcs_control99DocNumberType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Номер документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="docDate" type="xs:dateTime">
+			<xs:element name="docDate" type="xs:dateTime" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Дата/время формирования результата контроля</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="signDate" type="xs:dateTime">
+			<xs:element name="signDate" type="xs:dateTime" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Дата/время подписания результата контроля</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="controlAuthorityInfo" type="zfcs_control99ControlAuthorityInfoType">
+			<xs:element name="controlAuthorityInfo" type="zfcs_control99ControlAuthorityInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Сведения об органе контроля</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="customerInfo">
+			<xs:element name="customerInfo" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Сведения о заказчике</xs:documentation>
+					<xs:documentation>Сведения о заказчике (организации, размещающей закупку)</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:complexContent>
@@ -48095,12 +49217,12 @@ protocol - Итоговый протокол определения постав
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="responsibleInfo" type="zfcs_control99ResponsibleType">
+			<xs:element name="responsibleInfo" type="zfcs_control99ResponsibleType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Сведения об ответственном исполнителе</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType">
+			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Электронный документ</xs:documentation>
 				</xs:annotation>
@@ -48111,6 +49233,22 @@ protocol - Итоговый протокол определения постав
 				<xs:documentation>Версия схемы</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="zfcs_control99ProtocolCommonInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Общие поля протокола о несоответствии контролируемой информации</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="zfcs_control99NoticeProtocolCommonInfoType">
+				<xs:sequence>
+					<xs:element name="controlResults" type="zfcs_control99ControlResultsIKZType">
+						<xs:annotation>
+							<xs:documentation>Результаты контроля</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="zfcs_control99ConfirmType">
 		<xs:annotation>
@@ -48127,6 +49265,21 @@ protocol - Итоговый протокол определения постав
 					<xs:documentation>Внешний идентификатор документа, направленного на контроль</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="refPacketUid" type="zfcs_guidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор принятого извне пакета данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refVersionNumber" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер версии документа, направленного на контроль</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refEditionNumber" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер редакции в рамках версии документа, направленного на контроль</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="documentType">
 				<xs:annotation>
 					<xs:documentation>Тип документа, направленного на контроль:
@@ -48141,15 +49294,43 @@ protocol - Итоговый протокол определения постав
 					<xs:restriction base="zfcs_control99DocumentType"/>
 				</xs:simpleType>
 			</xs:element>
+			<xs:element name="docNumber" type="zfcs_control99DocNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="docDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата/время формирования сообщения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата/время подписания сообщения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="controlAuthorityInfo" type="zfcs_control99ControlAuthorityInfoType">
 				<xs:annotation>
 					<xs:documentation>Сведения об органе контроля</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="customerInfo" type="zfcs_control99CustomerInfoType">
+			<xs:element name="customerInfo">
 				<xs:annotation>
-					<xs:documentation>Сведения о заказчике</xs:documentation>
+					<xs:documentation>Сведения о заказчике (организации, размещающей закупку)</xs:documentation>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="zfcs_control99CustomerInfoType">
+							<xs:sequence>
+								<xs:element name="OKTMOPPO" type="zfcs_OKTMOPPORef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>ОКТМО публично-правового образования (ППО)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="controlObjectsInfo">
 				<xs:annotation>
@@ -48165,7 +49346,7 @@ protocol - Итоговый протокол определения постав
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType">
+			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Электронный документ</xs:documentation>
 				</xs:annotation>
@@ -48397,14 +49578,14 @@ OA - Организация, осуществляющая полномочия �
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="IKZ" type="zfcs_IKZCodeType">
+									<xs:element name="IKZ" type="zfcs_IKZCodeType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>ИКЗ, по которому осуществляется контроль</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="controlResult">
 										<xs:annotation>
-											<xs:documentation>Результат контроля по ИКЗ</xs:documentation>
+											<xs:documentation>Результат контроля</xs:documentation>
 										</xs:annotation>
 										<xs:complexType>
 											<xs:choice>
@@ -48432,7 +49613,7 @@ OA - Организация, осуществляющая полномочия �
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="discrepanciesText">
+			<xs:element name="discrepanciesText" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Выявленные несоответствия по всем ИКЗ объекта контроля</xs:documentation>
 				</xs:annotation>
@@ -48509,7 +49690,7 @@ OA - Организация, осуществляющая полномочия �
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:maxLength value="50"/>
+						<xs:maxLength value="150"/>
 						<xs:minLength value="1"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -48520,7 +49701,7 @@ OA - Организация, осуществляющая полномочия �
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:maxLength value="100"/>
+						<xs:maxLength value="256"/>
 						<xs:minLength value="1"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -48742,10 +49923,25 @@ OTHER - все остальные заказчики.</xs:documentation>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="actual" type="xs:boolean">
+			<xs:element name="status">
 				<xs:annotation>
-					<xs:documentation>Признак включения записи в число субъектов контроля</xs:documentation>
+					<xs:documentation>Признак включения записи в число субъектов контроля:
+
+CREATED - Запись создана;
+CONFIRMED - Запись подтверждена;
+LOCKED - Запись заблокирована;
+INVALID - Запись недействительна.
+
+</xs:documentation>
 				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="CREATED"/>
+						<xs:enumeration value="CONFIRMED"/>
+						<xs:enumeration value="LOCKED"/>
+						<xs:enumeration value="INVALID"/>
+					</xs:restriction>
+				</xs:simpleType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -49268,6 +50464,21 @@ NS - Не подано ни одного ценового предложения
 			<xs:enumeration value="15"/>
 			<xs:enumeration value="16"/>
 			<xs:enumeration value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_fundsBudgetLevelContract2015Type">
+		<xs:annotation>
+			<xs:documentation>Уровень бюджета фондов для контрактов с 01.01.2015:
+41 - бюджет Пенсионного фонда Российской Федерации;
+42 - бюджет Фонда социального страхования Российской Федерации;
+43 - бюджет Федерального фонда обязательного медицинского страхования;
+50 - бюджет территориального государственного внебюджетного фонда</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="50"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_checkNumberType">
@@ -50526,10 +51737,18 @@ OA - Организация, осуществляющая полномочия �
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_sketchPlanNumberType">
 		<xs:annotation>
-			<xs:documentation>Реестровый номер плана закупок</xs:documentation>
+			<xs:documentation>Реестровый номер плана закупок в неструктурированной форме</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_purchasePlanNumberType">
+		<xs:annotation>
+			<xs:documentation>Реестровый номер плана закупок в структурированной форме</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="18"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_spzNumType">
@@ -50554,14 +51773,6 @@ OA - Организация, осуществляющая полномочия �
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:pattern value="\d{16}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="zfcs_regulationRulesNumberType">
-		<xs:annotation>
-			<xs:documentation>Номер сведений нормирования</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:pattern value="\d{8,20}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_subordinationTypeEnum">

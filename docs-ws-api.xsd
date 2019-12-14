@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS docs-ws-api Integration Scheme, version 7.0, create date 29.11.2016 -->
+<!-- EIS docs-ws-api Integration Scheme, version 7.0.6, create date 12.01.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/fz44/ws/priz" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/fz44/ws/priz">
 	<xs:element name="getPRIZObjectListRequest">
 		<xs:annotation>
@@ -1822,6 +1822,11 @@ IKO - Информационные системы контрольных орг�
 					<xs:documentation>Протокол о несоответствии контролируемой информации</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="control99ProtocolMismatchReductFunds">
+				<xs:annotation>
+					<xs:documentation>Протокол о несоответствии контролируемой информации  в связи с уменьшением средств</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="RKDocumentKindType">
@@ -1901,6 +1906,11 @@ IKO - Информационные системы контрольных орг�
 					<xs:documentation>Протокол о несоответствии контролируемой информации</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="control99ProtocolMismatchReductFunds">
+				<xs:annotation>
+					<xs:documentation>Протокол о несоответствии контролируемой информации  в связи с уменьшением средств</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="RPZDocumentKindType">
@@ -1936,6 +1946,11 @@ IKO - Информационные системы контрольных орг�
 			<xs:enumeration value="control99ProtocolMismatch">
 				<xs:annotation>
 					<xs:documentation>Протокол о несоответствии контролируемой информации</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="control99ProtocolMismatchReductFunds">
+				<xs:annotation>
+					<xs:documentation>Протокол о несоответствии контролируемой информации  в связи с уменьшением средств</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>
