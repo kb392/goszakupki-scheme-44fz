@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXTEGRATION Integration Scheme, version 8.0, create date 22.01.2018 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/extegration/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/extegration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS EXTEGRATION Integration Scheme, version 8.1, create date 04.04.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/extegration/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" targetNamespace="http://zakupki.gov.ru/oos/extegration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:element name="bankGuarantee" type="oos:zfcs_bankGuaranteeType">
 		<xs:annotation>
@@ -502,6 +503,36 @@
 	<xs:element name="control99ProtocolMismatchReductFunds" type="oos:zfcs_control99ProtocolMismatchReductFundsType">
 		<xs:annotation>
 			<xs:documentation>Проект протокола о несоответствии контролируемой информации в связи с уменьшением средств</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pprf615NotificationEF" type="pp615:notificationEFType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ЭА (электронный аукцион) по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pprf615NotificationCancel" type="pp615:notificationCancelType">
+		<xs:annotation>
+			<xs:documentation>Извещение об отмене закупки по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pprf615Clarification" type="pp615:clarificationType">
+		<xs:annotation>
+			<xs:documentation>Разъяснение положений документации по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pprf615ActEvasion" type="pp615:actEvasionType">
+		<xs:annotation>
+			<xs:documentation>Акт отказа от заключения контракта по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pprf615ActDeviation" type="pp615:actDeviationType">
+		<xs:annotation>
+			<xs:documentation>Акт признания участника уклонившимся от заключения контракта по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pprf615ActCancel" type="pp615:actCancelType">
+		<xs:annotation>
+			<xs:documentation>Информация об отмене акта по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

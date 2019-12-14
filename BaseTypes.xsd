@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 8.0, create date 22.01.2018 -->
+<!-- BASE_TYPES Integration Scheme, version 8.1, create date 04.04.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<xs:complexType name="abandonedReasonRef">
@@ -14,14 +14,15 @@
 			</xs:element>
 			<xs:element name="name" type="abandonedReasonName" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование основания признания торгов несостоявшимися</xs:documentation>
+					<xs:documentation>Наименование основания признания торгов несостоявшимися.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="currencyRef">
 		<xs:annotation>
-			<xs:documentation>Ссылка на валюту</xs:documentation>
+			<xs:documentation>Ссылка на ОКВ</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="code">
@@ -37,7 +38,8 @@
 			</xs:element>
 			<xs:element name="name" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование валюты</xs:documentation>
+					<xs:documentation>Наименование валюты.
+Игнорируется при приеме.  При передаче заполняется значением из справочника "Общероссийский классификатор валют (ОКВ)" (nsiCurrency)</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -60,12 +62,14 @@
 			</xs:element>
 			<xs:element name="name" type="mediumTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование электронной площадки</xs:documentation>
+					<xs:documentation>Наименование электронной площадки. 
+Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник: Электронные торговые площадки по ПП РФ № 615" (nsiETP)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="url" type="base:hrefType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Адрес электронной площадки</xs:documentation>
+					<xs:documentation>Адрес электронной площадки. 
+Игнорируется при приеме.     При передаче заполняется значением из справочника "Справочник: Электронные торговые площадки по ПП РФ № 615" (nsiETP)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -82,7 +86,8 @@
 			</xs:element>
 			<xs:element name="name" type="base:longTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование основания</xs:documentation>
+					<xs:documentation>Наименование основания.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Основания для исключения сведений из реестра квалифицированных подрядных организаций по ПП РФ № 615" (pprf615NsiExclusionReasons)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -99,7 +104,8 @@
 			</xs:element>
 			<xs:element name="name" type="mediumTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование типа источника финансирования</xs:documentation>
+					<xs:documentation>Наименование типа источника финансирования.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Типы источников финансирования по ПП РФ № 615" (pprf615NsiFundingSources)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -122,7 +128,8 @@
 			</xs:element>
 			<xs:element name="singularName" type="longTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование в единственном числе</xs:documentation>
+					<xs:documentation>Наименование в единственном числе.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор организационно-правовых форм (ОКОПФ)" (nsiOKOPFList)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -139,7 +146,8 @@
 			</xs:element>
 			<xs:element name="OKPDName" type="base:okpdNameType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование товара, работы или услуги</xs:documentation>
+					<xs:documentation>Наименование товара, работы или услуги.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор продукции по видам экономической деятельности ОК 034-2014 (ОКПД2)" (nsiOKPD2List)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -156,7 +164,7 @@
 			</xs:element>
 			<xs:element name="countryFullName" type="base:kladrTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Полное наименование страны</xs:documentation>
+					<xs:documentation>Полное наименование страны. Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -178,7 +186,8 @@
 			</xs:element>
 			<xs:element name="fullName" type="base:longTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Полное наименование</xs:documentation>
+					<xs:documentation>Полное наименование.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Сводный перечень заказчиков (СПЗ)" (nsiOrganizationList)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -195,7 +204,7 @@
 			</xs:element>
 			<xs:element name="name" type="base:longTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование предмета электронного аукциона</xs:documentation>
+					<xs:documentation>Наименование предмета электронного аукциона. Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник: Предметы электронного аукциона по ПП РФ № 615" (nsiPurchaseSubject)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -212,7 +221,8 @@
 			</xs:element>
 			<xs:element name="name" type="base:longTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование организации / ФИО в РКПО</xs:documentation>
+					<xs:documentation>Наименование организации / ФИО в РКПО.
+Игнорируется при приеме. При передаче заполняется значением из реестра квалифицированных подрядных организаций (РКПО) по ПП РФ № 615 (pprf615QualifiedContractor)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -229,7 +239,8 @@
 			</xs:element>
 			<xs:element name="name" type="rejectReasonName" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование причины для отказа в допуске заявки</xs:documentation>
+					<xs:documentation>Наименование причины для отказа в допуске заявки.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник причин отказа в допуске к участию в торгах" (nsiPurchaseRejectReasonList)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -246,7 +257,9 @@
 			</xs:element>
 			<xs:element name="name" type="base:longTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование вида услуги или работы</xs:documentation>
+					<xs:documentation>Наименование вида услуги или работы. 
+Игнорируется при приеме. 
+При передаче заполняется значением из справочника "Справочник: Предметы электронного аукциона по ПП РФ № 615" (nsiPurchaseSubject)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -263,7 +276,8 @@
 			</xs:element>
 			<xs:element name="name" type="base:longTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование основания</xs:documentation>
+					<xs:documentation>Наименование основания.
+Игнорируется при приеме. При передаче заполняется значением из справочника "Основания расторжения договора по капитальному ремонту ПП РФ № 615" (pprf615NsiTerminationGrounds)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -280,7 +294,7 @@
 			</xs:element>
 			<xs:element name="name" type="base:longTextType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование причины</xs:documentation>
+					<xs:documentation>Наименование причины. Игнорируется при приеме. При передаче заполняется значением из справочника "Причины расторжения договора по капитальному ремонту ПП РФ № 615" (pprf615NsiTerminationReasons)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -297,6 +311,15 @@
 	<xs:simpleType name="abandonedReasonName">
 		<xs:annotation>
 			<xs:documentation>Тип: Наименование основания признания торгов несостоявшимися</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="abandonedReasonObjectName">
+		<xs:annotation>
+			<xs:documentation>Тип: Наименование интеграционного объекта в справочнике оснований признания процедуры несостоявшейся</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
@@ -741,7 +764,7 @@ I - Пени</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
-			<xs:maxLength value="250"/>
+			<xs:maxLength value="500"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="responsibleRoleType">
@@ -783,6 +806,7 @@ TC - Орган местного самоуправления и (или) гос
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="8.0"/>
+			<xs:enumeration value="8.1"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="serviceWorkCodeType">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION Integration Scheme, version 8.0, create date 22.01.2018 -->
+<!-- FCS INTEGRATION Integration Scheme, version 8.1, create date 04.04.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
@@ -2541,7 +2541,7 @@
 	<xs:element name="pprf615NotificationEF">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
-Извещение о проведении ЭА (электронный аукцион) по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+Извещение о проведении ЭА (электронный аукцион) по ПП РФ № 615; внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2560,7 +2560,7 @@
 	<xs:element name="pprf615TimeEF">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
-Время проведения электронного аукциона по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+Время проведения электронного аукциона по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2578,7 +2578,7 @@
 	</xs:element>
 	<xs:element name="pprf615ProtocolEF1">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Протокол рассмотрения заявок на участие в электронном аукционе по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+			<xs:documentation>Пакет данных:Протокол рассмотрения заявок на участие в электронном аукционе по ПП РФ № 615; внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2596,7 +2596,7 @@
 	</xs:element>
 	<xs:element name="pprf615ProtocolEF2">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Протокол проведения электронного аукциона по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+			<xs:documentation>Пакет данных:Протокол проведения электронного аукциона по ПП РФ № 615; внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2614,7 +2614,7 @@
 	</xs:element>
 	<xs:element name="pprf615ActEvasion">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Акт отказа от заключения контракта по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+			<xs:documentation>Пакет данных:Акт отказа от заключения контракта по ПП РФ № 615; внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2632,7 +2632,7 @@
 	</xs:element>
 	<xs:element name="pprf615ActDeviation">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Акт признания участника уклонившимся от заключения контракта по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+			<xs:documentation>Пакет данных:Акт признания участника уклонившимся от заключения контракта по ПП РФ № 615; внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2651,7 +2651,7 @@
 	<xs:element name="pprf615NotificationPO">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
-Извещение о проведении ПО (предварительный отбор) по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+Извещение о проведении ПО (предварительный отбор) по ПП РФ № 615; внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2669,7 +2669,7 @@
 	</xs:element>
 	<xs:element name="pprf615ProtocolPO">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Протокол предварительного отбора в ПО по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+			<xs:documentation>Пакет данных:Протокол предварительного отбора в ПО по ПП РФ № 615; внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2687,7 +2687,7 @@
 	</xs:element>
 	<xs:element name="pprf615NotificationCancel">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Извещение об отмене закупки по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+			<xs:documentation>Пакет данных:Извещение об отмене закупки по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2705,7 +2705,7 @@
 	</xs:element>
 	<xs:element name="pprf615ProtocolCancel">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Информация об отмене протокола по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+			<xs:documentation>Пакет данных:Информация об отмене протокола по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2723,7 +2723,7 @@
 	</xs:element>
 	<xs:element name="pprf615ActCancel">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Информация об отмене акта по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+			<xs:documentation>Пакет данных:Информация об отмене акта по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2742,7 +2742,7 @@
 	<xs:element name="pprf615Clarification">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
-Разъяснение положений документации по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+Разъяснение положений документации по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2761,7 +2761,7 @@
 	<xs:element name="pprf615ClarificationRequest">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
-Запрос ЭП о даче разъяснений положений документации по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+Запрос ЭП о даче разъяснений положений документации по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2781,7 +2781,7 @@
 		<xs:annotation>
 			<xs:documentation>Пакет данных:Сведения о 
 квалифицированной 
-подрядной организации для включения в РКПО по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+подрядной организации для включения в РКПО по ПП РФ № 615; внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2803,7 +2803,7 @@
 Сведения об исключении 
 квалифицированной 
 подрядной организации 
-из РКПО по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+из РКПО по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2845,7 +2845,7 @@
 	<xs:element name="pprf615Contract">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:Сведения о 
-договоре о проведении капитального ремонта по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+договоре о проведении капитального ремонта по ПП РФ № 615; внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2863,7 +2863,7 @@
 	</xs:element>
 	<xs:element name="pprf615MasterData">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Набор элементов справочников и классификаторов по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+			<xs:documentation>Пакет данных:Набор элементов справочников и классификаторов по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2972,7 +2972,12 @@ CM - Информация по жалобе для ИС КО;
 CR - Результат контроля для ИС КО;
 UC - Внеплановая проверка для ИС КО;
 PC - Плановая проверка для ИС КО;
-99DOC - Документы контроля по 99 статье.</xs:documentation>
+99DOC - Документы контроля по 99 статье;
+615_PO - ПП РФ 615 Предварительный отбор;
+615_KPO - ПП РФ 615 Квалифицированная подрядная организация;
+615_EF - ПП РФ 615 Электронный аукцион;
+615_CT - ПП РФ 615 Договор;
+615_DD - ПП РФ 615 Разные документы.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="objectId" minOccurs="0">

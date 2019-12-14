@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 8.0, create date 22.01.2018 -->
+<!-- FCS EXPORT Integration Scheme, version 8.1, create date 04.04.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
@@ -27,7 +27,6 @@
 					</xs:element>
 					<xs:element name="bankGuaranteeRefusalInvalid" type="oos:zfcs_bankGuaranteeRefusalInvalidType">
 						<xs:annotation>
-							<xs:documentation>Сведения о недействительности отказа заказчика в принятии банковской гарантии</xs:documentation>
 							<xs:documentation>Сведения о недействительности отказа заказчика в принятии банковской гарантии</xs:documentation>
 						</xs:annotation>
 					</xs:element>
@@ -1215,6 +1214,16 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
+					<xs:element name="nsiPPRF1428Subjects">
+						<xs:annotation>
+							<xs:documentation>Cправочник: Организации, на которых распространяется действие ПП РФ 1428</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiPPRF1428Subject" type="oos:zfcs_nsiControl99SubjectType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
 					<xs:element name="nsiTenderPlan2017ContractLifeCycleCases">
 						<xs:annotation>
 							<xs:documentation>Справочник: Случаи заключения контракта жизненного цикла</xs:documentation>
@@ -1235,7 +1244,7 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="nsiDrugOKEI">
+					<xs:element name="nsiDrugsOKEI">
 						<xs:annotation>
 							<xs:documentation>Справочник: Единицы измерения потребительских единиц измерения лекарственных препаратов по ОКЕИ</xs:documentation>
 						</xs:annotation>
@@ -1266,7 +1275,7 @@
 					</xs:element>
 					<xs:element name="pprf615NsiFundingSources">
 						<xs:annotation>
-							<xs:documentation>Справочник: Типы источников финансирования по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Справочник: Типы источников финансирования по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
@@ -1280,7 +1289,7 @@
 					</xs:element>
 					<xs:element name="pprf615NsiExclusionReasons">
 						<xs:annotation>
-							<xs:documentation>Справочник: Основания для исключения сведений из реестра квалифицированных подрядных организаций по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Справочник: Основания для исключения сведений из реестра квалифицированных подрядных организаций по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
@@ -1294,7 +1303,7 @@
 					</xs:element>
 					<xs:element name="pprf615NsiPurchaseSubjects">
 						<xs:annotation>
-							<xs:documentation>Справочник: Предметы электронного аукциона по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Справочник: Предметы электронного аукциона по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
@@ -1308,7 +1317,7 @@
 					</xs:element>
 					<xs:element name="pprf615NsiTerminationGrounds">
 						<xs:annotation>
-							<xs:documentation>Справочник: Основания расторжения договора по капитальному ремонту ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Справочник: Основания расторжения договора по капитальному ремонту ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
@@ -1322,7 +1331,7 @@
 					</xs:element>
 					<xs:element name="pprf615NsiTerminationReasons">
 						<xs:annotation>
-							<xs:documentation>Справочник: Причины расторжения договора по капитальному ремонту ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Справочник: Причины расторжения договора по капитальному ремонту ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
@@ -1336,62 +1345,62 @@
 					</xs:element>
 					<xs:element name="pprf615NotificationEF" type="pp615:notificationEFType">
 						<xs:annotation>
-							<xs:documentation>Извещение о проведении ЭА (электронный аукцион) по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Извещение о проведении ЭА (электронный аукцион) по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615NotificationCancel" type="pp615:notificationCancelType">
 						<xs:annotation>
-							<xs:documentation>Извещение об отказе от проведения закупки по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Извещение об отказе от проведения закупки по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615ProtocolEF1" type="pp615:protocolEF1Type">
 						<xs:annotation>
-							<xs:documentation>Протокол рассмотрения заявок на участие в электронном аукционе по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Протокол рассмотрения заявок на участие в электронном аукционе по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615ProtocolEF2" type="pp615:protocolEF2Type">
 						<xs:annotation>
-							<xs:documentation>Протокол проведения электронного аукциона по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Протокол проведения электронного аукциона по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615ActEvasion" type="pp615:actEvasionType">
 						<xs:annotation>
-							<xs:documentation>Акт об отказе от заключения договора о проведении капитального ремонта с победителем ЭА по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Акт об отказе от заключения договора о проведении капитального ремонта с победителем ЭА по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615ActDeviation" type="pp615:actDeviationType">
 						<xs:annotation>
-							<xs:documentation>Акт об уклонении победителя ЭА от заключения договора по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Акт об уклонении победителя ЭА от заключения договора по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615ActCancel" type="pp615:actCancelType">
 						<xs:annotation>
-							<xs:documentation>Информация об отмене акта по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Информация об отмене акта по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615NotificationPO" type="pp615:notificationPOType">
 						<xs:annotation>
-							<xs:documentation>Извещение о проведении ПО (предварительный отбор) по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Извещение о проведении ПО (предварительный отбор) по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615ProtocolPO" type="pp615:protocolPOType">
 						<xs:annotation>
-							<xs:documentation>Протокол предварительного отбора в ПО по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Протокол предварительного отбора в ПО по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615ProtocolCancel" type="pp615:protocolCancelType">
 						<xs:annotation>
-							<xs:documentation>Информация об отмене протокола  по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Информация об отмене протокола  по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615Clarification" type="pp615:clarificationType">
 						<xs:annotation>
-							<xs:documentation>Разъяснение положений документации/Дополнительная информация по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Разъяснение положений документации/Дополнительная информация по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615QualifiedContractor" type="pp615:qualifiedContractorType">
 						<xs:annotation>
-							<xs:documentation>Сведения о квалифицированной подрядной организации для включения в РКПО по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Сведения о квалифицированной подрядной организации для включения в РКПО по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615QualifiedContractorExclude" type="pp615:qualifiedContractorExcludeType">
@@ -1401,27 +1410,27 @@
 					</xs:element>
 					<xs:element name="pprf615QualifiedContractorExcludeCancel" type="pp615:qualifiedContractorExcludeCancelType">
 						<xs:annotation>
-							<xs:documentation>Сведения об отмене исключения квалифицированной подрядной организации из РКПО по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Сведения об отмене исключения квалифицированной подрядной организации из РКПО по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615Contract" type="pp615:contractType">
 						<xs:annotation>
-							<xs:documentation>Сведения о договоре о проведении капитального ремонта по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Сведения о договоре о проведении капитального ремонта по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615ContractProcedure" type="pp615:contractProcedureType">
 						<xs:annotation>
-							<xs:documentation>Сведения об исполнении/расторжении договора о проведении капитального ремонта по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Сведения об исполнении/расторжении договора о проведении капитального ремонта по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615ContractProcedureCancel" type="pp615:contractProcedureCancelType">
 						<xs:annotation>
-							<xs:documentation>Отмена информации об исполнении/расторжении договора о проведении капитального ремонта по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Отмена информации об исполнении/расторжении договора о проведении капитального ремонта по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="pprf615UnfairContractor" type="pp615:unfairContractorType">
 						<xs:annotation>
-							<xs:documentation>Сведения о недобросовестой подрядной организации по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+							<xs:documentation>Сведения о недобросовестой подрядной организации по ПП РФ № 615</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:choice>
