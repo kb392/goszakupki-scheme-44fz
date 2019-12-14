@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION Integration Scheme, version 8.2.100, create date 13.07.2018 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS INTEGRATION Integration Scheme, version 8.3, create date 28.09.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/EPtypes/1" schemaLocation="IntegrationEPTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/CPtypes/1" schemaLocation="IntegrationCPTypes.xsd"/>
 	<xs:element name="accreditedEPSupplier">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
@@ -3516,7 +3518,7 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
-	<!--Запрос котировок в электронной форме (ЭЗП)-->
+	<!--Запрос предложений в электронной форме (ЭЗП)-->
 	<xs:element name="epNotificationEZP">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:Извещение о проведении ЭЗП</xs:documentation>
@@ -3584,6 +3586,133 @@
 								<xs:documentation>Данные информационного пакета</xs:documentation>
 							</xs:annotation>
 						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!--Проекты контрактов-->
+	<xs:element name="cpContractProject">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Проект контракта без подписей</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="cp:contractProjectType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cpContractProjectChange">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Доработанный проект контракта на основании размещенного поставщиком протокола разногласий</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="cp:contractProjectChangeType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cpContractProjectSign">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Проект контракта, подписанный поставщиком</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="cp:contractProjectSignType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cpContractSign">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Подписанный контракт</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="cp:contractSignType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cpProtocolDisagreements">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Протокол разногласий</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="cp:protocolDisagreementsType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cpNoticeDeviation">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Уведомление об уклонении от заключения контракта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="cp:noticeDeviationType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cpNoticeEvasion">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Уведомление об отказе от заключения контракта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="cp:noticeEvasionType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cpProcedureCancel">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Извещение об отмене процедуры заключения контракта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="cp:procedureCancelType"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cpProcedureCancelFailure">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Отмена извещения об отмене процедуры заключения контракта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="cp:procedureCancelFailureType"/>
 					</xs:sequence>
 				</xs:extension>
 			</xs:complexContent>
@@ -3694,7 +3823,8 @@ EOKOU - ЭП Открытый конкурс с ограниченным уча�
 EOKD - ЭП Двухэтапный конкурс в электронной форме;
 EZK - ЭП Запрос котировок в электронной форме;
 EZP - ЭП Запрос предложений в электронной форме;
-EP_DD - ЭП Разные документы.</xs:documentation>
+EP_DD - ЭП Разные документы;
+CP - Проекты контрактов.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="objectId" minOccurs="0">
@@ -3722,7 +3852,7 @@ EP_DD - ЭП Разные документы.</xs:documentation>
 							<xs:complexType>
 								<xs:simpleContent>
 									<xs:extension base="xs:base64Binary">
-										<xs:attribute name="type" type="oos:zfcs_signatureType" use="required"/>
+										<xs:attribute name="type" type="base:signatureType" use="required"/>
 									</xs:extension>
 								</xs:simpleContent>
 							</xs:complexType>
@@ -3808,7 +3938,9 @@ EOKOU - ЭП Открытый конкурс с ограниченным уча�
 EOKD - ЭП Двухэтапный конкурс в электронной форме;
 EZK - ЭП Запрос котировок в электронной форме;
 EZP - ЭП Запрос предложений в электронной форме;
-EP_DD - ЭП Разные документы.</xs:documentation>
+EP_DD - ЭП Разные документы;
+CP - Проекты контрактов.
+</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="94_OK"/>
@@ -3862,6 +3994,7 @@ EP_DD - ЭП Разные документы.</xs:documentation>
 			<xs:enumeration value="EZK"/>
 			<xs:enumeration value="EZP"/>
 			<xs:enumeration value="EP_DD"/>
+			<xs:enumeration value="CP"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

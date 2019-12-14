@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS PRINT_FORM Integration Scheme, version 8.2.100, create date 13.07.2018 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/printform/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS PRINT_FORM Integration Scheme, version 8.3, create date 28.09.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/printform/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/EPtypes/1" schemaLocation="IntegrationEPTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/CPtypes/1" schemaLocation="IntegrationCPTypes.xsd"/>
 	<xs:simpleType name="zfcs_accountNumType">
 		<xs:annotation>
 			<xs:documentation>Номер лицевого счета заказчика</xs:documentation>
@@ -140,7 +141,7 @@ PUBL - Размещено
 			<xs:documentation>Информация об организации</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="regNum" type="oos:zfcs_spzNumType" minOccurs="0">
+			<xs:element name="regNum" type="base:spzNumType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Код по СПЗ</xs:documentation>
 				</xs:annotation>
@@ -160,12 +161,12 @@ PUBL - Размещено
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="inn" type="oos:zfcs_innOrganizationType" minOccurs="0">
+			<xs:element name="inn" type="base:innOrganizationType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>ИНН организации</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="kpp" type="oos:zfcs_kppType" minOccurs="0">
+			<xs:element name="kpp" type="base:kppType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>КПП организации</xs:documentation>
 				</xs:annotation>
@@ -179,12 +180,12 @@ PUBL - Размещено
 		<xs:complexContent>
 			<xs:extension base="zfcs_organizationInfoType">
 				<xs:sequence>
-					<xs:element name="ogrn" type="oos:zfcs_ogrnType" minOccurs="0">
+					<xs:element name="ogrn" type="base:ogrnCodeType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>ОГРН организации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="legalForm" type="oos:zfcs_okopfRef" minOccurs="0">
+					<xs:element name="legalForm" type="base:OKOPFRef" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Организационно-правовая форма организации в ОКОПФ</xs:documentation>
 						</xs:annotation>
@@ -238,7 +239,7 @@ PUBL - Размещено
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="OKTMO" type="oos:zfcs_OKTMORef" minOccurs="0">
+					<xs:element name="OKTMO" type="base:OKTMORef" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>ОКТМО организации</xs:documentation>
 						</xs:annotation>
@@ -336,22 +337,22 @@ PUBL - Размещено
 												</xs:annotation>
 												<xs:complexType>
 													<xs:sequence>
-														<xs:element name="kbkCode" type="oos:zfcs_kbkType">
+														<xs:element name="kbkCode" type="base:kbkType">
 															<xs:annotation>
 																<xs:documentation>Код бюджетной классификации</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="year" type="oos:zfcs_yearType">
+														<xs:element name="year" type="base:yearType">
 															<xs:annotation>
 																<xs:documentation>Год</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="sum" type="oos:zfcs_moneyType">
+														<xs:element name="sum" type="base:moneyType">
 															<xs:annotation>
 																<xs:documentation>Сумма</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="refuseSum" type="oos:zfcs_moneyType">
+														<xs:element name="refuseSum" type="base:moneyType">
 															<xs:annotation>
 																<xs:documentation>Сумма отклонения</xs:documentation>
 															</xs:annotation>
@@ -434,7 +435,7 @@ PUBL - Размещено
 												</xs:annotation>
 												<xs:complexType>
 													<xs:sequence>
-														<xs:element name="kbkCode" type="oos:zfcs_kbkType">
+														<xs:element name="kbkCode" type="base:kbkType">
 															<xs:annotation>
 																<xs:documentation>Код бюджетной классификации</xs:documentation>
 															</xs:annotation>
@@ -444,7 +445,7 @@ PUBL - Размещено
 																<xs:documentation>Год</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="sum" type="oos:zfcs_moneyType">
+														<xs:element name="sum" type="base:moneyType">
 															<xs:annotation>
 																<xs:documentation>Сумма</xs:documentation>
 															</xs:annotation>
@@ -566,7 +567,7 @@ PUBL - Размещено
 					<xs:complexContent>
 						<xs:extension base="zfcs_organizationInfoType">
 							<xs:sequence>
-								<xs:element name="ogrn" type="oos:zfcs_ogrnType" minOccurs="0">
+								<xs:element name="ogrn" type="base:ogrnCodeType" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>ОГРН организации</xs:documentation>
 									</xs:annotation>
@@ -576,12 +577,12 @@ PUBL - Размещено
 										<xs:documentation>Юридический адрес организации</xs:documentation>
 									</xs:annotation>
 								</xs:element>
-								<xs:element name="phone" type="oos:zfcs_phoneType" minOccurs="0">
+								<xs:element name="phone" type="base:phoneType" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>Телефон</xs:documentation>
 									</xs:annotation>
 								</xs:element>
-								<xs:element name="email" type="oos:zfcs_eMailType" minOccurs="0">
+								<xs:element name="email" type="base:eMailType" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>Адрес электронной почты</xs:documentation>
 									</xs:annotation>
@@ -633,7 +634,7 @@ PUBL - Размещено
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="OKTMO" type="oos:zfcs_OKTMORef" maxOccurs="unbounded">
+						<xs:element name="OKTMO" type="base:OKTMORef" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>ОКТМО</xs:documentation>
 							</xs:annotation>
@@ -1466,7 +1467,7 @@ PUBL - Размещено
 					<xs:documentation>Наименование объекта закупки</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="placingWay" type="oos:zfcs_placingWayType" minOccurs="0">
+			<xs:element name="placingWay" type="base:placingWayRef" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Cпособ определения поставщика</xs:documentation>
 				</xs:annotation>
@@ -1508,7 +1509,7 @@ PUBL - Размещено
 					<xs:documentation>Наименование объекта закупки</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="placingWay" type="oos:zfcs_placingWayType" minOccurs="0">
+			<xs:element name="placingWay" type="base:placingWayRef" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Cпособ определения поставщика</xs:documentation>
 				</xs:annotation>
@@ -1549,7 +1550,7 @@ OA - Организация, осуществляющая полномочия �
 OOA- Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения) в качестве организатора совместного аукциона;</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="placingWay" type="oos:zfcs_placingWayType" minOccurs="0">
+			<xs:element name="placingWay" type="base:placingWayRef" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Подспособ определения поставщика</xs:documentation>
 				</xs:annotation>
@@ -1836,12 +1837,12 @@ PUBL - Размещено.</xs:documentation>
 					<xs:documentation>Общее количество выданных постановлений о наложении административных штрафов</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="adminPenaltyOrdersSum" type="oos:zfcs_moneyPositiveType">
+			<xs:element name="adminPenaltyOrdersSum" type="base:moneyPositiveType">
 				<xs:annotation>
 					<xs:documentation>Сумма наложенных административных штрафов (в рублях)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="adminPenaltyOrdersSatisSum" type="oos:zfcs_moneyPositiveType">
+			<xs:element name="adminPenaltyOrdersSatisSum" type="base:moneyPositiveType">
 				<xs:annotation>
 					<xs:documentation>Сумма взысканных административных штрафов (в рублях)</xs:documentation>
 				</xs:annotation>
@@ -2083,17 +2084,17 @@ PUBL - Размещено.</xs:documentation>
 					<xs:documentation>Сокращенное наименование организации, разместившей отчет</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="reporterOrgINN" type="oos:innType" minOccurs="0">
+			<xs:element name="reporterOrgINN" type="base:innType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>ИНН</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="reporterOrgKPP" type="oos:kppType" minOccurs="0">
+			<xs:element name="reporterOrgKPP" type="base:kppType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>КПП</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="reporterOrgOGRN" type="oos:zfcs_ogrnType" minOccurs="0">
+			<xs:element name="reporterOrgOGRN" type="base:ogrnCodeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>ОГРН</xs:documentation>
 				</xs:annotation>
@@ -2552,6 +2553,47 @@ PUBL - Размещено.</xs:documentation>
 	<xs:element name="epProtocolEZP2" type="ep:protocolEZP2Type">
 		<xs:annotation>
 			<xs:documentation>Итоговый протокол ЭЗП</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Проекты контрактов-->
+	<xs:element name="cpContractProject" type="cp:contractProjectType">
+		<xs:annotation>
+			<xs:documentation>Проект контракта без подписей</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cpContractProjectChange" type="cp:contractProjectChangeType">
+		<xs:annotation>
+			<xs:documentation>Доработанный проект контракта на основании размещенного поставщиком протокола разногласий</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cpContractSign" type="cp:contractSignType">
+		<xs:annotation>
+			<xs:documentation>Подписанный контракт</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cpProtocolDisagreements" type="cp:protocolDisagreementsType">
+		<xs:annotation>
+			<xs:documentation>Протокол разногласий</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cpNoticeDeviation" type="cp:noticeDeviationType">
+		<xs:annotation>
+			<xs:documentation>Уведомление об уклонении от заключения контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cpNoticeEvasion" type="cp:noticeEvasionType">
+		<xs:annotation>
+			<xs:documentation>Уведомление об отказе от заключения контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cpProcedureCancel" type="cp:procedureCancelType">
+		<xs:annotation>
+			<xs:documentation>Извещение об отмене процедуры заключения контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cpControl99ContractProjectExtract" type="cp:control99ContractProjectExtractType">
+		<xs:annotation>
+			<xs:documentation>Информация из проекта контракта, направляемая на контроль по 99 статье в орган контроля</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- docs-https-api Integration Scheme, version 8.3, create date 28.09.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/fz44/https" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" targetNamespace="http://zakupki.gov.ru/fz44/https" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
+	<xs:element name="getRBGObjectListForOrgRequest">
+		<xs:annotation>
+			<xs:documentation>Запрос сведений о размещенных документах РБГ заказчика</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sender" type="base:organizationRef">
+					<xs:annotation>
+						<xs:documentation>Отправитель</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="customers">
+					<xs:annotation>
+						<xs:documentation>Организации заказчика</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="customer" type="base:organizationRef" maxOccurs="10">
+								<xs:annotation>
+									<xs:documentation>Организация заказчика</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="fromDate" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>Начало временного интервала, в котором ведется поиск (включается)
+                        </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="toDate" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>Конец временного интервала, в котором ведется поиск (не включается)
+                        </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="regNumber" type="base:bankGuaranteeRegNumberType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Реестровый номер банковской гарантии</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="documentKind" type="RBGDocumentKindType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Вид документа: 
+bankGuarantee - Информация о выданной банковской гарантии;
+bankGuaranteeInvalid - Информация о недействительности сведений о банков-ской гарантии;
+bankGuaranteeRefusal - Сведения об отказе заказчика в принятии банковской гарантии; внесение изменений;
+bankGuaranteeRefusalInvalid - Сведения о недействительности отказа заказчика в принятии банковской гарантии;
+bankGuaranteeTermination - Информация о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeTerminationInvalid - Сведения о недействительности информации о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeReturn - Информация о возвращении банковской гарантии или об освобождении от обязательств по банковской гарантии;
+bankGuaranteeReturnInvalid - Сведения о недействительности информации о воз-вращении банковской гарантии или об освобождении от обязательств по банковской гарантии</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getRBGObjectListForBankRequest">
+		<xs:annotation>
+			<xs:documentation>Запрос сведений о размещенных документах РБГ банка</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sender" type="base:organizationRef">
+					<xs:annotation>
+						<xs:documentation>Отправитель</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="banks">
+					<xs:annotation>
+						<xs:documentation>Банки</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="bank" type="base:organizationRef" maxOccurs="10">
+								<xs:annotation>
+									<xs:documentation>Банк</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="fromDate" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>Начало временного интервала, в котором ведется поиск (включается)
+                        </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="toDate" type="xs:dateTime">
+					<xs:annotation>
+						<xs:documentation>Конец временного интервала, в котором ведется поиск (не включается)
+                        </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="regNumber" type="base:bankGuaranteeRegNumberType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Реестровый номер банковской гарантии</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="documentKind" type="RBGDocumentKindType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Вид документа: 
+bankGuarantee - Информация о выданной банковской гарантии;
+bankGuaranteeInvalid - Информация о недействительности сведений о банков-ской гарантии;
+bankGuaranteeRefusal - Сведения об отказе заказчика в принятии банковской гарантии; внесение изменений;
+bankGuaranteeRefusalInvalid - Сведения о недействительности отказа заказчика в принятии банковской гарантии;
+bankGuaranteeTermination - Информация о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeTerminationInvalid - Сведения о недействительности информации о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeReturn - Информация о возвращении банковской гарантии или об освобождении от обязательств по банковской гарантии;
+bankGuaranteeReturnInvalid - Сведения о недействительности информации о воз-вращении банковской гарантии или об освобождении от обязательств по банковской гарантии</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getRBGObjectListResponse">
+		<xs:annotation>
+			<xs:documentation>Ответ на запрос сведений о размещенных документах РБГ</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="errorsInfo">
+					<xs:annotation>
+						<xs:documentation>Результаты вызова сервиса в случае ошибки</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="errorInfo" type="errorInfoType" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Результат вызова сервиса в случае ошибки</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="objectsInfo">
+					<xs:annotation>
+						<xs:documentation>Список кратких сведений о размещенных документах</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="objectInfo" type="RBGObjectInfoType" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Краткие сведения о размещенном документе</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getRBGObjectInfoRequest">
+		<xs:annotation>
+			<xs:documentation>Запрос сведений о документе РБГ</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sender" type="base:organizationRef">
+					<xs:annotation>
+						<xs:documentation>Отправитель</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="documentUid" type="base:guidType">
+					<xs:annotation>
+						<xs:documentation>Идентификатор документа</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="documentKind" type="RBGDocumentKindType">
+					<xs:annotation>
+						<xs:documentation>Вид документа: 
+bankGuarantee - Информация о выданной банковской гарантии;
+bankGuaranteeInvalid - Информация о недействительности сведений о банков-ской гарантии;
+bankGuaranteeRefusal - Сведения об отказе заказчика в принятии банковской гарантии; внесение изменений;
+bankGuaranteeRefusalInvalid - Сведения о недействительности отказа заказчика в принятии банковской гарантии;
+bankGuaranteeTermination - Информация о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeTerminationInvalid - Сведения о недействительности информации о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeReturn - Информация о возвращении банковской гарантии или об освобождении от обязательств по банковской гарантии;
+bankGuaranteeReturnInvalid - Сведения о недействительности информации о воз-вращении банковской гарантии или об освобождении от обязательств по банковской гарантии</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getRBGObjectInfoResponse">
+		<xs:annotation>
+			<xs:documentation>Ответ на запрос сведений о документе РБГ</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="errorsInfo">
+					<xs:annotation>
+						<xs:documentation>Результаты вызова сервиса в случае ошибки</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="errorInfo" type="errorInfoType">
+								<xs:annotation>
+									<xs:documentation>Результат вызова сервиса в случае ошибки</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="objectInfo">
+					<xs:annotation>
+						<xs:documentation>Cведения о документе</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="RBGObjectInfoType">
+								<xs:sequence>
+									<xs:element name="content" type="xs:base64Binary">
+										<xs:annotation>
+											<xs:documentation>Содержимое документа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RBGObjectInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Краткие сведения об опубликованном документе РБГ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="documentUid" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentKind" type="RBGDocumentKindType">
+				<xs:annotation>
+					<xs:documentation>Вид документа: 
+bankGuarantee - Информация о выданной банковской гарантии;
+bankGuaranteeInvalid - Информация о недействительности сведений о банков-ской гарантии;
+bankGuaranteeRefusal - Сведения об отказе заказчика в принятии банковской гарантии; внесение изменений;
+bankGuaranteeRefusalInvalid - Сведения о недействительности отказа заказчика в принятии банковской гарантии;
+bankGuaranteeTermination - Информация о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeTerminationInvalid - Сведения о недействительности информации о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeReturn - Информация о возвращении банковской гарантии или об освобождении от обязательств по банковской гарантии;
+bankGuaranteeReturnInvalid - Сведения о недействительности информации о воз-вращении банковской гарантии или об освобождении от обязательств по банковской гарантии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="documentStatusType">
+				<xs:annotation>
+					<xs:documentation>Статус сведений о документе:
+
+Допустимые значения:
+P - опубликован;
+I - недействителен;
+A - аннулирован.                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="publishDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата и время публикации документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="versionNumber" type="base:versionNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер последнего изменения документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="regNumber" type="base:documentNumberType">
+				<xs:annotation>
+					<xs:documentation>Реестровый номер документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="schemeVersion" type="base:schemeVersionType">
+				<xs:annotation>
+					<xs:documentation>Версия схемы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="extPartnerType" type="extPartnerType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Тип внешнего контрагента, от которого ЕИС получила документ (проект документа):
+
+VSRZ - Внешняя система размещения заказов;
+RMIS - Региональная муниципальная информационная система;
+FAS - Федеральная антимонопольная служба;
+ETP - Электронная торговая площадка;
+BANK - Банк;
+GIIS_EB - ГИИС Электронный бюджет;
+OA - Информационные системы органов аудита;
+OVK - Информационные системы органов внутреннего контроля;
+IKO - Информационные системы контрольных органов.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="errorInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат вызова сервиса в случае ошибки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="message" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Текстовая расшифровка ошибки, включающая дополнительную информацию
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="RBGDocumentKindType">
+		<xs:annotation>
+			<xs:documentation>Тип: Вид документа РБГ
+bankGuarantee - Информация о выданной банковской гарантии;
+bankGuaranteeInvalid - Информация о недействительности сведений о банков-ской гарантии;
+bankGuaranteeRefusal - Сведения об отказе заказчика в принятии банковской гарантии; внесение изменений;
+bankGuaranteeRefusalInvalid - Сведения о недействительности отказа заказчика в принятии банковской гарантии;
+bankGuaranteeTermination - Информация о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeTerminationInvalid - Сведения о недействительности информации о прекращении обязательств поставщика по банковской гарантии;
+bankGuaranteeReturn - Информация о возвращении банковской гарантии или об освобождении от обязательств по банковской гарантии;
+bankGuaranteeReturnInvalid - Сведения о недействительности информации о воз-вращении банковской гарантии или об освобождении от обязательств по банковской гарантии</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="bankGuarantee">
+				<xs:annotation>
+					<xs:documentation>Информация о выданной банковской гарантии; внесение изменений</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bankGuaranteeInvalid">
+				<xs:annotation>
+					<xs:documentation>Информация о недействительности сведений о банков-ской гарантии</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bankGuaranteeRefusal">
+				<xs:annotation>
+					<xs:documentation>Сведения об отказе заказчика в принятии банковской гарантии; внесение изменений</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bankGuaranteeRefusalInvalid">
+				<xs:annotation>
+					<xs:documentation>Сведения о недействительности отказа заказчика в принятии банковской гарантии</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bankGuaranteeTermination">
+				<xs:annotation>
+					<xs:documentation>Информация о прекращении обязательств поставщика по банковской гарантии; внесение изменений</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bankGuaranteeTerminationInvalid">
+				<xs:annotation>
+					<xs:documentation>Сведения о недействительности информации о прекращении обязательств поставщика по банковской гарантии</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bankGuaranteeReturn">
+				<xs:annotation>
+					<xs:documentation>Информация о возвращении банковской гарантии или об освобождении от обязательств по банковской гарантии; внесение изменений</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bankGuaranteeReturnInvalid">
+				<xs:annotation>
+					<xs:documentation>Сведения о недействительности информации о воз-вращении банковской гарантии или об освобождении от обязательств по банковской гарантии</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="documentStatusType">
+		<xs:annotation>
+			<xs:documentation>Тип: Статус документа</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="P">
+				<xs:annotation>
+					<xs:documentation>Опубликован</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="I">
+				<xs:annotation>
+					<xs:documentation>Недействителен</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A">
+				<xs:annotation>
+					<xs:documentation>Аннулирован</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="extPartnerType">
+		<xs:annotation>
+			<xs:documentation>Тип: Тип внешнего контрагента документа:
+	VSRZ   - Внешняя система размещения заказов; 
+	RMIS - Региональная муниципальная информационная система;
+    FAS - Федеральная антимонопольная служба;
+    ETP - Электронная торговая площадка;
+    BANK - Банк;
+    GIIS_EB - ГИИС Электронный бюджет,
+    OA - Информационные системы органов аудита,
+    OVK - Информационные системы органов внутреннего контроля,
+    IKO - Информационные системы контрольных органов.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VSRZ">
+				<xs:annotation>
+					<xs:documentation>Внешняя система размещения заказов</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RMIS">
+				<xs:annotation>
+					<xs:documentation>Региональная муниципальная информационная система</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAS">
+				<xs:annotation>
+					<xs:documentation>Федеральная антимонопольная служба</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ETP">
+				<xs:annotation>
+					<xs:documentation>Электронная торговая площадка</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BANK">
+				<xs:annotation>
+					<xs:documentation>Банк</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GIIS_EB">
+				<xs:annotation>
+					<xs:documentation>ГИИС Электронный бюджет</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OA">
+				<xs:annotation>
+					<xs:documentation>Информационные системы органов аудита</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OVK">
+				<xs:annotation>
+					<xs:documentation>Информационные системы органов внутреннего контроля</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IKO">
+				<xs:annotation>
+					<xs:documentation>Информационные системы контрольных органов</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="partnerType">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление контрагентов:
+OOS - Единая информационная система;
+GIIS_EB - Государственная интегрированная информационная система Электронный бюджет (ГИИС ЭБ);
+RMIS - Региональная (муниципальная) информационная система (РМИС);
+OVK - Информационная система органа внутреннего контроля (ИС ОВК);
+OA - Информационная система органа аудита (ИС ОА);
+KO - Информационная система контрольного органа (ИС КО);
+FAS - Информационная система Федеральной антимонопольной службы (ИС ФАС);
+SMEV3 - Подсистема взаимодействия со СМЭВ3.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OOS"/>
+			<xs:enumeration value="GIIS_EB"/>
+			<xs:enumeration value="RMIS"/>
+			<xs:enumeration value="OVK"/>
+			<xs:enumeration value="OA"/>
+			<xs:enumeration value="KO"/>
+			<xs:enumeration value="FAS"/>
+			<xs:enumeration value="SMEV3"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 8.2.100, create date 13.07.2018 -->
+<!-- BASE_TYPES Integration Scheme, version 8.3, create date 28.09.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -21,20 +21,19 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="attachedDocumentKindRef">
+	<xs:complexType name="budgetFundsContractRef">
 		<xs:annotation>
-			<xs:documentation>Ссылка на справочник Виды вложенных документов по типам интеграционных пакетов</xs:documentation>
+			<xs:documentation>Ссылка на Код и наименование бюджета в контракте</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="code" type="attachedDocumentKindCodeType">
+			<xs:element name="code" type="budgetCodeType">
 				<xs:annotation>
-					<xs:documentation>Код вида документа</xs:documentation>
+					<xs:documentation>Код бюджета</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="name" type="text2000Type" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование вида документа.
-Игнорируется при приеме. При передаче заполняется значением из справочника "Виды вложенных документов по типам интеграционных пакетов" (nsiAttachedDocumentType)</xs:documentation>
+					<xs:documentation>Наименование бюджета</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -75,33 +74,57 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="changePriceFoundationRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник: Обоснования изменения цены контракта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="changePriceFoundationNumType">
+				<xs:annotation>
+					<xs:documentation>Код обоснования</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование обоснования изменения цены контракта.
+Игнорируется при приеме.  При передаче заполняется значением из справочника "Обоснования изменения цены контратка" (nsiChangePriceFoundation)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="currencyRef">
 		<xs:annotation>
 			<xs:documentation>Ссылка на ОКВ</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="code">
+			<xs:element name="code" type="currencyCodeType">
 				<xs:annotation>
 					<xs:documentation>Код валюты</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="3"/>
-						<xs:minLength value="1"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
-			<xs:element name="name" minOccurs="0">
+			<xs:element name="name" type="text50Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Наименование валюты.
 Игнорируется при приеме.  При передаче заполняется значением из справочника "Общероссийский классификатор валют (ОКВ)" (nsiCurrency)</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="50"/>
-						<xs:minLength value="1"/>
-					</xs:restriction>
-				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="currencyCBRFRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник "Список валют, курс на которые устанавливается ЦБ РФ" (nsiContractCurrencyCBRF)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="currencyCodeType">
+				<xs:annotation>
+					<xs:documentation>Код валюты</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text50Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование валюты.
+Игнорируется при приеме.  При передаче заполняется значением из справочника "Список валют, курс на которые устанавливается ЦБ РФ" (nsiContractCurrencyCBRF)</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -115,10 +138,28 @@
 					<xs:documentation>Код причины признания участника уклонившимся</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="name" type="text500Type" minOccurs="0">
+			<xs:element name="name" type="text1000Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Наименование причины признания участника уклонившимся.
 Игнорируется при приеме.  При передаче заполняется значением из справочника "Причины признания участника уклонившимся от заключения контракта" (nsiDeviationFactFoundation)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="drugChangeReasonRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник: Причины корректировки справочных данных о лекарственных препаратах</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="text10Type">
+				<xs:annotation>
+					<xs:documentation>Код причины корректировки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование причины корректировки.
+Игнорируется при приеме.  При передаче заполняется значением из справочника "Причины корректировки справочных данных о лекарственных препаратах" (nsiDrugChangeReason)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -139,7 +180,7 @@
 Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник: Электронные торговые площадки по ПП РФ № 615" (nsiETP)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="url" type="base:hrefType" minOccurs="0">
+			<xs:element name="url" type="hrefType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Адрес электронной площадки. 
 Игнорируется при приеме.     При передаче заполняется значением из справочника "Справочник: Электронные торговые площадки по ПП РФ № 615" (nsiETP)</xs:documentation>
@@ -176,16 +217,10 @@
 			<xs:documentation>Ссылка на ОКОПФ</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="code">
+			<xs:element name="code" type="okopfCodeType">
 				<xs:annotation>
 					<xs:documentation>Код организационно-правовой формы</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:minLength value="1"/>
-						<xs:maxLength value="5"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element name="singularName" type="text2000Type" minOccurs="0">
 				<xs:annotation>
@@ -200,12 +235,12 @@
 			<xs:documentation>Ссылка на ОКПД2</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="OKPDCode" type="base:okpdCodeType">
+			<xs:element name="OKPDCode" type="okpdCodeType">
 				<xs:annotation>
 					<xs:documentation>Код товара, работы или услуги</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="OKPDName" type="base:okpdNameType" minOccurs="0">
+			<xs:element name="OKPDName" type="okpdNameType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Наименование товара, работы или услуги.
 Игнорируется при приеме. При передаче заполняется значением из справочника Общероссийский классификатор продукции по видам экономической деятельности ОК 034-2014 (nsiOKPD2)</xs:documentation>
@@ -234,17 +269,34 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="name" minOccurs="0">
+			<xs:element name="name" type="text1000Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Полное наименование единицы измерения (поле fullName  в справочнике ОКЕИ (nsiOKEI)).
 Игнорируется при приеме. автоматически заполняется значением из справочника и выгружается </xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:minLength value="1"/>
-						<xs:maxLength value="1000"/>
-					</xs:restriction>
-				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="contractOKEIRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на ОКЕИ в Реестре контрактов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="okeiCodeType">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nationalCode" type="base:text50Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Национальное условное обозначение (поле localSymbol в справочнике ОКЕИ (nsiOKEI)). Игнорируется при приеме. автоматически заполняется значением из справочника и выгружается </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullName" type="text1000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование единицы измерения (поле fullName  в справочнике ОКЕИ (nsiOKEI)).
+Игнорируется при приеме. автоматически заполняется значением из справочника и выгружается </xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -253,14 +305,65 @@
 			<xs:documentation>Ссылка на страну</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="countryCode" type="base:countryCodeType">
+			<xs:element name="countryCode" type="countryCodeType">
 				<xs:annotation>
 					<xs:documentation>Цифровой код страны</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="countryFullName" type="base:kladrTextType" minOccurs="0">
+			<xs:element name="countryFullName" type="text200Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Полное наименование страны. Игнорируется при приеме. При передаче заполняется значением из справочника "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OKFSRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на ОКФС</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="okfsCodeType">
+				<xs:annotation>
+					<xs:documentation>Код формы собственности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OKTMORef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на ОКТМО</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="oktmoCodeType">
+				<xs:annotation>
+					<xs:documentation>Код по ОКТМО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text1000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полное наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OKTMOPPORef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на ОКТМО ППО (Справочник ZAKUPKI_DEV.NSI_PPO)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="oktmoCodeType">
+				<xs:annotation>
+					<xs:documentation>Код ППО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -270,12 +373,12 @@
 			<xs:documentation>Ссылка на организацию</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="regNum" type="base:spzNumType">
+			<xs:element name="regNum" type="spzNumType">
 				<xs:annotation>
 					<xs:documentation>Код по СПЗ.  В случае если организация идентифицируется по коду СвР, а код СПЗ неизвестен, необходимо заполнить данное поле значением 00000000000, и обязательно указать код СвР</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="consRegistryNum" type="base:consRegistryNumType" minOccurs="0">
+			<xs:element name="consRegistryNum" type="consRegistryNumType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation> Код по Сводному Реестру. Должен быть заполнен в случае, если в поле regNum указано значение 00000000000</xs:documentation>
 				</xs:annotation>
@@ -298,33 +401,10 @@
 					<xs:documentation>Код подспособа определения поставщика</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="name" minOccurs="0">
+			<xs:element name="name" type="text500Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Наименование подспособа определения поставщика.
 Игнорируется при приеме. При передаче заполняется значением из справочника "Способы размещения заказа (определения поставщика)" (nsiPlacingWay)</xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="500"/>
-						<xs:minLength value="1"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="purchaseSubjectRef">
-		<xs:annotation>
-			<xs:documentation>Ссылка на справочник Предметы электронного аукциона по ПП РФ № 615</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="code" type="base:purchaseSubjectCodeType">
-				<xs:annotation>
-					<xs:documentation>Код </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="name" type="text2000Type" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Наименование предмета электронного аукциона. Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник: Предметы электронного аукциона по ПП РФ № 615" (nsiPurchaseSubject)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -365,6 +445,23 @@
 		</xs:sequence>
 	</xs:complexType>
 	<!--Ссылки на справочники по ПП РФ № 615-->
+	<xs:complexType name="purchaseSubjectRef">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник Предметы электронного аукциона по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:purchaseSubjectCodeType">
+				<xs:annotation>
+					<xs:documentation>Код </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование предмета электронного аукциона. Игнорируется при приеме. При передаче заполняется значением из справочника "Справочник: Предметы электронного аукциона по ПП РФ № 615" (nsiPurchaseSubject)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="exclusionReason615Ref">
 		<xs:annotation>
 			<xs:documentation>Ссылка на справочник Справочник оснований для исключения сведений из реестра квалифицированных подрядных организаций</xs:documentation>
@@ -477,7 +574,7 @@
 		<xs:annotation>
 			<xs:documentation>Тип: Текущая версия схем</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="current" type="base:schemeVersionType" fixed="8.2"/>
+		<xs:attribute name="current" type="base:schemeVersionType" fixed="8.3"/>
 	</xs:complexType>
 	<!--Простые типы-->
 	<xs:simpleType name="abandonedReasonCode">
@@ -554,6 +651,9 @@ M - Орган местного самоуправления муниципал�
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="attachedDocumentKindCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код типа документа</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="10"/>
@@ -680,13 +780,28 @@ GNC - в размере, указанном в извещении, и инфор
 			<xs:enumeration value="GNC"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="countryCodeType">
+	<xs:simpleType name="control99DocumentTypeEnum">
 		<xs:annotation>
-			<xs:documentation>Тип: Цифровой код страны</xs:documentation>
+			<xs:documentation>Тип: Документы для контроля по 99 статье:
+			contract - Сведения о контракте;
+			contractProcedure - Сведения об исполнении (расторжении) контракта;
+			purchasePlan - План закупок;
+			tenderPlan2017 - План график с 01.01.2017;
+			notification - Извещение (конкурсная документация);
+			protocol - Итоговый протокол определения поставщика, подрядчика, исполнителя;
+			contractProject - Проект контракта без подписей;
+			contractProjectChange - Доработанный проект контракта на основании размещенного поставщиком протокола разногласий.
+		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:minLength value="1"/>
-			<xs:maxLength value="3"/>
+			<xs:enumeration value="contract"/>
+			<xs:enumeration value="contractProcedure"/>
+			<xs:enumeration value="purchasePlan"/>
+			<xs:enumeration value="tenderPlan2017"/>
+			<xs:enumeration value="notification"/>
+			<xs:enumeration value="protocol"/>
+			<xs:enumeration value="contractProject"/>
+			<xs:enumeration value="contractProjectChange"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="costCriterionCodeEnum">
@@ -703,6 +818,24 @@ EN - Предложение о сумме соответствующих рас�
 			<xs:enumeration value="MC"/>
 			<xs:enumeration value="TC"/>
 			<xs:enumeration value="EN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="countryCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Цифровой код страны</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="changePriceFoundationNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код обоснования изменения цены контратка</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="qualitativeCriterionCodeEnum">
@@ -728,7 +861,7 @@ QO - Квалификация участников закупки, в том ч�
 	</xs:simpleType>
 	<xs:simpleType name="docNameType">
 		<xs:annotation>
-			<xs:documentation>Тип: Наименование документа</xs:documentation>
+			<xs:documentation>Тип: Наименование документа для проектов контрактов</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
@@ -762,7 +895,7 @@ QO - Квалификация участников закупки, в том ч�
 	</xs:simpleType>
 	<xs:simpleType name="documentNumberType">
 		<xs:annotation>
-			<xs:documentation>Тип: Номер документа</xs:documentation>
+			<xs:documentation>Тип: Номер документа для проектов контрактов</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
@@ -916,6 +1049,14 @@ QO - Квалификация участников закупки, в том ч�
 			<xs:pattern value="\d{36}"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="ikuType">
+		<xs:annotation>
+			<xs:documentation>Тип: ИКУ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{20}"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="indicatorValueType">
 		<xs:annotation>
 			<xs:documentation>Тип: Значение показателя критерия оценки заявок участников</xs:documentation>
@@ -1024,6 +1165,15 @@ QO - Квалификация участников закупки, в том ч�
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:maxLength value="10"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ktruClassifierCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип КТРУ: Код в классификаторе</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
 			<xs:minLength value="1"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -1156,7 +1306,7 @@ O - оценка производится по шкале оценки или д
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
-			<xs:maxLength value="500"/>
+			<xs:maxLength value="2000"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="okeiCodeType">
@@ -1168,9 +1318,48 @@ O - оценка производится по шкале оценки или д
 			<xs:maxLength value="4"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="okfsCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКФС</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="currencyCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКВ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="oktmoCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ОКТМО</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="budgetCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код бюджета</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="participantTypeEnum">
 		<xs:annotation>
-			<xs:documentation>Тип: Виды поставщика</xs:documentation>
+			<xs:documentation>Тип: Виды поставщика:
+			U - Юридическое лицо РФ;
+UF - Юридическое лицо иностранного государства;
+B - Индивидуальный предприниматель РФ.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="U"/>
@@ -1336,6 +1525,15 @@ F - на форуме Официального сайта Единой инфо�
 			<xs:pattern value="\d+(\.\d{1,2})?"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="quantity18p11Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Количество с 18 знаками до запятой и 11 знаками после запятой</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="29"/>
+			<xs:pattern value="\d{1,18}(\.\d{1,11})?"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="protocolTypeEnum">
 		<xs:annotation>
 			<xs:documentation>Тип: Типы протоколов</xs:documentation>
@@ -1382,11 +1580,11 @@ F - на форуме Официального сайта Единой инфо�
 			<xs:maxLength value="500"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="responsibleRoleType">
+	<xs:simpleType name="responsibleRoleRKPOType">
 		<xs:annotation>
-			<xs:documentation>Тип: Роль организации, осуществляющей закупку
-RPO - Орган, уполномоченный на ведение реестра квалифицированных подрядных организацийии технического заказчика;
-RO - Специализированная не-коммерческая организация, которая осуществляет деятельность, направленную на обеспечение проведения капитального ремонта общего имущества в много-квартирных домах (региональный оператор);
+			<xs:documentation>Тип: Роль организации, осуществляющей закупку РКПО ПП РФ № 615
+RPO - Орган, уполномоченный на ведение реестра квалифицированных подрядных организаций технического заказчика;
+RO - Специализированная некоммерческая организация, которая осуществляет деятельность, направленную на обеспечение проведения капитального ремонта общего имущества в многоквартирных домах (региональный оператор);
 TC - Орган местного самоуправления и (или) государственное, муниципальное бюджетное, казенное учреждение в случаях, предусмотренных частью 4 статьи 182 Жилищного кодекса Российской Федерации, осуществляющее функции тех-нического заказчика.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1397,7 +1595,7 @@ TC - Орган местного самоуправления и (или) гос
 	</xs:simpleType>
 	<xs:simpleType name="responsibleRoleEPType">
 		<xs:annotation>
-			<xs:documentation>Тип: Роль организации, осуществляющей закупку
+			<xs:documentation>Тип: Роль организации, осуществляющей закупку по жлектронным процедурам:
 CU - Заказчик;
 OCU - Заказчик в качестве организатора совместного аукциона;
 RA - Уполномоченный орган;
@@ -1436,7 +1634,7 @@ RO - Региональный оператор.</xs:documentation>
 	</xs:simpleType>
 	<xs:simpleType name="responsibleRolePOType">
 		<xs:annotation>
-			<xs:documentation>Тип: Роль организации, осуществляющей закупку по предварителньому отбору квалифицированных подрядных организаций ПП РФ № 615: 
+			<xs:documentation>Тип: Роль организации, осуществляющей закупку по предварительному отбору квалифицированных подрядных организаций ПП РФ № 615: 
 RPO - Орган, уполномоченный на ведение реестра квалифицированных подрядных организацийии технического заказчика.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
@@ -1485,6 +1683,8 @@ TC - Орган местного самоуправления и (или) гос
 			<xs:enumeration value="8.0"/>
 			<xs:enumeration value="8.1"/>
 			<xs:enumeration value="8.2"/>
+			<xs:enumeration value="8.2.100"/>
+			<xs:enumeration value="8.3"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="serviceWorkCodeType">
@@ -1517,6 +1717,14 @@ TC - Орган местного самоуправления и (или) гос
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="CAdES-BES"/>
 			<xs:enumeration value="CAdES-A"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SNILSType">
+		<xs:annotation>
+			<xs:documentation>Тип: СНИЛС</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{10}|\d{11}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="spzNumType">
@@ -1553,6 +1761,24 @@ TC - Орган местного самоуправления и (или) гос
 			<xs:minLength value="1"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="text50Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 50 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text100Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 100 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="text200Type">
 		<xs:annotation>
 			<xs:documentation>Тип: Текстовое поле 200 символов</xs:documentation>
@@ -1568,6 +1794,15 @@ TC - Орган местного самоуправления и (или) гос
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:maxLength value="500"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="text1000Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Текстовое поле 1000 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1000"/>
 			<xs:minLength value="1"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -1605,6 +1840,20 @@ TC - Орган местного самоуправления и (или) гос
 		<xs:restriction base="xs:decimal">
 			<xs:totalDigits value="5"/>
 			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VATRateEnum">
+		<xs:annotation>
+			<xs:documentation>Тип: Ставка НДС, процентов.
+Допустимые значения:
+0 - 0%;
+10 - 10%;
+18 - 18%.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="18"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="yearType">
@@ -1744,6 +1993,44 @@ CPWWCS - Подписанный контракт (с подписью заказ
 			<xs:enumeration value="CPWWS"/>
 			<xs:enumeration value="ECWWS"/>
 			<xs:enumeration value="CPWWCS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="contractPeriodEnum">
+		<xs:annotation>
+			<xs:documentation>Тип:Перод, в течении которого заключен контракт до даты подачи заявки: 
+1 - Контракты, заключённые в течении 1 года до даты подачи заявки;
+2 - Контракты, заключённые в течении 2-х лет до даты подачи заявки;
+3 - Контракты, заключённые в течении 3-х лет до даты подачи заявки.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="placerRoleContractProjectEnum">
+		<xs:annotation>
+			<xs:documentation>Тип: Роль организации, организации, разместившей контракт:
+CU - Заказчик;
+RA - Уполномоченный орган;
+AI - Уполномоченное учреждение;
+OA - Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения);
+CS - Заказчик, осуществляющий закупки в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ;
+RO - Специализированная некоммерческая организация, которая осуществляет деятельность, направленную на обеспечение проведения капитального ремонта общего имущества в многоквартирных домах (региональный оператор);
+TKO - Региональный оператор по обращению с твёрдыми коммунальными отходами;
+AU - Заказчик, осуществляющий закупку на проведение обязательного аудита;
+CC - Заказчик по Федеральному закону 223-ФЗ, осуществляющий закупки в соответствии с Федеральным законом № 44-ФЗ, в случаях, предусмотренных Федеральным законом № 223-ФЗ.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CU"/>
+			<xs:enumeration value="RA"/>
+			<xs:enumeration value="AI"/>
+			<xs:enumeration value="OA"/>
+			<xs:enumeration value="CS"/>
+			<xs:enumeration value="RO"/>
+			<xs:enumeration value="TKO"/>
+			<xs:enumeration value="AU"/>
+			<xs:enumeration value="CC"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

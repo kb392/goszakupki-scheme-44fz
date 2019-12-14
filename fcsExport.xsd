@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 8.2.100, create date 13.07.2018 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS EXPORT Integration Scheme, version 8.3, create date 28.09.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/EPtypes/1" schemaLocation="IntegrationEPTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/CPtypes/1" schemaLocation="IntegrationCPTypes.xsd"/>
 	<xs:element name="export">
 		<xs:annotation>
 			<xs:documentation>Схема данных подсистемы экспорта</xs:documentation>
@@ -645,6 +646,11 @@
 							<xs:documentation>Информация из извещения (конкурсной документации) (ПРИЗ), направляемая на контроль по 99 статье в орган контроля</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="control99ContractProjectExtract" type="cp:control99ContractProjectExtractType">
+						<xs:annotation>
+							<xs:documentation>Информация из проекта контракта (РПК), направляемая на контроль по 99 статье в орган контроля</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="control99ProtocolExtract" type="oos:zfcs_control99ProtocolExtractType">
 						<xs:annotation>
 							<xs:documentation>Информация из итогового протокола ОППИ (ПРИЗ), направляемая на контроль по 99 статье в орган контроля</xs:documentation>
@@ -912,6 +918,16 @@
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="nsiOKEI" type="oos:zfcs_nsiOKEIType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiOKFSList">
+						<xs:annotation>
+							<xs:documentation>Справочник: Общероссийский классификатор форм собственности (ОКФС) (nsiOKFS)</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiOKFS" type="oos:zfcs_nsiOKFSType" minOccurs="0" maxOccurs="unbounded"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -1274,20 +1290,6 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="nsiClosedMethodsOfReason">
-						<xs:annotation>
-							<xs:documentation>Справочник: Основания применения закрытого способа определения поставщика (подрядчика, исполнителя)</xs:documentation>
-						</xs:annotation>
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="nsiClosedMethodOfReason" type="oos:zfcs_nsiClosedMethodsOfReason" minOccurs="0" maxOccurs="unbounded">
-									<xs:annotation>
-										<xs:documentation>Основание применения закрытого способа определения поставщика (подрядчика, исполнителя)</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
 					<xs:element name="pprf615NsiFundingSources">
 						<xs:annotation>
 							<xs:documentation>Справочник: Типы источников финансирования по ПП РФ № 615</xs:documentation>
@@ -1353,6 +1355,34 @@
 								<xs:element name="pprf615NsiTerminationReason" type="pp615:nsiTerminationReasonType" minOccurs="0" maxOccurs="unbounded">
 									<xs:annotation>
 										<xs:documentation>Причина расторжения договора по капитальному ремонту ПП РФ № 615</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiChangePriceFoundations">
+						<xs:annotation>
+							<xs:documentation>Справочник: Обоснования изменения цены контракта в проекте контракта</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiChangePriceFoundation" type="oos:zfcs_nsiChangePriceFoundationType" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Обоснование изменения цены контракта в проекте контракта</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiDrugChangeReasons">
+						<xs:annotation>
+							<xs:documentation>Причины корректировки справочных данных о лекарственных препаратах</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiDrugChangeReason" type="oos:zfcs_nsiDrugChangeReason" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Причина корректировки справочных данных о лекарственных препаратах</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1627,6 +1657,52 @@
 					<xs:element name="epProtocolEZP2" type="ep:protocolEZP2Type">
 						<xs:annotation>
 							<xs:documentation>Итоговый протокол ЭЗП</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<!--Проекты контрактов-->
+					<xs:element name="cpContractProject" type="cp:contractProjectType">
+						<xs:annotation>
+							<xs:documentation>Проект контракта без подписей</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cpContractProjectChange" type="cp:contractProjectChangeType">
+						<xs:annotation>
+							<xs:documentation>Доработанный проект контракта на основании размещенного поставщиком протокола разногласий</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cpContractSign" type="cp:contractSignType">
+						<xs:annotation>
+							<xs:documentation>Подписанный контракт</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cpProcedureCancel" type="cp:procedureCancelType">
+						<xs:annotation>
+							<xs:documentation>Извещение об отмене процедуры заключения контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cpProcedureCancelFailure" type="cp:procedureCancelFailureType">
+						<xs:annotation>
+							<xs:documentation>Отмена извещения об отмене процедуры заключения контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cpContractProjectSign" type="cp:contractProjectSignType">
+						<xs:annotation>
+							<xs:documentation>Проект контракта, подписанный поставщиком</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cpProtocolDisagreements" type="cp:protocolDisagreementsType">
+						<xs:annotation>
+							<xs:documentation>Протокол разногласий</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cpNoticeDeviation" type="cp:noticeDeviationType">
+						<xs:annotation>
+							<xs:documentation>Уведомление об уклонении от заключения контракта</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cpNoticeEvasion" type="cp:noticeEvasionType">
+						<xs:annotation>
+							<xs:documentation>Уведомление об отказе от заключения контракта</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:choice>

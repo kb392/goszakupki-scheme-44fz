@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.2.100, create date 13.07.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.3, create date 28.09.2018 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/pprf615types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -1185,7 +1185,7 @@ TC - Орган местного самоуправления и (или) гос
 									</xs:element>
 									<xs:element name="contractorInfo" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Сведения о подрядной организации. Игнорируется при приёме, заполняется заполняется на основании протокола проведения электронного аукциона (protocolEF1). Заполняется при передаче </xs:documentation>
+											<xs:documentation>Сведения о подрядной организации. Игнорируется при приёме, заполняется на основании протокола проведения электронного аукциона (protocolEF2), если в протоколе-основании присутствуют сведения о подрядной организации. Заполняется при передаче. Не игнорируется при приеме в случае отсутствия сведений о подрядной организации в протоколе-основании</xs:documentation>
 										</xs:annotation>
 										<xs:complexType>
 											<xs:choice>
@@ -2961,7 +2961,7 @@ ROLLBACK - Решение суда об отмене решения ФАС.</xs:
 					<xs:documentation>Печатная форма документа в ЕИС. Элемент игнорируется при приёме. При передаче заполняется ссылкой на печатную форму  и электронную подпись размещенного в ЕИС документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintFormInfo" type="extPrintFormType" minOccurs="1">
+			<xs:element name="extPrintFormInfo" type="extPrintFormType">
 				<xs:annotation>
 					<xs:documentation>Электронный документ, полученный из внешней системы</xs:documentation>
 				</xs:annotation>
@@ -2993,7 +2993,7 @@ ROLLBACK - Решение суда об отмене решения ФАС.</xs:
 											<xs:documentation>Организация, разместившая отмену протокола. При приеме содержимое контролируется на присутствие в справочнике "Сводный перечень заказчиков (СПЗ)" nsiOrganization</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="publisherRole" type="base:responsibleRoleType">
+									<xs:element name="publisherRole" type="base:responsibleRoleRKPOType">
 										<xs:annotation>
 											<xs:documentation>Роль организации:
 RPO - Орган, уполномоченный на ведение реестра квалифицированных подрядных организацийии тех-нического заказчика;
@@ -4113,7 +4113,12 @@ CAdES-A</xs:documentation>
 			<xs:choice>
 				<xs:element name="content" type="xs:base64Binary">
 					<xs:annotation>
-						<xs:documentation>Содержимое файла электронного документа. Контролируется заполнение поля при приёме. Поле не заполняется при передаче</xs:documentation>
+						<xs:documentation>Содержимое файла электронного документа. Контролируется заполнение поля content или contentID при приёме. Поле не заполняется при передаче</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="contentId" type="base:guidType">
+					<xs:annotation>
+						<xs:documentation>Уникальный идентификатор контента прикрепленного документа в ЕИС. Поле не заполняется при передаче</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="url" type="base:hrefType">

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS INTEGRATION eisSignIncoming Scheme, version 8.2.100, create date 13.07.2018 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/signIncoming/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:si="http://zakupki.gov.ru/oos/signIncoming/1" targetNamespace="http://zakupki.gov.ru/oos/signIncoming/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- EIS INTEGRATION eisSignIncoming Scheme, version 8.3, create date 28.09.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/signIncoming/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:si="http://zakupki.gov.ru/oos/signIncoming/1" targetNamespace="http://zakupki.gov.ru/oos/signIncoming/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:element name="processingResult" type="processingResultType">
 		<xs:annotation>
@@ -2253,7 +2254,7 @@
 						<xs:documentation>Индексная карточка пакета данных</xs:documentation>
 					</xs:annotation>
 					<xs:sequence>
-						<xs:element name="packetUid" type="oos:zfcs_guidType">
+						<xs:element name="packetUid" type="base:guidType">
 							<xs:annotation>
 								<xs:documentation>Глобальный идентификатор  информационного пакета</xs:documentation>
 							</xs:annotation>
@@ -2368,7 +2369,7 @@ TEST - тестовые данные</xs:documentation>
 							<xs:complexType>
 								<xs:simpleContent>
 									<xs:extension base="xs:base64Binary">
-										<xs:attribute name="type" type="oos:zfcs_signatureType" use="required"/>
+										<xs:attribute name="type" type="base:signatureType" use="required"/>
 									</xs:extension>
 								</xs:simpleContent>
 							</xs:complexType>

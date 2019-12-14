@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXTEGRATION Integration Scheme, version 8.2.100, create date 13.07.2018 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/extegration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/extegration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS EXTEGRATION Integration Scheme, version 8.3, create date 28.09.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/extegration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/extegration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/EPtypes/1" schemaLocation="IntegrationEPTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/CPtypes/1" schemaLocation="IntegrationCPTypes.xsd"/>
 	<xs:element name="bankGuarantee" type="oos:zfcs_bankGuaranteeType">
 		<xs:annotation>
 			<xs:documentation>Проект информация о выданной банковской гарантии; внесение изменений</xs:documentation>
@@ -553,6 +554,11 @@
 			<xs:documentation>Проект сведений об отмене информации об исполнении/расторжении договора о проведении капитального ремонта по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<xs:element name="pprf615NotificationPO" type="pp615:notificationPOType">
+		<xs:annotation>
+			<xs:documentation>Извещение о проведении ПО (предварительный отбор) по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 	<!--Электронные процедуры. Общие документы-->
 	<xs:element name="epNotificationCancel" type="ep:notificationCancelType">
 		<xs:annotation>
@@ -622,6 +628,22 @@
 	<xs:element name="epNotificationEZP" type="ep:notificationEZPType">
 		<xs:annotation>
 			<xs:documentation>Проект извещения о проведении ЭЗП</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Проекты контрактов-->
+	<xs:element name="cpContractProject" type="cp:contractProjectType">
+		<xs:annotation>
+			<xs:documentation>Проект контракта без подписей</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cpContractProjectChange" type="cp:contractProjectChangeType">
+		<xs:annotation>
+			<xs:documentation>Доработанный проект контракта на основании размещенного поставщиком протокола разногласий</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cpProcedureCancel" type="cp:procedureCancelType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения об отмене процедуры заключения контракта</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>
