@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.3, create date 28.09.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.3.4, create date 2.11.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -45288,7 +45288,8 @@ PR7 - Размещение протокола проведения электр�
 PR8 -  Размещение протокола работы комиссии по электронным процедурам;
 PR9 -  Размещение протокола рассмотрения и оценки заявок при проведении запроса котировок в электронной форме по электронным процедурам;
 PR10 - Размещение протокола о признании участника уклонившимся от заключения контракта;
-PR11 - Размещение отмены протоколов.</xs:documentation>
+PR11 - Размещение отмены протоколов;
+PR12 - Размещение протокола отказа от заключения контракта.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="organization" type="zfcs_organizationRef" minOccurs="0">
@@ -62755,7 +62756,8 @@ PR7 - Размещение протокола проведения электр�
 PR8 -  Размещение протокола работы комиссии по электронным процедурам;
 PR9 -  Размещение протокола рассмотрения и оценки заявок при проведении запроса котировок в электронной форме по электронным процедурам;
 PR10 - Размещение протокола о признании участника уклонившимся от заключения контракта;
-PR11 - Размещение отмены протоколов.</xs:documentation>
+PR11 - Размещение отмены протоколов;
+PR12 - Размещение протокола отказа от заключения контракта.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="PRP"/>
@@ -62770,6 +62772,7 @@ PR11 - Размещение отмены протоколов.</xs:documentation
 			<xs:enumeration value="PR9"/>
 			<xs:enumeration value="PR10"/>
 			<xs:enumeration value="PR11"/>
+			<xs:enumeration value="PR12"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_innAnalogType">
