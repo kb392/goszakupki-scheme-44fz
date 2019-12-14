@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS docs-ws-api Integration Scheme, version 8.1, create date 04.04.2018 -->
-<xs:schema xmlns="http://zakupki.gov.ru/fz44/ws/priz" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/fz44/ws/priz">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EIS docs-ws-api Integration Scheme, version 8.2, create date 28.04.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/fz44/ws/priz" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" targetNamespace="http://zakupki.gov.ru/fz44/ws/priz" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:element name="getPRIZObjectListRequest">
 		<xs:annotation>
 			<xs:documentation>Запрос сведений о размещенных документах ПРИЗ</xs:documentation>
@@ -233,7 +234,7 @@ A - аннулирован.                    </xs:documentation>
 					<xs:documentation>Реестровый номер документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="schemeVersion" type="schemeVersionType">
+			<xs:element name="schemeVersion" type="base:schemeVersionType">
 				<xs:annotation>
 					<xs:documentation>Версия схемы</xs:documentation>
 				</xs:annotation>
@@ -468,7 +469,7 @@ A - аннулирован.                    </xs:documentation>
 					<xs:documentation>Реестровый номер документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="schemeVersion" type="schemeVersionType">
+			<xs:element name="schemeVersion" type="base:schemeVersionType">
 				<xs:annotation>
 					<xs:documentation>Версия схемы</xs:documentation>
 				</xs:annotation>
@@ -700,7 +701,7 @@ A - аннулирован.                    </xs:documentation>
 					<xs:documentation>Реестровый номер документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="schemeVersion" type="schemeVersionType">
+			<xs:element name="schemeVersion" type="base:schemeVersionType">
 				<xs:annotation>
 					<xs:documentation>Версия схемы</xs:documentation>
 				</xs:annotation>
@@ -932,7 +933,7 @@ A - аннулирован.                    </xs:documentation>
 					<xs:documentation>Реестровый номер документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="schemeVersion" type="schemeVersionType">
+			<xs:element name="schemeVersion" type="base:schemeVersionType">
 				<xs:annotation>
 					<xs:documentation>Версия схемы</xs:documentation>
 				</xs:annotation>
@@ -1159,7 +1160,7 @@ A - аннулирован.                    </xs:documentation>
 					<xs:documentation>Реестровый номер документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="schemeVersion" type="schemeVersionType">
+			<xs:element name="schemeVersion" type="base:schemeVersionType">
 				<xs:annotation>
 					<xs:documentation>Версия схемы</xs:documentation>
 				</xs:annotation>
@@ -1391,7 +1392,7 @@ A - аннулирован.                    </xs:documentation>
 					<xs:documentation>Реестровый номер документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="schemeVersion" type="schemeVersionType">
+			<xs:element name="schemeVersion" type="base:schemeVersionType">
 				<xs:annotation>
 					<xs:documentation>Версия схемы</xs:documentation>
 				</xs:annotation>
@@ -1518,7 +1519,7 @@ SMEV3 - Подсистема взаимодействия со СМЭВ3.</xs:do
 					<xs:documentation>Реестровый номер документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="schemeVersion" type="schemeVersionType">
+			<xs:element name="schemeVersion" type="base:schemeVersionType">
 				<xs:annotation>
 					<xs:documentation>Версия схемы</xs:documentation>
 				</xs:annotation>
@@ -2275,37 +2276,6 @@ SMEV3 - Подсистема взаимодействия со СМЭВ3.
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="27"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="schemeVersionType">
-		<xs:annotation>
-			<xs:documentation>Версия схемы</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="1.0"/>
-			<xs:enumeration value="4.1"/>
-			<xs:enumeration value="4.2"/>
-			<xs:enumeration value="4.3"/>
-			<xs:enumeration value="4.3.100"/>
-			<xs:enumeration value="4.4"/>
-			<xs:enumeration value="4.4.2"/>
-			<xs:enumeration value="4.5"/>
-			<xs:enumeration value="4.6"/>
-			<xs:enumeration value="5.0"/>
-			<xs:enumeration value="5.1"/>
-			<xs:enumeration value="5.2"/>
-			<xs:enumeration value="6.0"/>
-			<xs:enumeration value="6.1"/>
-			<xs:enumeration value="6.2"/>
-			<xs:enumeration value="6.3"/>
-			<xs:enumeration value="6.4"/>
-			<xs:enumeration value="7.0"/>
-			<xs:enumeration value="7.1"/>
-			<xs:enumeration value="7.2"/>
-			<xs:enumeration value="7.3"/>
-			<xs:enumeration value="7.5"/>
-			<xs:enumeration value="8.0"/>
-			<xs:enumeration value="8.1"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
