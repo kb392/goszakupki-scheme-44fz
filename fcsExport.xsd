@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 10.0, create date 21.11.2019 -->
+<!-- FCS EXPORT Integration Scheme, version 10.0, create date 03.12.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
@@ -1345,6 +1345,20 @@
 								<xs:element name="nsiTRUAdmissionNPA" type="oos:zfcs_nsiTRUAdmissionNPA" minOccurs="0" maxOccurs="unbounded">
 									<xs:annotation>
 										<xs:documentation>Справочник: НПА, регулирующие допуск товаров, работ, услуг, происходящих из иностранных государств</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiEAESCountry">
+						<xs:annotation>
+							<xs:documentation>Справочник: Страны ЕАЭС</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiEAESCountry" type="oos:zfcs_nsiEAESCountry" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Справочник: Страны ЕАЭС</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>

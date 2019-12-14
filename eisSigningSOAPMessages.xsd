@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS SOAP Messages Integration Scheme, version 10.0, create date 21.11.2019 -->
+<!-- EIS SOAP Messages Integration Scheme, version 10.0, create date 03.12.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/signIncoming/soap/messages" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:si="http://zakupki.gov.ru/oos/signIncoming/1" targetNamespace="http://zakupki.gov.ru/oos/signIncoming/soap/messages" elementFormDefault="qualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/signIncoming/1" schemaLocation="eisSignIncoming.xsd"/>
 	<xs:element name="receiveRbgRequest" type="receiveRbgRequestType">

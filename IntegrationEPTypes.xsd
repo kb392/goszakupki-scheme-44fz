@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 21.11.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 03.12.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -381,14 +381,17 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										</xs:sequence>
 									</xs:complexType>
 								</xs:element>
-								<xs:element name="mustPublicDiscussion" type="xs:boolean">
+								<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ</xs:documentation>
+										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ.
+Устарело.
+Если первая версия извещения размещена до выхода версии 10.0 ЕИС, то контролируется обязательное заполнение поля, иначе игнорируется при приеме/передаче</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="publicDiscussionInfo" type="publicDiscussionType" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы).
+Устарело. Игнорируется при приеме. Автоматически заполняется при передаче для извещения, первая версия которых размещена до выхода доработки ЕИС версии 10.0</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -766,14 +769,17 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										</xs:sequence>
 									</xs:complexType>
 								</xs:element>
-								<xs:element name="mustPublicDiscussion" type="xs:boolean">
+								<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ</xs:documentation>
+										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ.
+Устарело.
+Если первая версия извещения размещена до выхода версии 10.0 ЕИС, то контролируется обязательное заполнение поля, иначе игнорируется при приеме/передаче</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="publicDiscussionInfo" type="publicDiscussionType" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы).
+Устарело. Игнорируется при приеме. Автоматически заполняется при передаче для извещения, первая версия которых размещена до выхода доработки ЕИС версии 10.0</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1156,14 +1162,17 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										</xs:sequence>
 									</xs:complexType>
 								</xs:element>
-								<xs:element name="mustPublicDiscussion" type="xs:boolean">
+								<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ</xs:documentation>
+										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ.
+Устарело.
+Если первая версия извещения размещена до выхода версии 10.0 ЕИС, то контролируется обязательное заполнение поля, иначе игнорируется при приеме/передаче</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="publicDiscussionInfo" type="publicDiscussionType" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы).
+Устарело. Игнорируется при приеме. Автоматически заполняется при передаче для извещения, первая версия которых размещена до выхода доработки ЕИС версии 10.0</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1729,14 +1738,17 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										</xs:sequence>
 									</xs:complexType>
 								</xs:element>
-								<xs:element name="mustPublicDiscussion" type="xs:boolean">
+								<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ</xs:documentation>
+										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ.
+Устарело.
+Если первая версия извещения размещена до выхода версии 10.0 ЕИС, то контролируется обязательное заполнение поля, иначе игнорируется при приеме/передаче</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="publicDiscussionInfo" type="publicDiscussionType" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы).
+Устарело. Игнорируется при приеме. Автоматически заполняется при передаче для извещения, первая версия которых размещена до выхода доработки ЕИС версии 10.0</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="contractServiceInfo" type="base:text2000Type">
@@ -3848,7 +3860,11 @@ manual - ручной ввод.
 						</xs:element>
 						<xs:element name="isContactPriceFormula" type="xs:boolean" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Указать формулу цены и максимальное значение цены контракта</xs:documentation>
+								<xs:documentation>Указать формулу цены и максимальное значение цены контракта
+
+При приеме бизнес-контролем контролируется, что если признак установлен в true, то для каждого объекта закупки в рамках лота в поле 
+purchaseObjectsInfo\notDrugPurchaseObjectsInfo\quantity\quantityUndefined\ либо в поле 
+purchaseObjectsInfo\drugPurchaseObjectsInfo\quantityUndefined\quantityUndefined устaновлено значение true</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -5754,6 +5770,20 @@ CU5CH26 - Заказчик как орган исполнительной вла
 								<xs:documentation>Начальная (максимальная) цена в валюте контракта.
  Заполняется автоматически по формуле:
 «Начальная (максимальная) цена контракта» / «Курс конвертации»</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="mustPublicDiscussion" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ.
+Если первая версия извещения размещена после выхода доработки ЕИС версии 10.0, то контролируется обязательное заполнение поля, иначе игнорируется при приеме/передаче.
+Если извещение сформировано на основании позиции ПГ с 01.01.2020, то контролируется соответствие значению данного признака из связанной позиции ПГ с 01.01.2020.
+Игнорируется при приеме/передаче закрытых электропроцедур</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="publicDiscussionInfo" type="cmn:publicDiscussionInfoType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Сведения об общественном обсуждении. Если в поле "Необходимо обязательное общественное обсуждение (да или нет) в соответствии со статьей 20 Федерального закона №44" (publicDiscussion) задано значение true, то контролируется обязательность заполнения блока.
+Игнорируется при приеме/передаче закрытых электропроцедур</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="advancePaymentSum" minOccurs="0">

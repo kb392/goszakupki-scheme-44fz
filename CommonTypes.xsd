@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- COMMON_TYPES Integration Scheme, version 10.0, create date 21.11.2019 -->
+<!-- COMMON_TYPES Integration Scheme, version 10.0, create date 03.12.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -2235,6 +2235,38 @@ A-дополнительный
 				<xs:annotation>
 					<xs:documentation>Закупка за счет нескольких КВР либо КВР отсутствует.
 При выгрузке заполняется 34-36 разрядами ИКЗ, если в соответствующих разрядах указано значение '000'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="publicDiscussionInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения об общественном обсуждении</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="publicDiscussionInEISInfo">
+				<xs:annotation>
+					<xs:documentation>Общественное обсуждение проводится в ЕИС</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="publicDiscussionInEIS" type="xs:boolean" fixed="true">
+							<xs:annotation>
+								<xs:documentation>Общественное обсуждение проводится в ЕИС</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="publicDiscussionNum" type="base:publicDiscussionNumType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Реестровый номер общественного обсуждения.
+Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="publicDiscussionNotInEIS" type="xs:boolean" fixed="true">
+				<xs:annotation>
+					<xs:documentation>Общественное обсуждение проводится не в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:choice>
