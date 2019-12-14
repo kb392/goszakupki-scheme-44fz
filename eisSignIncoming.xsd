@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS INTEGRATION eisSignIncoming Scheme, version 8.1, create date 04.04.2018 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/signIncoming/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/signIncoming/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- EIS INTEGRATION eisSignIncoming Scheme, version 8.2, create date 14.06.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/signIncoming/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:si="http://zakupki.gov.ru/oos/signIncoming/1" targetNamespace="http://zakupki.gov.ru/oos/signIncoming/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:element name="processingResult" type="processingResultType">
 		<xs:annotation>

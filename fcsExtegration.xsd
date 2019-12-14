@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXTEGRATION Integration Scheme, version 8.1, create date 04.04.2018 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/extegration/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" targetNamespace="http://zakupki.gov.ru/oos/extegration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
+<!-- FCS EXTEGRATION Integration Scheme, version 8.2, create date 14.06.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/extegration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/extegration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/EPtypes/1" schemaLocation="IntegrationEPTypes.xsd"/>
 	<xs:element name="bankGuarantee" type="oos:zfcs_bankGuaranteeType">
 		<xs:annotation>
 			<xs:documentation>Проект информация о выданной банковской гарантии; внесение изменений</xs:documentation>
@@ -505,34 +506,122 @@
 			<xs:documentation>Проект протокола о несоответствии контролируемой информации в связи с уменьшением средств</xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<!--ПП РФ № 615-->
 	<xs:element name="pprf615NotificationEF" type="pp615:notificationEFType">
 		<xs:annotation>
-			<xs:documentation>Извещение о проведении ЭА (электронный аукцион) по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+			<xs:documentation>Проект извещения о проведении ЭА (электронный аукцион) по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="pprf615NotificationCancel" type="pp615:notificationCancelType">
 		<xs:annotation>
-			<xs:documentation>Извещение об отмене закупки по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+			<xs:documentation>Проект извещения об отмене закупки по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="pprf615Clarification" type="pp615:clarificationType">
 		<xs:annotation>
-			<xs:documentation>Разъяснение положений документации по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+			<xs:documentation>Проект разъяснения положений документации по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="pprf615ActEvasion" type="pp615:actEvasionType">
 		<xs:annotation>
-			<xs:documentation>Акт отказа от заключения контракта по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+			<xs:documentation>Проект акта отказа от заключения контракта по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="pprf615ActDeviation" type="pp615:actDeviationType">
 		<xs:annotation>
-			<xs:documentation>Акт признания участника уклонившимся от заключения контракта по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+			<xs:documentation>Проект акта признания участника уклонившимся от заключения контракта по ПП РФ № 615</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="pprf615ActCancel" type="pp615:actCancelType">
 		<xs:annotation>
-			<xs:documentation>Информация об отмене акта по ПП РФ № 615. Добавлено на развитие, в версии 8.1 не используется</xs:documentation>
+			<xs:documentation>Проект информации об отмене акта по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pprf615Contract" type="pp615:contractType">
+		<xs:annotation>
+			<xs:documentation>Проект сведений о 
+договоре о проведении капитального ремонта по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pprf615ContractProcedure" type="pp615:contractProcedureType">
+		<xs:annotation>
+			<xs:documentation>Проект сведений об исполнении/расторжении договора о проведении капитального ремонта по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pprf615ContractProcedureCancel" type="pp615:contractProcedureCancelType">
+		<xs:annotation>
+			<xs:documentation>Проект сведений об отмене информации об исполнении/расторжении договора о проведении капитального ремонта по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Электронные процедуры. Общие документы-->
+	<xs:element name="epNotificationCancel" type="ep:notificationCancelType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения об отмене определения поставщика (подрядчика, исполнителя) в электронной форме</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epNotificationCancelFailure" type="ep:notificationCancelFailureType">
+		<xs:annotation>
+			<xs:documentation>Проект отмены извещения об отмене определения поставщика (подрядчика, исполнителя) в электронной форме</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epClarificationDoc" type="ep:clarificationDocType">
+		<xs:annotation>
+			<xs:documentation>Проект разъяснения положений документации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epClarificationResult" type="ep:clarificationResultType">
+		<xs:annotation>
+			<xs:documentation>Проект разъяснения результатов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Открытый конкурс в электронной форме (ЭOK)-->
+	<xs:element name="epNotificationEOK" type="ep:notificationEOKType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о проведении ЭOK</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epProlongationEOK" type="ep:prolongationEOKType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о продлении срока подачи заявок на участие в ЭOK</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Открытый конкурс с ограниченным участием в электронной форме (ЭOK-ОУ)-->
+	<xs:element name="epNotificationEOKOU" type="ep:notificationEOKOUType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о проведении ЭOK-ОУ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epProlongationEOKOU" type="ep:prolongationEOKOUType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о продлении срока подачи заявок на участие в ЭOK-ОУ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Двухэтапный конкурс в электронной форме (ЭOKД)-->
+	<xs:element name="epNotificationEOKD" type="ep:notificationEOKDType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о проведении ЭOKД</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epProlongationEOKD" type="ep:prolongationEOKDType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о продлении срока подачи заявок на участие в ЭOKД</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Запрос котировок в электронной форме (ЭЗК)-->
+	<xs:element name="epNotificationEZK" type="ep:notificationEZKType">
+		<xs:annotation>
+			<xs:documentation>Проект мзвещения о проведении ЭЗК</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epProlongationEZK" type="ep:prolongationEZKType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о продлении срока подачи заявок на участие в ЭЗК</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Запрос котировок в электронной форме (ЭЗП)-->
+	<xs:element name="epNotificationEZP" type="ep:notificationEZPType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о проведении ЭЗП</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>
