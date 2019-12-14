@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS FILESTORE API Integration Scheme, version 7.2, create date 25.07.2017 -->
+<!-- EIS FILESTORE API Integration Scheme, version 7.2, create date 17.08.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/filestore/ws/data" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/filestore/ws/data">
 	<xs:complexType name="startRequestType">
 		<xs:annotation>
@@ -31,7 +31,7 @@
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="name" type="fileNameType">
+						<xs:element name="name" type="shortNameType">
 							<xs:annotation>
 								<xs:documentation>Наименование файла</xs:documentation>
 							</xs:annotation>
@@ -370,9 +370,8 @@
 PRIZ - подсистема определения поставщика;
 RGK - реестр контрактов;
 RPG - реестр планов-графиков;
-RPZ - реестр планов закупок;
-RBG - реестр банковских гарантий;
-DIZK - Дополнительная информация о закупках и контрактах.</xs:documentation>
+RPZ - реестр планов закупок.
+RBG - реестр банковских гарантий.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="sender">
@@ -441,9 +440,8 @@ TEST - тестовые данные</xs:documentation>
 PRIZ - подсистема определения поставщика;
 RGK - реестр контрактов;
 RPG - реестр планов-графиков;
-RPZ - реестр планов закупок;
-RBG - реестр банковских гарантий;
-DIZK - Дополнительная информация о закупках и контрактах.</xs:documentation>
+RPZ - реестр планов закупок.
+RBG - реестр банковских гарантий.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="sender">
@@ -537,15 +535,6 @@ TEST - тестовые данные</xs:documentation>
 			<xs:maxLength value="100"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="fileNameType">
-		<xs:annotation>
-			<xs:documentation>Тип: Наименование файла</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:minLength value="1"/>
-			<xs:maxLength value="1000"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="guidType">
 		<xs:annotation>
 			<xs:documentation>Тип: Глобальный идентификатор</xs:documentation>
@@ -586,10 +575,15 @@ TEST - тестовые данные</xs:documentation>
 				PRIZ - подсистема определения поставщика;
 				RGK - реестр контрактов;
 				RPG - реестр планов-графиков;
-				RPZ - реестр планов закупок;
-				RBG - реестр банковских гарантий;
-				DIZK - Дополнительная информация о закупках и контрактах.
-			</xs:documentation>
+				RPZ - реестр планов закупок.
+				RBG - реестр банковских гарантий.
+				OZ - реестр отчетов заказчиков;
+				RDI - реестр дополнительной информации о закупках и контрактах;
+				OOKZ - обязательное обсуждение крупных закупок;
+				RPNZ - реестр правил нормирования закупок;
+				ZC - реестр размещения запросов цен товаров, работ, услуг;
+				RRA - реестр результатов аудита.
+		</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="PRIZ"/>
@@ -597,7 +591,12 @@ TEST - тестовые данные</xs:documentation>
 			<xs:enumeration value="RPG"/>
 			<xs:enumeration value="RPZ"/>
 			<xs:enumeration value="RBG"/>
-			<xs:enumeration value="DIZK"/>
+			<xs:enumeration value="OZ"/>
+			<xs:enumeration value="RDI"/>
+			<xs:enumeration value="OOKZ"/>
+			<xs:enumeration value="RPNZ"/>
+			<xs:enumeration value="ZC"/>
+			<xs:enumeration value="RRA"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="spzNumType">
