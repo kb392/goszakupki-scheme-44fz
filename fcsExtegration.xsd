@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXTEGRATION Integration Scheme, version 8.3.4, create date 2.11.2018 -->
+<!-- FCS EXTEGRATION Integration Scheme, version 9.0, create date 26.10.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/extegration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/extegration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
@@ -132,7 +132,7 @@
 	</xs:element>
 	<xs:element name="fcsNotificationPO" type="oos:zfcs_notificationPOType">
 		<xs:annotation>
-			<xs:documentation>Проект извещения о проведении ПО (предварительный отбор); внесение изменений</xs:documentation>
+			<xs:documentation>Проект извещения о проведении ПО (предварительный отбор)</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="fcsNotificationZakA" type="oos:zfcs_notificationZakAType">
@@ -630,6 +630,30 @@
 			<xs:documentation>Проект извещения о проведении ЭЗП</xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<!--Закрытый конкурс в электронной форме (ЭЗакК)-->
+	<xs:element name="epNotificationEZakK" type="ep:notificationEZakKType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о проведении ЭЗакК</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Закрытый конкурс в электронной форме (ЭЗакК-ОУ)-->
+	<xs:element name="epNotificationEZakKOU" type="ep:notificationEZakKOUType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о проведении ЭЗакК-ОУ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Закрытый конкурс в электронной форме (ЭЗакКД)-->
+	<xs:element name="epNotificationEZakKD" type="ep:notificationEZakKDType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о проведении ЭЗакКД</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Закрытый конкурс в электронной форме (ЭЗакА)-->
+	<xs:element name="epNotificationEZakA" type="ep:notificationEZakAType">
+		<xs:annotation>
+			<xs:documentation>Проект извещения о проведении ЭЗакА</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 	<!--Проекты контрактов-->
 	<xs:element name="cpContractProject" type="cp:contractProjectType">
 		<xs:annotation>
@@ -644,6 +668,12 @@
 	<xs:element name="cpProcedureCancel" type="cp:procedureCancelType">
 		<xs:annotation>
 			<xs:documentation>Проект извещения об отмене процедуры заключения контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--Лимиты бюджетных обязательств (ЛБО)-->
+	<xs:element name="fcsLBO" type="oos:zfcs_LBOType">
+		<xs:annotation>
+			<xs:documentation>Сведения о лимитах бюджетных обязательств (ЛБО), загружаемых из региональных систем финансового учета</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

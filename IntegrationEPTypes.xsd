@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.3.4, create date 2.11.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.0, create date 26.10.2018 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -355,7 +355,7 @@ RO - Региональный оператор.</xs:documentation>
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="restrictionInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Ограничение</xs:documentation>
 												</xs:annotation>
@@ -725,7 +725,7 @@ RO - Региональный оператор.</xs:documentation>
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="restrictionInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Ограничение</xs:documentation>
 												</xs:annotation>
@@ -1095,7 +1095,7 @@ RO - Региональный оператор.</xs:documentation>
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="restrictionInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Ограничение</xs:documentation>
 												</xs:annotation>
@@ -1653,7 +1653,7 @@ RO - Региональный оператор.</xs:documentation>
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="restrictionInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Ограничение</xs:documentation>
 												</xs:annotation>
@@ -2105,7 +2105,7 @@ PASS_OFFER - Все остальные заявки</xs:documentation>
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="restrictionInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Ограничение</xs:documentation>
 												</xs:annotation>
@@ -2706,6 +2706,586 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<!--Закрытый конкурс в электронном виде (ЭЗакК)-->
+	<xs:complexType name="notificationEZakKType">
+		<xs:annotation>
+			<xs:documentation>Тип: Извещение о проведении закрытого конкурса в электронном виде (ЭЗакК); внесение изменений</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="notificationType">
+				<xs:sequence>
+					<xs:element name="notificationInfo">
+						<xs:annotation>
+							<xs:documentation>Информация о проведении закрытого конкурса в электронной форме</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="procedureInfo" type="procedureEOKType">
+									<xs:annotation>
+										<xs:documentation>Информация о процедуре закупки</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="contractConditionsInfo" type="contractConditionsType">
+									<xs:annotation>
+										<xs:documentation>Условия контракта</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="purchaseObjectsInfo">
+									<xs:annotation>
+										<xs:documentation>Объекты закупки</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:choice>
+											<xs:element name="notDrugPurchaseObjectsInfo">
+												<xs:annotation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseObjectsType">
+															<xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="drugPurchaseObjectsInfo">
+												<xs:annotation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
+															<xs:sequence minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
+																</xs:annotation>
+																<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+																	<xs:annotation>
+																		<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
+																	<xs:annotation>
+																		<xs:documentation>Решение врачебной комиссии</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:choice>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="customerRequirementsInfo">
+									<xs:annotation>
+										<xs:documentation>Требования заказчиков</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="customerRequirementInfo" type="customerRequirementType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Требование заказчика</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="preferensesInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Преимущества</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="preferenseInfo" type="cmn:preferenseType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Преимущество</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="requirementsInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Требования</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="requirementInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Требование</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="restrictionsInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Ограничения</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Ограничение</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="modificationInfo" type="notificationModificationType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Основание внесения изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Закрытый конкурс с ограниченным участием в электронном виде (ЭЗакК-ОУ)-->
+	<xs:complexType name="notificationEZakKOUType">
+		<xs:annotation>
+			<xs:documentation>Тип: Извещение о проведении закрытого конкурса с ограниченным участием в электронном виде (ЭЗакК-ОУ); внесение изменений</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="notificationType">
+				<xs:sequence>
+					<xs:element name="notificationInfo">
+						<xs:annotation>
+							<xs:documentation>Информация о проведении закрытого конкурса в электронной форме</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="procedureInfo" type="procedureEOKType">
+									<xs:annotation>
+										<xs:documentation>Информация о процедуре закупки</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="contractConditionsInfo" type="contractConditionsType">
+									<xs:annotation>
+										<xs:documentation>Условия контракта</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="purchaseObjectsInfo">
+									<xs:annotation>
+										<xs:documentation>Объекты закупки</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:choice>
+											<xs:element name="notDrugPurchaseObjectsInfo">
+												<xs:annotation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseObjectsType">
+															<xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="drugPurchaseObjectsInfo">
+												<xs:annotation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
+															<xs:sequence minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
+																</xs:annotation>
+																<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+																	<xs:annotation>
+																		<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
+																	<xs:annotation>
+																		<xs:documentation>Решение врачебной комиссии</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:choice>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="customerRequirementsInfo">
+									<xs:annotation>
+										<xs:documentation>Требования заказчиков</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="customerRequirementInfo" type="customerRequirementType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Требование заказчика</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="preferensesInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Преимущества</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="preferenseInfo" type="cmn:preferenseType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Преимущество</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="requirementsInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Требования</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="requirementInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Требование</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="restrictionsInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Ограничения</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Ограничение</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="modificationInfo" type="notificationModificationType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Основание внесения изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Двухэтапный закрытый конкурс в электронном виде (ЭЗакКД)-->
+	<xs:complexType name="notificationEZakKDType">
+		<xs:annotation>
+			<xs:documentation>Тип: Извещение о проведении двухэтапного закрытого конкурса в электронном виде (ЭЗакКД); внесение изменений</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="notificationType">
+				<xs:sequence>
+					<xs:element name="notificationInfo">
+						<xs:annotation>
+							<xs:documentation>Информация о проведении закрытого конкурса в электронной форме</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="procedureInfo" type="procedureEOKDType">
+									<xs:annotation>
+										<xs:documentation>Информация о процедуре закупки</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="contractConditionsInfo" type="contractConditionsType">
+									<xs:annotation>
+										<xs:documentation>Условия контракта</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="purchaseObjectsInfo">
+									<xs:annotation>
+										<xs:documentation>Объекты закупки</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:choice>
+											<xs:element name="notDrugPurchaseObjectsInfo">
+												<xs:annotation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseObjectsType">
+															<xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="drugPurchaseObjectsInfo">
+												<xs:annotation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
+															<xs:sequence minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
+																</xs:annotation>
+																<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+																	<xs:annotation>
+																		<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
+																	<xs:annotation>
+																		<xs:documentation>Решение врачебной комиссии</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:choice>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="customerRequirementsInfo">
+									<xs:annotation>
+										<xs:documentation>Требования заказчиков</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="customerRequirementInfo" type="customerRequirementType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Требование заказчика</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="preferensesInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Преимущества</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="preferenseInfo" type="cmn:preferenseType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Преимущество</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="requirementsInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Требования</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="requirementInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Требование</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="restrictionsInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Ограничения</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Ограничение</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="modificationInfo" type="notificationModificationType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Основание внесения изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Закрытый аукцион в электронном виде (ЭЗакА)-->
+	<xs:complexType name="notificationEZakAType">
+		<xs:annotation>
+			<xs:documentation>Тип: Извещение о проведении закрытого аукциона в электронном виде (ЭЗакА); внесение изменений</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="notificationType">
+				<xs:sequence>
+					<xs:element name="notificationInfo">
+						<xs:annotation>
+							<xs:documentation>Информация о проведении закрытого конкурса в электронной форме</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="procedureInfo" type="procedureEZakAType">
+									<xs:annotation>
+										<xs:documentation>Информация о процедуре закупки</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="contractConditionsInfo" type="contractConditionsType">
+									<xs:annotation>
+										<xs:documentation>Условия контракта</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="purchaseObjectsInfo">
+									<xs:annotation>
+										<xs:documentation>Объекты закупки</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:choice>
+											<xs:element name="notDrugPurchaseObjectsInfo">
+												<xs:annotation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются не лекарственные препараты</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseObjectsType">
+															<xs:sequence>
+																<xs:element name="quantityUndefined" type="xs:boolean">
+																	<xs:annotation>
+																		<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="drugPurchaseObjectsInfo">
+												<xs:annotation>
+													<xs:documentation>Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:purchaseDrugObjectsInfoType">
+															<xs:sequence minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>В случае если блок заполнен, считается что признак "Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ" установлен, иначе - что признак не установлен</xs:documentation>
+																</xs:annotation>
+																<xs:element name="p7Ch2St83Purchase" type="xs:boolean" fixed="true">
+																	<xs:annotation>
+																		<xs:documentation>Закупка в соответствии с пунктом 7 части 2 статьи 83 Закона № 44-ФЗ</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="medicalCommissionDecision" type="cmn:attachmentListType">
+																	<xs:annotation>
+																		<xs:documentation>Решение врачебной комиссии</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:choice>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="customerRequirementsInfo">
+									<xs:annotation>
+										<xs:documentation>Требования заказчиков</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="customerRequirementInfo" type="customerRequirementType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Требование заказчика</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="preferensesInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Преимущества</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="preferenseInfo" type="cmn:preferenseType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Преимущество</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="requirementsInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Требования</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="requirementInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Требование</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="restrictionsInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Ограничения</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Ограничение</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="modificationInfo" type="notificationModificationType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Основание внесения изменений</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<!--Вспомогательные типы-->
 	<!--Вспомогательные типы (Извещения)-->
 	<xs:complexType name="notificationChangeReasonType">
@@ -3081,7 +3661,8 @@ manual - ручной ввод.
 						</xs:element>
 						<xs:element name="currency" type="base:currencyRef">
 							<xs:annotation>
-								<xs:documentation>Валюта</xs:documentation>
+								<xs:documentation>Валюта. 
+Может быть указано только значение "Российский рубль" (RUR)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="financeSource" type="base:text2000Type">
@@ -3096,7 +3677,8 @@ manual - ручной ввод.
 						</xs:element>
 						<xs:element name="isMaxPriceCurrency" type="cmn:purchaseIsMaxPriceCurrencyType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Указать НМЦК в валюте контракта. Заполнение доступно только при значении «Российский рубль» поля lot/currency</xs:documentation>
+								<xs:documentation>Указать НМЦК в валюте контракта.
+Требуется и допускается заполнение в случае, если валюта НМЦК контрактов отлична от рубля</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -3263,7 +3845,7 @@ maxPrice / currencyRate/rate, где  currencyRate/rate - курс валюты 
 		<xs:sequence>
 			<xs:element name="startDT" type="xs:dateTime">
 				<xs:annotation>
-					<xs:documentation>Дата и время начала подачи заявок</xs:documentation>
+					<xs:documentation>Дата и время начала подачи заявок. Игнорируется при приеме. Заполняется фактической датой и временем размещения Извещения по местному времени организации, осуществляющей размещение</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="endDT" type="xs:dateTime">
@@ -3273,7 +3855,7 @@ maxPrice / currencyRate/rate, где  currencyRate/rate - курс валюты 
 			</xs:element>
 			<xs:element name="place" type="base:text2000Type">
 				<xs:annotation>
-					<xs:documentation>Место подачи заявок</xs:documentation>
+					<xs:documentation>Место подачи заявок. Игнорируется при приеме. Заполняется автоматически наименованием электронной площадки, указанной на вкладке «Общая информация»</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="order" type="base:text2000Type">
@@ -3440,6 +4022,42 @@ maxPrice / currencyRate/rate, где  currencyRate/rate - курс валюты 
 				<xs:annotation>
 					<xs:documentation>Условия признания победителя запроса котировок или иного участника запроса котировок уклонившегося от заключения контракта</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="procedureEZakAType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация о процедуре закупки ЭЗакА (закрытый аукцион в электронной форме)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="collectingInfo" type="procedureCollectingType">
+				<xs:annotation>
+					<xs:documentation>Информация о подаче заявок</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="scoringInfo">
+				<xs:annotation>
+					<xs:documentation>Информация о рассмотрении и оценке заявок участников и подаче окончательных предложений</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="endDate" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Дата окончания срока рассмотрения первых частей заявок участников</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="biddingDate" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Дата проведения закрытого аукциона в электронной форме</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="addInfo" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дополнительная информация</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -4142,6 +4760,38 @@ O - оценка производится по шкале оценки или д
 					<xs:documentation>Информация о прикрепленных документах</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="printFormFieldsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация для печатной формы. Игнорируется при приёме, заполняется при передаче</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0">
+						<xs:element name="notificationInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Информация из извещения</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence minOccurs="0">
+									<xs:element name="commonInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Общая информация</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence minOccurs="0">
+												<xs:element name="docType" type="cmn:docType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Тип документа</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
 			<xs:annotation>
@@ -4271,6 +4921,11 @@ O - оценка производится по шкале оценки или д
 														<xs:documentation>Электронная торговая площадка</xs:documentation>
 													</xs:annotation>
 												</xs:element>
+												<xs:element name="docType" type="cmn:docType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Тип документа</xs:documentation>
+													</xs:annotation>
+												</xs:element>
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
@@ -4392,7 +5047,7 @@ RO - Региональный оператор.</xs:documentation>
 		<xs:sequence>
 			<xs:element name="purchaseNumber" type="base:purchaseNumberType">
 				<xs:annotation>
-					<xs:documentation>Реестровый номер закупки. При приёме контролируется наличие неотменённой закупки с указанным номером</xs:documentation>
+					<xs:documentation>Реестровый номер закупки. При приёме контролируется наличие неотменённой (в случае документа notificationCancelFailure наоборот отмененной) закупки с указанным номером</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
@@ -4954,6 +5609,11 @@ RO - Региональный оператор.</xs:documentation>
 					<xs:documentation>Дополнительная информация</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="bankSupportContractRequiredInfo" type="cmn:bankSupportContractRequiredInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="customerRequirementEZPType">
@@ -5041,6 +5701,11 @@ RO - Региональный оператор.</xs:documentation>
 			<xs:element name="addInfo" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Дополнительная информация</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bankSupportContractRequiredInfo" type="cmn:bankSupportContractRequiredInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -5140,6 +5805,11 @@ RO - Региональный оператор.</xs:documentation>
 			<xs:element name="addInfo" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Дополнительная информация</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bankSupportContractRequiredInfo" type="cmn:bankSupportContractRequiredInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo И в связанном ППГ Информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

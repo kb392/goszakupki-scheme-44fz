@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 8.3.4, create date 2.11.2018 -->
+<!-- BASE_TYPES Integration Scheme, version 9.0, create date 26.10.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -175,6 +175,30 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="currencyRateType">
+		<xs:annotation>
+			<xs:documentation>Тип: Курс валюты</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="rate">
+				<xs:annotation>
+					<xs:documentation>Курс валюты по отношению к рублю</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:fractionDigits value="4"/>
+						<xs:totalDigits value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="raiting" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номинал валюты.
+Поле игнорируется при приеме, заполняется автоматически значением из ОКВ на дату последнего сохранения извещения/изменения извещения (приема интеграционного пакета)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="docPropertyType">
 		<xs:annotation>
 			<xs:documentation>Тип: Реквизиты документа</xs:documentation>
@@ -194,6 +218,35 @@
 				<xs:annotation>
 					<xs:documentation>Дата документа</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="docType">
+		<xs:annotation>
+			<xs:documentation>Тип: Тип документа в рамках закупки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code">
+				<xs:annotation>
+					<xs:documentation>Кодовое наименование типа</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="name" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование типа документа</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="350"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -494,6 +547,33 @@ CAdES-A</xs:documentation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="purchaseIsMaxPriceCurrencyType">
+		<xs:annotation>
+			<xs:documentation>Тип: НМЦК в валюте контракта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="maxPriceCurrency" type="base:moneyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Начальная (максимальная) цена в валюте контракта.
+Заполняется автоматически по формуле:
+Для валют с номиналом = 1 или номинал не указан:
+maxPrice / currencyRate/rate, где  currencyRate/rate - курс валюты по отношению к рублю на дату последнего сохранения извещения/изменения извещения (приема интеграционного пакета).
+Для валют с номиналом не равным 1:
+maxPrice * «Номинал» (из справочника валют для соответствующей валюты) / currencyRate/rate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currency" type="base:currencyCBRFRef">
+				<xs:annotation>
+					<xs:documentation>Валюта из справочника "Список валют, курс на которые устанавливается ЦБ РФ" (nsiContractCurrencyCBRF) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currencyRate" type="currencyRateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Курс валюты по отношению к рублю на дату последнего сохранения извещения/изменения извещения (приема интеграционного пакета). Если блок не задан, то поле "Курс валюты по отношению к рублю"(rate) заполняется автоматически значением из ОКВ курса ЦБ РФ на дату последнего сохранения извещения/изменения извещения (приема интеграционного пакета)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="preferenseType">
 		<xs:annotation>
 			<xs:documentation>Тип: Преимущество для участников</xs:documentation>
@@ -556,6 +636,108 @@ CAdES-A</xs:documentation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="restrictionType">
+		<xs:annotation>
+			<xs:documentation>Тип: Ограничение для участников</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="preferenseRequirementInfo" type="base:prefsReqsRef">
+				<xs:annotation>
+					<xs:documentation>Требование (ограничение)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:element name="content" type="base:text4000Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Содержание требования (ограничения)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="restrictionsSt14" type="restrictionSt14Type" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Перечень требований, нормативно-правовых актов, конкретизирующих особенностей применения национального режима. Указание допустимо и обязательно для ограничения «Запрет на допуск товаров, работ, услуг при осуществлении закупок, а также ограничения и условия допуска в соответствии с требованиями, установленными статьей 14 Федерального закона № 44-ФЗ» (код JB2149)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="restrictionSt14Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения по запрету, ограничению участия, условию допуска</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="restrictionSt14" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения по запрету, ограничению участия, условию допуска</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="requirementsType">
+							<xs:annotation>
+								<xs:documentation>Виды требований</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="requirementType" maxOccurs="2">
+										<xs:annotation>
+											<xs:documentation>Вид требования</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="type">
+													<xs:annotation>
+														<xs:documentation>Вид требования:
+AC - условия допуска;
+RA - ограничение допуска;
+BAN - запрет.</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="AC"/>
+															<xs:enumeration value="RA"/>
+															<xs:enumeration value="BAN"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="NPAInfo" type="base:NPASt14Ref">
+							<xs:annotation>
+								<xs:documentation>Сведения о нормативно-правовом акте</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="exception" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Присутствуют обстоятельства, допускающие исключение, влекущее неприменение запрета, ограничения допуска</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="imposibilityBan" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>Присутствуют обстоятельства, допускающие исключение, влекущее неприменение запрета, ограничения допуска</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="imposibilityBanReason" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Обоснование невозможности запрета, ограничения допуска</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="note" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Примечание</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="signatureType">
 		<xs:annotation>
 			<xs:documentation>Тип: Электронная подпись</xs:documentation>
@@ -571,53 +753,6 @@ CAdES-A</xs:documentation>
 				</xs:attribute>
 			</xs:extension>
 		</xs:simpleContent>
-	</xs:complexType>
-	<xs:complexType name="currencyRateType">
-		<xs:annotation>
-			<xs:documentation>Тип: Курс валюты</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="rate">
-				<xs:annotation>
-					<xs:documentation>Курс валюты по отношению к рублю</xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:decimal">
-						<xs:fractionDigits value="4"/>
-						<xs:totalDigits value="10"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="raiting" type="xs:int" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Номинал валюты</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="purchaseIsMaxPriceCurrencyType">
-		<xs:annotation>
-			<xs:documentation>Тип: НМЦК в валюте контракта</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="maxPriceCurrency" type="base:moneyType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Начальная (максимальная) цена в валюте контракта.
-Заполняется автоматически по формуле:
-maxPrice / currencyRate/rate, где  currencyRate/rate - курс валюты по отношению к рублю на дату последнего сохранения извещения/изменения извещения (приема интеграционного пакета)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="currency" type="base:currencyCBRFRef">
-				<xs:annotation>
-					<xs:documentation>Валюта из справочника "Список валют, курс на которые устанавливается ЦБ РФ" (nsiContractCurrencyCBRF) </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="currencyRate" type="currencyRateType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Курс валюты по отношению к рублю на дату последнего сохранения извещения/изменения извещения (приема интеграционного пакета). Если не задано, то заполняется автоматически значением из ОКВ курса ЦБ РФ на дату последнего сохранения извещения/изменения извещения (приема интеграционного пакета)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
 	</xs:complexType>
 	<!--Контроль по 99 статье-->
 	<xs:complexType name="control99CustomerInfoType">
@@ -1354,6 +1489,24 @@ A-дополнительный
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Разные реестры. Типы-->
+	<xs:complexType name="bankSupportContractRequiredInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информации о банковском и (или) казначейском сопровождении контакта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bankSupportContractRequired" type="xs:boolean" fixed="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Требуется банковское сопровождение контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="treasurySupportContractRequired" type="xs:boolean" fixed="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Требуется казначейское сопровождение контракта</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

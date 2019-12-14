@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 8.3.4, create date 2.11.2018 -->
+<!-- FCS EXPORT Integration Scheme, version 9.0, create date 26.10.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
@@ -588,7 +588,7 @@
 					</xs:element>
 					<xs:element name="tenderSuspension" type="oos:zfcs_tenderSuspensionType">
 						<xs:annotation>
-							<xs:documentation>Информация о приостановке определения поставщика</xs:documentation>
+							<xs:documentation>Информация о приостановке определения поставщика (подрядчика, исполнителя) в части заключения контракта</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="eventPlan" type="oos:zfcs_eventPlanType">
@@ -1290,6 +1290,20 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
+					<xs:element name="nsiTRUAdmissionNPAs">
+						<xs:annotation>
+							<xs:documentation>Справочник: НПА, регулирующие допуск товаров, работ, услуг, происходящих из иностранных государств</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiTRUAdmissionNPA" type="oos:zfcs_nsiTRUAdmissionNPA" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Справочник: НПА, регулирующие допуск товаров, работ, услуг, происходящих из иностранных государств</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
 					<xs:element name="pprf615NsiFundingSources">
 						<xs:annotation>
 							<xs:documentation>Справочник: Типы источников финансирования по ПП РФ № 615</xs:documentation>
@@ -1657,6 +1671,27 @@
 					<xs:element name="epProtocolEZP2" type="ep:protocolEZP2Type">
 						<xs:annotation>
 							<xs:documentation>Итоговый протокол ЭЗП</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<!--Закрытые способы электронных процедур-->
+					<xs:element name="epNotificationEZakK" type="ep:notificationEZakKType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЭЗакК</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="epNotificationEZakKOU" type="ep:notificationEZakKOUType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЭЗакК-ОУ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="epNotificationEZakKD" type="ep:notificationEZakKDType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЭЗакКД</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="epNotificationEZakA" type="ep:notificationEZakAType">
+						<xs:annotation>
+							<xs:documentation>Извещение о проведении ЭЗакА</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!--Проекты контрактов-->

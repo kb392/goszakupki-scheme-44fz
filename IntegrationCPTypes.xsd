@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.3.4, create date 2.11.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.0, create date 26.10.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/CPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -282,9 +282,10 @@
 					<xs:documentation>Файлы протокола разногласий</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintFormInfo" type="cmn:extPrintFormType">
+			<xs:element name="extPrintFormInfo" type="cmn:extPrintFormType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Электронный документ, полученный из внешней системы</xs:documentation>
+					<xs:documentation>Электронный документ, полученный из внешней системы
+Элемент игнорируется при приёме, оставлен для обратной совместимости</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -531,7 +532,7 @@ tenderPlan2017 - План график с 01.01.2017;
 notification - Извещение (конкурсная документация);
 protocol - Итоговый протокол определения поставщика, подрядчика, исполнителя;
 contractProject - Проект контракта без подписей;
-contractProjectChange - Доработанный проект контракта на основании размещенного поставщиком протокола разногласий</xs:documentation>
+contractProjectChange - Доработанный проект контракта на основании размещенного поставщиком протокола разногласий.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="externalId" type="base:externalIdType" minOccurs="0">
@@ -593,7 +594,7 @@ contractProjectChange - Доработанный проект контракта
 						</xs:element>
 						<xs:element name="isSecondParticipant" type="xs:boolean">
 							<xs:annotation>
-								<xs:documentation>Контракт заключается с участником, которому по результатам процедуры определения поставщика присвоен воторой номер. В поле указывается значение "false" в случае процедуры подписания контракта с победителем процедуры определения поставщика</xs:documentation>
+								<xs:documentation>Контракт заключается с участником, которому по результатам процедуры определения поставщика присвоен второй номер. В поле указывается значение "false" в случае процедуры подписания контракта с победителем процедуры определения поставщика</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="changePriceFoundation" type="base:changePriceFoundationRef" minOccurs="0">
@@ -684,7 +685,7 @@ CC - Заказчик по Федеральному закону 223-ФЗ, ос�
 						</xs:element>
 						<xs:element name="editionNumber" type="base:versionNumberType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Номер текущией редакции в рамках версии извещения</xs:documentation>
+								<xs:documentation>Номер текущей редакции в рамках версии извещения</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="quantityUndefined" type="xs:boolean">
@@ -780,7 +781,7 @@ CC - Заказчик по Федеральному закону 223-ФЗ, ос�
 									</xs:element>
 									<xs:element name="name" type="base:docNameType">
 										<xs:annotation>
-											<xs:documentation>Наименование протокола-основаня</xs:documentation>
+											<xs:documentation>Наименование протокола-основания</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="number" type="base:documentNumberType">
@@ -805,7 +806,7 @@ CC - Заказчик по Федеральному закону 223-ФЗ, ос�
 									</xs:element>
 									<xs:element name="concludeContractRight" type="xs:boolean">
 										<xs:annotation>
-											<xs:documentation>Торги проводили на право заключения контратка</xs:documentation>
+											<xs:documentation>Торги проводили на право заключения контракта</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="documentLink" minOccurs="0">
@@ -844,7 +845,7 @@ CC - Заказчик по Федеральному закону 223-ФЗ, ос�
 			</xs:element>
 			<xs:element name="changeInfo" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Информация об изменении в поекте контракта, направляемого участнику </xs:documentation>
+					<xs:documentation>Информация об изменении в проекте контракта, направляемого участнику </xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:choice>
@@ -1132,9 +1133,10 @@ CC - Заказчик по Федеральному закону 223-ФЗ, ос�
 					<xs:documentation>Основание внесения изменений</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintFormInfo" type="cmn:extPrintFormType">
+			<xs:element name="extPrintFormInfo" type="cmn:extPrintFormType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Электронный документ, полученный из внешней системы</xs:documentation>
+					<xs:documentation>Электронный документ, полученный из внешней системы.
+Элемент игнорируется при приёме, оставлен для обратной совместимости</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1739,7 +1741,7 @@ M - Орган местного самоуправления муниципал�
 					</xs:element>
 					<xs:element name="fileFingerPrint" type="base:fileHashType" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Отпечаток контента файла (хэш). Элемент игнорируется при приёме, автоматически заполняется при передаче значением хэша файла</xs:documentation>
+							<xs:documentation>Отпечаток файла. Элемент игнорируется при приёме, автоматически заполняется при передаче hash файла.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1760,7 +1762,7 @@ M - Орган местного самоуправления муниципал�
 					</xs:element>
 					<xs:element name="fileFingerPrint" type="base:fileHashType">
 						<xs:annotation>
-							<xs:documentation>Отпечаток контента файла (хэш)</xs:documentation>
+							<xs:documentation>Отпечаток файла</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="supplierSignature" type="cmn:signatureType">
@@ -1786,7 +1788,7 @@ M - Орган местного самоуправления муниципал�
 					</xs:element>
 					<xs:element name="fileFingerPrint" type="base:fileHashType" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Отпечаток контента файла (хэш)</xs:documentation>
+							<xs:documentation>Отпечаток файла</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="customerSignature" type="cmn:signatureType" minOccurs="0">

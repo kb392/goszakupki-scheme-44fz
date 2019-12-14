@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 8.3.4, create date 2.11.2018 -->
+<!-- BASE_TYPES Integration Scheme, version 9.0, create date 26.10.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -208,6 +208,28 @@
 				<xs:annotation>
 					<xs:documentation>Идентификатор версии позиции.
 Не используется, добавлено на развитие</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NPASt14Ref">
+		<xs:annotation>
+			<xs:documentation>Ссылка на справочник Нормативно-правовые акты, регулирующие допуск товаров, работ, услуг в соответствии со ст.14 Закона 44-ФЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="NPASt14CodeType">
+				<xs:annotation>
+					<xs:documentation>Код нормативно-правового акта по справочнику "Нормативно-правовые акты, регулирующие допуск товаров, работ, услуг в соответствии со ст.14 Закона 44-ФЗ" (nsiTRUAdmissionNPA)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование нормативно-правового акта.  Игнорируется при приеме. Заполняется  при передаче</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shortName" type="text100Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Краткое наименование нормативно-правового акта.  Игнорируется при приеме. Заполняется  при передаче</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -574,7 +596,7 @@
 		<xs:annotation>
 			<xs:documentation>Тип: Текущая версия схем</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="current" type="base:schemeVersionType" fixed="8.3"/>
+		<xs:attribute name="current" type="base:schemeVersionType" fixed="9.0"/>
 	</xs:complexType>
 	<!--Простые типы-->
 	<xs:simpleType name="abandonedReasonCode">
@@ -1256,6 +1278,16 @@ O - оценка производится по шкале оценки или д
 			<xs:pattern value="\d{1,18}(\.\d{1,2})?"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="moneyPosNegMaxLengthToPoint18Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Cумма c максимальной длиной до точки 18 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="21"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value="(-)?\d{1,18}(\.\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="monthType">
 		<xs:annotation>
 			<xs:documentation>Тип: Номер месяца</xs:documentation>
@@ -1685,6 +1717,7 @@ TC - Орган местного самоуправления и (или) гос
 			<xs:enumeration value="8.2"/>
 			<xs:enumeration value="8.2.100"/>
 			<xs:enumeration value="8.3"/>
+			<xs:enumeration value="9.0"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="serviceWorkCodeType">
@@ -1938,6 +1971,15 @@ TC - Орган местного самоуправления и (или) гос
 		</xs:annotation>
 		<xs:restriction base="xs:int">
 			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NPASt14CodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код Нормативно-правового акта, регулирующего допуск товаров, работ, услуг в соответствии со ст.14 Закона 44-ФЗ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<!--Проекты контрактов-->

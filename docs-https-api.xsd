@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- docs-https-api Integration Scheme, version 8.3.4, create date 2.11.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/fz44/https" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" targetNamespace="http://zakupki.gov.ru/fz44/https" elementFormDefault="unqualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
+	<!--Сервис РБГ-->
 	<xs:element name="getRBGObjectListForOrgRequest">
 		<xs:annotation>
 			<xs:documentation>Запрос сведений о размещенных документах РБГ заказчика</xs:documentation>
@@ -228,6 +228,7 @@ bankGuaranteeReturnInvalid - Сведения о недействительно�
 			</xs:choice>
 		</xs:complexType>
 	</xs:element>
+	<!--Типы РБГ-->
 	<xs:complexType name="RBGObjectInfoType">
 		<xs:annotation>
 			<xs:documentation>Тип: Краткие сведения об опубликованном документе РБГ</xs:documentation>
@@ -298,24 +299,6 @@ IKO - Информационные системы контрольных орг�
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="errorInfoType">
-		<xs:annotation>
-			<xs:documentation>Тип: Результат вызова сервиса в случае ошибки</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="code" type="xs:int">
-				<xs:annotation>
-					<xs:documentation>Код ошибки</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="message" type="base:text2000Type">
-				<xs:annotation>
-					<xs:documentation>Текстовая расшифровка ошибки, включающая дополнительную информацию
-                    </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:simpleType name="RBGDocumentKindType">
 		<xs:annotation>
 			<xs:documentation>Тип: Вид документа РБГ
@@ -371,6 +354,258 @@ bankGuaranteeReturnInvalid - Сведения о недействительно�
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
+	<!--Сервис БО-->
+	<xs:element name="getBOObjectListRequest">
+		<xs:annotation>
+			<xs:documentation>Запрос сведений о документах БО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="getObjectListRequest">
+					<xs:sequence>
+						<xs:element name="budgetObligationNumber" type="base:boNumberType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Учетный номер бюджетного обязательства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="year" type="base:yearType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Финансовый год бюджетного обязательства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getBOObjectListResponse">
+		<xs:annotation>
+			<xs:documentation>Ответ на запрос сведений о документах БО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="errorsInfo">
+					<xs:annotation>
+						<xs:documentation>Результаты вызова сервиса в случае ошибки</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="errorInfo" type="errorInfoType" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Результат вызова сервиса в случае ошибки</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="objectsInfo">
+					<xs:annotation>
+						<xs:documentation>Список кратких сведений о размещенных документах</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="objectInfo" type="BOObjectInfoType" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Краткие сведения о размещенном документе</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getBOObjectInfoRequest">
+		<xs:annotation>
+			<xs:documentation>Запрос сведений о документе БО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sender" type="base:organizationRef">
+					<xs:annotation>
+						<xs:documentation>Отправитель</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="documentUid" type="base:guidType">
+					<xs:annotation>
+						<xs:documentation>Идентификатор документа</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="foundationDocumentKind" type="foundationDocumentKindType">
+					<xs:annotation>
+						<xs:documentation>Вид документа-основания:
+CO - контракт,
+NO – извещение об осуществлении закупки</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getBOObjectInfoResponse">
+		<xs:annotation>
+			<xs:documentation>Ответ на запрос сведений о документе БО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="errorsInfo">
+					<xs:annotation>
+						<xs:documentation>Результаты вызова сервиса в случае ошибки</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="errorInfo" type="errorInfoType">
+								<xs:annotation>
+									<xs:documentation>Результат вызова сервиса в случае ошибки</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="objectInfo">
+					<xs:annotation>
+						<xs:documentation>Cведения о документе</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="BOObjectInfoType">
+								<xs:sequence>
+									<xs:element name="content" type="xs:base64Binary">
+										<xs:annotation>
+											<xs:documentation>Содержимое документа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<!--Типы БО-->
+	<xs:complexType name="BOObjectInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Краткие сведения о документе БО</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="documentUid" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="documentStatusType">
+				<xs:annotation>
+					<xs:documentation>Статус сведений о документе:
+S - Направлены для постановки на учет,
+A - Ожидается постановка БО на учет,
+R - Поставлены на учет,
+D - Не поставлены на учет           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="createDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата формирования сведений/изменения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата подписания документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="registrationDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата постановки на учет</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="versionNumber" type="base:versionNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер последнего изменения документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="budgetObligationNumber" type="base:boNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Учетный номер бюджетного обязательства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="year" type="base:yearType">
+				<xs:annotation>
+					<xs:documentation>Финансовый год бюджетного обязательства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foundationDocumentKind" type="foundationDocumentKindType">
+				<xs:annotation>
+					<xs:documentation>Вид документа-основания:
+CO - контракт,
+NO – извещение об осуществлении закупки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="schemeVersion" type="base:schemeVersionType">
+				<xs:annotation>
+					<xs:documentation>Версия схемы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="foundationDocumentKindType">
+		<xs:annotation>
+			<xs:documentation>Тип: Вид документа-основания: 
+CO - контракт,
+NO – извещение об осуществлении закупки.
+		     </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CO"/>
+			<xs:enumeration value="NO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Общие типы-->
+	<xs:complexType name="getObjectListRequest">
+		<xs:annotation>
+			<xs:documentation>Тип: Общие поля запроса сведений о документах</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="sender" type="base:organizationRef">
+				<xs:annotation>
+					<xs:documentation>Отправитель</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customer" type="base:organizationRef">
+				<xs:annotation>
+					<xs:documentation>Организация заказчика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fromDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Начало временного интервала, в котором ведется поиск (включается)
+                        </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Конец временного интервала, в котором ведется поиск (не включается)
+                        </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="errorInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат вызова сервиса в случае ошибки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="message" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Текстовая расшифровка ошибки, включающая дополнительную информацию
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:simpleType name="documentStatusType">
 		<xs:annotation>
 			<xs:documentation>Тип: Статус документа</xs:documentation>
@@ -452,30 +687,6 @@ bankGuaranteeReturnInvalid - Сведения о недействительно�
 					<xs:documentation>Информационные системы контрольных органов</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="partnerType">
-		<xs:annotation>
-			<xs:documentation>Тип: Перечисление контрагентов:
-OOS - Единая информационная система;
-GIIS_EB - Государственная интегрированная информационная система Электронный бюджет (ГИИС ЭБ);
-RMIS - Региональная (муниципальная) информационная система (РМИС);
-OVK - Информационная система органа внутреннего контроля (ИС ОВК);
-OA - Информационная система органа аудита (ИС ОА);
-KO - Информационная система контрольного органа (ИС КО);
-FAS - Информационная система Федеральной антимонопольной службы (ИС ФАС);
-SMEV3 - Подсистема взаимодействия со СМЭВ3.
-			</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="OOS"/>
-			<xs:enumeration value="GIIS_EB"/>
-			<xs:enumeration value="RMIS"/>
-			<xs:enumeration value="OVK"/>
-			<xs:enumeration value="OA"/>
-			<xs:enumeration value="KO"/>
-			<xs:enumeration value="FAS"/>
-			<xs:enumeration value="SMEV3"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

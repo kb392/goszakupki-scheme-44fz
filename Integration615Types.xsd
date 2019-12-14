@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.3.4, create date 2.11.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.0, create date 26.10.2018 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/pprf615types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -1172,7 +1172,7 @@ TC - Орган местного самоуправления и (или) гос
 												</xs:element>
 												<xs:element name="decisionDate" type="xs:date" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Дата подведения результатов определения подрядной организации. Игнорируется при приёме, заполняется заполняется из протокола проведения электронного аукциона  (protocolEF1) зачением  "Дата размещения документа" commonInfo/docPublishDate Заполняется при передаче</xs:documentation>
+														<xs:documentation>Дата подведения результатов определения подрядной организации. Игнорируется при приёме, заполняется из протокола проведения электронного аукциона  (protocolEF1) зачением  "Дата размещения документа" commonInfo/docPublishDate Заполняется при передаче</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 												<xs:element name="protocolEFProperties" type="cmn:docPropertyType" minOccurs="0">
@@ -1183,144 +1183,10 @@ TC - Орган местного самоуправления и (или) гос
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
-									<xs:element name="contractorInfo" minOccurs="0">
+									<xs:element name="contractorInfo" type="contractorInfoType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Сведения о подрядной организации. Игнорируется при приёме, заполняется на основании протокола проведения электронного аукциона (protocolEF2), если в протоколе-основании присутствуют сведения о подрядной организации. Заполняется при передаче. Не игнорируется при приеме в случае отсутствия сведений о подрядной организации в протоколе-основании</xs:documentation>
 										</xs:annotation>
-										<xs:complexType>
-											<xs:choice>
-												<xs:element name="legalEntityRFInfo">
-													<xs:annotation>
-														<xs:documentation>Юридическое лицо РФ</xs:documentation>
-													</xs:annotation>
-													<xs:complexType>
-														<xs:complexContent>
-															<xs:extension base="legalEntityRFType">
-																<xs:sequence>
-																	<xs:element name="qualifiedContractorInfo" type="base:qualifiedContractorRef" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Запись реестра квалифицированных подрядных организаций. При приеме содержимое контролируется на  присутствие в справочнике "Реестр квалифицированных подрядных организаций по ПП РФ № 615" (nsiQualifiedContractors)</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="legalForm" type="base:OKOPFRef" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Организационно-правовая форма организации в ОКОПФ. При приеме содержимое контролируется на  присутствие в справочнике "Общероссийский классификатор организационно-правовых форм (ОКОПФ)" (nsiOKOPF)</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="shortName" type="base:text2000Type" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Сокращенное наименование организации</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="registrationDate" type="xs:date" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="eMail" type="base:eMailType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Адрес электронной почты</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="contactPerson" type="personType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Контактное лицо</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="phone" type="base:phoneType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Номер телефона организации</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																</xs:sequence>
-															</xs:extension>
-														</xs:complexContent>
-													</xs:complexType>
-												</xs:element>
-												<xs:element name="legalEntityForeignStateInfo">
-													<xs:annotation>
-														<xs:documentation>Юридическое лицо иностранного государства</xs:documentation>
-													</xs:annotation>
-													<xs:complexType>
-														<xs:complexContent>
-															<xs:extension base="legalEntityForeignStateType">
-																<xs:sequence>
-																	<xs:element name="qualifiedContractorInfo" type="base:qualifiedContractorRef" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Запись реестра квалифицированных подрядных организаций. При приеме содержимое контролируется на  присутствие в справочнике "Реестр квалифицированных подрядных организаций по ПП РФ № 615" (nsiQualifiedContractors)</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="registrationDate" type="xs:date" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="eMail" type="base:eMailType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Адрес электронной почты</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="phone" type="base:phoneType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Номер телефона организации</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																</xs:sequence>
-															</xs:extension>
-														</xs:complexContent>
-													</xs:complexType>
-												</xs:element>
-												<xs:element name="individualPersonInfo">
-													<xs:annotation>
-														<xs:documentation>Индивидуальный предприниматель</xs:documentation>
-													</xs:annotation>
-													<xs:complexType>
-														<xs:sequence>
-															<xs:element name="nameInfo" type="personType">
-																<xs:annotation>
-																	<xs:documentation>Фамилия, имя, отчество индивидуального предпринимателя</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="INN" type="base:innType">
-																<xs:annotation>
-																	<xs:documentation>ИНН</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="factAddress" type="base:text2000Type">
-																<xs:annotation>
-																	<xs:documentation>Адрес места жительства</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="qualifiedContractorInfo" type="base:qualifiedContractorRef" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Запись реестра квалифицированных подрядных организаций. При приеме содержимое контролируется на  присутствие в справочнике "Реестр квалифицированных подрядных организаций по ПП РФ № 615" (nsiQualifiedContractors)</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="taxPayerCode" type="base:taxPayerCode" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Код налогоплательщика в стране регистрации или его аналог</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="registrationDate" type="xs:date" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="eMail" type="base:eMailType" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Адрес электронной почты</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-															<xs:element name="phone" type="base:phoneType" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Номер телефона организации</xs:documentation>
-																</xs:annotation>
-															</xs:element>
-														</xs:sequence>
-													</xs:complexType>
-												</xs:element>
-											</xs:choice>
-										</xs:complexType>
 									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
@@ -1361,133 +1227,10 @@ TC - Орган местного самоуправления и (или) гос
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
-									<xs:element name="contractorInfo">
+									<xs:element name="contractorInfo" type="contractorInfoType">
 										<xs:annotation>
 											<xs:documentation>Сведения о подрядной организации</xs:documentation>
 										</xs:annotation>
-										<xs:complexType>
-											<xs:choice>
-												<xs:element name="legalEntityRFInfo">
-													<xs:annotation>
-														<xs:documentation>Юридическое лицо РФ</xs:documentation>
-													</xs:annotation>
-													<xs:complexType>
-														<xs:complexContent>
-															<xs:extension base="legalEntityRFType">
-																<xs:sequence>
-																	<xs:element name="qualifiedContractorInfo" type="base:qualifiedContractorRef" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Запись реестра квалифицированных подрядных организаций. При приеме содержимое контролируется на  присутствие в справочнике "Реестр квалифицированных подрядных организаций по ПП РФ № 615" (nsiQualifiedContractors)</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="legalForm" type="base:OKOPFRef" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Организационно-правовая форма организации в ОКОПФ. При приеме содержимое контролируется на  присутствие в справочнике "Общероссийский классификатор организационно-правовых форм (ОКОПФ)" (nsiOKOPF)</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="shortName" type="base:text2000Type" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Сокращенное наименование организации</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="registrationDate" type="xs:date" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="eMail" type="base:eMailType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Адрес электронной почты</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="contactPerson" type="personType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Контактное лицо</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="phone" type="base:phoneType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Номер телефона организации</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																</xs:sequence>
-															</xs:extension>
-														</xs:complexContent>
-													</xs:complexType>
-												</xs:element>
-												<xs:element name="legalEntityForeignStateInfo">
-													<xs:annotation>
-														<xs:documentation>Юридическое лицо иностранного государства</xs:documentation>
-													</xs:annotation>
-													<xs:complexType>
-														<xs:complexContent>
-															<xs:extension base="legalEntityForeignStateType">
-																<xs:sequence>
-																	<xs:element name="qualifiedContractorInfo" type="base:qualifiedContractorRef" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Запись реестра квалифицированных подрядных организаций. При приеме содержимое контролируется на  присутствие в справочнике "Реестр квалифицированных подрядных организаций по ПП РФ № 615" (nsiQualifiedContractors)</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="registrationDate" type="xs:date" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="eMail" type="base:eMailType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Адрес электронной почты</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="phone" type="base:phoneType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Номер телефона организации</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																</xs:sequence>
-															</xs:extension>
-														</xs:complexContent>
-													</xs:complexType>
-												</xs:element>
-												<xs:element name="individualPersonInfo">
-													<xs:annotation>
-														<xs:documentation>Индивидуальный предприниматель</xs:documentation>
-													</xs:annotation>
-													<xs:complexType>
-														<xs:complexContent>
-															<xs:extension base="individualPersonType">
-																<xs:sequence>
-																	<xs:element name="qualifiedContractorInfo" type="base:qualifiedContractorRef" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Запись реестра квалифицированных подрядных организаций. При приеме содержимое контролируется на  присутствие в справочнике "Реестр квалифицированных подрядных организаций по ПП РФ № 615" (nsiQualifiedContractors)</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="taxPayerCode" type="base:taxPayerCode" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Код налогоплательщика в стране регистрации или его аналог</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="registrationDate" type="xs:date" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="eMail" type="base:eMailType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Адрес электронной почты</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="phone" type="base:phoneType" minOccurs="0">
-																		<xs:annotation>
-																			<xs:documentation>Номер телефона организации</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																</xs:sequence>
-															</xs:extension>
-														</xs:complexContent>
-													</xs:complexType>
-												</xs:element>
-											</xs:choice>
-										</xs:complexType>
 									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
@@ -2708,6 +2451,143 @@ ROLLBACK - Решение суда об отмене решения ФАС.</xs:
 		</xs:attribute>
 	</xs:complexType>
 	<!--Общие документы-->
+	<xs:complexType name="contractorInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения о подрядной организации в сведениях о договоре о проведении капитального ремонта по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="legalEntityRFInfo">
+				<xs:annotation>
+					<xs:documentation>Юридическое лицо РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="legalEntityRFType">
+							<xs:sequence>
+								<xs:element name="qualifiedContractorInfo" type="base:qualifiedContractorRef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Запись реестра квалифицированных подрядных организаций. При приеме содержимое контролируется на  присутствие в справочнике "Реестр квалифицированных подрядных организаций по ПП РФ № 615" (nsiQualifiedContractors)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="legalForm" type="base:OKOPFRef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Организационно-правовая форма организации в ОКОПФ. При приеме содержимое контролируется на  присутствие в справочнике "Общероссийский классификатор организационно-правовых форм (ОКОПФ)" (nsiOKOPF)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="shortName" type="base:text2000Type" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Сокращенное наименование организации</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="registrationDate" type="xs:date" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="eMail" type="base:eMailType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Адрес электронной почты</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="contactPerson" type="personType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Контактное лицо</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="phone" type="base:phoneType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Номер телефона организации</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="legalEntityForeignStateInfo">
+				<xs:annotation>
+					<xs:documentation>Юридическое лицо иностранного государства</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="legalEntityForeignStateType">
+							<xs:sequence>
+								<xs:element name="qualifiedContractorInfo" type="base:qualifiedContractorRef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Запись реестра квалифицированных подрядных организаций. При приеме содержимое контролируется на  присутствие в справочнике "Реестр квалифицированных подрядных организаций по ПП РФ № 615" (nsiQualifiedContractors)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="registrationDate" type="xs:date" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="eMail" type="base:eMailType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Адрес электронной почты</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="phone" type="base:phoneType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Номер телефона организации</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="individualPersonInfo">
+				<xs:annotation>
+					<xs:documentation>Индивидуальный предприниматель</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nameInfo" type="personType">
+							<xs:annotation>
+								<xs:documentation>Фамилия, имя, отчество индивидуального предпринимателя</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INN" type="base:innType">
+							<xs:annotation>
+								<xs:documentation>ИНН</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="factAddress" type="base:text2000Type">
+							<xs:annotation>
+								<xs:documentation>Адрес места жительства</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="qualifiedContractorInfo" type="base:qualifiedContractorRef" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Запись реестра квалифицированных подрядных организаций. При приеме содержимое контролируется на  присутствие в справочнике "Реестр квалифицированных подрядных организаций по ПП РФ № 615" (nsiQualifiedContractors)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="taxPayerCode" type="base:taxPayerCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Код налогоплательщика в стране регистрации или его аналог</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="registrationDate" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="eMail" type="base:eMailType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Адрес электронной почты</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="phone" type="base:phoneType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер телефона организации</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
 	<xs:complexType name="clarificationRequestType">
 		<xs:annotation>
 			<xs:documentation>Запрос ЭП о даче разъяснений положений документации по ПП РФ № 615</xs:documentation>
@@ -3016,6 +2896,87 @@ TC - Орган местного самоуправления и (или) гос
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="contractSignType">
+		<xs:annotation>
+			<xs:documentation>Сведения о заключенном в электронной форме на ЭП договоре оказания услуг и (или) выполнения работ по капитальному ремонту общего имущества в многоквартирном доме по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="commonInfo">
+				<xs:annotation>
+					<xs:documentation>Общая информация</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="purchaseInfo">
+							<xs:annotation>
+								<xs:documentation>Информация о закупке</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="purchaseNumber" type="base:purchaseNumber615Type">
+										<xs:annotation>
+											<xs:documentation>Реестровый номер электронного аукциона.
+При приеме контролируется наличие неотмененного извещения о проведении ЭА по ПП РФ 615 с таким номером и наличие размещенного и неотмененного протокола проведения электронного аукциона (protocolEF2)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="contractNumber" type="base:contractNumber615Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер договора о проведении капитального ремонта</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="signDate" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Дата заключения договора</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="customerInfo" type="contractOrganizationInfoType">
+				<xs:annotation>
+					<xs:documentation>Заказчик.
+При приеме контролируется, что заказчик, указанный в блоке, совпадает по коду по СПЗ (коду СвР) с заказчиком в связанном ЭА по ПП РФ 615</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractorInfo" type="contractorInfoType">
+				<xs:annotation>
+					<xs:documentation>Сведения о подрядной организации. При приеме контролируется, что подрядная организация, указанная в блоке, совпадает по коду по СПЗ (коду СвР) с подрядной организацией в связанном ЭА по ПП РФ 615 на основании протокола проведения электронного аукциона (protocolEF2)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="financesInfo">
+				<xs:annotation>
+					<xs:documentation>Финансирование</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="price" type="base:moneyPositiveType">
+							<xs:annotation>
+								<xs:documentation>Значение цены договора в российских рублях</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="extPrintFormInfo" type="extPrintFormType">
+				<xs:annotation>
+					<xs:documentation>Электронный документ, полученный из внешней системы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attachmentsInfo" type="attachmentListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о прикрепленных документах</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">

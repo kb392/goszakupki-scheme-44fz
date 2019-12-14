@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION Integration Scheme, version 8.3.4, create date 2.11.2018 -->
+<!-- FCS INTEGRATION Integration Scheme, version 9.0, create date 26.10.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
@@ -785,7 +785,7 @@
 	<xs:element name="fcsNotificationPO">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
-Извещение о проведении ПО (предварительный отбор); внесение изменений</xs:documentation>
+Извещение о проведении ПО (предварительный отбор)</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2339,7 +2339,7 @@
 	<xs:element name="tenderSuspension">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
-Информация о приостановке определения поставщика</xs:documentation>
+Информация о приостановке определения поставщика (подрядчика, исполнителя) в части заключения контракта</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2892,6 +2892,24 @@
 				<xs:extension base="as2PacketType">
 					<xs:sequence>
 						<xs:element name="data" type="pp615:contractProcedureCancelType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615ContractSign">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Сведения о заключенном в электронной форме на ЭП договоре оказания услуг и (или) выполнения работ по капитальному ремонту общего имущества в многоквартирном доме по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:contractSignType">
 							<xs:annotation>
 								<xs:documentation>Данные информационного пакета</xs:documentation>
 							</xs:annotation>
@@ -3591,6 +3609,82 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+	<!--Закрытый конкурс в электронном виде(ЭЗакК)-->
+	<xs:element name="epNotificationEZakK">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Извещение о проведении ЭЗакК</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="ep:notificationEZakKType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!--Закрытый конкурс с ограниченным участием в электронном виде (ЭЗакК-ОУ)-->
+	<xs:element name="epNotificationEZakKOU">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Извещение о проведении ЭЗакК-ОУ</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="ep:notificationEZakKOUType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!--Двухэтапный закрытый конкурс в электронном виде (ЭЗакКД)-->
+	<xs:element name="epNotificationEZakKD">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Извещение о проведении ЭЗакКД</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="ep:notificationEZakKDType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!--Закрытый аукцион в электронном виде (ЭЗакА)-->
+	<xs:element name="epNotificationEZakA">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Извещение о проведении ЭЗакА</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="ep:notificationEZakAType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
 	<!--Проекты контрактов-->
 	<xs:element name="cpContractProject">
 		<xs:annotation>
@@ -3823,6 +3917,10 @@ EOKOU - ЭП Открытый конкурс с ограниченным уча�
 EOKD - ЭП Двухэтапный конкурс в электронной форме;
 EZK - ЭП Запрос котировок в электронной форме;
 EZP - ЭП Запрос предложений в электронной форме;
+EZAKA - ЭП Закрытый аукцион в электронной форме;
+EZAKKD - ЭП Закрытый конкурс, двухэтапный в электронной форме;
+EZAKKOU - ЭП Закрытый конкурс с ограниченным участием в электронной форме;
+EZAKK - ЭП Закрытый конкурс в электронной форме;
 EP_DD - ЭП Разные документы;
 CP - Проекты контрактов.</xs:documentation>
 							</xs:annotation>
@@ -3993,6 +4091,10 @@ CP - Проекты контрактов.
 			<xs:enumeration value="EOKD"/>
 			<xs:enumeration value="EZK"/>
 			<xs:enumeration value="EZP"/>
+			<xs:enumeration value="EZAKA"/>
+			<xs:enumeration value="EZAKKD"/>
+			<xs:enumeration value="EZAKKOU"/>
+			<xs:enumeration value="EZAKK"/>
 			<xs:enumeration value="EP_DD"/>
 			<xs:enumeration value="CP"/>
 		</xs:restriction>
