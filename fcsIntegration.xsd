@@ -1,7 +1,27 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION Integration Scheme, version 7.2, create date 17.08.2017 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS INTEGRATION Integration Scheme, version 8.0, create date 22.01.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
+	<xs:element name="accreditedEPSupplier">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Информация по участнику закупки, аккредитованному на электронной площадке. Устарело, не применяется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="oos:zfcs_accreditedEPSupplierType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="bankGuaranteeRefusal">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
@@ -321,7 +341,7 @@
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
-	</xs:element>	
+	</xs:element>
 	<xs:element name="eventResultCancel">
 		<xs:annotation>
 			<xs:documentation>Пакет данных: Информация об отмене результата контроля для ОВК</xs:documentation>
@@ -339,7 +359,7 @@
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
-	</xs:element>	
+	</xs:element>
 	<xs:element name="unplannedEvent">
 		<xs:annotation>
 			<xs:documentation>Пакет данных: Информация по внеплановому контрольному мероприятию для ОВК</xs:documentation>
@@ -357,7 +377,7 @@
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
-	</xs:element>	
+	</xs:element>
 	<xs:element name="unplannedEventCancel">
 		<xs:annotation>
 			<xs:documentation>Пакет данных: Информация об отмене проведения внепланового контрольного мероприятия для ОВК</xs:documentation>
@@ -375,7 +395,7 @@
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
-	</xs:element>	
+	</xs:element>
 	<xs:element name="confirmation">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
@@ -2518,6 +2538,347 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="pprf615NotificationEF">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Извещение о проведении ЭА (электронный аукцион) по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:notificationEFType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615TimeEF">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Время проведения электронного аукциона по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:timeEFType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615ProtocolEF1">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Протокол рассмотрения заявок на участие в электронном аукционе по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:protocolEF1Type">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615ProtocolEF2">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Протокол проведения электронного аукциона по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:protocolEF2Type">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615ActEvasion">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Акт отказа от заключения контракта по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:actEvasionType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615ActDeviation">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Акт признания участника уклонившимся от заключения контракта по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:actDeviationType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615NotificationPO">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Извещение о проведении ПО (предварительный отбор) по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:notificationPOType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615ProtocolPO">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Протокол предварительного отбора в ПО по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:protocolPOType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615NotificationCancel">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Извещение об отмене закупки по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:notificationCancelType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615ProtocolCancel">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Информация об отмене протокола по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:protocolCancelType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615ActCancel">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Информация об отмене акта по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:actCancelType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615Clarification">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Разъяснение положений документации по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:clarificationType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615ClarificationRequest">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Запрос ЭП о даче разъяснений положений документации по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:clarificationRequestType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615QualifiedContractor">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Сведения о 
+квалифицированной 
+подрядной организации для включения в РКПО по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:qualifiedContractorType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615QualifiedContractorExclude">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Сведения об исключении 
+квалифицированной 
+подрядной организации 
+из РКПО по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:qualifiedContractorExcludeType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615QualifiedContractorExcludeCancel">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Сведения об отмене 
+исключения 
+квалифицированной 
+подрядной организации 
+из РКПО по ПП РФ № 615</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:qualifiedContractorExcludeCancelType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615Contract">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Сведения о 
+договоре о проведении капитального ремонта по ПП РФ № 615; внесение изменений. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:contractType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pprf615MasterData">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:Набор элементов справочников и классификаторов по ПП РФ № 615. Добавлено на развитие, в версии 8.0 не используется</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="pp615:masterDataType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
 	<xs:complexType name="as2PacketType" abstract="true">
 		<xs:annotation>
 			<xs:documentation>Пакет данных AS2 протокола</xs:documentation>
@@ -2713,7 +3074,13 @@ CM - Информация по жалобе для ИС КО;
 CR - Результат контроля для ИС КО;
 UC - Внеплановая проверка для ИС КО;
 PC - Плановая проверка для ИС КО;
-99DOC - Документы контроля по 99 статье.</xs:documentation>
+99DOC - Документы контроля по 99 статье;
+ST - Участник закупки, аккредитованный на ЭП;
+615_PO - ПП РФ 615 Предварительный отбор;
+615_KPO - ПП РФ 615 Квалифицированная подрядная организация;
+615_EF - ПП РФ 615 Электронный аукцион;
+615_CT - ПП РФ 615 Договор;
+615_DD - ПП РФ 615 Разные документы.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="94_OK"/>
@@ -2755,6 +3122,12 @@ PC - Плановая проверка для ИС КО;
 			<xs:enumeration value="UC"/>
 			<xs:enumeration value="PC"/>
 			<xs:enumeration value="99DOC"/>
+			<xs:enumeration value="ST"/>
+			<xs:enumeration value="615_PO"/>
+			<xs:enumeration value="615_KPO"/>
+			<xs:enumeration value="615_EF"/>
+			<xs:enumeration value="615_CT"/>
+			<xs:enumeration value="615_DD"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS INTEGRATION eisSignIncoming Scheme, version 7.2, create date 17.08.2017 -->
+<!-- EIS INTEGRATION eisSignIncoming Scheme, version 8.0, create date 22.01.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/signIncoming/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/signIncoming/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:element name="processingResult" type="processingResultType">
@@ -1437,7 +1437,7 @@
 	<xs:complexType name="tenderPlanChange2017">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
-Изменение плана-графика с 01.01.2017</xs:documentation>
+Изменение общей информации плана-графика с 01.01.2017</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="packetType">
@@ -1891,6 +1891,22 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="eventPlanSuspension">
+		<xs:annotation>
+			<xs:documentation>Информации о приостановке/возобновлении планового контрольного мероприятия</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="packetType">
+				<xs:sequence>
+					<xs:element name="data" type="oos:zfcs_eventPlanSuspensionType">
+						<xs:annotation>
+							<xs:documentation>Данные информационного пакета</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:complexType name="eventResult">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:
@@ -1950,6 +1966,23 @@
 			<xs:extension base="packetType">
 				<xs:sequence>
 					<xs:element name="data" type="oos:zfcs_unplannedEventCancelType">
+						<xs:annotation>
+							<xs:documentation>Данные информационного пакета</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="unplannedEventSuspension">
+		<xs:annotation>
+			<xs:documentation>Пакет данных:
+Информации о приостановке/возобновлении внепланового контрольного мероприятия</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="packetType">
+				<xs:sequence>
+					<xs:element name="data" type="oos:zfcs_unplannedEventSuspensionType">
 						<xs:annotation>
 							<xs:documentation>Данные информационного пакета</xs:documentation>
 						</xs:annotation>

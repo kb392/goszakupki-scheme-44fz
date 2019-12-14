@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS SOAP Messages Integration Scheme, version 7.2, create date 17.08.2017 -->
+<!-- EIS SOAP Messages Integration Scheme, version 8.0, create date 22.01.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/signIncoming/soap/messages" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:si="http://zakupki.gov.ru/oos/signIncoming/1" targetNamespace="http://zakupki.gov.ru/oos/signIncoming/soap/messages" elementFormDefault="qualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/signIncoming/1" schemaLocation="eisSignIncoming.xsd"/>
 	<xs:element name="receiveRbgRequest" type="receiveRbgRequestType">
@@ -281,12 +281,14 @@
 		<xs:choice>
 			<xs:element name="eventPlan" type="si:eventPlan"/>
 			<xs:element name="eventPlanProject" type="si:eventPlanProject"/>
+			<xs:element name="eventPlanSuspension" type="si:eventPlanSuspension"/>
 		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="receiveRvpOvkRequestType">
 		<xs:choice>
 			<xs:element name="unplannedEvent" type="si:unplannedEvent"/>
 			<xs:element name="unplannedEventProject" type="si:unplannedEventProject"/>
+			<xs:element name="unplannedEventSuspension" type="si:unplannedEventSuspension"/>
 			<xs:element name="unplannedEventCancel" type="si:unplannedEventCancel"/>
 			<xs:element name="unplannedEventCancelProject" type="si:unplannedEventCancelProject"/>
 		</xs:choice>
