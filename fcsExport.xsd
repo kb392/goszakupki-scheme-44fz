@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 7.1.7, create date 21.06.2017 -->
+<!-- FCS EXPORT Integration Scheme, version 7.2, create date 25.07.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:element name="export">
@@ -465,12 +465,22 @@
 					</xs:element>
 					<xs:element name="publicDiscussionPhase1Suspension" type="oos:zfcs_publicDiscussionPhase1SuspensionType">
 						<xs:annotation>
-							<xs:documentation>Приостановление/возобновление певрого этапа ООКЗ</xs:documentation>
+							<xs:documentation>Приостановление/возобновление первого этапа ООКЗ</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="publicDiscussionPhase2Suspension" type="oos:zfcs_publicDiscussionPhase2SuspensionType">
 						<xs:annotation>
 							<xs:documentation>Приостановление/возобновление второго этапа ООКЗ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="publicDiscussionLargePurchase2016" type="oos:zfcs_publicDiscussionLargePurchase2016Type">
+						<xs:annotation>
+							<xs:documentation>Информация об обязательном общественном обсуждения крупной закупки (ООКЗ) до 01.01.2017</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="publicDiscussionSuspension2016" type="oos:zfcs_publicDiscussionSuspension2016Type">
+						<xs:annotation>
+							<xs:documentation>Приостановление/возобновление ООКЗ до 01.01.2017</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="publicDiscussionComment" type="oos:zfcs_publicDiscussionCommentType">
@@ -1195,6 +1205,16 @@
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="nsiFarmDrugDictionary" type="oos:zfcs_nsiFarmDrugDictionary" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiDrugOKEI">
+						<xs:annotation>
+							<xs:documentation>Справочник: Единицы измерения потребительских единиц измерения лекарственных препаратов по ОКЕИ</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiDrugOKEI" type="oos:zfcs_nsiDrugOKEIType" minOccurs="0" maxOccurs="unbounded"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>

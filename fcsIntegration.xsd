@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION Integration Scheme, version 7.1.7, create date 21.06.2017 -->
+<!-- FCS INTEGRATION Integration Scheme, version 7.2, create date 25.07.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:element name="bankGuaranteeRefusal">
@@ -286,6 +286,96 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="eventPlan">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: План контрольных мероприятий для ОВК</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="oos:zfcs_eventPlanType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="eventResult">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Результат контроля для ОВК</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="oos:zfcs_eventResultType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>	
+	<xs:element name="eventResultCancel">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Информация об отмене результата контроля для ОВК</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="oos:zfcs_eventResultCancelType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>	
+	<xs:element name="unplannedEvent">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Информация по внеплановому контрольному мероприятию для ОВК</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="oos:zfcs_unplannedEventType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>	
+	<xs:element name="unplannedEventCancel">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Информация об отмене проведения внепланового контрольного мероприятия для ОВК</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="as2PacketType">
+					<xs:sequence>
+						<xs:element name="data" type="oos:zfcs_unplannedEventCancelType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>	
 	<xs:element name="confirmation">
 		<xs:annotation>
 			<xs:documentation>Пакет данных:

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS FILESTORE API Integration Scheme, version 7.1.7, create date 21.06.2017 -->
+<!-- EIS FILESTORE API Integration Scheme, version 7.2, create date 25.07.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/filestore/ws/data" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/filestore/ws/data">
 	<xs:complexType name="startRequestType">
 		<xs:annotation>

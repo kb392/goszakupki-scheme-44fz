@@ -1,0 +1,115 @@
+Версия 7.2 итерация 4
+
+
+   IntegrationTypes.xsd
+
+
+FCSNF-4286 Доработка интеграции РПГ и ПРИЗ в части лекарственных препаратов часть 3
+
+1. В типе "Тип: Сведения о МНН, ТН, лекарственной форме и дозировке в случае когда информация о лекарственных препаратах формируется в текстовой форме"   
+
+   - удалено поле "Потребительская единица дозировки. Ссылка на классификатор ОКЕИ (nsiOKEI)" (dosageInfo\dosageUserOKEI)
+   - блок "Единица измерения товара" (manualUserOKEI) сделан обязательным и переименован в "Единица измерения товара. При приеме содержимое контролируется на  присутствие в справочнике "Справочник: Единицы измерения потребительских единиц измерения лекарственных препаратов по ОКЕИ" (nsiDrugOKEI)"
+
+2. В типе "Тип: Сведения о МНН, ТН, лекарственной форме и дозировке" (zfcs_drugInfoType) 
+   
+   блок manualUserOKEI переименован в "Единица измерения товара, введенная вручную . Если  заполнено в принимаемом документе, то считается, что внешняя система явно указала этот блок, содержимое контролируется на  присутствие в справочнике "Справочник: Единицы измерения потребительских единиц измерения лекарственных препаратов по ОКЕИ" (nsiDrugOKEI)"
+
+3. В типе "Тип: Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты (РПГ)" (zfcs_tenderPlan2017DrugPurchaseObjectsInfoType) 
+   
+   - добавлен блок "Необходимо указание сведений об упаковке закупаемого лекарственного препарата" (drugPurchaseObjectInfo\objectInfoUsingReferenceInfo\mustSpecifyDrugPackage)
+   - добавлен блок "Необходимо указание сведений об упаковке закупаемого лекарственного препарата" (drugPurchaseObjectInfo\objectInfoUsingTextForm\mustSpecifyDrugPackage)
+
+   В типе "Тип: Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты (ПРИЗ)" (zfcs_tenderPlan2017DrugPurchaseObjectsInfoType) 
+   
+   - добавлен блок "Необходимо указание сведений об упаковке закупаемого лекарственного препарата" (drugPurchaseObjectInfo\objectInfoUsingReferenceInfo\mustSpecifyDrugPackage)
+   - добавлен блок "Необходимо указание сведений об упаковке закупаемого лекарственного препарата" (drugPurchaseObjectInfo\objectInfoUsingTextForm\mustSpecifyDrugPackage)
+
+   В типе "Тип: Сведения о МНН, ТН, лекарственной форме и дозировке" (zfcs_drugInfoType) 
+   блок packagingInfo переименован в "Сведения об упаковке. В  случае заполнения блока mustSpecifyDrugPackage при приеме контролируется заполненность блока packagingInfo во всех  вариантах поставки лекарственных препаратов"
+
+4. Добавлен тип "Справочник: Единицы измерения потребительских единиц измерения лекарственных препаратов по ОКЕИ" (zfcs_nsiDrugOKEIType)
+
+5. В типе "Тип: Сведения о МНН, ТН, лекарственной форме и дозировке" (zfcs_drugInfoType) удален блок "Количество (объем) закупаемого лекарственного препарата" (drugQuantityInfo)
+
+   В типе "Тип: Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты (РПГ)" (zfcs_tenderPlan2017DrugPurchaseObjectsInfoType)
+   - добавлен блок "Количество (объем) закупаемого лекарственного препарат" (drugPurchaseObjectInfo\objectInfoUsingReferenceInfo\drugsInfo\drugInfo\drugQuantityInfo)
+   - добавлен блок "Количество (объем) закупаемого лекарственного препарат" (drugPurchaseObjectInfo\objectInfoUsingTextForm\drugsInfo\drugInfo\drugQuantityInfo)
+ 
+   В типе "Тип: Сведения о МНН, ТН, лекарственной форме и дозировке" (zfcs_drugInfoType) удален блок "Количество (объем) закупаемого лекарственного препарата" (drugQuantityInfo)
+
+   В типе "Тип: Сведения о МНН, ТН, лекарственной форме и дозировке в случае когда информация о лекарственных препаратах формируется в текстовой форме" (zfcs_drugInfoUsingTextFormType) удален блок "Количество (объем) закупаемого лекарственного препарата" (drugQuantityInfo)
+   
+   В типе "Тип: Сведения об объектах закупки в том случае, когда объектами закупки являются лекарственные препараты (ПРИЗ)" (zfcs_purchaseDrugPurchaseObjectsInfoType)
+   - добавлено поле "Количество (объем) закупаемого лекарственного препарата" (drugPurchaseObjectInfo\objectInfoUsingReferenceInfo\drugsInfo\drugInfo\drugQuantity)
+   - добавлено поле "Количество (объем) закупаемого лекарственного препарата" (drugPurchaseObjectInfo\objectInfoUsingTextForm\drugsInfo\drugInfo\drugQuantity)
+
+
+
+
+FCSNF-4141 Интеграция РК. Доработки по лекарствам и гарантийным случаям в исполнениях
+
+6. В типе "Информация об исполнении (исполнении обязательств по предоставленной гарантии качества, расторжении) контракта с 01.01.2015" (zfcs_contractProcedure2015Type)
+
+   удален блок "Предметы контракта (объекты закупки)" (executions\execution\quantityContractSubjects\quantityContractSubject\products). Блок "Предмет контракта (объект закупки)" (product) перенесен в корень блока quantityContractSubject
+   удален блок "Предметы контракта (объекты закупки)" (executions\executionquantityDrugContractSubjectsquantityDrugContractSubject\products). Блок "Предмет контракта (объект закупки)" (product) перенесен в корень блока quantityDrugContractSubject
+
+7. Создан тип "Тип: Реквизиты предмета контракта для поиска в исполнении контракта" (zfcs_contractProcedure2015SearchProductsAttrsType)
+
+   В тип "Информация (проект информации) о заключенном контракте с 01.01.2015" (zfcs_contract2015Type)
+   - добавлено необязательное поле "Внешний идентификатор объекта закупки" (externalSid)
+
+
+   В типе "Информация об исполнении (исполнении обязательств по предоставленной гарантии качества, расторжении) контракта с 01.01.2015" (zfcs_contractProcedure2015Type)
+   - В блок "Сведения об объеме" (executions\execution\quantityContractSubjects\quantityContractSubject) добавлен чойс и поля
+     "Внешний идентификатор объекта закупки" (externalSid) и "Атрибуты объекта закупки из сведений о контракте" (productInfo)
+
+   - В блок "Сведения об объеме" (executions\execution\quantityDrugContractSubjects\quantityDrugContractSubject) добавлен чойс и поля
+     "Внешний идентификатор объекта закупки" (externalSid) и "Атрибуты объекта закупки из сведений о контракте" (productInfo)
+   
+
+
+
+   fcsPrintForm.xsd 
+
+
+
+
+
+   fcsExport.xsd 
+
+FCSNF-4415 Выгрузка на FTP справочника "Единицы измерения потребительских единиц измерения лекарственных препаратов по ОКЕИ" (nsiDrugOKEI)
+
+
+1. Добавлен элемент "Справочник: Единицы измерения потребительских единиц измерения лекарственных препаратов по ОКЕИ" (nsiDrugOKEI)
+
+
+
+
+   fcsIntegration.xsd
+
+
+
+
+
+   fcsExtegration.xsd
+
+
+
+
+   fcsEisSignIncoming.xsd
+
+
+
+
+   fcsInternal.xsd
+
+
+   docs-ws-api.xsd
+
+
+   eis-fs-ws-api.xsd
+
+
+   fcsControl99.xsd
+
