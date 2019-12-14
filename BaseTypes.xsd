@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 9.0, create date 25.12.2018 -->
+<!-- BASE_TYPES Integration Scheme, version 9.1, create date 13.03.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -596,7 +596,7 @@
 		<xs:annotation>
 			<xs:documentation>Тип: Текущая версия схем</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="current" type="base:schemeVersionType" fixed="9.0"/>
+		<xs:attribute name="current" type="base:schemeVersionType" fixed="9.1"/>
 	</xs:complexType>
 	<!--Простые типы-->
 	<xs:simpleType name="abandonedReasonCode">
@@ -648,13 +648,15 @@ PASS_OFFER – Все остальные заявки
 			
 P4 - В соответствии с ч. 4 ст. 15 Закона № 44-ФЗ;
 P5 - В соответствии с ч. 5 ст. 15 Закона № 44-ФЗ;
-P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ.
+P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ:
+P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ.
 </xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="P4"/>
 			<xs:enumeration value="P5"/>
 			<xs:enumeration value="P6"/>
+			<xs:enumeration value="P41"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="authorityType">
@@ -1151,7 +1153,7 @@ QO - Квалификация участников закупки, в том ч�
 			<xs:documentation>Тип: КПП</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:pattern value="\d{9}"/>
+			<xs:length value="9"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ktruCharacteristicTypeType">
@@ -1303,7 +1305,7 @@ O - оценка производится по шкале оценки или д
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
-			<xs:maxLength value="50"/>
+			<xs:maxLength value="60"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ogrnCodeType">
@@ -1627,7 +1629,7 @@ TC - Орган местного самоуправления и (или) гос
 	</xs:simpleType>
 	<xs:simpleType name="responsibleRoleEPType">
 		<xs:annotation>
-			<xs:documentation>Тип: Роль организации, осуществляющей закупку по жлектронным процедурам:
+			<xs:documentation>Тип: Роль организации, осуществляющей закупку по электронным процедурам:
 CU - Заказчик;
 OCU - Заказчик в качестве организатора совместного аукциона;
 RA - Уполномоченный орган;
@@ -1644,7 +1646,10 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
-RO - Региональный оператор.</xs:documentation>
+RO - Региональный оператор;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.
+</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="CU"/>
@@ -1662,6 +1667,8 @@ RO - Региональный оператор.</xs:documentation>
 			<xs:enumeration value="AU"/>
 			<xs:enumeration value="OAU"/>
 			<xs:enumeration value="RO"/>
+			<xs:enumeration value="CN"/>
+			<xs:enumeration value="OCN"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="responsibleRolePOType">
@@ -1718,6 +1725,7 @@ TC - Орган местного самоуправления и (или) гос
 			<xs:enumeration value="8.2.100"/>
 			<xs:enumeration value="8.3"/>
 			<xs:enumeration value="9.0"/>
+			<xs:enumeration value="9.1"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="serviceWorkCodeType">
@@ -1894,7 +1902,7 @@ TC - Орган местного самоуправления и (или) гос
 	</xs:simpleType>
 	<xs:simpleType name="VATRateEnum">
 		<xs:annotation>
-			<xs:documentation>Тип: Ставка НДС, процентов.
+			<xs:documentation>Тип: Ставка НДС, процентов. 
 Допустимые значения:
 0 - 0%;
 10 - 10%;
@@ -1906,6 +1914,22 @@ TC - Орган местного самоуправления и (или) гос
 			<xs:enumeration value="10"/>
 			<xs:enumeration value="18"/>
 			<xs:enumeration value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VATRate2019Enum">
+		<xs:annotation>
+			<xs:documentation>Тип: Ставка НДС с 2019 года, процентов. 
+Допустимые значения:
+0 - 0%;
+10 - 10%;
+20 - 20%;
+n-без НДС.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="n"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="yearType">

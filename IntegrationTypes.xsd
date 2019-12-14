@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.0, create date 25.12.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.1, create date 13.03.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -8821,7 +8821,7 @@ R - Результаты аудита  привлечения подрядных
 					<xs:sequence>
 						<xs:element name="central" type="xs:boolean">
 							<xs:annotation>
-								<xs:documentation>Центральный аппарат</xs:documentation>
+								<xs:documentation>ГО, ОУ ГВФ, МО</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="territorial" type="xs:boolean">
@@ -8842,6 +8842,21 @@ R - Результаты аудита  привлечения подрядных
 						<xs:element name="unitary" type="xs:boolean">
 							<xs:annotation>
 								<xs:documentation>Унитарные предприятия</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="scientific" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наиболее значимые учреждения науки, образования, культуры и здравоохранения, определенные в соответствии с Бюджетным кодексом Российской Федерации</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Rosatom" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Государственная корпорация по атомной энергии "Росатом"</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Roskosmos" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Государственная корпорация по космической деятельности "Роскосмос"</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -9228,7 +9243,7 @@ PA - Принять правила нормирования.</xs:documentation>
 					<xs:sequence>
 						<xs:element name="central" type="xs:boolean">
 							<xs:annotation>
-								<xs:documentation>Центральный аппарат</xs:documentation>
+								<xs:documentation>ГО, ОУ ГВФ, МО</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="territorial" type="xs:boolean">
@@ -9249,6 +9264,21 @@ PA - Принять правила нормирования.</xs:documentation>
 						<xs:element name="unitary" type="xs:boolean">
 							<xs:annotation>
 								<xs:documentation>Унитарные предприятия</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="scientific" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наиболее значимые учреждения науки, образования, культуры и здравоохранения, определенные в соответствии с Бюджетным кодексом Российской Федерации</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Rosatom" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Государственная корпорация по атомной энергии "Росатом"</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Roskosmos" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Государственная корпорация по космической деятельности "Роскосмос"</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -18261,7 +18291,8 @@ OR-обследование в рамках ревизии
 												</xs:element>
 												<xs:element name="contractProjectNumber" type="base:contractProjNumType" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Реестровый номер проекта контракта, заключенного в электронной форме. Игнорируется при приеме. Используется в печатной форме</xs:documentation>
+														<xs:documentation>Реестровый номер проекта контракта, заключенного в электронной форме. Контролируется заполнение в случае если к закупке с извещением, номер которого указан в поле notificationNumber, привязано более одного идентификатора заключенного в электронной форме контракта в статусе "Контракт заключен" и значение признака «Право заключения контракта с несколькими участниками» у данной закупки = TRUE.
+В остальных случаях игнорируется при приеме, заполняется автоматически</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 												<xs:element name="tenderPlanInfo" type="zfcs_contract2015TenderPlanInfoType" minOccurs="0">
@@ -18287,7 +18318,7 @@ OR-обследование в рамках ревизии
 														</xs:element>
 														<xs:element name="contractProjectNumber" type="base:contractProjNumType" minOccurs="0">
 															<xs:annotation>
-																<xs:documentation>Реестровый номер проекта контракта, заключенного в электронной форме Игнорируется при приеме. Используется в печатной форме</xs:documentation>
+																<xs:documentation>Реестровый номер проекта контракта, заключенного в электронной форме. Устарело. Игнорируется при приеме-передаче</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 														<xs:element name="tenderPlanInfo" type="zfcs_contract2015TenderPlanInfoType" minOccurs="0">
@@ -18348,7 +18379,7 @@ OR-обследование в рамках ревизии
 												</xs:element>
 												<xs:element name="contractProjectNumber" type="base:contractProjNumType" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Реестровый номер проекта контракта, заключенного в электронной форме Игнорируется при приеме. Используется в печатной форме</xs:documentation>
+														<xs:documentation>Реестровый номер проекта контракта, заключенного в электронной форме. Устарело. Игнорируется при приеме-передаче</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 												<xs:element name="tenderPlanInfo" type="zfcs_contract2015TenderPlanInfoType" minOccurs="0">
@@ -18761,6 +18792,12 @@ MP - максимальное значение цены контракта</xs:d
 							<xs:element name="priceVATRUR" type="base:moneyPositiveType" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Значение НДС в рублевом эквиваленте. При приеме игнорируется, заполняется при передаче в случае если валюта контракта отлична от рублей</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="amountsReducedByTaxes" type="xs:boolean" fixed="true" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Суммы, уплачиваемые заказчиком поставщику (подрядчику, исполнителю), будут уменьшены на размер налогов, сборов и иных обязательных платежей.
+Признак может быть установлен, если контракт заключается не по цене за право заключения контракта</xs:documentation>
 								</xs:annotation>
 							</xs:element>
 						</xs:sequence>
@@ -19309,6 +19346,10 @@ MP - максимальное значение цены контракта</xs:d
 										</xs:annotation>
 									</xs:element>
 									<xs:choice>
+										<xs:annotation>
+											<xs:documentation>Значение блоков OKPD/OKPD2/KTRU игнорируется и заполняется значением соответствующей позиции КТРУ, в случае если контракт создан на основании извещения об осуществлении закупки (заполнен блок foundation\fcsOrder\order\notificationNumber) и в извещении заполнен код по КТРУ, либо в случае если контракт создан на основании позиции плана-графика (заполнен блок foundation\singleCustomer\tenderPlanInfo или foundation\ notOosOrder\ tenderPlanInfo) и в такой позиции заполнен код по КТРУ. 
+В других случаях сохраняется значение одного из блоков OKPD/OKPD2/KTRU</xs:documentation>
+										</xs:annotation>
 										<xs:element name="OKPD" type="zfcs_OKPDRef">
 											<xs:annotation>
 												<xs:documentation>Классификация по ОКПД</xs:documentation>
@@ -19319,10 +19360,40 @@ MP - максимальное значение цены контракта</xs:d
 												<xs:documentation>Классификация по ОКПД2</xs:documentation>
 											</xs:annotation>
 										</xs:element>
-										<xs:element name="KTRU" type="zfcs_KTRURef">
+										<xs:element name="KTRU">
 											<xs:annotation>
 												<xs:documentation>Классификация по КТРУ. При приеме контролируется, что позиция с данным кодом НЕ является укрупненной (для нее НЕ заполнено поле position/data/isTemplate в справочнике nsiKTRU)</xs:documentation>
 											</xs:annotation>
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="zfcs_KTRURef">
+														<xs:sequence>
+															<xs:element name="characteristics" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Характеристики товара, работы, услуги позиции КТРУ.
+Значение блока игнорируется и заполняется соответствующим значением характеристики для позиции КТРУ, в случае если контракт создан на основании извещения об осуществлении закупки (заполнен блок foundation\fcsOrder\order\notificationNumber) и в извещении заполнен код по КТРУ, либо в случае если контракт создан на основании позиции плана-графика (заполнен блок foundation\singleCustomer\tenderPlanInfo или foundation\notOosOrder\tenderPlanInfo) и в такой позиции заполнены характеристики для позиции КТРУ.
+В других случаях блок принимается и сохраняется, если заполнен и при этом контролируется заполнение одного из дочерних блоков characteristicsUsingReferenceInfo и/или characteristicsUsingTextForm</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="characteristicsUsingReferenceInfo" type="zfcs_tenderPlan2017RefKtruCharacteristicType" minOccurs="0" maxOccurs="unbounded">
+																			<xs:annotation>
+																				<xs:documentation>Характеристика товара, работы услуги позиции КТРУ формируется с использованием справочной информации (справочник Каталог товаров, работ, услуг (КТРУ) (nsiKTRU)).
+Контролируется принадлежность характеристики по совокупности полей name+type КТРУ(positions/position/purchaseObjectInfo/productsSpecification/product/KTRU/code) по справочнику Каталог товаров, работ, услуг (КТРУ) (nsiKTRU)</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="characteristicsUsingTextForm" type="zfcs_tenderPlan2017ManualKtruCharacteristicType" minOccurs="0" maxOccurs="unbounded">
+																			<xs:annotation>
+																				<xs:documentation>Характеристика товара, работы услуги позиции КТРУ формируется в текстовой форме</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:extension>
+												</xs:complexContent>
+											</xs:complexType>
 										</xs:element>
 									</xs:choice>
 									<xs:element name="name" type="zfcs_longTextMinType" minOccurs="0">
@@ -19354,6 +19425,18 @@ MP - максимальное значение цены контракта</xs:d
 											<xs:documentation>Цена за единицу в рублевом эквиваленте</xs:documentation>
 										</xs:annotation>
 									</xs:element>
+									<xs:element name="whitoutVATPrice" type="base:moneyPositiveType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Цена за единицу без НДС в валюте контракта.
+При приеме контролируется обязательность заполнения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="whitoutVATPriceRUR" type="base:moneyPositiveType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Цена за единицу без НДС в рублевом эквиваленте.
+При приеме игнорируется, заполняется при передаче, в случае если валюта контракта отлична от рублей</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 									<xs:element name="quantity" type="base:quantity18p11Type" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Количество поставляемого товара, объёма выполняемых работ, оказываемых услуг</xs:documentation>
@@ -19369,6 +19452,45 @@ MP - максимальное значение цены контракта</xs:d
 											<xs:documentation>Стоимость поставляемого товара, выполняемых работ, оказываемых услуг в рублевом эквиваленте</xs:documentation>
 										</xs:annotation>
 									</xs:element>
+									<xs:element name="withoutVATSum" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Сумма без НДС в валюте контракта.
+При приеме контролируется обязательность заполнение поля, если значение поля «Невозможно указать сведения о количестве товара, работы, услуги» (products/quantityUndefined) = false, которое:
+1) заполнено на основании извещения об осуществлении закупки
+2) ИЛИ заполнено в принимаемом пакете, если контракт создан НЕ на основании извещения об осуществлении закупки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="withoutVATSumRUR" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Сумма без НДС в рублевом эквиваленте.
+При приеме игнорируется, заполняется при передаче, в случае если валюта контракта отлична от рублей и заполнено поле "Сумма без НДС в валюте контракта" (products/product/withoutVATSum)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="VATRate" type="base:VATRate2019Enum" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Ставка НДС, процентов. 
+Допустимые значения:
+20 - 20%;
+10 - 10%;
+0 - 0%;
+n - Без НДС.
+При приеме контролируется обязательность заполнение поля</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="VATSum" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Размер НДС в валюте контракта.
+При приеме контролируется обязательность заполнение поля, если значение поля «Невозможно указать сведения о количестве товара, работы, услуги» (products/quantityUndefined) = false, которое:
+1) заполнено на основании извещения об осуществлении закупки
+2) ИЛИ заполнено в принимаемом пакете, если контракт создан НЕ на основании извещения об осуществлении закупки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="VATSumRUR" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Размер НДС в рублевом эквиваленте.
+При приеме игнорируется, заполняется при передаче, в случае если валюта контракта отлична от рублей и заполнено поле "Размер НДС в валюте контракта" (products/product/VATSum)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 									<xs:element name="drugPurchaseObjectInfo" type="zfcs_contract2015DrugPurchaseInfoType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Сведения об объекте закупки в том случае, когда объектом закупки является лекарственный препарат</xs:documentation>
@@ -19376,6 +19498,13 @@ MP - максимальное значение цены контракта</xs:d
 									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
+						</xs:element>
+						<xs:element name="quantityUndefined" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Невозможно указать сведения о количестве товара, работы, услуги.
+Игнорируется при приеме и заполняется соответствующим значением, в случае если контракт создан на основании извещения об осуществлении закупки (заполнен блок foundation\fcsOrder\order\notificationNumber) из поля «Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг» (quantityUndefined) (Для извещений о проведении ЭОК, ЭОК-ОУ, ЭОКД, ЭКЗ, ЭЗП, ЭЗакК, ЭЗакК-ОУ, ЭЗакКД, ЭЗакА поле notificationInfo/purchaseObjectsInfo/notDrugPurchaseObjectsInfo/quantityUndefined, для извещения о проведении ЭА lot/quantityUndefined).
+В других случаях значение поля принимается и сохраняется</xs:documentation>
+							</xs:annotation>
 						</xs:element>
 						<xs:element name="productsChange" minOccurs="0">
 							<xs:annotation>
@@ -19644,7 +19773,7 @@ IN	Aннулировано.</xs:documentation>
 	</xs:complexType>
 	<xs:complexType name="zfcs_contractProcedure2015Type">
 		<xs:annotation>
-			<xs:documentation>Информация об исполнении (исполнении обязательств по предоставленной гарантии качества, расторжении) контракта с 01.01.2015</xs:documentation>
+			<xs:documentation>Информация об исполнении (исполнении обязательств по предоставленной гарантии качества, расторжении, возврата переплаты по контракту) контракта с 01.01.2015</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="id" minOccurs="0">
@@ -20279,7 +20408,7 @@ IN	Aннулировано.</xs:documentation>
 			</xs:element>
 			<xs:element name="executionObligationGuarantee" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Информация об исполнении обязательств по предоставленной гарантии качества товаров, работ, услуг. Не может быть заполнен одновременно с блоками executions и termination</xs:documentation>
+					<xs:documentation>Информация об исполнении обязательств по предоставленной гарантии качества товаров, работ, услуг. Не может быть заполнен одновременно с блоками executions, termination, refundOverpaymentsInfo</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -20618,6 +20747,159 @@ IN	Aннулировано.</xs:documentation>
 									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="refundOverpaymentsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о возврате поставщиком (подрядчиком, исполнителем) переплаты по контракту.
+Не может быть заполнен одновременно с блоками executions, termination, executionObligationGuarantee.
+При приеме контролируется, что:
+1. Контракт находится на этапе "Исполнение" или "Исполнение завершено" или "Исполнение прекращено"
+2. Есть размещенные сведения об исполнении/расторжении контракта, содержащие сведения о платежных документах (Хотя бы в одном из таких документов заполнен блок "Платежный документ" (executions/execution/payDoc))
+3. Разность суммы полей refundOverpaymentsInfo/refundOverpaymentInfo/amountOverpaidsInfo/amountOverpaidInfo/amountOverpaidSum и суммы полей refundOverpaymentsInfo/refundOverpaymentInfo/amountRefundsInfo/amountRefundInfo/amountRefundSum больше 0
+4. Разность суммы полей refundOverpaymentsInfo/refundOverpaymentInfo/amountRefundsInfo/amountRefundInfo/amountRefundSum И суммы полей executions/execution/paid в документах об исполнении/расторжении, в которых заполнен блок executions/execution/payDoc больше 0</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="refundOverpaymentInfo" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Информация о возврате поставщиком (подрядчиком, исполнителем) переплаты по контракту.
+В блоке контролируется, что (ИЛИ):
+1. Заполнены блоки foundationRefundDocsInfo, amountOverpaidsInfo и amountRefundsInfo
+2. Заполнены блоки foundationRefundDocsInfo и 
+amountOverpaidsInfo
+3. Заполнен только блок amountRefundsInfo</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="foundationRefundDocsInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Реквизиты документов, являющихся основанием для возврата заказчику излишне уплаченной суммы оплаты контракта</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="foundationRefundDocInfo" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Реквизиты документа, являющегося основанием для возврата заказчику излишне уплаченной суммы оплаты контракта</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="name" type="base:text200Type">
+																<xs:annotation>
+																	<xs:documentation>Наименование</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="number" type="base:text200Type">
+																<xs:annotation>
+																	<xs:documentation>Номер</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="date" type="xs:date">
+																<xs:annotation>
+																	<xs:documentation>Дата</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="amountOverpaidsInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Размеры излишне уплаченной заказчиком суммы оплаты контракта</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="amountOverpaidInfo" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Размер излишне уплаченной заказчиком суммы оплаты контракта</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="amountOverpaidSum" type="base:moneyMaxLengthToPoint18Type">
+																<xs:annotation>
+																	<xs:documentation>Размер излишне уплаченной заказчиком суммы оплаты контракта в валюте контракта</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="amountOverpaidSumRUR" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Размер излишне уплаченной заказчиком суммы оплаты контракта в российских рублях.
+Игнорируется при приеме, заполняется при передаче, в случае если валюта контракта отлична от рублей</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="overpaidDate" type="xs:date">
+																<xs:annotation>
+																	<xs:documentation>Дата возникновения переплаты (дата платежного документа)</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="currencyRate" type="zfcs_currencyRateContract2015" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Курс валюты (на дату переплаты) по отношению к рублю.
+Игнорируется при приеме, заполняется при передаче, в случае если валюта контракта отлична от рублей</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="amountRefundsInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Размеры возвращенной заказчику излишне уплаченной заказчиком суммы оплаты контракта</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="amountRefundInfo" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Размер возвращенной заказчику излишне уплаченной заказчиком суммы оплаты контракта</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="amountRefundSum" type="base:moneyMaxLengthToPoint18Type">
+																<xs:annotation>
+																	<xs:documentation>Размер возвращенной заказчику излишне уплаченной заказчиком суммы оплаты контракта в валюте контракта</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="amountRefundSumRUR" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Размер возвращенной заказчику излишне уплаченной заказчиком суммы оплаты контракта в российских рублях.
+Игнорируется при приеме, заполняется при передаче, в случае если валюта контракта отлична от рублей</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="refundDate" type="xs:date">
+																<xs:annotation>
+																	<xs:documentation>Дата возврата заказчику излишне уплаченной суммы оплаты контракта</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="currencyRate" type="zfcs_currencyRateContract2015" minOccurs="0">
+																<xs:annotation>
+																	<xs:documentation>Курс валюты (на дату возврата) по отношению к рублю.
+Игнорируется при приеме, заполняется при передаче, в случае если валюта контракта отлична от рублей</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="currency" type="zfcs_currencyRef">
+							<xs:annotation>
+								<xs:documentation>Валюта.
+При приеме контролируется, что валюта, указанная в данном блоке, соответствует валюте контракта</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="refundOverpaidDocuments" type="zfcs_contract.attachmentListType">
+							<xs:annotation>
+								<xs:documentation>Документы, являющиеся основанием для возврата заказчику излишне уплаченной суммы оплаты контракта</xs:documentation>
+							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
@@ -21291,14 +21573,45 @@ IN	Aннулировано.</xs:documentation>
 								<xs:documentation>ОКТМО</xs:documentation>
 							</xs:annotation>
 						</xs:element>
+						<xs:element name="personalAccount" type="zfcs_personalAccountType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер лицевого счета.
+Обязательность заполнения контролируется бизнес-контролем</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 						<xs:element name="address" type="zfcs_contract2015AddressType">
 							<xs:annotation>
 								<xs:documentation>Адрес места нахождения</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
+						<xs:element name="postAdressInfo" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Почтовый адрес</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="mailingAdress" type="zfcs_contract2015AddressType">
+										<xs:annotation>
+											<xs:documentation>Адрес пользователя услугами почтовой связи в информационной системе организации федеральной почтовой связи</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="mailFacilityName" type="zfcs_contract2015AddressType">
+										<xs:annotation>
+											<xs:documentation>Наименование объекта почтовой связи</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="postBoxNumber" type="zfcs_contract2015AddressType">
+										<xs:annotation>
+											<xs:documentation>Номер ячейки абонементного почтового шкафа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Почтовый адрес.
+Устарело. Используется для приема данных о контрактах, первая версия сведений о которых сформирована до выхода версии ЕИС 9.1</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="contactInfo" type="zfcs_contactPersonType" minOccurs="0">
@@ -21345,9 +21658,10 @@ IN	Aннулировано.</xs:documentation>
 								<xs:documentation>Полное наименование (латинскими буквами)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="taxPayerCode">
+						<xs:element name="taxPayerCode" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Код налогоплательщика в стране регистрации или его аналог</xs:documentation>
+								<xs:documentation>Код налогоплательщика в стране регистрации или его аналог.
+При приеме контролируется заполнение данного поля или\и блока "Поставщик состоит на учете в налоговых органах на территории РФ" (legalEntityForeignState/registerInRFTaxBodies)</xs:documentation>
 							</xs:annotation>
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
@@ -21356,9 +21670,16 @@ IN	Aннулировано.</xs:documentation>
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
+						<xs:element name="personalAccount" type="zfcs_personalAccountType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер лицевого счета.
+Обязательность заполнения контролируется бизнес-контролем</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 						<xs:element name="registerInRFTaxBodies" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Поставщик состоит на учете в налоговых органах на территории РФ</xs:documentation>
+								<xs:documentation>Поставщик состоит на учете в налоговых органах на территории РФ.
+При приеме контролируется заполнение данного блока или\и поля "Код налогоплательщика в стране регистрации или его аналог" (/legalEntityForeignState/taxPayerCode)</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -21430,9 +21751,34 @@ IN	Aннулировано.</xs:documentation>
 											<xs:documentation>Адрес места нахождения</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
+									<xs:element name="postAdressInfo" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Почтовый адрес</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="mailingAdress" type="zfcs_contract2015AddressType">
+													<xs:annotation>
+														<xs:documentation>Адрес пользователя услугами почтовой связи в информационной системе организации федеральной почтовой связи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="mailFacilityName" type="zfcs_contract2015AddressType">
+													<xs:annotation>
+														<xs:documentation>Наименование объекта почтовой связи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="postBoxNumber" type="zfcs_contract2015AddressType">
+													<xs:annotation>
+														<xs:documentation>Номер ячейки абонементного почтового шкафа</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Почтовый адрес.
+Устарело. Используется для приема данных о контрактах, первая версия сведений о которых сформирована до выхода версии ЕИС 9.1</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="contactEMail" type="base:eMailType" minOccurs="0">
@@ -21510,14 +21856,45 @@ IN	Aннулировано.</xs:documentation>
 								<xs:documentation>ОКТМО</xs:documentation>
 							</xs:annotation>
 						</xs:element>
+						<xs:element name="personalAccount" type="zfcs_personalAccountType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер лицевого счета.
+Обязательность заполнения контролируется бизнес-контролем</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 						<xs:element name="address" type="zfcs_contract2015AddressType">
 							<xs:annotation>
 								<xs:documentation>Адрес места нахождения</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
+						<xs:element name="postAddressInfo" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Почтовый адрес</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="mailingAdress" type="zfcs_contract2015AddressType">
+										<xs:annotation>
+											<xs:documentation>Адрес пользователя услугами почтовой связи в информационной системе организации федеральной почтовой связи</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="mailFacilityName" type="zfcs_contract2015AddressType">
+										<xs:annotation>
+											<xs:documentation>Наименование объекта почтовой связи</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="postBoxNumber" type="zfcs_contract2015AddressType">
+										<xs:annotation>
+											<xs:documentation>Номер ячейки абонементного почтового шкафа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Почтовый адрес.
+Устарело. Используется для приема данных о контрактах, первая версия сведений о которых сформирована до выхода версии ЕИС 9.1</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="contactEMail" type="base:eMailType">
@@ -21621,6 +21998,12 @@ IN	Aннулировано.</xs:documentation>
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
+						<xs:element name="personalAccount" type="zfcs_personalAccountType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер лицевого счета.
+Обязательность заполнения контролируется бизнес-контролем</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 						<xs:element name="registerInRFTaxBodies" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Поставщик состоит на учете в налоговых органах на территории РФ</xs:documentation>
@@ -21646,12 +22029,12 @@ IN	Aннулировано.</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="country" type="zfcs_countryRef">
+									<xs:element name="country" type="zfcs_countryRef" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Страна регистрации</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="address" type="zfcs_contract2015AddressType">
+									<xs:element name="address" type="zfcs_contract2015AddressType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Адрес места нахождения в стране регистрации</xs:documentation>
 										</xs:annotation>
@@ -21692,8 +22075,33 @@ IN	Aннулировано.</xs:documentation>
 									</xs:element>
 									<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
 										<xs:annotation>
+											<xs:documentation>Почтовый адрес.
+Устарело. Используется для приема данных о контрактах, первая версия сведений о которых сформирована до выхода версии ЕИС 9.1</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="postAddressInfo" minOccurs="0">
+										<xs:annotation>
 											<xs:documentation>Почтовый адрес</xs:documentation>
 										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="mailingAdress" type="zfcs_contract2015AddressType">
+													<xs:annotation>
+														<xs:documentation>Адрес пользователя услугами почтовой связи в информационной системе организации федеральной почтовой связи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="mailFacilityName" type="zfcs_contract2015AddressType">
+													<xs:annotation>
+														<xs:documentation>Наименование объекта почтовой связи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="postBoxNumber" type="zfcs_contract2015AddressType">
+													<xs:annotation>
+														<xs:documentation>Номер ячейки абонементного почтового шкафа</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
 									</xs:element>
 									<xs:element name="contactEMail" type="base:eMailType" minOccurs="0">
 										<xs:annotation>
@@ -21775,14 +22183,45 @@ IN	Aннулировано.</xs:documentation>
 								<xs:documentation>ОКТМО</xs:documentation>
 							</xs:annotation>
 						</xs:element>
+						<xs:element name="personalAccount" type="zfcs_personalAccountType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер лицевого счета.
+Обязательность заполнения контролируется бизнес-контролем</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 						<xs:element name="address" type="zfcs_contract2015AddressType" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Адрес места нахождения</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
+						<xs:element name="postAddressInfo" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Почтовый адрес</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="mailingAdress" type="zfcs_contract2015AddressType">
+										<xs:annotation>
+											<xs:documentation>Адрес пользователя услугами почтовой связи в информационной системе организации федеральной почтовой связи</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="mailFacilityName" type="zfcs_contract2015AddressType">
+										<xs:annotation>
+											<xs:documentation>Наименование объекта почтовой связи</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="postBoxNumber" type="zfcs_contract2015AddressType">
+										<xs:annotation>
+											<xs:documentation>Номер ячейки абонементного почтового шкафа</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Почтовый адрес.
+Устарело. Используется для приема данных о контрактах, первая версия сведений о которых сформирована до выхода версии ЕИС 9.1</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="contactEMail" type="base:eMailType" minOccurs="0">
@@ -21881,6 +22320,12 @@ IN	Aннулировано.</xs:documentation>
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
+						<xs:element name="personalAccount" type="zfcs_personalAccountType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер лицевого счета.
+Обязательность заполнения контролируется бизнес-контролем</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 						<xs:element name="registerInRFTaxBodies" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Поставщик состоит на учете в налоговых органах на территории РФ</xs:documentation>
@@ -21906,12 +22351,12 @@ IN	Aннулировано.</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="country" type="zfcs_countryRef">
+									<xs:element name="country" type="zfcs_countryRef" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Страна регистрации</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="address" type="zfcs_contract2015AddressType">
+									<xs:element name="address" type="zfcs_contract2015AddressType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Адрес места нахождения в стране регистрации</xs:documentation>
 										</xs:annotation>
@@ -21952,8 +22397,33 @@ IN	Aннулировано.</xs:documentation>
 									</xs:element>
 									<xs:element name="postAddress" type="zfcs_contract2015AddressType" minOccurs="0">
 										<xs:annotation>
+											<xs:documentation>Почтовый адрес.
+Устарело. Используется для приема данных о контрактах, первая версия сведений о которых сформирована до выхода версии ЕИС 9.1</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="postAddressInfo" minOccurs="0">
+										<xs:annotation>
 											<xs:documentation>Почтовый адрес</xs:documentation>
 										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="mailingAdress" type="zfcs_contract2015AddressType">
+													<xs:annotation>
+														<xs:documentation>Адрес пользователя услугами почтовой связи в информационной системе организации федеральной почтовой связи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="mailFacilityName" type="zfcs_contract2015AddressType">
+													<xs:annotation>
+														<xs:documentation>Наименование объекта почтовой связи</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="postBoxNumber" type="zfcs_contract2015AddressType">
+													<xs:annotation>
+														<xs:documentation>Номер ячейки абонементного почтового шкафа</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
 									</xs:element>
 									<xs:element name="contactEMail" type="base:eMailType" minOccurs="0">
 										<xs:annotation>
@@ -24389,6 +24859,14 @@ CS - Заказчик, осуществляющий закупки в соотв
 			<xs:enumeration value="AI"/>
 			<xs:enumeration value="OA"/>
 			<xs:enumeration value="CS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_personalAccountType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер лицевого счета</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{11}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<!--Контракты (РК). Типы для документов до 01.01.2015-->
@@ -29217,7 +29695,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -30350,6 +30830,11 @@ Ro5 - Ненадлежащее исполнение обязательств б�
 					<xs:documentation>Закупка товаров, работ, услуг по государственному оборонному заказу в соответствии с ФЗ № 275-ФЗ от 29 декабря 2012 г. Не может быть задан одновременно с признаком "Закупка за счет средств бюджета Союзного государства" (isBudgetUnionState). Проверяется принадлежность всех Заказчиков к перечню настройки "Настройка дополнительного перечня организаций для ГОЗ" или "Настройка перечня кодов ОКФС для ГОЗ"</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="isBBST" type="xs:boolean" fixed="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Закупка в части заказа на создание, модернизацию, поставку, ремонт, сервисное обслуживание и утилизацию вооружения, военной и специальной техники. Может быть заполнено только при указании признака "Закупка товаров, работ, услуг по государственному оборонному заказу в соответствии с ФЗ № 275-ФЗ от 29 декабря 2012 г" (isGOZ), а также если у документа закупки нет связи с позицией плана-графика (в закупке не заполнен ни один блок tenderPlanInfo)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="purchaseResponsible">
 				<xs:annotation>
 					<xs:documentation>Информация об организации, осуществляющей закупку</xs:documentation>
@@ -30381,7 +30866,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -30398,7 +30885,8 @@ TKO - Региональный оператор для обращения с Т�
 
 P4 - В соответствии с ч. 4 ст. 15 Закона № 44-ФЗ;
 P5 - В соответствии с ч. 5 ст. 15 Закона № 44-ФЗ;
-P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ</xs:documentation>
+P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ;
+P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="okpd2okved2" type="xs:boolean" minOccurs="0">
@@ -30591,7 +31079,7 @@ P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ</xs:
 			</xs:element>
 			<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
+					<xs:documentation>Информация о бюджетном обязательстве. Блок игнорируется при приеме, если данная организация-заказчик включена в настройку «Настройка ПРИЗ для организаций, в извещениях которых не требуется указание сведений о принимаемом БО»</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="purchaseObjectDescription" type="zfcs_longText4000MinType" minOccurs="0">
@@ -30892,7 +31380,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 											</xs:annotation>
 										</xs:element>
 									</xs:sequence>
@@ -31073,12 +31563,24 @@ TKO - Региональный оператор для обращения с Т�
 														</xs:element>
 														<xs:element name="applicationGuarantee" type="zfcs_paymentInfoType" minOccurs="0">
 															<xs:annotation>
-																<xs:documentation>Обеспечение заявок</xs:documentation>
+																<xs:documentation>Обеспечение заявок.
+Блок может быть не заполнен, если заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
+Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 														<xs:element name="contractGuarantee" type="zfcs_paymentInfoType" minOccurs="0">
 															<xs:annotation>
 																<xs:documentation>Обеспечение исполнения контракта</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="unableProvideContractGuaranteeDocs" type="zfcs_attachmentListType" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Отчет с обоснованием невозможности установления требования обеспечения контракта.
+Контролируется бизнес-контролем заполнение блока, если (И):
+-первая версия извещения размещена после выхода версии ЕИС 9.1;
+-не заполнен блок "Обеспечение исполнения контракта" (contractGuarantee);
+-заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
+Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 														<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
@@ -31108,7 +31610,7 @@ TKO - Региональный оператор для обращения с Т�
 														</xs:element>
 														<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
 															<xs:annotation>
-																<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
+																<xs:documentation>Информация о бюджетном обязательстве. Блок игнорируется при приеме, если данная организация-заказчик включена в настройку «Настройка ПРИЗ для организаций, в извещениях которых не требуется указание сведений о принимаемом БО»</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 														<xs:element name="purchaseObjectDescription" type="zfcs_longText4000MinType" minOccurs="0">
@@ -31492,7 +31994,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -31760,6 +32264,12 @@ M - Орган местного самоуправления муниципал�
 					<xs:documentation>Закупка товаров, работ, услуг по государственному оборонному заказу в соответствии с ФЗ № 275-ФЗ от 29 декабря 2012 г. Не может быть задан одновременно с признаком "Закупка за счет средств бюджета Союзного государства" (isBudgetUnionState). Проверяется принадлежность всех Заказчиков к перечню настройки "Настройка дополнительного перечня организаций для ГОЗ" или "Настройка перечня кодов ОКФС для ГОЗ"</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="isBBST" type="xs:boolean" fixed="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Закупка в части заказа на создание, модернизацию, поставку, ремонт, сервисное обслуживание и утилизацию вооружения, военной и специальной техники. Может быть задано, только при указании признака "Закупка товаров, работ, услуг по государственному оборонному заказу в соответствии с ФЗ № 275-ФЗ от 29 декабря 2012 г" (isGOZ),
+ а также если у документа закупки нет связи с позицией плана-графика (в закупке не заполнен ни один блок tenderPlanInfo)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="purchaseResponsible">
 				<xs:annotation>
 					<xs:documentation>Информация об организации, осуществляющей закупку</xs:documentation>
@@ -31790,7 +32300,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="responsibleInfo" type="zfcs_contactInfoType">
@@ -31817,7 +32329,8 @@ TKO - Региональный оператор для обращения с Т�
 
 P4 - В соответствии с ч. 4 ст. 15 Закона № 44-ФЗ;
 P5 - В соответствии с ч. 5 ст. 15 Закона № 44-ФЗ;
-P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ</xs:documentation>
+P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ;
+P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="contractConclusionOnSt83Ch2" type="xs:boolean" minOccurs="0">
@@ -31927,6 +32440,16 @@ P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ</xs:
 														<xs:documentation>Обеспечение исполнения контракта. Отсутствие элемента в извещении означает, что обеспечение исполнения контракта не установлена.</xs:documentation>
 													</xs:annotation>
 												</xs:element>
+												<xs:element name="unableProvideContractGuaranteeDocs" type="zfcs_attachmentListType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Отчет с обоснованием невозможности установления требования обеспечения контракта.
+Контролируется бизнес-контролем заполнение блока, если (И):
+-первая версия извещения размещена после выхода версии ЕИС 9.1;
+-не заполнен блок "Обеспечение исполнения контракта" (contractGuarantee);
+-заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
+Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
 												<xs:element name="addInfo" type="zfcs_longTextType" minOccurs="0">
 													<xs:annotation>
 														<xs:documentation>Дополнительная информация</xs:documentation>
@@ -31959,7 +32482,7 @@ P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ</xs:
 												</xs:element>
 												<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
 													<xs:annotation>
-														<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
+														<xs:documentation>Информация о бюджетном обязательстве. Блок игнорируется при приеме, если данная организация-заказчик включена в настройку «Настройка ПРИЗ для организаций, в извещениях которых не требуется указание сведений о принимаемом БО»</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 												<xs:element name="purchaseObjectDescription" type="zfcs_longText4000MinType" minOccurs="0">
@@ -32588,7 +33111,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -32642,7 +33167,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -32677,7 +33204,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="specialOrg" type="xs:boolean" minOccurs="0">
@@ -34052,12 +34581,24 @@ TKO - Региональный оператор для обращения с Т�
 														</xs:element>
 														<xs:element name="applicationGuarantee" type="zfcs_paymentInfoType" minOccurs="0">
 															<xs:annotation>
-																<xs:documentation>Обеспечение заявок</xs:documentation>
+																<xs:documentation>Обеспечение заявок.
+Блок может быть не заполнен, если заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
+Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 														<xs:element name="contractGuarantee" type="zfcs_paymentInfoType" minOccurs="0">
 															<xs:annotation>
 																<xs:documentation>Обеспечение исполнения контракта. Отсутствие элемента в извещении означает, что обеспечение исполнения контракта не установлена.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="unableProvideContractGuaranteeDocs" type="zfcs_attachmentListType" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>Отчет с обоснованием невозможности установления требования обеспечения контракта.
+Контролируется бизнес-контролем заполнение блока, если (И):
+-первая версия извещения размещена после выхода версии ЕИС 9.1;
+-не заполнен блок "Обеспечение исполнения контракта" (contractGuarantee);
+-заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
+Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 														<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
@@ -34482,7 +35023,11 @@ TKO - Региональный оператор для обращения с Т�
 		<xs:sequence>
 			<xs:element name="startDate" type="xs:dateTime" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Дата и время начала предоставления. Если не задано, то значение даты и времени начала предоставления будет сформировано автоматически при размещении извещения. Значение будет соответствовать фактической дате и времени размещения извещения по местному времени организации, осуществляющей размещение</xs:documentation>
+					<xs:documentation>Дата и время начала предоставления. 
+1) При приеме первой версии извещения: 
+Если не задано в принимаемом документе, то значение даты и времени начала предоставления будет сформировано автоматически при размещении извещения. Значение будет соответствовать фактической дате и времени размещения первой версии извещения по местному времени организации, осуществляющей размещение;
+2) При приеме второй и последующих версий извещения: 
+Если не задано в принимаемом документе, то значение даты и времени начала предоставления будет сформировано автоматически при размещении второй и последующей версий извещения. Значение будет соответствовать значению  из предыдущей размещенной версии извещения</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="endDate" type="xs:dateTime">
@@ -34490,7 +35035,7 @@ TKO - Региональный оператор для обращения с Т�
 					<xs:documentation>Дата и время окончания предоставления</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="deliveryProcedure" type="base:text500Type">
+			<xs:element name="deliveryProcedure" type="base:text2000Type">
 				<xs:annotation>
 					<xs:documentation>Порядок предоставления</xs:documentation>
 				</xs:annotation>
@@ -35053,12 +35598,24 @@ TKO - Региональный оператор для обращения с Т�
 									</xs:element>
 									<xs:element name="applicationGuarantee" type="zfcs_paymentInfoType" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Обеспечение заявок</xs:documentation>
+											<xs:documentation>Обеспечение заявок.
+Блок может быть не заполнен, если заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
+Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="contractGuarantee" type="zfcs_paymentInfoType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Обеспечение исполнения контракта</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="unableProvideContractGuaranteeDocs" type="zfcs_attachmentListType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Отчет с обоснованием невозможности установления требования обеспечения контракта.
+Контролируется бизнес-контролем заполнение блока, если (И):
+-первая версия извещения размещена после выхода версии ЕИС 9.1;
+-не заполнен блок "Обеспечение исполнения контракта" (contractGuarantee);
+-заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
+Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="addInfo" type="zfcs_longTextType" minOccurs="0">
@@ -35093,7 +35650,7 @@ TKO - Региональный оператор для обращения с Т�
 									</xs:element>
 									<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
+											<xs:documentation>Информация о бюджетном обязательстве. Блок игнорируется при приеме, если данная организация-заказчик включена в настройку «Настройка ПРИЗ для организаций, в извещениях которых не требуется указание сведений о принимаемом БО» и конкурс является закрытым</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="purchaseObjectDescription" type="zfcs_longText4000MinType" minOccurs="0">
@@ -35464,6 +36021,16 @@ TKO - Региональный оператор для обращения с Т�
 											<xs:documentation>Обеспечение исполнения контракта. Отсутствие элемента в извещении означает, что обеспечение исполнения контракта не установлена.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
+									<xs:element name="unableProvideContractGuaranteeDocs" type="zfcs_attachmentListType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Отчет с обоснованием невозможности установления требования обеспечения контракта.
+Контролируется бизнес-контролем заполнение блока, если (И):
+-первая версия извещения размещена после выхода версии ЕИС 9.1;
+-не заполнен блок "Обеспечение исполнения контракта" (contractGuarantee);
+-заказчик осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика значение поля «Организация включена в перечень ст. 111.1 
+Федерального закона №44-ФЗ» (isSt111_1) равно «true»)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 									<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Идентификационный код закупки. Заполняется автоматически из плана-графика в случае указания блока tenderPlanInfo. Иначе требуется обязательное заполнение.</xs:documentation>
@@ -35491,7 +36058,7 @@ TKO - Региональный оператор для обращения с Т�
 									</xs:element>
 									<xs:element name="BOInfo" type="zfcs_purchaseBOInfoType" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Информация о бюджетном обязательстве</xs:documentation>
+											<xs:documentation>Информация о бюджетном обязательстве. Блок игнорируется при приеме, если данная организация-заказчик включена в настройку «Настройка ПРИЗ для организаций, в извещениях которых не требуется указание сведений о принимаемом БО»</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="purchaseObjectDescription" type="zfcs_longText4000MinType" minOccurs="0">
@@ -36569,7 +37136,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -36659,6 +37228,13 @@ TKO - Региональный оператор для обращения с Т�
 Игнорируется при приеме, начиная с версии ЕИС 9.0, для извещений предварительного отбора (notificationPO)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="isBBST" type="xs:boolean" fixed="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Закупка в части заказа на создание, модернизацию, поставку, ремонт, сервисное обслуживание и утилизацию вооружения, военной и специальной техники. Может быть задано, только при указании признака "Закупка товаров, работ, услуг по государственному оборонному заказу в соответствии с ФЗ № 275-ФЗ от 29 декабря 2012 г" (isGOZ),
+ а также если у документа закупки нет связи с позицией плана-графика (в закупке не заполнен ни один блок tenderPlanInfo).
+Игнорируется при приеме для извещений предварительного отбора (notificationPO)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="purchaseResponsible">
 				<xs:annotation>
 					<xs:documentation>Информация об организации, осуществляющей закупку</xs:documentation>
@@ -36689,7 +37265,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-ТКО - Региональный оператор для обращения с ТБО.</xs:documentation>
+ТКО - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="responsibleInfo" type="zfcs_contactInfoType">
@@ -36721,7 +37299,8 @@ RO - Региональный оператор;
 
 P4 - В соответствии с ч. 4 ст. 15 Закона № 44-ФЗ;
 P5 - В соответствии с ч. 5 ст. 15 Закона № 44-ФЗ;
-P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ</xs:documentation>
+P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ;
+P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="contractConclusionOnSt83Ch2" type="xs:boolean" minOccurs="0">
@@ -37321,7 +37900,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -37449,7 +38030,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО..</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -37582,7 +38165,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -37625,7 +38210,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -38958,7 +39545,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -39191,10 +39780,10 @@ TKO - Региональный оператор для обращения с Т�
 															<xs:annotation>
 																<xs:documentation>Порядковый номер заявки по результатам аукциона.
 При приеме контролируется:
-1) Если не установлен признак признания закупки несостоявшейся, то в списке заявок должна быть заявка с порядковым номером «1» и она должна быть только одна;
-2) Если не установлен признак признания закупки несостоявшейся, то в списке заявок должна быть с порядковым номером «2» и она должна быть только одна;
-3) Если установлен признак признания закупки несостоявшейся с типом причины NS (Не подано ни одного ценового предложения) и допущено более одной заявки, то в списке заявок должна быть только одна заявка с порядковым номером «1»
-4) Если установлен признак признания закупки несостоявшейся с типом причины NS (Не подано ни одного ценового предложения) и допущено более одной заявки, то в списке заявок должна быть только одна заявка с порядковым номером «2»</xs:documentation>
+1) Если не установлен признак признания закупки несостоявшейся, 
+то в списке заявок должна быть одна и только одна заявка с порядковым номером «1», а также в списке заявок должна одна и только одна заявка с порядковым номером «2»;
+2) Если установлен признак признания закупки несостоявшейся с типом причины NS (Не подано ни одного ценового предложения) и допущено более одной заявки, то в списке заявок должна быть одна и только одна заявка с порядковым номером «1», 
+а также в списке заявок должна одна и только одна заявка с порядковым номером «2»</xs:documentation>
 															</xs:annotation>
 														</xs:element>
 														<xs:element name="winnerPrice" type="base:moneyType" minOccurs="0">
@@ -39549,7 +40138,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -39592,7 +40183,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -39711,11 +40304,25 @@ TKO - Региональный оператор для обращения с Т�
 									</xs:element>
 									<xs:element name="appParticipants" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Участники заявки (для печатной формы)</xs:documentation>
+											<xs:documentation>Участники заявки (для печатной формы). Устарело, не применяется.</xs:documentation>
 										</xs:annotation>
 										<xs:complexType>
 											<xs:sequence>
 												<xs:element name="appParticipant" type="zfcs_participantType" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Сведения об участнике</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="appParticipantsInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Участники заявки (для печатной формы)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="appParticipantInfo" type="cmn:participantType" minOccurs="0" maxOccurs="unbounded">
 													<xs:annotation>
 														<xs:documentation>Сведения об участнике</xs:documentation>
 													</xs:annotation>
@@ -39743,6 +40350,11 @@ TKO - Региональный оператор для обращения с Т�
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="contractRegNum" type="zfcs_contract.regNum2015Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер контракта. Игнорируется при приеме. Выгружается для электронных процедур, если извещение содержит признак contractConclusionOnSt83Ch2</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
@@ -39866,7 +40478,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -39909,7 +40523,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -40028,11 +40644,26 @@ TKO - Региональный оператор для обращения с Т�
 									</xs:element>
 									<xs:element name="appParticipants" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Участники заявки (для печатной формы)</xs:documentation>
+											<xs:documentation>Участники заявки (для печатной формы).
+Устарело, не применяется</xs:documentation>
 										</xs:annotation>
 										<xs:complexType>
 											<xs:sequence>
 												<xs:element name="appParticipant" type="zfcs_participantType" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Сведения об участнике</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="appParticipantsInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Участники заявки (для печатной формы)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="appParticipantInfo" type="cmn:participantType" minOccurs="0" maxOccurs="unbounded">
 													<xs:annotation>
 														<xs:documentation>Сведения об участнике</xs:documentation>
 													</xs:annotation>
@@ -40079,6 +40710,11 @@ TKO - Региональный оператор для обращения с Т�
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="contractRegNum" type="zfcs_contract.regNum2015Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер контракта. Игнорируется при приеме. Выгружается для электронных процедур, если извещение содержит признак contractConclusionOnSt83Ch2</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
@@ -40274,7 +40910,7 @@ M - Орган местного самоуправления муниципал�
 	</xs:complexType>
 	<xs:complexType name="zfcs_protocolOK1Type">
 		<xs:annotation>
-			<xs:documentation>Протокол вскрытия конвертов и открытия доступа к электронным документам заявок участников в ОК</xs:documentation>
+			<xs:documentation>Протокол вскрытия конвертов с заявками на участие в ОК</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="zfcs_purchaseProtocolType">
@@ -42667,6 +43303,12 @@ QO - Квалификация участников закупки, в том ч�
 					<xs:documentation>Закупка товаров, работ, услуг по государственному оборонному заказу в соответствии с ФЗ № 275-ФЗ от 29 декабря 2012 г. Не может быть задан одновременно с признаком "Закупка за счет средств бюджета Союзного государства" (isBudgetUnionState). Проверяется принадлежность всех Заказчиков к перечню настройки "Настройка дополнительного перечня организаций для ГОЗ" или "Настройка перечня кодов ОКФС для ГОЗ"</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="isBBST" type="xs:boolean" fixed="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Закупка в части заказа на создание, модернизацию, поставку, ремонт, сервисное обслуживание и утилизацию вооружения, военной и специальной техники. Может быть задано, только при указании признака "Закупка товаров, работ, услуг по государственному оборонному заказу в соответствии с ФЗ № 275-ФЗ от 29 декабря 2012 г" (isGOZ),
+ а также если у документа закупки нет связи с позицией плана-графика (в закупке не заполнен ни один блок tenderPlanInfo)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="purchaseResponsible">
 				<xs:annotation>
 					<xs:documentation>Информация об организации, осуществляющей закупку</xs:documentation>
@@ -42697,7 +43339,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="responsibleInfo">
@@ -42743,7 +43387,8 @@ TKO - Региональный оператор для обращения с Т�
 
 P4 - В соответствии с ч. 4 ст. 15 Закона № 44-ФЗ;
 P5 - В соответствии с ч. 5 ст. 15 Закона № 44-ФЗ;
-P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ</xs:documentation>
+P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ;
+P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="lot">
@@ -43323,7 +43968,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ4
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -43929,7 +44576,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор.
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -43972,7 +44621,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -45736,27 +46387,15 @@ RB - Заявка на блкировку.</xs:documentation>
 			<xs:documentation>Справочник: Действия пользователей на электронных площадках</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="code">
+			<xs:element name="code" type="zfcs_etpPrivilegeCodeType">
 				<xs:annotation>
 					<xs:documentation>Код действия</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:minLength value="1"/>
-						<xs:maxLength value="10"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
-			<xs:element name="name">
+			<xs:element name="name" type="zfcs_etpPrivilegeNameType">
 				<xs:annotation>
 					<xs:documentation>Наименование действия</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="1000"/>
-						<xs:minLength value="1"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element name="actual" type="xs:boolean">
 				<xs:annotation>
@@ -45765,32 +46404,38 @@ RB - Заявка на блкировку.</xs:documentation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="zfcs_etpPrivilegeCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код привилегии пользователя на ЭП</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="zfcs_etpPrivilegeNameType">
+		<xs:annotation>
+			<xs:documentation>Тип: Наименование привилегии пользователя на ЭП</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="zfcs_etpActionRefType">
 		<xs:annotation>
 			<xs:documentation>Ссылка на справочник "Действия пользователей на электронных площадках"</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="code">
+			<xs:element name="code" type="zfcs_etpPrivilegeCodeType">
 				<xs:annotation>
 					<xs:documentation>Код действия</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:minLength value="1"/>
-						<xs:maxLength value="10"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
-			<xs:element name="name" minOccurs="0">
+			<xs:element name="name" type="zfcs_etpPrivilegeNameType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Наименование действия</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="100"/>
-						<xs:minLength value="1"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -47687,7 +48332,7 @@ PP615 - ПП РФ 615.</xs:documentation>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="IKUInfo" minOccurs="0">
+			<xs:element name="IKUInfo" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Информация об идентификационном коде заказчика (ИКУ)</xs:documentation>
 				</xs:annotation>
@@ -47857,7 +48502,10 @@ REP - Орган исполнительной власти, предоставл
 PIK - Производитель товаров в соответствии со специальным инвестиционным контрактом;
 RO - Региональный оператор, осуществляющий закупки товаров, работ, услуг в соответствии с частью 1.1 статьи 180 и частью 5 статьи 182 Жилищного кодекса РФ;
 OTR - Федеральный орган исполнительной власти, уполномоченный на формирование сведений каталога товаров, работ, услуг;
-ТКО - Региональный оператор для обращения с ТБО.</xs:documentation>
+ТКО - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.
+</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="startDate" type="xs:date" minOccurs="0">
@@ -48688,7 +49336,10 @@ RD -  Орган, уполномоченный на ведение реестр�
 REP - Орган исполнительной власти, предоставляющий информацию и документы для включения в реестр единственных поставщиков товара, производство которого создается или модернизируется и (или) осваивается на территории Российской Федерации;
 PIK - Производитель товаров в соответствии со специальным инвестиционным контрактом;
 RO - Региональный оператор, осуществляющий закупки товаров, работ, услуг в соответствии с частью 1.1 статьи 180 и частью 5 статьи 182 Жилищного кодекса РФ;
-OTR - Федеральный орган исполнительной власти, уполномоченный на формирование сведений каталога товаров, работ, услуг.</xs:documentation>
+OTR - Федеральный орган исполнительной власти, уполномоченный на формирование сведений каталога товаров, работ, услуг;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.
+</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="status" type="zfcs_userStatusType">
@@ -50813,7 +51464,10 @@ PPF1043 - Постановление правительства РФ №1043 о�
 								</xs:element>
 								<xs:element name="OKTMOPPO" type="zfcs_OKTMOPPORef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Территориально-муниципальное образование публично-правового образования (ППО) организации. Необязательно для заполнения</xs:documentation>
+										<xs:documentation>Территориально-муниципальное образование публично-правового образования (ППО) организации. Необязательно для заполнения.
+
+Если длина кода=8 символов, при приеме осуществляется поиск по полю OKTMO_CODE справочника nsi_ppo.
+Если длина кода=11 символов, осуществляется поиск по полю CODE (код ОКАТО) справочника  nsi_ppo</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -51282,6 +51936,11 @@ E - Данные позиции отредактированы.</xs:documentatio
 				<xs:annotation>
 					<xs:documentation>Сведения о закупках на последующие годы.
 Может быть заполнено только при заданном поле «Сумма на последующие годы» (financeInfo/subsecYears)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isEnergyServiceContract" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Признак "Планируется заключение энергосервисного контракта". Если признак не указан и в версии документа к которой принимается изменение/редакция в данной позиции имеется признак «Планируется заключение энергосервисного контракта в соответствии со статьей 108 Федерального закона №44» (positions/position/purchasesSubsecYearsInfo/energyServiceContract), то наследуется значение данного признака</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -52147,7 +52806,7 @@ OTHER - Иное.</xs:documentation>
 		<xs:choice>
 			<xs:element name="energyServiceContract">
 				<xs:annotation>
-					<xs:documentation>Планируется заключение энергосервисного контракта в соответствии со статьей 108 Федерального закона №44</xs:documentation>
+					<xs:documentation>Планируется заключение энергосервисного контракта в соответствии со статьей 108 Федерального закона №44. Указание блока недопустимо. Начиная с версии 9.1, необходимо указывать признак «Планируется заключение энергосервисного контракта» (positions/position/isEnergyServiceContract)</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -53177,6 +53836,11 @@ OA - Организация, осуществляющая полномочия �
 											<xs:documentation>Вынесенное решение. Заполнение блока зависит от обосования внесения изменеий, указанных в блоке  changeReason</xs:documentation>
 										</xs:annotation>
 									</xs:element>
+									<xs:element name="purchaseFailedConsequence" type="zfcs_tenderplan2017PurchaseFailedConsequenceType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Последствия признания закупки несостоявшейся. Доступно и обязательно к заполнению, если код commonInfo/positionModification/changeReason/code по справочнику "Обоснования внесения изменений в позицию плана-графика с 01.01.2017" (nsiTenderPlan2017PositionChangeReasons) соответствует значению «Признание закупки несостоявшейся»</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 									<xs:element name="description" type="zfcs_longTextMinType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Содержание изменений</xs:documentation>
@@ -53553,7 +54217,10 @@ EC - В данные позиции вносятся сведения об эк�
 						</xs:element>
 						<xs:element name="contractFinCondition" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Условия финансового обеспечения исполнения контракта.  В случае если блок заполнен, в нем обязательно должно быть заполнено либо поле amount, либо поле amountInPercents</xs:documentation>
+								<xs:documentation>Условия финансового обеспечения исполнения контракта.  
+В случае если блок заполнен, в нем обязательно должно быть заполнено либо поле amount, либо поле amountInPercents.
+Если признак «Планируется заключение энергосервисного контракта» (isEnergyServiceContract), наследован/установлен в значение true 
+и заказчик не осуществляет деятельность на территории иностранного государства (в справочнике «Субъект контроля по 99 статье» (nsiControl99Subjects) для данного заказчика поле «Организация включена в перечень ст. 111.1 Федерального закона №44-ФЗ» (isSt111_1) отсутствует или его значение равно «false»), то в рамках блока требуется заполнение обоих полей amount и amountInPercents</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -53741,6 +54408,13 @@ BANK_AND_TREASURE_SUPPORT - требуется банковское и казн�
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="isEnergyServiceContract" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Признак "Планируется заключение энергосервисного контракта". 
+В случае новой позиции плана-графика игнорируется при приеме и заполняется автоматически, если в связанной позиции плана закупок, заданной в блоке purchasePlanPositionInfo, установлен признак "Планируется заключение энергосервисного контракта" (positions/position/isEnergyServiceContract)  или установлен признак "Планируется заключение энергосервисного контракта в соответствии со статьей 108 Федерального закона № 44" (positions/position/purchasesSubsecYearsInfo/energyServiceContract/energyServiceContractAttribute). 
+В случае изменения позиции плана-графика, для которой признак "Планируется заключение энергосервисного контракта" имеет значение false, значение из принимаемого пакета не игнорируется и сохраняется</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -54161,7 +54835,8 @@ O871N - метод, установленный приказом Минздрав
 		<xs:sequence>
 			<xs:element name="shortName" type="base:prefsReqsShortNameType">
 				<xs:annotation>
-					<xs:documentation>Крaткое наименование преимущества (требования, ограничения). Ссылка на справоник "Преимущества (требования, ограничения) к участникам закупки" (nsiPurchasePreferences), Принимаются только те преимущества (требования, ограничения), для которых заполнен блок "Группа преимуществ (требований, ограничений) для плана-графика" (tenderPlanPurchaseGroups)</xs:documentation>
+					<xs:documentation>Крaткое наименование преимущества (требования, ограничения). Ссылка на справоник "Преимущества (требования, ограничения) к участникам закупки" (nsiPurchasePreferences), Принимаются только те преимущества (требования, ограничения), для которых заполнен блок "Группа преимуществ (требований, ограничений) для плана-графика" (tenderPlanPurchaseGroups).
+Для позиций, размещенных ПОСЛЕ выхода версии 9.0 (01.01.2019) не принимаются преимущества (требования, ограничения) с кодами 'RBK 44' и 'RBK126'</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="prefsReqsGroup" minOccurs="0">
@@ -54707,6 +55382,23 @@ O871N - метод, установленный приказом Минздрав
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="zfcs_tenderplan2017PurchaseFailedConsequenceType">
+		<xs:annotation>
+			<xs:documentation>Тип: Последствия признания закупки несостоявшейся</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="currentPosition" type="xs:boolean" fixed="true">
+				<xs:annotation>
+					<xs:documentation>Закупка будет повторно осуществляться в текущей позиции плана-графика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newPosition" type="xs:boolean" fixed="true">
+				<xs:annotation>
+					<xs:documentation>Закупка будет осуществляться в новой позиции плана-графика. Недопустимо указание, если признак "Изменить планируемые платежи" (commonInfo/financeInfo/planPaymentsChange) равен true. При установке сведения текущей позиции плана-графика будут обновлены в соответствии с размещенными ранее сведениями и будут недоступны для редактирования, при этом суммы финансового обеспечения по текущей позиции плана-графика не будут учитываться при расчете итоговых показателей плана-графика закупок</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
 	<xs:simpleType name="zfcs_tenderPlan2017BankSupportContractType">
 		<xs:annotation>
 			<xs:documentation>Тип: Информация о банковском или казначейском сопровождении контракта:
@@ -55206,7 +55898,7 @@ PPF1043 -  Ошибочное значение, не применяется. О�
 						</xs:element>
 						<xs:element name="pricesInfo" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Референтные цены. Устарело, не заполняется для новых позиций справочника</xs:documentation>
+								<xs:documentation>Референтные цены</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -58899,7 +59591,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="specializedOrg" type="zfcs_purchaseOrganizationType" minOccurs="0">
@@ -59206,6 +59900,11 @@ auto - автоматический.</xs:documentation>
 					<xs:documentation>Электронный документ</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="controlBO" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Контроль БО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
 			<xs:annotation>
@@ -59365,7 +60064,9 @@ OCC - Заказчик, осуществляющий закупки в соот�
 AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="specializedOrg" type="zfcs_purchaseOrganizationType" minOccurs="0">
@@ -60148,6 +60849,11 @@ OA - Организация, осуществляющая полномочия �
 					<xs:documentation>Сведения о закупках на последующие годы</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="isEnergyServiceContract" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Признак "Планируется заключение энергосервисного контракта"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="zfcs_control99TenderPlan2017PositionType">
@@ -60827,9 +61533,14 @@ fcsProtocolZP - Итоговый протокол  запроса предлож
 					<xs:complexContent>
 						<xs:extension base="zfcs_nsiControl99SubjectOrgType">
 							<xs:sequence minOccurs="0">
-								<xs:element name="OKTMO" type="zfcs_OKTMORef">
+								<xs:element name="OKTMO" type="zfcs_OKTMORef" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>ОКТМО заказчика</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="isSt111_1" type="xs:boolean" fixed="true" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Организация включена в перечень ст. 111.1 Федерального закона №44-ФЗ</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -62901,7 +63612,10 @@ CU - Производитель товаров в соответствии со 
 													<xs:sequence>
 														<xs:element name="OKTMOPPO" type="base:OKTMOPPORef" minOccurs="0">
 															<xs:annotation>
-																<xs:documentation>Код ОКТМО ППО. При преме контролируется на наличие в справочнике "ОКТМО ППО" (nsiOKTMOPPO) </xs:documentation>
+																<xs:documentation>Код ОКТМО ППО. 
+При приеме контролируется на наличие в справочнике "ОКТМО ППО" (nsiOKTMOPPO). 
+Если длина кода=8 символов, при приеме осуществляется поиск по полю OKTMO_CODE справочника nsi_ppo.
+Если длина кода=11 символов, осуществляется поиск по полю CODE (код ОКАТО) справочника  nsi_ppo" </xs:documentation>
 															</xs:annotation>
 														</xs:element>
 													</xs:sequence>
@@ -63766,7 +64480,10 @@ REP - Орган исполнительной власти, предоставл
 PIK - Производитель товаров в соответствии со специальным инвестиционным контрактом;
 RO - Региональный оператор, осуществляющий закупки товаров, работ, услуг в соответствии с частью 1.1 статьи 180 и частью 5 статьи 182 Жилищного кодекса РФ;
 OTR - Федеральный орган исполнительной власти, уполномоченный на формирование сведений каталога товаров, работ, услуг;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.
+</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="CU"/>
@@ -63807,6 +64524,8 @@ TKO - Региональный оператор для обращения с Т�
 			<xs:enumeration value="RO"/>
 			<xs:enumeration value="OTR"/>
 			<xs:enumeration value="TKO"/>
+			<xs:enumeration value="CN"/>
+			<xs:enumeration value="OCN"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_orgLinkOrdersVisibilityTypeEnum">
@@ -63976,7 +64695,10 @@ AU - Заказчик, осуществляющий закупку на пров
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
 RO - Региональный оператор;
-TKO - Региональный оператор для обращения с ТБО.</xs:documentation>
+TKO - Региональный оператор для обращения с ТБО;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ.
+OCN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ.
+</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="CU"/>
@@ -63995,6 +64717,8 @@ TKO - Региональный оператор для обращения с Т�
 			<xs:enumeration value="OAU"/>
 			<xs:enumeration value="RO"/>
 			<xs:enumeration value="TKO"/>
+			<xs:enumeration value="CN"/>
+			<xs:enumeration value="OCN"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="zfcs_sketchPlanNumberType">

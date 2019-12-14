@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- COMMON_TYPES Integration Scheme, version 9.0, create date 25.12.2018 -->
+<!-- COMMON_TYPES Integration Scheme, version 9.1, create date 13.03.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -334,7 +334,7 @@ CAdES-A</xs:documentation>
 			</xs:element>
 			<xs:element name="consRegistryNum" type="base:consRegistryNumType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Код по Сводному Реестру. Должен быть заполнен в случае, если в поле spzCode указано значение 00000000000</xs:documentation>
+					<xs:documentation>Код по Сводному Реестру. Должен быть заполнен в случае, если в поле spzCode указано значение "00000000000"</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="fullName" type="base:text2000Type" minOccurs="0">
@@ -437,7 +437,7 @@ CAdES-A</xs:documentation>
 								<xs:documentation>ОГРН</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="legalForm" type="base:OKOPFRef">
+						<xs:element name="legalForm" type="base:OKOPFRef" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Организационно-правовая форма организации в ОКОПФ. При приеме содержимое контролируется на  присутствие в справочнике "Общероссийский классификатор организационно-правовых форм (ОКОПФ)" (nsiOKOPF)</xs:documentation>
 							</xs:annotation>
@@ -505,9 +505,10 @@ CAdES-A</xs:documentation>
 								<xs:documentation>Полное наименование (латинскими буквами)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="taxPayerCode" type="base:taxPayerCode">
+						<xs:element name="taxPayerCode" type="base:taxPayerCode" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Код налогоплательщика в стране регистрации или его аналог</xs:documentation>
+								<xs:documentation>Код налогоплательщика в стране регистрации или его аналог.
+При приеме контролируется заполнение данного поля или/и блока  "Поставщик состоит на учете в налоговых органах на территории РФ" (legalEntityForeignStateInfo/registerInRFTaxBodiesInfo)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="ogrn" type="base:ogrnCodeType" minOccurs="0">
@@ -522,7 +523,8 @@ CAdES-A</xs:documentation>
 						</xs:element>
 						<xs:element name="registerInRFTaxBodiesInfo" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Поставщик состоит на учете в налоговых органах на территории РФ</xs:documentation>
+								<xs:documentation>Поставщик состоит на учете в налоговых органах на территории РФ.
+При приеме контролируется заполнение данного блока или/и поля "Код налогоплательщика в стране регистрации или его аналог" (legalEntityForeignStateInfo/taxPayerCode)</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -666,12 +668,12 @@ CAdES-A</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="nameInfo" type="cmn:personType">
+						<xs:element name="nameInfo" type="personType">
 							<xs:annotation>
 								<xs:documentation>ФИО</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="nameLatInfo" type="cmn:personType" minOccurs="0">
+						<xs:element name="nameLatInfo" type="personType" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>ФИО (латинскими буквами)</xs:documentation>
 							</xs:annotation>
@@ -706,17 +708,17 @@ CAdES-A</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="country" type="base:OKSMRef">
+									<xs:element name="country" type="base:OKSMRef" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Страна регистрации</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="postAddress" type="base:text2000Type">
+									<xs:element name="postAddress" type="base:text2000Type" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Почтовый адрес </xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="factAddress" type="base:text2000Type">
+									<xs:element name="factAddress" type="base:text2000Type" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Адрес местонахождения </xs:documentation>
 										</xs:annotation>
@@ -1079,7 +1081,7 @@ maxPrice * «Номинал» (из справочника валют для с�
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="requirementType" maxOccurs="2">
+									<xs:element name="requirementType" maxOccurs="unbounded">
 										<xs:annotation>
 											<xs:documentation>Вид требования</xs:documentation>
 										</xs:annotation>
