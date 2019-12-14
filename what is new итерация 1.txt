@@ -1,0 +1,284 @@
+﻿Версия 9.2 итерация 1
+
+
+
+===========================================================================================Base.xsd===============================================================================================================================
+
+FCSNF-5727 Интеграция. Доработка интеграции РПГ, ПРИЗ, РК, НСИ в связи с переходом на формат ЕСКЛП 2.0
+
+1. Добавлен новый тип "Тип: Наименование 2000 для справочника "Лекарственные препараты"" (drugName2000Type)
+
+
+===========================================================================================CommonTypes.xsd===============================================================================================================================
+
+FCSNF-5727 Интеграция. Доработка интеграции РПГ, ПРИЗ, РК, НСИ в связи с переходом на формат ЕСКЛП 2.0
+
+1. В типе "Тип: Международное, группировочное или химическое наименование лекарственного препарата (МНН)" (MNNInfoType) 
+   - для поля "Наименование МНН. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\MNNName документа nsiFarmDrugDictionary)" (MNNName) тип изменен на base:drugName2000Type
+
+2. В типе "Тип: Сведения о МНН, ТН, лекарственной форме и дозировке в случае когда информация о лекарственных препаратах формируется в текстовой форме" (drugInfoUsingTextFormType) 
+   - для поля "Наименование МНН" (MNNInfo/MNNName) тип изменен на base:drugName2000Type
+
+
+===========================================================================================IntegrationTypes.xsd===============================================================================================================================
+
+FCSNF-5727 Интеграция. Доработка интеграции РПГ, ПРИЗ, РК, НСИ в связи с переходом на формат ЕСКЛП 2.0
+
+1. В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary) 
+   - для блока MNNInfo/nonNormMNNsListInfo изменена аннотация на "Список нормализованных МНН"
+   - для блока MNNInfo/nonNormMNNsListInfo/nonNormMNNInfo изменена аннотация на "Нормализованный МНН"
+   - для блока MNNInfo/nonNormMedFormsDosagesListInfo изменена аннотация на "Список нормализованных лекарственных форм и дозировок"
+   - для блока MNNInfo/NormMedFormsDosagesListInfo/nonNormMedFormDosage изменена аннотация на "Нормализованная лекарственная форма (дозировка)"
+
+2. В типе "Тип:Дозировки для справочника "Лекарственные препараты"" (zfcs_nsiFarmDrugDosageInfoType)
+ - у блока dosageFactors изменена аннотация на "Кратности поставки потребительской единицы дозировки. Устарел, не применяется"
+ - у блока dosageFactorRanges изменена аннотация на "Диапазоны значений кратности поставки потребительской единицы дозировки. Устарел, не применяется"
+ 
+3. В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary) добавлен необязательный блок "Список сведений о качестве данных на уровне МНН, результате валидации и возможности применения данных" (MNNInfo/invalidationDataListInfo)
+
+4. В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary) у поля MNNInfo/pricesInfo/priceInfo/priceType
+ - изменена аннотация на "Тип референтной цены по справочнику "Референтные цены по МНН".
+1 - рассчитана по Методике с использованием исторических данных
+2 - рассчитана по Методике с использованием исторических данных и последующей ручной корректировкой
+3 - задана путем проведения переговоров
+4 - референтная цена, рассчитаная по Методике с использованием исторических данных и сведений о взаимозаменяемости после 01.01.2019"
+ - добавлено принимаемое значение "4"
+ 
+5. В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary) у поля MNNInfo/positionsTradeName/positionTradeName/conv
+ - изменена аннотация на "Свертка кода каталога. Устарело. Не применяется"
+ - поле сделано необязательным
+ 
+6. В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary) добавлены необязательные поля:
+ - "Нормализованное описание (исходное) МНН" (MNNInfo/positionsTradeName/positionTradeName/MNNNormName)
+ - "Нормализованное описание (исходное) дозировки" (MNNInfo/positionsTradeName/positionTradeName/dosageNormName)
+ - "Нормализованное название (исходное) лекарственной формы" (MNNInfo/positionsTradeName/positionTradeName/medicamentalFormNormName)
+ - "Признак дозированного ЛП" (MNNInfo/positionsTradeName/positionTradeName/isDosed)
+ - "Причина окончания действия записи" (MNNInfo/positionsTradeName/positionTradeName/reasonEnd)
+
+7. В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary) 
+   - поле "Уникальный внешний код лекарственного препарата по справочнику "Лекарственные препараты"" (MNNInfo/positionsTradeName/positionTradeName/descendantInfo/positionTradeNameExternalCode) преобразовано в множественное
+   - для поля MNNInfo/positionsTradeName/positionTradeName/packagingsInfo/packagingInfo/packaging1Quantity изменена аннотация на "Количество лекарственных форм в первичной упаковке по справочнику "Сведения об упаковке" (единицей измерения количеств лекарственной формы является значение из блока MNNInfo/dosagesInfo/dosageInfo/dosageUser)"
+   - добавлено необязательное поляе"Причина окончания действия записи" (MNNInfo/positionsTradeName/positionTradeName/limPricesInfo/limPriceInfo/reasonEnd)
+   - добавлен необязательный блок "Список сведений о качестве данных на уровне МНН, результате валидации и возможности применения данных" (MNNInfo/positionsTradeName/positionTradeName/invalidationDataListInfo)
+
+
+8. В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary) изменен тип на base:drugName2000Type для полей:
+   - "Наименование МНН по справочнику "Международные непатентованные химические или групповые наименования"" (MNNInfo/MNNName)
+   - "Наименование МНН по справочнику "Международные непатентованные химические или групповые наименования"" (MNNInfo/nonNormMNNsListInfo/nonNormMNNInfo/MNNName)
+   - "Наименование лекарственной формы по справочнику "Список лекарственных форм"" (MNNInfo/nonNormMedFormsDosagesListInfo/nonNormMedFormDosage/medicamentalFormName)
+   - "Наименование единицы измерения дозировки по справочнику "Дозировки лекарственных препаратов"" (MNNInfo/nonNormMedFormsDosagesListInfo/nonNormMedFormDosage/dosageName)
+ 
+9. В типе "Тип: Международное, группировочное или химическое наименование лекарственного препарата (МНН)" (zfcs_MNNInfoType) 
+   - для поля "Наименование МНН. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\MNNName документа nsiFarmDrugDictionary)" (MNNName) 
+     тип изменен на base:drugName2000Type
+
+10. В типе "Тип: Сведения о МНН, ТН, лекарственной форме и дозировке в случае когда информация о лекарственных препаратах формируется в текстовой форме" (zfcs_drugInfoUsingTextFormType) 
+   - для поля "Наименование МНН" (MNNInfo/MNNName) тип изменен на base:drugName2000Type
+
+11. В типе "Информация об объекте закупки -  лекарственном препарате" (zfcs_contract2015DrugPurchaseInfoType) изменен тип на base:drugName2000Type для полей
+    - "Наименование МНН. Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\MNNName документа nsiFarmDrugDictionary)" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/MNNName)
+    - "Наименование МНН" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/MNNTextForm/MNNName)
+    - "Наименование МНН" (drugInfoUsingTextForm/MNNsInfo/MNNInfo/MNNName)
+ 
+12. В типе "Тип: Сведения о МНН, ТН, лекарственной форме и дозировке" (zfcs_drugInfoType) 
+    - добавлено необязательное поле "Наименование потребительской единицы дозировки по справочнику  "Дозировки лекарственных препаратов"" (dosageInfo/dosageUserName)
+ 
+13. В типе "Информация об объекте закупки -  лекарственном препарате" (zfcs_contract2015DrugPurchaseInfoType)
+    - добавлено необязательное поле "Нормализованное описание (исходное) МНН" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/positionTradeNameUsingTextForm/MNNNormName)
+    - добавлено необязательное поле "Нормализованное название (исходное) лекарственной формы" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/positionTradeNameUsingTextForm/medicamentalFormNormName)
+    - добавлено необязательное поле "Нормализованное описание (исходное) дозировки" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/positionTradeNameUsingTextForm/dosageNormName)
+
+    - добавлено необязательное поле "Нормализованное описание (исходное) дозировки" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/MNNNormName)
+    - добавлено необязательное поле "Нормализованное название (исходное) лекарственной формы" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/dosageNormName)
+    - добавлено необязательное поле "Нормализованное описание (исходное) МНН" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/medicamentalFormNormName)
+
+    - блок "Единица измерения дозировки. Ссылка на классификатор ОКЕИ (nsiOKEI)" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/editedDosageInfo/dosageOKEI) сделан необязательным
+
+    - для блока drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/dosageInfo/dosageOKEI изменена аннотация на 
+      "Единица измерения дозировки. Ссылка на классификатор ОКЕИ (nsiOKEI)/Потребительская единица  измерения дозировки по справочнику  "Лекарственные препараты" (nsiFarmDrugDictionary) (блок MNNsInfo\MNNInfo\dosagesInfo\dosageInfo\dosageUser\ dosageUserOKEI). Ссылка на классификатор ОКЕИ (nsiOKEI)"
+    - для блока drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/editedDosageInfo/dosageOKEI 
+      изменена аннотация на "Единица измерения дозировки. Ссылка на классификатор ОКЕИ (nsiOKEI)/Потребительская единица  измерения дозировки по справочнику  "Лекарственные препараты" (nsiFarmDrugDictionary) (блок MNNsInfo\MNNInfo\dosagesInfo\dosageInfo\dosageUser\ dosageUserOKEI). Ссылка на классификатор ОКЕИ (nsiOKEI). Игнорируется при приеме"
+ 
+    - для блока "Единица измерения дозировки" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/positionTradeNameUsingTextForm/dosageInfo/dosageOKEI) тип изменен на base:OKEIRef
+    - для блока "Единица измерения дозировки" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/editedDosageInfo/dosageOKEI) тип изменен на base:OKEIRef
+    - для блока "Единица измерения дозировки" (drugInfoUsingReferenceInfo/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/dosageInfo/dosageOKEI) тип изменен на base:OKEIRef
+ 
+14. В типе "Информация об исполнении (исполнении обязательств по предоставленной гарантии качества, расторжении) контракта с 01.01.2015" (zfcs_contractProcedure2015Type):
+    - добавлено необязательное поле "Нормализованное описание (исходное) МНН" (executions/execution/quantityDrugContractSubjects/quantityDrugContractSubject/product/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/MNNNormName)
+    - добавлено необязательное поле "Нормализованное описание (исходное) дозировки" (executions/execution/quantityDrugContractSubjects/quantityDrugContractSubject/product/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/dosageNormName)
+    - добавлено необязательное поле "Нормализованное название (исходное) лекарственной формы" (executions/execution/quantityDrugContractSubjects/quantityDrugContractSubject/product/MNNsInfo/MNNInfo/positionsTradeName/positionTradeName/medicamentalFormNormName)
+
+
+15. Создан тип "Тип референтной цены по справочнику "Референтные цены по МНН"" (zfcs_nsiFarmDrugPriceTypeEnum)
+
+16. В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary)
+    - у блока "Тип референтной цены по справочнику "Референтные цены по МНН"" (MNNInfo\pricesInfo\priceInfo\priceType) изменен тип на zfcs_nsiFarmDrugPriceTypeEnum
+    - у блока "Тип референтной цены по справочнику "Референтные цены по МНН"" (MNNInfo\positionsTradeName\positionTradeName\pricesInfo\priceInfo\priceType) изменен тип на zfcs_nsiFarmDrugPriceTypeEnum
+
+FCSNF-7216 Интеграция. Порядок отображения дат в ПЗ, ПГЗ
+
+17. В типе "Общие сведения плана закупок" (zfcs_purchasePlanCommonInfoType):
+ - для поля confirmDate изменена аннотация на "Дата утверждения плана закупок (базовой версии). Требуется обязательное заполнение при приеме в ЕИС базовой версии. Игнорируется и заполняется автоматически при приеме изменений плана закупок"
+ - поле "Дата утверждения плана закупок (базовой версии)" (confirmDate) сделано необязательным 
+ - добавлено необязательное поле "Дата внесения изменений в план закупок (утверждения внесенных изменений)" (modificationConfirmDate)
+ 
+18. В типе "Общая информация о плане-графике с 01.01.2017" (zfcs_tenderPlan2017CommonInfoType):
+ - добавлено необязательное поле "Дата внесения изменений" (modificationConfirmDate)
+ - добавлено необязательное поле "Дата подписания плана-графика исполнителем" (signingDate)
+
+FCSNF-7220 Интеграция. Правка ошибок на версии 9.2
+
+19. В типе "Справочник: НПА, регулирующие допуск товаров, работ, услуг, происходящих из иностранных государств" (zfcs_nsiTRUAdmissionNPA) добавлены необязательные поля:
+ - "Значение соответствует приказу Минэкономразвития России № 155 от 25.03.2014" (isNPA155)
+ - "Дата начала действия" (startDate)
+ - "Дата окончания действия" (endDate)
+ - "Порядок отображения" (orderNum)
+ - "Последнее изменение" (updateDate)
+ добавлен необязательный блок 
+ - "Виды требований на допуск товаров, работ, услуг, происходящих из иностранных государств" (typeCodes)
+  
+20. В типе "Информация о лоте для способа по ст. 111 Федерального закона № 44-ФЗ" (zfcs_lotI111Type)
+   - добавлен новый блок "Объекты закупки" (purchaseObjects)
+   - изменена аннотация для блока OKPD2 на "Классификация по ОКПД2. Устарело. Не применяется"
+   - изменена аннотация для блока KTRU на "Классификация по КТРУ. Устарело. Не применяется"
+   - чойс выбора между блоками OKPD2 и KTRU сделан необязательным
+
+FCSNF-7758 Интеграция ПРИЗ. Обязательность приложения копий договоров (соглашений) при осуществлении закупки в соответствии с частями 5 и 6 статьи 15 Закона № 44-ФЗ
+
+21. В типах 
+    "Общая информация об извещении по закупке" (zfcs_purchaseNotificationType)
+    "Общая информация об извещении о проведении закупки способом определения поставщика (подрядчика, исполнителя), установленным Правительством Российской Федерации в соответствии со ст. 111 Федерального закона № 44-ФЗ" (zfcs_purchaseNotification111Type)
+    "Извещение о проведении закупки у ЕП (единственного поставщика)" (zfcs_notificationEPType)
+    "Общая информация об объекте закупки и структурированный протокол рассмотрения и оценки заявок на участие в ЗК-БИ (запрос котировок без извещения); внесение изменений" (zfcs_protocolZKBIType)
+ 
+    - добавлен необязательный блок "Файлы с копией договора (соглашения)" (article15Attachments)
+
+FCSNF-7768 Интеграция. Добавить дату исключения сведений из РНП в выгружаемую информацию
+
+22. В тип "Сведения о недобросовестном поставщике" (zfcs_unfairSupplierType)
+    - добавлено поле "Предельная дата включения сведений в реестр" (finalDateInclude)
+    - добавлен блок "Информация о дате автоматического исключения" (autoExDateInfo)
+
+FCSNF-7856 Интеграция. Необязательное указание членов комиссии в протоколе уклонения по ч. 13 ст. 83.2
+
+23. В типе "Протокол признания участника уклонившимся от заключения контракта" (zfcs_protocolDeviationType) 
+    - блок "Информация о комиссии" (commission) сделан необязательным.
+
+EISADVICE-6432
+
+24. В типе "Поставщик в информации о контракте с 01.01.01.2015"
+    - у блока legalEntityRF/postAdressInfo изменена аннотация на 
+      "Почтовый адрес. При приеме контролируется, что поля mailFacilityName и postBoxNumber заполняются/не заполняются парой"
+    - сделаны необязательными поля 
+      legalEntityRF/postAdressInfo/mailingAdress
+      legalEntityRF/postAdressInfo/mailFacilityName, 
+      legalEntityRF/postAdressInfo/postBoxNumber
+
+    - у блока legalEntityForeignState/placeOfStayInRF/postAdressInfo изменена аннотация на 
+      "Почтовый адрес. При приеме контролируется, что поля mailFacilityName и postBoxNumber заполняются/не заполняются парой"
+    - сделаны необязательными поля 
+      legalEntityForeignState//postAdressInfo/mailingAdress
+      legalEntityRF/postAdressInfo/mailFacilityName, 
+      legalEntityRF/postAdressInfo/postBoxNumber
+
+    - у блока individualPersonRF/postAdressInfo изменена аннотация на 
+      "Почтовый адрес. При приеме контролируется, что поля mailFacilityName и postBoxNumber заполняются/не заполняются парой"
+    - сделаны необязательными поля 
+      individualPersonRF/postAdressInfo/mailingAdress
+      individualPersonRF/postAdressInfo/mailFacilityName, 
+      individualPersonRF/postAdressInfo/postBoxNumber
+
+    - у блока individualPersonForeignState/placeOfStayInRF/postAdressInfo изменена аннотация на 
+      "Почтовый адрес. При приеме контролируется, что поля mailFacilityName и postBoxNumber заполняются/не заполняются парой"
+    - сделаны необязательными поля 
+      individualPersonForeignState/postAdressInfo/mailingAdress
+      individualPersonForeignState/postAdressInfo/mailFacilityName, 
+      individualPersonForeignState/postAdressInfo/postBoxNumber
+
+    - у блока individualPersonRFisCulture/postAdressInfo изменена аннотация на 
+      "Почтовый адрес. При приеме контролируется, что поля mailFacilityName и postBoxNumber заполняются/не заполняются парой"
+    - сделаны необязательными поля 
+      individualPersonRFisCulture/postAdressInfo/mailingAdress
+      individualPersonRFisCulture/postAdressInfo/mailFacilityName, 
+      individualPersonRFisCulture/postAdressInfo/postBoxNumber
+
+    - у блока individualPersonForeignStateisCulture/placeOfStayInRF/postAdressInfo изменена аннотация на 
+      "Почтовый адрес. При приеме контролируется, что поля mailFacilityName и postBoxNumber заполняются/не заполняются парой"
+    - сделаны необязательными поля 
+      individualPersonForeignStateisCulture/postAdressInfo/mailingAdress
+      individualPersonForeignStateisCulture/postAdressInfo/mailFacilityName, 
+      individualPersonForeignStateisCulture/postAdressInfo/postBoxNumber
+
+
+===========================================================================================Integration615Types.xsd===============================================================================================================================
+
+
+
+
+===========================================================================================IntegrationEPTypes.xsd===============================================================================================================================
+
+FCSNF-7220 Интеграция. Правка ошибок на версии 9.2
+
+1. В типе "Тип: Информация и документы, предусмотренные конкурсной документацией" (documentRequirementType) поле "Порядковый номер информации или документа" (number)
+ - сделано необязательным
+ - изменена аннотация на "Порядковый номер информации или документа. Игнорируется при приеме. Заполняется автоматически"
+ 
+2. В типе "Тип: Общие поля документов закупки" (purchaseDocumentType) для поля attachmentsInfo изменена аннотация на "Прикрепленные документы. Игнорируется при приеме документа извещения о продлении срока"
+
+FCSNF-7758 Интеграция ПРИЗ. Обязательность приложения копий договоров (соглашений) при осуществлении закупки в соответствии с частями 5 и 6 статьи 15 Закона № 44-ФЗ
+
+3. В типе "Тип: Общая информация о извещении" (notificationCommonInfoType) добавлен необязательный блок "Файлы с копией договора (соглашения)" (article15Attachments)
+
+
+
+===========================================================================================IntegrationCPTypes.xsd===============================================================================================================================
+
+
+
+
+===========================================================================================fcsPrintForm.xsd===============================================================================================================================
+
+
+	
+===========================================================================================fcsExport.xsd===============================================================================================================================
+
+
+
+===========================================================================================fcsIntegration.xsd===============================================================================================================================
+
+
+   
+===========================================================================================fcsInternal.xsd===============================================================================================================================
+
+
+
+===========================================================================================fcsExtegration.xsd===============================================================================================================================
+
+
+
+===========================================================================================docs-ws-api.xsd===============================================================================================================================
+
+
+
+===========================================================================================eisSignIncoming.xsd===============================================================================================================================
+
+
+
+===========================================================================================fcsControl99.xsd===============================================================================================================================
+
+
+
+===========================================================================================boServiceInternal.xsd===============================================================================================================================
+
+
+
+===========================================================================================esmvBaseTypes.xsd===========================================================================================
+
+
+
+===========================================================================================esmvIntegrationTypes.xsd===========================================================================================
+
+
+
+===========================================================================================esmvInternal.xsd===========================================================================================
+

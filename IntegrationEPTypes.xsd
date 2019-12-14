@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.1, create date 13.03.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.2, create date 08.04.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -181,7 +181,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 						</xs:element>
 						<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Номер документа. Элемент игнорируется при приёме. Заполняется при передаче номером документа присвоенным в ЕИС</xs:documentation>
+								<xs:documentation>Номер документа. Элемент игнорируется при приёме. Заполняется при передаче номером документа, присвоенным в ЕИС</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="publishDTInEIS" type="xs:dateTime" minOccurs="0">
@@ -3544,6 +3544,11 @@ P6 - В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ;
 P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="article15Attachments" type="cmn:attachmentListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Файлы с копией договора (соглашения). Доступен и обязателен к заполнению, если значение поля «Информация об осуществлении закупки в соответствии с ч. 4-6 ст. 15 Закона № 44-ФЗ» (article15FeaturesInfo) = «В соответствии с ч. 5 ст. 15 Закона № 44-ФЗ» ИЛИ «В соответствии с ч. 6 ст. 15 Закона № 44-ФЗ» ИЛИ «В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ»</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="contractConclusionOnSt83Ch2" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Заключение контракта по статье 83 ч. 2. Игнорируется при приёме, заполняется при выгрузке.
@@ -4686,9 +4691,9 @@ O - оценка производится по шкале оценки или д
 					<xs:documentation>Внешний идентификатор требования</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="number" type="xs:positiveInteger">
+			<xs:element name="number" type="xs:positiveInteger" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Порядковый номер информации или документа</xs:documentation>
+					<xs:documentation>Порядковый номер информации или документа. Игнорируется при приеме. Заполняется автоматически</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="name" type="base:text2000Type">
@@ -5045,7 +5050,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 			</xs:element>
 			<xs:element name="attachmentsInfo" type="cmn:attachmentListType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Прикрепленные документы</xs:documentation>
+					<xs:documentation>Прикрепленные документы. Игнорируется при приеме документа извещения о продлении срока</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
