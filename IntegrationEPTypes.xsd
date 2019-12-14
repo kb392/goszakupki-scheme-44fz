@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.2, create date 08.04.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.2, create date 21.06.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -714,7 +714,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="requirementInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+											<xs:element name="requirementInfo" type="cmn:requirementWithAddReqsType" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Требование</xs:documentation>
 												</xs:annotation>
@@ -1084,7 +1084,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="requirementInfo" type="cmn:requirementRestrictionType" maxOccurs="unbounded">
+											<xs:element name="requirementInfo" type="cmn:requirementWithAddReqsType" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Требование</xs:documentation>
 												</xs:annotation>
@@ -1098,10 +1098,15 @@ OCN - Заказчик, осуществляющий закупки в соот�
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="restrictionInfo" type="cmn:restrictionType" maxOccurs="unbounded">
+											<xs:element name="restrictionInfo" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Ограничение</xs:documentation>
 												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="cmn:restrictionType"/>
+													</xs:complexContent>
+												</xs:complexType>
 											</xs:element>
 										</xs:sequence>
 									</xs:complexType>
@@ -3672,9 +3677,9 @@ manual - ручной ввод.
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="maxPrice" type="base:moneyPositiveType">
+						<xs:element name="maxPrice" type="base:moneyType">
 							<xs:annotation>
-								<xs:documentation>Начальная (максимальная) цена контракта</xs:documentation>
+								<xs:documentation>Начальная (максимальная) цена контракта/Максимальное значение цены контракта</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="currency" type="base:currencyRef">
@@ -4329,9 +4334,9 @@ F - на форуме Официального сайта Единой инфо�
 			<xs:element name="code" type="base:costCriterionCodeEnum">
 				<xs:annotation>
 					<xs:documentation>Код критерия:
-CP - Цена контракта.
-MC - Расходы на эксплуатацию и ремонт товаров, использование результатов работ.
-TC - Стоимость жизненного цикла товара или созданного в результате выполнения работы объекта.
+CP - Цена контракта, сумма цен единиц товара, работы, услуги;
+MC - Расходы на эксплуатацию и ремонт товаров, использование результатов работ;
+TC - Стоимость жизненного цикла товара или созданного в результате выполнения работы объекта;
 EN - Предложение о сумме соответствующих расходов заказчика, которые заказчик осуществит или понесет по энергосервисному контракту</xs:documentation>
 				</xs:annotation>
 			</xs:element>
@@ -4483,9 +4488,9 @@ O - оценка производится по шкале оценки или д
 				<xs:element name="criterionCode" type="base:costCriterionCodeEnum">
 					<xs:annotation>
 						<xs:documentation>Код критерия:
-CP - Цена контракта.
-MC - Расходы на эксплуатацию и ремонт товаров, использование результатов работ.
-TC - Стоимость жизненного цикла товара или созданного в результате выполнения работы объекта.
+CP - Цена контракта, сумма цен единиц товара, работы, услуги;
+MC - Расходы на эксплуатацию и ремонт товаров, использование результатов работ;
+TC - Стоимость жизненного цикла товара или созданного в результате выполнения работы объекта;
 EN - Предложение о сумме соответствующих расходов заказчика, которые заказчик осуществит или понесет по энергосервисному контракту</xs:documentation>
 					</xs:annotation>
 				</xs:element>
@@ -5924,7 +5929,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 			<xs:documentation>Тип: Информация о начальной (максимальной) цене контракта</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="maxPrice" type="base:moneyPositiveType">
+			<xs:element name="maxPrice" type="base:moneyType">
 				<xs:annotation>
 					<xs:documentation>Начальная (максимальная) цена контракта</xs:documentation>
 				</xs:annotation>
@@ -5936,7 +5941,7 @@ OCN - Заказчик, осуществляющий закупки в соот�
 			<xs:documentation>Тип: Информация о платеже для обеспечения заявки (исполнения контракта) или за предоставление документации</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="amount" type="base:moneyPositiveType">
+			<xs:element name="amount" type="base:moneyType">
 				<xs:annotation>
 					<xs:documentation>Размер обеспечения</xs:documentation>
 				</xs:annotation>

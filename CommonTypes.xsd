@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- COMMON_TYPES Integration Scheme, version 9.2, create date 08.04.2019 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- COMMON_TYPES Integration Scheme, version 9.2, create date 21.06.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -936,17 +936,26 @@ CAdES-A</xs:documentation>
 								<xs:documentation>Стоимость позиции</xs:documentation>
 							</xs:annotation>
 						</xs:element>
+						<xs:element name="isMedicalProduct" type="xs:boolean" fixed="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Объектом закупки является медицинское изделие. 
+При приеме контролируется обязательность заполнения, если 
+позиция КТРУ, указанная в блоке products/product/KTRU, включает в себя позицию номенклатурной классификации медицинских изделий по видам (НКМИ)
+(т.е в выгрузке справочника nsiKTRU для данной позиции как минимум в одном поле classifiers\classifier\name указано значение
+"Номенклатурная классификация медицинских изделий по видам")</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="totalSum" type="base:moneyType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Общая сумма позиций</xs:documentation>
+					<xs:documentation>Общая сумма позиций/Начальная сумма цен единиц товара, работы, услуги</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="totalSumCurrency" type="base:moneyType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Общая сумма позиций в валюте контракта </xs:documentation>
+					<xs:documentation>Общая сумма позиций/Начальная сумма цен единиц товара, работы, услуги в валюте контракт</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -958,7 +967,8 @@ CAdES-A</xs:documentation>
 		<xs:sequence>
 			<xs:element name="maxPriceCurrency" type="base:moneyType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Начальная (максимальная) цена в валюте контракта.
+					<xs:documentation>Начальная (максимальная) цена в валюте контракта/Максимальная цена контракта.
+
 Заполняется автоматически по формуле:
 Для валют с номиналом = 1 или номинал не указан:
 maxPrice / currencyRate/rate, где  currencyRate/rate - курс валюты по отношению к рублю на дату последнего сохранения извещения/изменения извещения (приема интеграционного пакета).
@@ -1014,6 +1024,82 @@ maxPrice * «Номинал» (из справочника валют для с�
 			<xs:element name="content" type="base:text4000Type" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Содержание требования (ограничения)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="requirementWithAddReqsType">
+		<xs:annotation>
+			<xs:documentation>Тип: Требование  (ограничение) к участникам (с дополнительными требованиями)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="preferenseRequirementInfo" type="base:prefsReqsRef">
+				<xs:annotation>
+					<xs:documentation>Требование (ограничение)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="content" type="base:text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Содержание требования (ограничения)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addRequirements" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительные требования.
+При приеме бизнес-контролем контролируется обязательность заполнения блока при заполнения в блоке requirement значений «Требования к участникам закупок в соответствии с частью 2 статьи 31 Федерального закона № 44-ФЗ (TU44)» или "Требования к участникам закупок в соответствии с частью 2.1 статьи 31 Федерального закона № 44-ФЗ (ET44312)"</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="addRequirement" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Дополнительное требование (перечень пунктов приложений ПП РФ № 99). 
+Может быть указана только ссылка запись справочника "Требования (преимущества, ограничения)" (nsiPurchasePreferences) в поле type которой указано значение "D" - "Дополнительное требование" и заполнено поле parentShortName</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="shortName" type="base:prefsReqsShortNameType">
+										<xs:annotation>
+											<xs:documentation>Символьный код дополнительного требования. 
+Символьный бизнес-код, по которому определяется ссылка на запись справочника "Требования (преимущества, ограничения)" (nsiPurchasePreferences)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="name" type="base:text2000Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Наименование дополнительного требования. Игнорируется при приеме. Заполняется  при передаче</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="content" type="base:text4000Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Содержание дополнительного требования. Игнорируется при приеме. Заполняется  при передаче</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="addRequirementType">
+		<xs:annotation>
+			<xs:documentation>Тип: Дополнительное требование к участникам</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="shortName" type="base:prefsReqsShortNameType">
+				<xs:annotation>
+					<xs:documentation>Символьный код дополнительного требования. 
+Символьный бизнес-код, по которому определяется ссылка на запись справочника "Требования (преимущества, ограничения)" (nsiPurchasePreferences)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование дополнительного требования. Игнорируется при приеме. Заполняется  при передаче</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="content" type="base:text4000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Содержание дополнительного требования. Игнорируется при приеме. Заполняется  при передаче</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1298,6 +1384,11 @@ CAdES-A</xs:documentation>
 						<xs:element name="dosageUserOKEI" type="base:OKEIRef">
 							<xs:annotation>
 								<xs:documentation>Потребительская единица  измерения дозировки по справочнику  "Лекарственные препараты" (nsiFarmDrugDictionary) (блок MNNsInfo\MNNInfo\dosagesInfo\dosageInfo\dosageUser\ dosageUserOKEI). Ссылка на классификатор ОКЕИ (nsiOKEI)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="dosageUserName" type="base:drugNameType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наименование потребительской единицы дозировки по справочнику  "Дозировки лекарственных препаратов"</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
