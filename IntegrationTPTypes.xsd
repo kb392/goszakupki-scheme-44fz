@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3, create date 20.09.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3.1, create date 14.10.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/TPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -154,11 +154,6 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="attachments" type="cmn:attachmentListType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Информация о прикрепленных документах</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="printForm" type="cmn:printFormType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Печатная форма плана-графика закупок</xs:documentation>
@@ -194,7 +189,7 @@
 	</xs:complexType>
 	<xs:complexType name="tenderPlan2020ChangeType">
 		<xs:annotation>
-			<xs:documentation>Изменение плана-графика закупок в структурированной форме</xs:documentation>
+			<xs:documentation>Изменение плана-графика закупок в структурированной форме с 01.01.2020</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="id" type="xs:long" minOccurs="0">
@@ -341,11 +336,6 @@
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="attachments" type="cmn:attachmentListType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Информация о прикрепленных документах</xs:documentation>
-				</xs:annotation>
 			</xs:element>
 			<xs:element name="extPrintForm" type="cmn:extPrintFormType" minOccurs="0">
 				<xs:annotation>
@@ -824,7 +814,7 @@ E - Данные позиции отредактированы</xs:documentation
 		<xs:sequence>
 			<xs:element name="type" type="tenderPlan2020SpecialPurchaseRef">
 				<xs:annotation>
-					<xs:documentation>Тип особой закупки из справочника "Типы особых закупок для планов закупок (планов-графиков закупок с 01.01.2017) и планов-графиков с 01.01.2017" (zfcs_nsiSpecialPurchaseType)</xs:documentation>
+					<xs:documentation>Тип особой закупки из справочника "Типы особых закупок для планов-графиков закупок с 01.01.2020" (zfcs_nsiSpecialPurchase2020Type)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="yearFinanceInfo" type="tenderPlan2020FinanceResourcesType" minOccurs="0">
@@ -1172,20 +1162,14 @@ E - Данные особой закупки отредактированы.</xs
 			<xs:documentation>Тип: Ссылка на справочник "Типы особых закупок" планах-графиках закупок с 01.01.2020</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="code">
+			<xs:element name="code" type="base:text10Type">
 				<xs:annotation>
 					<xs:documentation>Код типа</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="10"/>
-						<xs:minLength value="1"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element name="name" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование типа особых закупок в планах закупок и в планах графиках</xs:documentation>
+					<xs:documentation>Полное наименование типа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

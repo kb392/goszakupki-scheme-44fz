@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3, create date 20.09.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3.1, create date 14.10.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -25375,6 +25375,7 @@ MCP - максимальное значение цены договора</xs:do
 Допустимые значения:
 20 - 20%;
 10 - 10%;
+18 - 18%;
 0 - 0%;
 n - Без НДС.
 При приеме контролируется обязательность заполнение поля</xs:documentation>
@@ -47959,7 +47960,7 @@ BO - Заблокировано создание новых извещений.<
 			</xs:element>
 			<xs:element name="nsiSpecialPurchases" type="zfcs_nsiSpecialPurchaseType">
 				<xs:annotation>
-					<xs:documentation>Типы особых закупок для планов закупок (планов-графиков закупок с 01.01.2020) и планов-графиков с 01.01.2017</xs:documentation>
+					<xs:documentation>Типы особых закупок для планов закупок и планов-графиков с 01.01.2017</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="nsiPurchaseRejectReason" type="zfcs_nsiPurchaseRejectReasonType">
@@ -50385,6 +50386,38 @@ D - Дополнительное требование.</xs:documentation>
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_nsiSpecialPurchase2020Type">
+		<xs:annotation>
+			<xs:documentation>Cправочник: Типы особых закупок для планов-графиков закупок с 01.01.2020</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>Идентификатор</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="base:text10Type">
+				<xs:annotation>
+					<xs:documentation>Код типа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullName" type="base:text1000Type">
+				<xs:annotation>
+					<xs:documentation>Полное наименование типа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shortName" type="base:text500Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Краткое наименование типа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="actual" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Признак актуальности</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -54020,7 +54053,7 @@ E - Данные особой закупки отредактированы.</xs
 	</xs:complexType>
 	<xs:complexType name="zfcs_nsiSpecialPurchaseType">
 		<xs:annotation>
-			<xs:documentation>Cправочник: Типы особых закупок для планов закупок (планов-графиков закупок с 01.01.2020) и планов-графиков с 01.01.2017</xs:documentation>
+			<xs:documentation>Cправочник: Типы особых закупок для планов закупок и планов-графиков с 01.01.2017</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="id" type="xs:long">
@@ -54041,7 +54074,7 @@ E - Данные особой закупки отредактированы.</xs
 			</xs:element>
 			<xs:element name="purchasePlanShortName" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Краткое наименование типа для планов закупок (планов-графиков закупок с 01.01.2020)</xs:documentation>
+					<xs:documentation>Краткое наименование типа для планов закупок</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -54052,7 +54085,7 @@ E - Данные особой закупки отредактированы.</xs
 			</xs:element>
 			<xs:element name="purchasePlanFullName" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Полное наименование типа для планов закупок (планов-графиков закупок с 01.01.2020)</xs:documentation>
+					<xs:documentation>Полное наименование типа для планов закупок</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
