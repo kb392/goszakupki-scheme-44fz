@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS docs-ws-api Integration Scheme, version 7.0.6, create date 12.01.2017 -->
+<!-- EIS docs-ws-api Integration Scheme, version 7.1.3, create date 05.06.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/fz44/ws/priz" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/fz44/ws/priz">
 	<xs:element name="getPRIZObjectListRequest">
 		<xs:annotation>
@@ -2210,6 +2210,8 @@ FAS - Информационная система Федеральной ант�
 			<xs:enumeration value="6.2"/>
 			<xs:enumeration value="6.3"/>
 			<xs:enumeration value="6.4"/>
+			<xs:enumeration value="7.0"/>
+			<xs:enumeration value="7.1"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
