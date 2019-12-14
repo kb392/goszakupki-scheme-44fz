@@ -1,0 +1,68 @@
+Версия 7.1.3
+
+   IntegrationTypes.xsd
+
+https://jira.lanit.ru/browse/FCSNF-4104
+
+
+1. В тип "Информация (проект информации) о заключенном контракте с 01.01.2015" (zfcs_contract2015Type)
+   добавлены поля
+
+  "Код вида расходов. Допустимо указание для унитарных предприятий, автономных и бюджетных учреждений" (finances\budgetFunds\stages\payments\KVR)
+  "Не указано. Допустимо указание для унитарных предприятий, автономных и бюджетных учреждений" (finances\extrabudgetFunds\stages\payments\notSpecified)
+
+
+https://jira.lanit.ru/browse/FCS-59815
+2. В типе "Информация об объекте закупки -  лекарственном препарате" (zfcs_contract2015DrugPurchaseInfoType)
+
+   у блока "Страна производителя. Ссылка на классификатор ОКСМ (nsiOKSM)" (drugInfoUsingTextForm\positionsTradeName\positionTradeName\manufacturerOKSM) убран тип zfcs_OKSMRef
+   добавлены необязательные поля "Цифровой код страны" (countryCode) и "Полное наименование страны" (countryFullName)
+   
+   В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary)
+
+   у блока "Страна производителя. Ссылка на классификатор ОКСМ (nsiOKSM)" (MNNInfo\positionsTradeName\positionTradeName\manufacturerInfo\manufacturerInfo\manufacturerOKSM) убран тип zfcs_OKSMRef
+   добавлены необязательные поля "Цифровой код страны" (countryCode) и "Полное наименование страны" (countryFullName)
+
+
+
+
+   fcsPrintForm.xsd 
+
+
+
+
+   fcsExport.xsd 
+
+
+
+
+   fcsIntegration.xsd
+
+
+
+   fcsExtegration.xsd
+
+
+
+
+   fcsEisSignIncoming.xsd
+
+
+
+   fcsInternal.xsd
+
+
+   docs-ws-api.xsd
+
+
+
+   eis-fs-ws-api.xsd
+
+
+
+   fcsControl99.xsd
+
+
+
+
+   eisSigningSOAPMessages.xsd

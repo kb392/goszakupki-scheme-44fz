@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 7.1, create date 19.05.2017 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 7.1.3, create date 05.06.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:complexType name="account">
 		<xs:annotation>
@@ -18211,6 +18211,11 @@ CS - Заказчик, осуществляющий закупки в соотв
 																		<xs:documentation>Код бюджетной классификации (указывается после 01.01.2016)</xs:documentation>
 																	</xs:annotation>
 																</xs:element>
+																<xs:element name="KVR" type="zfcs_KVRCodeType">
+																	<xs:annotation>
+																		<xs:documentation>Код вида расходов. Допустимо указание для заказчиков - унитарных предприятий, автономных и бюджетных учреждений</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
 															</xs:choice>
 															<xs:element name="comment" minOccurs="0">
 																<xs:annotation>
@@ -18288,6 +18293,11 @@ CS - Заказчик, осуществляющий закупки в соотв
 																<xs:element name="KVR" type="zfcs_KVRCodeType">
 																	<xs:annotation>
 																		<xs:documentation>Код вида расходов (указывается с 01.01.2016)</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="notSpecified" type="xs:boolean" fixed="true">
+																	<xs:annotation>
+																		<xs:documentation>Не указано. Допустимо указание для для заказчиков - унитарных предприятий, автономных и бюджетных учреждений</xs:documentation>
 																	</xs:annotation>
 																</xs:element>
 															</xs:choice>
@@ -21010,7 +21020,7 @@ IN	Aннулировано.</xs:documentation>
 								<xs:sequence>
 									<xs:element name="MNNExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
 										<xs:annotation>
-											<xs:documentation>Уникальный внешний код МНН по справочнику "Лекарственные препараты" (поле MNNInfo\MNNExternalCode документа nsiFarmDrugDictionary)</xs:documentation>
+											<xs:documentation>Уникальный внешний код МНН по справочнику "Лекарственные препараты" (поле MNNInfo\MNNExternalCode документа nsiFarmDrugDictionary). При приеме контролируется наличие в справочнике "Лекарственные препараты" ЕИС МНН с таким кодом</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="MNNDrugCode" type="zfcs_nsiFarmDrugDictExternalCodeType" minOccurs="0">
@@ -21064,7 +21074,7 @@ IN	Aннулировано.</xs:documentation>
 						</xs:element>
 						<xs:element name="isZNVLP" type="xs:boolean" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Признак включения в реестр жизненно необходимые и важнейших лекарственных препаратов (ЖНВЛП). Игнорируется при приеме, автоматически заполняется при передаче из справочника "Лекарственные препараты" (поле MNNInfo\isZNVLP документа nsiFarmDrugDictionary)</xs:documentation>
+								<xs:documentation>Признак включения в реестр жизненно необходимых и важнейших лекарственных препаратов (ЖНВЛП)</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="positionsTradeName">
@@ -21081,7 +21091,7 @@ IN	Aннулировано.</xs:documentation>
 											<xs:sequence>
 												<xs:element name="positionTradeNameExternalCode" type="zfcs_nsiFarmDrugDictExternalCodeType">
 													<xs:annotation>
-														<xs:documentation>Уникальный внешний код лекарственного препарата по справочнику "Лекарственные препараты" (поле MNNInfo\positionsTradeName\positionTradeName\positionTradeNameExternalCode  документа nsiFarmDrugDictionary)</xs:documentation>
+														<xs:documentation>Уникальный внешний код лекарственного препарата по справочнику "Лекарственные препараты" (поле MNNInfo\positionsTradeName\positionTradeName\positionTradeNameExternalCode  документа nsiFarmDrugDictionary). При приеме контролируется наличие в справочнике "Лекарственные препараты" ЕИС лекарственного препарата с таким кодом и принадлежность лекарственного препарата с указанным кодом к МНН с кодом, указанным в поле MNNInfo\MNNExternalCode </xs:documentation>
 													</xs:annotation>
 												</xs:element>
 												<xs:element name="drugCode" type="zfcs_nsiFarmDrugDictExternalCodeType" minOccurs="0">
@@ -21168,10 +21178,36 @@ IN	Aннулировано.</xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="manufacturerOKSM" type="zfcs_OKSMRef">
+															<xs:element name="manufacturerOKSM">
 																<xs:annotation>
 																	<xs:documentation>Страна производителя. Ссылка на классификатор ОКСМ (nsiOKSM)</xs:documentation>
 																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="countryCode" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Цифровой код страны</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:maxLength value="3"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="countryFullName" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Полное наименование страны</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:maxLength value="200"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
 															</xs:element>
 															<xs:element name="manufacturerName" type="zfcs_contract2015DrugDictNameType">
 																<xs:annotation>
@@ -21195,13 +21231,13 @@ IN	Aннулировано.</xs:documentation>
 																	<xs:sequence>
 																		<xs:element name="primaryPackagingInfo">
 																			<xs:annotation>
-																				<xs:documentation>Сведения о первичной упаковке по справочнику "Лекарственные препараты" (блок MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo  документа nsiFarmDrugDictionary)</xs:documentation>
+																				<xs:documentation>Сведения о первичной упаковке по справочнику "Лекарственные препараты" (блок MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo  документа nsiFarmDrugDictionary). При приеме контролируется принадлежность вида с указанным наименованием к МНН с кодом, указанным в поле MNNInfo\MNNExternalCode</xs:documentation>
 																			</xs:annotation>
 																			<xs:complexType>
 																				<xs:sequence>
 																					<xs:element name="primaryPackagingName" type="zfcs_contract2015DrugDictNameType">
 																						<xs:annotation>
-																							<xs:documentation>Наименование вида первичной упаковки по справочнику "Лекарственные препараты" (поле MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo\primaryPackagingName  документа nsiFarmDrugDictionary)</xs:documentation>
+																							<xs:documentation>Наименование вида первичной упаковки по справочнику "Лекарственные препараты" (поле MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\primaryPackagingInfo\primaryPackagingName  документа nsiFarmDrugDictionary). При приеме контролируется наличие в справочнике "Лекарственные препараты" ЕИС первичной упаковки с таким наименованием и принадлежность первичной упаковки с указанным наименованием к МНН с кодом, указанным в поле MNNInfo\MNNExternalCode </xs:documentation>
 																						</xs:annotation>
 																					</xs:element>
 																				</xs:sequence>
@@ -44997,10 +45033,36 @@ Publish - Размещение (публикация) документа</xs:doc
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="manufacturerOKSM" type="zfcs_OKSMRef">
+															<xs:element name="manufacturerOKSM">
 																<xs:annotation>
 																	<xs:documentation>Страна производителя. Ссылка на классификатор ОКСМ (nsiOKSM)</xs:documentation>
 																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="countryCode" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Цифровой код страны</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:maxLength value="3"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="countryFullName" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Полное наименование страны</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:maxLength value="200"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
 															</xs:element>
 															<xs:element name="manufacturerAdress" type="zfcs_nsiFarmDrugDictNameType">
 																<xs:annotation>
