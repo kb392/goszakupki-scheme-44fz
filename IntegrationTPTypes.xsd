@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3, create date 11.09.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3, create date 20.09.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/TPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -110,7 +110,7 @@
 						<xs:element name="KVRsTotalsInfo" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Итоговые показатели по кодам видов расходов.
-Блок должен быть заполнен для организации заказчика, являющейся бюджетным или автономным учреждением</xs:documentation>
+Блок может быть заполнен только для организации заказчика, являющейся бюджетным или автономным учреждением</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -674,7 +674,7 @@ E - Данные позиции отредактированы</xs:documentation
 								<xs:element name="KBKsInfo" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>Детализировано по КБК.
-Блок должен быть заполнен в случае, если код ОКФС организации заказчика = 12 и для организации заказчика выполняются условия:
+Блок может быть заполнен в случае, если для организации заказчика выполняются условия:
 тип организации = «01 - федеральный орган государственной власти, федеральный государственный орган, орган государственной власти субъекта Российской Федерации, государственный орган субъекта Российской Федерации, орган местного самоуправления, в том числе его территориальные органы»
 ИЛИ
 тип организации = «08 - казенное учреждение»
@@ -683,7 +683,8 @@ E - Данные позиции отредактированы</xs:documentation
 ИЛИ
 Код СПЗ организации = 09950000002 (Государственная корпорация по космической деятельности "Роскосмос")
 ИЛИ
-Код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")</xs:documentation>
+Код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")
+Блок должен быть заполнен в случае, если выполняется одно из условий выше И уровень организации заказчика = 1 «Федеральный уровень»</xs:documentation>
 									</xs:annotation>
 									<xs:complexType>
 										<xs:complexContent>
@@ -902,7 +903,7 @@ E - Данные закупки отредактированы.</xs:documentatio
 			<xs:element name="KBKsInfo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Детализировано по КБК.
-Блок должен быть заполнен в случае, если код ОКФС организации заказчика = 12 и для организации заказчика выполняются условия:
+Блок может быть заполнен в случае, если для организации заказчика выполняются условия:
 тип организации = «01 - федеральный орган государственной власти, федеральный государственный орган, орган государственной власти субъекта Российской Федерации, государственный орган субъекта Российской Федерации, орган местного самоуправления, в том числе его территориальные органы»
 ИЛИ
 тип организации = «08 - казенное учреждение»
@@ -911,7 +912,8 @@ E - Данные закупки отредактированы.</xs:documentatio
 ИЛИ
 Код СПЗ организации = 09950000002 (Государственная корпорация по космической деятельности "Роскосмос")
 ИЛИ
-Код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")</xs:documentation>
+Код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")
+Блок должен быть заполнен в случае, если выполняется одно из условий выше И уровень организации заказчика = 1 «Федеральный уровень»</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:complexContent>
@@ -1031,11 +1033,6 @@ E - Данные особой закупки отредактированы.</xs
 			<xs:element name="KPP" type="base:kppType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>КПП организации. Игнорируется при приеме. Заполняется автоматически значением по Коду по СПЗ/Коду по СвР из справочника организаций ЕИС</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="OKPO" type="base:OKPORef" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>ОКПО организации</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="OKTMO" type="base:OKTMORef" minOccurs="0">
@@ -1300,7 +1297,7 @@ OTHER - Иное.</xs:documentation>
 					<xs:documentation>Отчество</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="position" type="base:positionType" minOccurs="0">
+			<xs:element name="position" type="base:positionType" minOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Должность</xs:documentation>
 				</xs:annotation>

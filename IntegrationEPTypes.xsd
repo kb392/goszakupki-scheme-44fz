@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3, create date 11.09.2019 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.3, create date 20.09.2019 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -6157,8 +6157,7 @@ CU5CH26 - Заказчик как орган исполнительной вла
 
 Начиная с версии ЕИС 9.3:
 1) Контролируется обязательность заполнения, кроме варианта, для которого установлено ограничение «Закупка у субъектов малого предпринимательства и социально ориентированных некоммерческих организаций» в notificationInfo/restrictionsInfo/restrictionInfo/preferenseRequirementInfo/shortName в соответствии со справочником "Преимущества (требования, ограничения) к участникам закупки" (nsiPurchasePreferences). 
-2) Если установлено ограничение «Закупка у субъектов малого предпринимательства и социально ориентированных некоммерческих организаций», то контролируется недопустимость указания размера обеспечения.
-3) Если задан блок customerRequirement/contractConditionsInfo/tenderPlanInfo и в связанной ППГ  ограничение «Закупка у субъектов малого предпринимательства и социально ориентированных некоммерческих организаций» = TRUE и для данного извещения такое ограничение не указано, то  принимается значение из пакета, если задано.</xs:documentation>
+2) Если установлено ограничение «Закупка у субъектов малого предпринимательства и социально ориентированных некоммерческих организаций», то контролируется недопустимость указания размера обеспечения</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="account" type="cmn:paymentPropertysType">
