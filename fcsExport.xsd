@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 9.0, create date 26.10.2018 -->
+<!-- FCS EXPORT Integration Scheme, version 9.0, create date 23.11.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
@@ -1399,6 +1399,36 @@
 										<xs:documentation>Причина корректировки справочных данных о лекарственных препаратах</xs:documentation>
 									</xs:annotation>
 								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiContractorUserRightList">
+						<xs:annotation>
+							<xs:documentation>Справочник прав доступа пользователей для ЕРУЗ</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiContractorUserRight" type="oos:zfcs_nsiContractorUserRightType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiContractorExcludeReasonList">
+						<xs:annotation>
+							<xs:documentation>Справочник оснований исключений участника закупки из ЕРУЗ</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiContractorExcludeReason" type="oos:zfcs_nsiContractorExcludeReasonType" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiWorldTimeZoneList">
+						<xs:annotation>
+							<xs:documentation>Cправочник часовых зон мира для ЕРУЗ</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiWorldTimeZone" type="oos:zfcs_nsiWorldTimeZoneType" minOccurs="0" maxOccurs="unbounded"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>

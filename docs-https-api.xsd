@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EIS docs-https-api Integration Scheme, version 9.0, create date 23.11.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/fz44/https" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" targetNamespace="http://zakupki.gov.ru/fz44/https" elementFormDefault="unqualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Сервис РБГ-->
@@ -252,14 +253,13 @@ bankGuaranteeReturn - Информация о возвращении банко�
 bankGuaranteeReturnInvalid - Сведения о недействительности информации о воз-вращении банковской гарантии или об освобождении от обязательств по банковской гарантии</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="status" type="documentStatusType">
+			<xs:element name="status" type="documentRBGStatusType">
 				<xs:annotation>
 					<xs:documentation>Статус сведений о документе:
-
 Допустимые значения:
 P - опубликован;
 I - недействителен;
-A - аннулирован.                    </xs:documentation>
+A - аннулирован</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="publishDate" type="xs:dateTime">
@@ -299,6 +299,31 @@ IKO - Информационные системы контрольных орг�
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="documentRBGStatusType">
+		<xs:annotation>
+			<xs:documentation>Тип: Статус документа РБГ:
+P - опубликован;
+I - недействителен;
+A - аннулирован</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="P">
+				<xs:annotation>
+					<xs:documentation>Опубликован</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="I">
+				<xs:annotation>
+					<xs:documentation>Недействителен</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A">
+				<xs:annotation>
+					<xs:documentation>Аннулирован</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="RBGDocumentKindType">
 		<xs:annotation>
 			<xs:documentation>Тип: Вид документа РБГ
@@ -493,7 +518,7 @@ NO – извещение об осуществлении закупки</xs:doc
 					<xs:documentation>Идентификатор документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="status" type="documentStatusType">
+			<xs:element name="status" type="documentBOStatusType">
 				<xs:annotation>
 					<xs:documentation>Статус сведений о документе:
 S - Направлены для постановки на учет,
@@ -546,6 +571,37 @@ NO – извещение об осуществлении закупки</xs:doc
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="documentBOStatusType">
+		<xs:annotation>
+			<xs:documentation>Тип: Статус документа БО:
+S - Направлены для постановки на учет,
+A - Ожидается постановка БО на учет,
+R - Поставлены на учет,
+D - Не поставлены на учет</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation>Опубликован</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A">
+				<xs:annotation>
+					<xs:documentation>Недействителен</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R">
+				<xs:annotation>
+					<xs:documentation>Аннулирован</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D">
+				<xs:annotation>
+					<xs:documentation>Аннулирован</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="foundationDocumentKindType">
 		<xs:annotation>
 			<xs:documentation>Тип: Вид документа-основания: 
@@ -606,28 +662,6 @@ NO – извещение об осуществлении закупки.
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:simpleType name="documentStatusType">
-		<xs:annotation>
-			<xs:documentation>Тип: Статус документа</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="P">
-				<xs:annotation>
-					<xs:documentation>Опубликован</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="I">
-				<xs:annotation>
-					<xs:documentation>Недействителен</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="A">
-				<xs:annotation>
-					<xs:documentation>Аннулирован</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="extPartnerType">
 		<xs:annotation>
 			<xs:documentation>Тип: Тип внешнего контрагента документа:

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.0, create date 26.10.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.0, create date 23.11.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -18687,7 +18687,8 @@ CS - Заказчик, осуществляющий закупки в соотв
 			</xs:element>
 			<xs:element name="bankSupportContractRequiredInfo" type="cmn:bankSupportContractRequiredInfoType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Если блок bankSupportContractRequiredInfo не задан и имеется связь с планом-графиком (задан блок tenderPlanInfo), то сведения о банковском и (или) казначейском сопровождении контакта автоматически заполняются на основании позиции плана-графика</xs:documentation>
+					<xs:documentation>Информации о банковском и (или) казначейском сопровождении контакта. Если блок bankSupportContractRequiredInfo не задан и имеется связь с планом-графиком (задан блок tenderPlanInfo) и в качестве основания заключения контракта указан блок foundation/fcsOrder/notOosOrder или foundation/fcsOrder/singleCustomer, сведения о банковском и (или) казначейском сопровождении контакта автоматически заполняются на основании позиции плана-графика. 
+Если блок bankSupportContractRequiredInfo не задан и в качестве основания заключения контракта указан блок foundation/fcsOrder/order, сведения о банковском и (или) казначейском сопровождении контакта автоматически заполняются на основании извещения</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="defenseContractNumber" type="zfcs_contract.defenseNum2015Type" minOccurs="0">
@@ -45921,6 +45922,16 @@ BO - Заблокировано создание новых извещений.<
 					<xs:documentation>Справочник: НПА, регулирующие допуск товаров, работ, услуг, происходящих из иностранных государств</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="nsiContractorExcludeReason" type="zfcs_nsiContractorExcludeReasonType">
+				<xs:annotation>
+					<xs:documentation>Справочник: Основания исключений участника закупки из ЕРУЗ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nsiWorldTimeZone" type="zfcs_nsiWorldTimeZoneType">
+				<xs:annotation>
+					<xs:documentation>Справочник: Часовые зон мира для ЕРУЗ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:choice>
 		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
 			<xs:annotation>
@@ -45965,7 +45976,8 @@ O - По окончании срока подачи заявок подана т
 NS - Не подано ни одного ценового предложения;
 ON - Подано единственное ценовое предложение о цене договора;
 OO - Отказано в допуске всем участникам электронной процедуры или о допуске только одного участника электронной процедуры;
-NV2 - По окончании срока подачи заявок подана только одна заявка. Такая заявка признана не соответствующей требованиям 44-ФЗ и требованиям, указанным в извещении.</xs:documentation>
+NV2 - По окончании срока подачи заявок подана только одна заявка. Такая заявка признана не соответствующей требованиям 44-ФЗ и требованиям, указанным в извещении;
+OV3 - По результатам рассмотрения вторых частей заявок только одна заявка признана соответствующей требованиям ФЗ и требованиям, указанным в извещении.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="docType" type="zfcs_docType">
@@ -48020,6 +48032,11 @@ PP615 - ПП РФ 615.</xs:documentation>
 					<xs:documentation>Является электронной процедурой</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="isExclude" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Является исключением</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="zfcs_nsiPlanPositionChangeReasonType">
@@ -49869,6 +49886,73 @@ Publish - Размещение (публикация) документа</xs:doc
 			<xs:enumeration value="3"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<!--НСИ ЕРУЗ-->
+	<xs:complexType name="zfcs_nsiContractorExcludeReasonType">
+		<xs:annotation>
+			<xs:documentation>Справочник: Основания исключений участника закупки из ЕРУЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:text10Type">
+				<xs:annotation>
+					<xs:documentation>Код основания исключения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Наименование основания исключения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isActual" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Признак акутальности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_nsiContractorUserRightType">
+		<xs:annotation>
+			<xs:documentation>Справочник: Права доступа пользователей в ЕРУЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="base:text10Type">
+				<xs:annotation>
+					<xs:documentation>Код права пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Наименование права доступа пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isActual" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Признак акутальности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_nsiWorldTimeZoneType">
+		<xs:annotation>
+			<xs:documentation>Cправочник: Часовые зоны мира для ЕРУЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="base:timeZoneNameType">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="differenceTime" type="base:timeZoneDifferenceType">
+				<xs:annotation>
+					<xs:documentation>Разница во времени</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isActual" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Актуальность</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Неструктурированные планы закупок (РПЗ)-->
 	<xs:complexType name="zfcs_sketchPlanExecutionType">
 		<xs:annotation>
@@ -54664,13 +54748,13 @@ O871N - метод, установленный приказом Минздрав
 								<xs:documentation>Сумма выплат по лекарственному препарату в основном варианте поставки. При приеме в ЕИС контролируется заполненность суммы для тех лет, для которых заполнены соответствующее количество в блоке drugQuantityInfo из блока drugsInfo, у которого в поле basicUnit установлено true. Поле total в составе блока рассчитывается автоматически</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="accordingSt111.4" type="xs:boolean" fixed="true" minOccurs="0">
-							<xs:annotation>
-								<xs:documentation>Закупка осуществляется в соответствии со ст. 111.4 Федерального закона N 44-ФЗ</xs:documentation>
-							</xs:annotation>
-						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+			<xs:element name="accordingSt111.4" type="xs:boolean" fixed="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Закупка осуществляется в соответствии со ст. 111.4 Федерального закона N 44-ФЗ</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -59017,7 +59101,7 @@ notification - Извещение (конкурсная документация
 protocol - Итоговый протокол определения поставщика, подрядчика, исполнителя;
 contractProject - Проект контракта без подписей;
 contractProjectChange - Доработанный проект контракта на основании размещенного поставщиком протокола разногласий.</xs:documentation>
-			</xs:annotation>
+				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="base:control99DocumentTypeEnum"/>
 				</xs:simpleType>
@@ -59510,7 +59594,9 @@ contractProcedure - Сведения об исполнении (расторже
 purchasePlan - План закупок;
 tenderPlan2017 - План график с 01.01.2017;
 notification - Извещение (конкурсная документация);
-protocol - Итоговый протокол определения поставщика, подрядчика, исполнителя.</xs:documentation>
+protocol - Итоговый протокол определения поставщика, подрядчика, исполнителя;
+contractProject - Проект контракта без подписей;
+contractProjectChange - Доработанный проект контракта на основании размещенного поставщиком протокола разногласий.</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="base:control99DocumentTypeEnum"/>
