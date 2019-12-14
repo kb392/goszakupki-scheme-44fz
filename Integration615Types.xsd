@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.2, create date 14.06.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.2.2, create date 11.07.2018 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/pprf615types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -1736,6 +1736,11 @@ TC - Орган местного самоуправления и (или) гос
 					<xs:documentation>Электронный документ, полученный из внешней системы</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="scanAttachmentsInfo" type="attachmentListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Отсканированная копия договора или электронный договор</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="attachmentsInfo" type="attachmentListType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Информация о прикрепленных документах</xs:documentation>
@@ -1755,6 +1760,11 @@ TC - Орган местного самоуправления и (или) гос
 						<xs:element name="info" type="base:text2000Type">
 							<xs:annotation>
 								<xs:documentation>Описание условий договора, которые бвли изменены</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="attachmentsInfo" type="attachmentListType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Документы, являющиеся основанием изменения договора</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
