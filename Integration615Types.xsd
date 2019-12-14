@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.2, create date 28.04.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.2, create date 14.06.2018 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/pprf615types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -1535,25 +1535,34 @@ TC - Орган местного самоуправления и (или) гос
 				</xs:annotation>
 				<xs:complexType>
 					<xs:choice>
-						<xs:element name="bankGuaranteeInfo">
-							<xs:annotation>
-								<xs:documentation>Банковская гарантия, выданная банком</xs:documentation>
-							</xs:annotation>
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="regNumber" type="base:bankGuaranteeRegNumberType">
-										<xs:annotation>
-											<xs:documentation>Номер реестровой записи банковской гарантии</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="guaranteeAmount" type="base:moneyPositiveType">
-										<xs:annotation>
-											<xs:documentation>Сумма банковской гарантии в российских рублях</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-								</xs:sequence>
-							</xs:complexType>
-						</xs:element>
+						<xs:choice>
+							<xs:element name="bankGuaranteeInfo">
+								<xs:annotation>
+									<xs:documentation>Банковская гарантия, выданная банком</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="regNumber" type="base:bankGuaranteeRegNumberType">
+											<xs:annotation>
+												<xs:documentation>Номер реестровой записи банковской гарантии</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="guaranteeAmount" type="base:moneyPositiveType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Сумма банковской гарантии в российских рублях.
+Игнорируется при приеме, автоматически заполняется при передаче  на основании реестровой записи  из реестра банковских гарантий</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="notPublishedOnEIS" type="xs:boolean" fixed="true">
+								<xs:annotation>
+									<xs:documentation>Информация о банковской гарантии, выданной банком, не будет размещена на официальном сайте ЕИС в соответствии с ч. 8.1 ст. 45 Федерального закона № 44-ФЗ.
+Игнорируется при приеме, заполняется при передаче, в случае если информация не должна быть размещена в открытой части ЕИС </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
 						<xs:element name="amount" type="base:moneyPositiveType">
 							<xs:annotation>
 								<xs:documentation>Размер обеспечения исполнения договора в российских рублях</xs:documentation>
@@ -4237,7 +4246,7 @@ CAdES-A</xs:documentation>
 					<xs:documentation>Полное наименование организации (латинскими буквами)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="INN" type="base:innType">
+			<xs:element name="INN" type="base:innType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>ИНН</xs:documentation>
 				</xs:annotation>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS PRINT_FORM Integration Scheme, version 8.2, create date 28.04.2018 -->
+<!-- FCS PRINT_FORM Integration Scheme, version 8.2, create date 14.06.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/printform/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
@@ -2367,6 +2367,16 @@ PUBL - Размещено.</xs:documentation>
 	<xs:element name="epClarificationResult" type="ep:clarificationResultType">
 		<xs:annotation>
 			<xs:documentation>Разъяснение результатов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epClarificationDocRequest" type="ep:clarificationDocRequestType">
+		<xs:annotation>
+			<xs:documentation>Запрос о даче разъяснений положений документации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epClarificationResultRequest" type="ep:clarificationResultRequestType">
+		<xs:annotation>
+			<xs:documentation>Запрос о даче разъяснений результатов</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<!--Открытый конкурс в электронной форме (ЭOK)-->

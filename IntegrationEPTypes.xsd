@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.2, create date 28.04.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 8.2, create date 14.06.2018 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -12,9 +12,14 @@
 		<xs:complexContent>
 			<xs:extension base="purchaseDocumentType">
 				<xs:sequence>
-					<xs:element name="cancelReasonInfo" type="notificationModificationType">
+					<xs:element name="cancelReasonInfo" type="notificationChangeReasonType">
 						<xs:annotation>
 							<xs:documentation>Причина отмены</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="addInfo" type="base:text2000Type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Дополнительная информация</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -62,12 +67,41 @@ FO  Определение поставщика завершено;
 CO  Определение поставщика отменено.		</xs:documentation>
 									</xs:annotation>
 								</xs:element>
-								<xs:element name="notificationCancelFailureOrgInfo" type="organizationType">
+								<xs:element name="notificationCancelFailureOrgInfo">
 									<xs:annotation>
 										<xs:documentation>Организация, осуществляющая размещение отмены извещения определения поставщика (подрядчика, исполнителя)</xs:documentation>
 									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="organizationType">
+												<xs:sequence>
+													<xs:element name="responsibleRole" type="base:responsibleRoleEPType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Роль организации, осуществляющей закупку
+CU - Заказчик;
+OCU - Заказчик в качестве организатора совместного аукциона;
+RA - Уполномоченный орган;
+ORA- Уполномоченный орган в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+AI - Уполномоченное учреждение;
+OAI- Уполномоченное учреждение в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+OA - Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения);
+OOA- Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения) в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CS - Заказчик, осуществляющий закупки в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ;
+OCS -  Заказчик, осуществляющий закупки в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ, в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+CC - Заказчик, осуществляющий закупки в соответствии с Федеральным законом № 44-ФЗ, в связи с неразмещением положения о закупке в соответствии с положениями Федерального закона № 223-ФЗ;
+OCC - Заказчик, осуществляющий закупки в соответствии с Федеральным законом № 44-ФЗ, в связи с неразмещением положения о закупке в соответствии с положениями Федерального закона № 223-ФЗ,
+в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+AU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU);
+OAU - Заказчик, осуществляющий закупку на проведение обязательного аудита (код AU), в качестве организатора совместного конкурса (аукциона) согласно ст. 25 №44ФЗ;
+RO - Региональный оператор.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
 								</xs:element>
-								<xs:element name="cancelReasonInfo" type="modificationType">
+								<xs:element name="cancelReasonInfo" type="changeReasonType">
 									<xs:annotation>
 										<xs:documentation>Основание для отмены извещений об отмене определения поставщика (подрядчика, исполнителя)</xs:documentation>
 									</xs:annotation>
@@ -144,7 +178,7 @@ CO  Определение поставщика отменено.		</xs:document
 						</xs:element>
 						<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Номер документа. Элемент ингорируется при приёме. Заполняется при передаче номерод документа присвоенным в ЕИС</xs:documentation>
+								<xs:documentation>Номер документа. Элемент игнорируется при приёме. Заполняется при передаче номером документа присвоенным в ЕИС</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="publishDTInEIS" type="xs:dateTime" minOccurs="0">
@@ -154,7 +188,7 @@ CO  Определение поставщика отменено.		</xs:document
 						</xs:element>
 						<xs:element name="href" type="base:hrefType" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент ингорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
+								<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент игнорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="publishDTInETP" type="xs:dateTime">
@@ -179,7 +213,7 @@ CO  Определение поставщика отменено.		</xs:document
 						</xs:element>
 						<xs:element name="canceledProtocolNumber" type="base:documentNumberType">
 							<xs:annotation>
-								<xs:documentation>Сформирорванный во внешней системе номер отменяемого протокола. При приёме контролируется наличие опубликованного протокола с указанным номером</xs:documentation>
+								<xs:documentation>Сформированный во внешней системе номер отменяемого протокола. При приёме контролируется наличие опубликованного протокола с указанным номером</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -205,7 +239,7 @@ CO  Определение поставщика отменено.		</xs:document
 					<xs:documentation>Информация о прикрепленных документах</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="cancelReasonInfo" type="modificationWithoutСustomerDecisionType">
+			<xs:element name="cancelReasonInfo" type="modificationWithoutCustomerDecisionType">
 				<xs:annotation>
 					<xs:documentation>Причина отмены протокола</xs:documentation>
 				</xs:annotation>
@@ -334,6 +368,11 @@ CO  Определение поставщика отменено.		</xs:document
 										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ</xs:documentation>
 									</xs:annotation>
 								</xs:element>
+								<xs:element name="publicDiscussionInfo" type="publicDiscussionType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -394,7 +433,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEOK1" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOK1" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="research" type="xs:boolean">
@@ -439,7 +478,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEOK2" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOK2" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="research" type="xs:boolean">
@@ -482,6 +521,11 @@ CO  Определение поставщика отменено.		</xs:document
 										</xs:sequence>
 									</xs:complexType>
 								</xs:element>
+								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOK2" в поле objectName</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 								<xs:element name="research" type="xs:boolean">
 									<xs:annotation>
 										<xs:documentation>Предусмотрено выполнение научно-исследовательских, опытно-конструкторских, технологических работ или оказание консультационных услуг</xs:documentation>
@@ -513,14 +557,14 @@ CO  Определение поставщика отменено.		</xs:document
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="applicationIInfo" type="singleAppType">
+								<xs:element name="applicationInfo" type="singleAppType">
 									<xs:annotation>
 										<xs:documentation>Заявка</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEPSingleApp" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKSingleApp" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -551,7 +595,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEPSinglePart" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKSinglePart" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -694,6 +738,11 @@ CO  Определение поставщика отменено.		</xs:document
 										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ</xs:documentation>
 									</xs:annotation>
 								</xs:element>
+								<xs:element name="publicDiscussionInfo" type="publicDiscussionType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -754,7 +803,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEOKOU1" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKOU1" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="research" type="xs:boolean">
@@ -799,7 +848,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEOOUK2" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKOU2" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="research" type="xs:boolean">
@@ -880,7 +929,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEPSingleApp" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKOUSingleApp" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -911,7 +960,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEPSinglePart" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKOUSinglePart" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1054,6 +1103,11 @@ CO  Определение поставщика отменено.		</xs:document
 										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ</xs:documentation>
 									</xs:annotation>
 								</xs:element>
+								<xs:element name="publicDiscussionInfo" type="publicDiscussionType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -1085,15 +1139,14 @@ CO  Определение поставщика отменено.		</xs:document
 	</xs:complexType>
 	<xs:complexType name="protocolEOKD1Type">
 		<xs:annotation>
-			<xs:documentation>Тип: Протокол первого этапа ЭOKД (двухэтапный конкурс в электронной форме);
- внесение изменений</xs:documentation>
+			<xs:documentation>Тип: Протокол первого этапа ЭOKД (двухэтапный конкурс в электронной форме); внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="protocolType">
 				<xs:sequence>
 					<xs:element name="protocolInfo">
 						<xs:annotation>
-							<xs:documentation>Информация о проведении первого этапа ЭOKД (двухэтапный конкурс в электронной форме).
+							<xs:documentation>Информация о проведении ЭOKД (двухэтапный конкурс в электронной форме).
 В рамках блока должен быть заполнен блок applicationsInfo и/или abandonedReason</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
@@ -1140,15 +1193,42 @@ CO  Определение поставщика отменено.		</xs:document
 															</xs:annotation>
 															<xs:complexType>
 																<xs:choice>
-																	<xs:element name="admitted" type="xs:boolean" fixed="true">
+																	<xs:element name="appAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Заявка допущена</xs:documentation>
+																			<xs:documentation>Информация о допущенной заявке</xs:documentation>
 																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="admitted" type="xs:boolean" fixed="true">
+																					<xs:annotation>
+																						<xs:documentation>Заявка допущена</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
-																	<xs:element name="appRejectedReason" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																	<xs:element name="appNotAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Причины отказа в допуске. Указание хотябы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+																			<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="appRejectedReasonsInfo">
+																					<xs:annotation>
+																						<xs:documentation>Причины отказа в допуске</xs:documentation>
+																					</xs:annotation>
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																								<xs:annotation>
+																									<xs:documentation>Причина отказа в допуске</xs:documentation>
+																								</xs:annotation>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
 																</xs:choice>
 															</xs:complexType>
@@ -1161,7 +1241,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание ЭOKД несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEOKD1" в поле objectName</xs:documentation>
+										<xs:documentation>Признание ЭOKД несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKD1" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1202,7 +1282,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание ЭOKД несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEOKD2" в поле objectName</xs:documentation>
+										<xs:documentation>Признание ЭOKД несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKD2" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="research" type="xs:boolean">
@@ -1247,7 +1327,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание ЭOKД несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEOKD3" в поле objectName</xs:documentation>
+										<xs:documentation>Признание ЭOKД несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKD3" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="research" type="xs:boolean">
@@ -1317,7 +1397,7 @@ CO  Определение поставщика отменено.		</xs:document
 				<xs:sequence>
 					<xs:element name="protocolInfo">
 						<xs:annotation>
-							<xs:documentation>Информация в протоколе  о рассмотрении единственной заявки ЭOK (открытый конкурс в электронной форме)</xs:documentation>
+							<xs:documentation>Информация в протоколе  о рассмотрении единственной заявки ЭOKД  (двухэтапный конкурс в электронной форме)</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
@@ -1328,7 +1408,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEPSingleApp" в поле objectName</xs:documentation>
+										<xs:documentation>Признание ЭОКД несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKDSingleApp" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1348,18 +1428,18 @@ CO  Определение поставщика отменено.		</xs:document
 				<xs:sequence>
 					<xs:element name="protocolInfo">
 						<xs:annotation>
-							<xs:documentation>Информация протокола  рассмотрения заявки единственного участника ЭOK (открытый конкурс в электронной форме)</xs:documentation>
+							<xs:documentation>Информация протокола  рассмотрения заявки единственного участника ЭOKД  (двухэтапный конкурс в электронной форме)</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="applicationInfo" type="singleAppType">
+								<xs:element name="applicationInfo" type="singlePartType">
 									<xs:annotation>
 										<xs:documentation>Заявка</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEPSinglePart" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOKDSinglePart" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1378,7 +1458,7 @@ CO  Определение поставщика отменено.		</xs:document
 				<xs:sequence>
 					<xs:element name="prolongationInfo">
 						<xs:annotation>
-							<xs:documentation>Информацияо продлении срока подачи заявок ЭOKД (двухэтапный конкурс в электронной форме)</xs:documentation>
+							<xs:documentation>Информация о продлении срока подачи заявок ЭOKД (двухэтапный конкурс в электронной форме)</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
@@ -1393,9 +1473,14 @@ CO  Определение поставщика отменено.		</xs:document
 													<xs:documentation>Дата и время окончания подачи заявок</xs:documentation>
 												</xs:annotation>
 											</xs:element>
+											<xs:element name="newCollectingEndDT" type="xs:dateTime">
+												<xs:annotation>
+													<xs:documentation>Дата и время окончания подачи заявок после продления</xs:documentation>
+												</xs:annotation>
+											</xs:element>
 											<xs:element name="scoringDT" type="xs:dateTime">
 												<xs:annotation>
-													<xs:documentation>Дата и время проведения обсуждения</xs:documentation>
+													<xs:documentation>Дата и время проведения обсуждения после продления</xs:documentation>
 												</xs:annotation>
 											</xs:element>
 										</xs:sequence>
@@ -1403,7 +1488,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="secondStageInfo">
 									<xs:annotation>
-										<xs:documentation>Информация по первому этапу</xs:documentation>
+										<xs:documentation>Информация по второму этапу после продления</xs:documentation>
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
@@ -1571,6 +1656,16 @@ CO  Определение поставщика отменено.		</xs:document
 										<xs:documentation>Необходимо обязательное общественное обсуждение в соответствии со статьей 20 Федерального закона №44-ФЗ</xs:documentation>
 									</xs:annotation>
 								</xs:element>
+								<xs:element name="publicDiscussionInfo" type="publicDiscussionType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Общественное обсуждение крупных закупок (для печатной формы). Игнорируется при приеме. Автоматически заполняется при передаче</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="contractServiceInfo" type="base:text2000Type">
+									<xs:annotation>
+										<xs:documentation>Информация о контрактной службе, контрактном управляющем</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -1614,11 +1709,6 @@ CO  Определение поставщика отменено.		</xs:document
 																<xs:documentation>Общая информация</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="finalPrice" type="base:moneyType">
-															<xs:annotation>
-																<xs:documentation>Сумма предложения участника</xs:documentation>
-															</xs:annotation>
-														</xs:element>
 														<xs:element name="appParticipantInfo" type="participantType">
 															<xs:annotation>
 																<xs:documentation>Сведения об участнике</xs:documentation>
@@ -1655,15 +1745,42 @@ CO  Определение поставщика отменено.		</xs:document
 															</xs:annotation>
 															<xs:complexType>
 																<xs:choice>
-																	<xs:element name="admitted" type="xs:boolean" fixed="true">
+																	<xs:element name="appAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Заявка допущена</xs:documentation>
+																			<xs:documentation>Информация о допущенной заявке</xs:documentation>
 																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="admitted" type="xs:boolean" fixed="true">
+																					<xs:annotation>
+																						<xs:documentation>Заявка допущена</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
-																	<xs:element name="appRejectedReason" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																	<xs:element name="appNotAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Причины отказа в допуске. Указание хотябы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+																			<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="appRejectedReasonsInfo">
+																					<xs:annotation>
+																						<xs:documentation>Причины отказа в допуске</xs:documentation>
+																					</xs:annotation>
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																								<xs:annotation>
+																									<xs:documentation>Причина отказа в допуске</xs:documentation>
+																								</xs:annotation>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
 																</xs:choice>
 															</xs:complexType>
@@ -1676,7 +1793,7 @@ CO  Определение поставщика отменено.		</xs:document
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание запроса котировок электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEZK1" в поле objectName</xs:documentation>
+										<xs:documentation>Признание запроса котировок электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEZK1" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1757,19 +1874,50 @@ CO  Определение поставщика отменено.		</xs:document
 															</xs:annotation>
 															<xs:complexType>
 																<xs:choice>
-																	<xs:element name="resultType" type="base:admissionResultsEnum">
+																	<xs:element name="appAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Результат оценки в тестовом представлении, возможные значения: WIN_OFFER - Победитель;
+																			<xs:documentation>Информация о допущенной заявке</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="admitted" type="xs:boolean" fixed="true">
+																					<xs:annotation>
+																						<xs:documentation>Заявка допущена</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="resultType" type="base:admissionResultsEnum">
+																					<xs:annotation>
+																						<xs:documentation>Результат оценки в тестовом представлении, возможные значения: WIN_OFFER - Победитель;
 LIKE_WIN_OFFER - Предложение о цене контракта такое же как у победителя;
 SECOND_OFFER - Лучшее предложение о цене контракта после победителя;
-PASS_OFFER - Все остальные заявки;
-ADMITTED_OFFER - Заявка допущена (только при рассмотрении единственной поданной заявки).</xs:documentation>
-																		</xs:annotation>
+PASS_OFFER - Все остальные заявки</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
-																	<xs:element name="appRejectedReason" type="base:rejectReasonRef" maxOccurs="unbounded">
+																	<xs:element name="appNotAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Причина отказа в допуске.  Указание хотя бы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+																			<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="appRejectedReasonsInfo">
+																					<xs:annotation>
+																						<xs:documentation>Причины отказа в допуске</xs:documentation>
+																					</xs:annotation>
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																								<xs:annotation>
+																									<xs:documentation>Причина отказа в допуске</xs:documentation>
+																								</xs:annotation>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
 																</xs:choice>
 															</xs:complexType>
@@ -1779,6 +1927,11 @@ ADMITTED_OFFER - Заявка допущена (только при рассмо
 											</xs:element>
 										</xs:sequence>
 									</xs:complexType>
+								</xs:element>
+								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Признание запроса котировок электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEZK2" в поле objectName</xs:documentation>
+									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
 						</xs:complexType>
@@ -1800,9 +1953,14 @@ ADMITTED_OFFER - Заявка допущена (только при рассмо
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="endDate" type="xs:dateTime">
+								<xs:element name="collectingEndDT" type="xs:dateTime">
 									<xs:annotation>
-										<xs:documentation>Дата и время окончания подачи заявок</xs:documentation>
+										<xs:documentation>Дата и время окончания подачи заявок до продления</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="newCollectingEndDT" type="xs:dateTime">
+									<xs:annotation>
+										<xs:documentation>Дата и время окончания подачи заявок после продления</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1948,7 +2106,7 @@ ADMITTED_OFFER - Заявка допущена (только при рассмо
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="modificationInfo" type="modificationWithoutСustomerDecisionType" minOccurs="0">
+					<xs:element name="modificationInfo" type="modificationWithoutCustomerDecisionType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Основание внесения изменений</xs:documentation>
 						</xs:annotation>
@@ -1976,8 +2134,7 @@ ADMITTED_OFFER - Заявка допущена (только при рассмо
 	</xs:complexType>
 	<xs:complexType name="protocolEZP1ExtractType">
 		<xs:annotation>
-			<xs:documentation>Тип: Выписка из протокола проведения ЭЗП (Запрос предложений в электронной форме);
- внесение изменений</xs:documentation>
+			<xs:documentation>Тип: Выписка из протокола проведения ЭЗП (Запрос предложений в электронной форме); внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="id" type="xs:long" minOccurs="0">
@@ -1994,6 +2151,11 @@ ADMITTED_OFFER - Заявка допущена (только при рассмо
 				<xs:annotation>
 					<xs:documentation>Номер версии документа. В случае если значение поля не указано или в поле указано 1, считается, что это первоначальная версия документа, иначе – изменение существующей версии.
 При приеме изменений документа контролируется последовательность нумерации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foundationDocInfo" type="foundationDocInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Документ-основание. При указании блока должен быть заполнен элемент foundationDocNumber или foundationDocNumberExternal. В случае указания обоих элементов, элемент foundationDocNumberExternal будет игнорироваться. При выгрузке заполняются оба вложенных элемента</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="commonInfo" type="protocolCommonInfoType">
@@ -2098,26 +2260,30 @@ RO - Региональный оператор.</xs:documentation>
 														</xs:sequence>
 													</xs:complexType>
 												</xs:element>
-												<xs:element name="price" type="base:moneyType">
-													<xs:annotation>
-														<xs:documentation>Общая сумма предложения участника</xs:documentation>
-													</xs:annotation>
-												</xs:element>
 												<xs:element name="appParticipant" type="participantType">
 													<xs:annotation>
 														<xs:documentation>Сведения об участнике</xs:documentation>
 													</xs:annotation>
 												</xs:element>
-												<xs:element name="admittedInfo">
+												<xs:element name="appNotAdmittedInfo">
 													<xs:annotation>
-														<xs:documentation>Информация о допуске заявки</xs:documentation>
+														<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="appRejectedReason" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+															<xs:element name="appRejectedReasonsInfo">
 																<xs:annotation>
-																	<xs:documentation>Причины отказа в допуске. Указание хотябы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+																	<xs:documentation>Причины отказа в допуске</xs:documentation>
 																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																			<xs:annotation>
+																				<xs:documentation>Причина отказа в допуске</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
 															</xs:element>
 														</xs:sequence>
 													</xs:complexType>
@@ -2135,7 +2301,7 @@ RO - Региональный оператор.</xs:documentation>
 						</xs:element>
 						<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Признание запроса предложений в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEZP1Extract" в поле objectName</xs:documentation>
+								<xs:documentation>Признание запроса предложений в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEZP1Extract" в поле objectName</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -2162,13 +2328,13 @@ RO - Региональный оператор.</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="applications" minOccurs="0">
+								<xs:element name="applicationsInfo" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>Заявки</xs:documentation>
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="application" maxOccurs="unbounded">
+											<xs:element name="applicationInfo" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Заявка</xs:documentation>
 												</xs:annotation>
@@ -2179,12 +2345,7 @@ RO - Региональный оператор.</xs:documentation>
 																<xs:documentation>Общая информация</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="price" type="base:moneyType">
-															<xs:annotation>
-																<xs:documentation>Общая сумма предложения участника</xs:documentation>
-															</xs:annotation>
-														</xs:element>
-														<xs:element name="appParticipant" type="participantType">
+														<xs:element name="appParticipantInfo" type="participantType">
 															<xs:annotation>
 																<xs:documentation>Сведения об участнике</xs:documentation>
 															</xs:annotation>
@@ -2203,13 +2364,13 @@ RO - Региональный оператор.</xs:documentation>
 																</xs:sequence>
 															</xs:complexType>
 														</xs:element>
-														<xs:element name="correspondencies" minOccurs="0">
+														<xs:element name="correspondenciesInfo" minOccurs="0">
 															<xs:annotation>
 																<xs:documentation>Соответствие участника преимуществам</xs:documentation>
 															</xs:annotation>
 															<xs:complexType>
 																<xs:sequence>
-																	<xs:element name="correspondence" type="appCorrespondenceType" maxOccurs="unbounded">
+																	<xs:element name="correspondenceInfo" type="appCorrespondenceType" maxOccurs="unbounded">
 																		<xs:annotation>
 																			<xs:documentation>Соответствие участника отдельному преимуществу/требованию к участникам </xs:documentation>
 																		</xs:annotation>
@@ -2234,10 +2395,24 @@ RO - Региональный оператор.</xs:documentation>
 															</xs:annotation>
 															<xs:complexType>
 																<xs:choice>
-																	<xs:element name="admitted" type="xs:boolean" fixed="true">
+																	<xs:element name="singleAppAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Заявка допущена (только для единственной допущенной заявки)</xs:documentation>
+																			<xs:documentation>Заявка допущена (только для единственной допущенной/поданной заявки)</xs:documentation>
 																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="admitted" type="xs:boolean" fixed="true">
+																					<xs:annotation>
+																						<xs:documentation>Заявка допущена (только для единственной допущенной заявки)</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="price" type="base:moneyType">
+																					<xs:annotation>
+																						<xs:documentation>Cумма предложения участника</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
 																	<xs:element name="appAdmittedInfo">
 																		<xs:annotation>
@@ -2255,7 +2430,7 @@ RO - Региональный оператор.</xs:documentation>
 																						<xs:documentation>Оценка заявки</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
-																				<xs:element name="conditionsScoring" minOccurs="1">
+																				<xs:element name="conditionsScoringInfo" minOccurs="1">
 																					<xs:annotation>
 																						<xs:documentation>Оценка предложения участника по критериям оценки</xs:documentation>
 																					</xs:annotation>
@@ -2269,13 +2444,36 @@ RO - Региональный оператор.</xs:documentation>
 																						</xs:sequence>
 																					</xs:complexType>
 																				</xs:element>
+																				<xs:element name="price" type="base:moneyType">
+																					<xs:annotation>
+																						<xs:documentation>Cумма предложения участника</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
 																			</xs:sequence>
 																		</xs:complexType>
 																	</xs:element>
-																	<xs:element name="appRejectedReason" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																	<xs:element name="appNotAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Причины отказа в допуске. Указание хотябы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+																			<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="appRejectedReasonsInfo">
+																					<xs:annotation>
+																						<xs:documentation>Причины отказа в допуске</xs:documentation>
+																					</xs:annotation>
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																								<xs:annotation>
+																									<xs:documentation>Причина отказа в допуске</xs:documentation>
+																								</xs:annotation>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
 																</xs:choice>
 															</xs:complexType>
@@ -2288,7 +2486,7 @@ RO - Региональный оператор.</xs:documentation>
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание запроса предложений в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEZP1" в поле objectName</xs:documentation>
+										<xs:documentation>Признание запроса предложений в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEZP1" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -2311,13 +2509,13 @@ RO - Региональный оператор.</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="applications">
+								<xs:element name="applicationsInfo">
 									<xs:annotation>
 										<xs:documentation>Заявки</xs:documentation>
 									</xs:annotation>
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element name="application" maxOccurs="unbounded">
+											<xs:element name="applicationInfo" maxOccurs="unbounded">
 												<xs:annotation>
 													<xs:documentation>Заявка</xs:documentation>
 												</xs:annotation>
@@ -2328,31 +2526,7 @@ RO - Региональный оператор.</xs:documentation>
 																<xs:documentation>Общая информация</xs:documentation>
 															</xs:annotation>
 														</xs:element>
-														<xs:element name="price" type="base:moneyType">
-															<xs:annotation>
-																<xs:documentation>Общая сумма первоначального предложения участника</xs:documentation>
-															</xs:annotation>
-														</xs:element>
-														<xs:element name="finalOfferInfo" minOccurs="0">
-															<xs:annotation>
-																<xs:documentation>Информация об окончательном предложении</xs:documentation>
-															</xs:annotation>
-															<xs:complexType>
-																<xs:sequence>
-																	<xs:element name="date" type="xs:dateTime">
-																		<xs:annotation>
-																			<xs:documentation>Дата и время подачи окончательного предложения</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																	<xs:element name="price" type="base:moneyType">
-																		<xs:annotation>
-																			<xs:documentation>Общая сумма окончательного предложения участника</xs:documentation>
-																		</xs:annotation>
-																	</xs:element>
-																</xs:sequence>
-															</xs:complexType>
-														</xs:element>
-														<xs:element name="appParticipant" type="participantType">
+														<xs:element name="appParticipantInfo" type="participantType">
 															<xs:annotation>
 																<xs:documentation>Сведения об участнике</xs:documentation>
 															</xs:annotation>
@@ -2371,7 +2545,7 @@ RO - Региональный оператор.</xs:documentation>
 																</xs:sequence>
 															</xs:complexType>
 														</xs:element>
-														<xs:element name="correspondencies" minOccurs="0">
+														<xs:element name="correspondenciesInfo" minOccurs="0">
 															<xs:annotation>
 																<xs:documentation>Соответствие участника преимуществам</xs:documentation>
 															</xs:annotation>
@@ -2402,10 +2576,29 @@ RO - Региональный оператор.</xs:documentation>
 															</xs:annotation>
 															<xs:complexType>
 																<xs:choice>
-																	<xs:element name="admitted" type="xs:boolean" fixed="true">
+																	<xs:element name="singleAppAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Заявка допущена (только для единственной допущенной заявки)</xs:documentation>
+																			<xs:documentation>Заявка допущена (только для единственной допущенной/поданной заявки)</xs:documentation>
 																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="admitted" type="xs:boolean" fixed="true">
+																					<xs:annotation>
+																						<xs:documentation>Заявка допущена (только для единственной допущенной/поданной заявки)</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="finalDT" type="xs:dateTime" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation>Дата и время подачи окончательного предложения</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="price" type="base:moneyType">
+																					<xs:annotation>
+																						<xs:documentation>Cумма предложения участника</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
 																	<xs:element name="appAdmittedInfo">
 																		<xs:annotation>
@@ -2437,13 +2630,41 @@ RO - Региональный оператор.</xs:documentation>
 																						</xs:sequence>
 																					</xs:complexType>
 																				</xs:element>
+																				<xs:element name="finalDT" type="xs:dateTime" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation>Дата и время подачи окончательного предложения</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="price" type="base:moneyType">
+																					<xs:annotation>
+																						<xs:documentation>Cумма предложения участника</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
 																			</xs:sequence>
 																		</xs:complexType>
 																	</xs:element>
-																	<xs:element name="appRejectedReason" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																	<xs:element name="appNotAdmittedInfo">
 																		<xs:annotation>
-																			<xs:documentation>Причины отказа в допуске. Указание хотя бы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+																			<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="appRejectedReasonsInfo">
+																					<xs:annotation>
+																						<xs:documentation>Причины отказа в допуске</xs:documentation>
+																					</xs:annotation>
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+																								<xs:annotation>
+																									<xs:documentation>Причина отказа в допуске</xs:documentation>
+																								</xs:annotation>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
 																	</xs:element>
 																</xs:choice>
 															</xs:complexType>
@@ -2456,7 +2677,7 @@ RO - Региональный оператор.</xs:documentation>
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание запроса предложений в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "protocolEZP2" в поле objectName</xs:documentation>
+										<xs:documentation>Признание запроса предложений в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEZP2" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -2649,12 +2870,12 @@ RO - Региональный оператор.</xs:documentation>
 		<xs:sequence>
 			<xs:element name="purchaseNumber" type="base:purchaseNumberType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Реестровый номер закупки. Элемент не заполняется при приёме первой версии документа. Присваивается автоматически после размещения. Должен быть заполнен при приёме изменения.</xs:documentation>
+					<xs:documentation>Реестровый номер закупки. Элемент не заполняется при приёме первой версии документа. Присваивается автоматически после размещения. Должен быть заполнен при приёме изменения документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Номер документа. Элемент ингорируется при приёме. Заполняется при передаче номером документа, присвоенным в ЕИС</xs:documentation>
+					<xs:documentation>Номер документа. Элемент игнорируется при приёме. Заполняется при передаче номером документа, присвоенным в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="directDT" type="xs:dateTime" minOccurs="0">
@@ -2674,7 +2895,7 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:element>
 			<xs:element name="href" type="base:hrefType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент ингорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
+					<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент игнорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="isBudgetUnionState" type="xs:boolean" fixed="true" minOccurs="0">
@@ -2734,7 +2955,7 @@ manual - ручной ввод.
 				<xs:annotation>
 					<xs:documentation>Блок «План оплаты исполнения контракта» 
 
-Если признак ручного ввода для данной организзации в ЕИС = FALSE, то автоматически заполняется при передаче сведения на основании связанного БО.
+Если признак ручного ввода для данной организации в ЕИС = FALSE, то автоматически заполняется при передаче сведения на основании связанного БО.
 Если признак ручного ввода = TRUE, то в ЕИС принимается содержимое блока</xs:documentation>
 				</xs:annotation>
 			</xs:element>
@@ -3087,7 +3308,7 @@ maxPrice / currencyRate/rate, где  currencyRate/rate - курс валюты 
 			</xs:element>
 			<xs:element name="secondStageInfo">
 				<xs:annotation>
-					<xs:documentation>Информация по первому этапу</xs:documentation>
+					<xs:documentation>Информация по второму этапу</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -3497,7 +3718,7 @@ QO - Квалификация участников закупки, в том ч�
 		<xs:sequence>
 			<xs:element name="sId" type="base:sIdType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Уникальный идентификатор показателя в ЕИС в рамках критерия. Элемент ингорируется при приёме. Заполняется при передаче идентификатором критерия, присвоенным в ЕИС</xs:documentation>
+					<xs:documentation>Уникальный идентификатор показателя в ЕИС в рамках критерия. Элемент игнорируется при приёме. Заполняется при передаче идентификатором критерия, присвоенным в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
@@ -3595,7 +3816,7 @@ EN - Предложение о сумме соответствующих рас�
 						<xs:sequence>
 							<xs:element name="sId" type="base:sIdType" minOccurs="0">
 								<xs:annotation>
-									<xs:documentation>Уникальный идентификатор критерия в ЕИС в рамках закупки. Элемент ингорируется при приёме. Заполняется при передаче идентификатором критермя, присвоенным в ЕИС</xs:documentation>
+									<xs:documentation>Уникальный идентификатор критерия в ЕИС в рамках закупки. Элемент игнорируется при приёме. Заполняется при передаче идентификатором критермя, присвоенным в ЕИС</xs:documentation>
 								</xs:annotation>
 							</xs:element>
 							<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
@@ -3645,7 +3866,7 @@ QO - Квалификация участников закупки, в том ч�
 						<xs:sequence>
 							<xs:element name="sId" type="base:sIdType" minOccurs="0">
 								<xs:annotation>
-									<xs:documentation>Уникальный идентификатор критерия в ЕИС в рамках закупки. Элемент ингорируется при приёме. Заполняется при передаче идентификатором критермя, присвоенным в ЕИС</xs:documentation>
+									<xs:documentation>Уникальный идентификатор критерия в ЕИС в рамках закупки. Элемент игнорируется при приёме. Заполняется при передаче идентификатором критермя, присвоенным в ЕИС</xs:documentation>
 								</xs:annotation>
 							</xs:element>
 							<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
@@ -3702,7 +3923,7 @@ QO - Квалификация участников закупки, в том ч�
 		<xs:sequence>
 			<xs:element name="sId" type="base:sIdType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Уникальный идентификатор показателя в ЕИС в рамках критерия. Элемент ингорируется при приёме. Заполняется при передаче идентификатором критермя, присвоенным в ЕИС</xs:documentation>
+					<xs:documentation>Уникальный идентификатор показателя в ЕИС в рамках критерия. Элемент игнорируется при приёме. Заполняется при передаче идентификатором критермя, присвоенным в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
@@ -3781,7 +4002,7 @@ O - оценка производится по шкале оценки или д
 		<xs:sequence>
 			<xs:element name="sId" type="base:sIdType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Уникальный идентификатор требования в ЕИС в рамках закупки. Элемент ингорируется при приёме. Заполняется при передаче идентификатором требования, присвоенным в ЕИС</xs:documentation>
+					<xs:documentation>Уникальный идентификатор требования в ЕИС в рамках закупки. Элемент игнорируется при приёме. Заполняется при передаче идентификатором требования, присвоенным в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
@@ -3849,7 +4070,7 @@ O - оценка производится по шкале оценки или д
 					<xs:sequence>
 						<xs:element name="purchaseNumber" type="base:purchaseNumberType">
 							<xs:annotation>
-								<xs:documentation>Номер закупки. При приёме контролируется наличие не отменённой закупки с указанным номером</xs:documentation>
+								<xs:documentation>Номер закупки. При приёме контролируется наличие неотменённой закупки с указанным номером</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="docNumber" type="base:documentNumberType">
@@ -3906,7 +4127,7 @@ O - оценка производится по шкале оценки или д
 					<xs:sequence>
 						<xs:element name="purchaseNumber" type="base:purchaseNumberType">
 							<xs:annotation>
-								<xs:documentation>Реестровый немер закупки. При приёме контролируется наличие не отменённой закупки с указанным номером</xs:documentation>
+								<xs:documentation>Реестровый номер закупки. При приёме контролируется наличие неотменённой закупки с указанным номером</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="docPublishDTInEIS" type="xs:dateTime" minOccurs="0">
@@ -3971,6 +4192,53 @@ O - оценка производится по шкале оценки или д
 				<xs:annotation>
 					<xs:documentation>Информация о прикрепленных документах</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="printFormFieldsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация для печатной формы. Игнорируется при приёме, заполняется при передаче</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence minOccurs="0">
+						<xs:element name="notificationInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Информация из извещения</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence minOccurs="0">
+									<xs:element name="commonInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Общая информация</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence minOccurs="0">
+												<xs:element name="purchaseObjectInfo" type="base:text2000Type" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Наименование объекта закупки</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="placingWay" type="base:placingWayRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Подспособ определения поставщика</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="ETP" type="base:ETPRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Электронная торговая площадка</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="purchaseResponsibleInfo" type="base:organizationRef" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Информация об организации, осуществляющей размещение</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
@@ -4050,7 +4318,7 @@ O - оценка производится по шкале оценки или д
 		<xs:sequence>
 			<xs:element name="purchaseNumber" type="base:purchaseNumberType">
 				<xs:annotation>
-					<xs:documentation>Реестровый номер закупки. При приёме контролируется наличие не отменённой закупки с указанным номером</xs:documentation>
+					<xs:documentation>Реестровый номер закупки. При приёме контролируется наличие неотменённой закупки с указанным номером</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
@@ -4087,7 +4355,7 @@ O - оценка производится по шкале оценки или д
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="commissionMemberInfo" type="cmn:commissionMemberType" maxOccurs="unbounded">
+						<xs:element name="commissionMemberInfo" type="cmn:commissionMemberType" maxOccurs="1">
 							<xs:annotation>
 								<xs:documentation>Участник комиссии</xs:documentation>
 							</xs:annotation>
@@ -4155,7 +4423,7 @@ O - оценка производится по шкале оценки или д
 	</xs:complexType>
 	<xs:complexType name="competitionApp1Type">
 		<xs:annotation>
-			<xs:documentation>Тип: Заявка входящая в протокол рассмотрения и оценки первых частей заявок на участие в конкурсе</xs:documentation>
+			<xs:documentation>Тип: Заявка, входящая в протокол рассмотрения и оценки первых частей заявок на участие в конкурсе</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="commonInfo" type="appCommonInfoType">
@@ -4169,10 +4437,19 @@ O - оценка производится по шкале оценки или д
 				</xs:annotation>
 				<xs:complexType>
 					<xs:choice>
-						<xs:element name="admitted" type="xs:boolean" fixed="true">
+						<xs:element name="singleAppAdmittedInfo">
 							<xs:annotation>
-								<xs:documentation>Заявка допущена (только для единственной допущенной заявки) </xs:documentation>
+								<xs:documentation>Информация о допущенной заявке (В случае если допущена одна заявка)</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="admitted" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>Заявка допущена</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="appAdmittedInfo">
 							<xs:annotation>
@@ -4193,10 +4470,28 @@ O - оценка производится по шкале оценки или д
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
-						<xs:element name="appRejectedReason" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+						<xs:element name="appNotAdmittedInfo">
 							<xs:annotation>
-								<xs:documentation>Причины отказа в допуске. Указание хотябы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+								<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="appRejectedReasonsInfo">
+										<xs:annotation>
+											<xs:documentation>Причины отказа в допуске</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Причина отказа в допуске</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 					</xs:choice>
 				</xs:complexType>
@@ -4205,7 +4500,7 @@ O - оценка производится по шкале оценки или д
 	</xs:complexType>
 	<xs:complexType name="competitionApp2Type">
 		<xs:annotation>
-			<xs:documentation>Тип: Заявка входящая в протокол рассмотрения и оценки вторых частей заявок на участие в конкурсе</xs:documentation>
+			<xs:documentation>Тип: Заявка, входящая в протокол рассмотрения и оценки вторых частей заявок на участие в конкурсе</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="commonInfo" type="appCommonInfoType">
@@ -4263,10 +4558,19 @@ O - оценка производится по шкале оценки или д
 				</xs:annotation>
 				<xs:complexType>
 					<xs:choice>
-						<xs:element name="admitted" type="xs:boolean" fixed="true">
+						<xs:element name="singleAppAdmittedInfo">
 							<xs:annotation>
-								<xs:documentation>Заявка допущена (только для единственной допущенной заявки)</xs:documentation>
+								<xs:documentation>Информация о допущенной заявке (В случае если допущена одна заявка)</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="admitted" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>Заявка допущена</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="appAdmittedInfo">
 							<xs:annotation>
@@ -4287,11 +4591,28 @@ O - оценка производится по шкале оценки или д
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
-						<xs:element name="appRejectedReason" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+						<xs:element name="appNotAdmittedInfo">
 							<xs:annotation>
-								<xs:documentation>Причины отказа в допуске. 
-Указание хотя бы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+								<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="appRejectedReasonsInfo">
+										<xs:annotation>
+											<xs:documentation>Причины отказа в допуске</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Причина отказа в допуске</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 					</xs:choice>
 				</xs:complexType>
@@ -4300,7 +4621,7 @@ O - оценка производится по шкале оценки или д
 	</xs:complexType>
 	<xs:complexType name="competitionApp3Type">
 		<xs:annotation>
-			<xs:documentation>Тип: Заявка входящая в протокол подведения итогов конкурса</xs:documentation>
+			<xs:documentation>Тип: Заявка, входящая в протокол подведения итогов конкурса</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="commonInfo" type="appCommonInfoType">
@@ -4308,17 +4629,12 @@ O - оценка производится по шкале оценки или д
 					<xs:documentation>Общая информация</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="finalPrice" type="base:moneyType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Итоговая сумма предложения участника</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="appParticipantInfo" type="participantType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Сведения об участнике</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="documentRequirementsInfo">
+			<xs:element name="documentRequirementsInfo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Требования к информации и документам для предоставления участниками</xs:documentation>
 				</xs:annotation>
@@ -4363,6 +4679,35 @@ O - оценка производится по шкале оценки или д
 				</xs:annotation>
 				<xs:complexType>
 					<xs:choice>
+						<xs:element name="singleAppAdmittedInfo">
+							<xs:annotation>
+								<xs:documentation>Информация о допущенной заявке (В случае если допущена одна заявка)</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="admitted" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>Заявка допущена</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="finalPrice" type="base:moneyType">
+										<xs:annotation>
+											<xs:documentation>Сумма предложения участника</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="qualitativeCriterionInfo" type="qualitativeCriterionProtocolOK1Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Качественный (нестоимостной) критерий оценки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="finalDT" type="xs:dateTime" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Дата и время подачи окончательного предложения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 						<xs:element name="appAdmittedInfo">
 							<xs:annotation>
 								<xs:documentation>Информация о допущенной заявке (В случае если допущено более одной заявки)</xs:documentation>
@@ -4387,7 +4732,7 @@ O - оценка производится по шкале оценки или д
 											<xs:sequence>
 												<xs:element name="conditionScoringInfo" maxOccurs="unbounded">
 													<xs:annotation>
-														<xs:documentation>Оценка предложения участника по отдельному критерию оценки</xs:documentation>
+														<xs:documentation>Оценка предложения участника по отдельному критерию оценки, В рамках блока должен присутствовать как минимум один блок costCriterionInfo </xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:choice>
@@ -4407,13 +4752,41 @@ O - оценка производится по шкале оценки или д
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
+									<xs:element name="finalDT" type="xs:dateTime" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Дата и время подачи окончательного предложения</xs:documentation>
+										</xs:annotation>
+									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
-						<xs:element name="appRejectedReason" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+						<xs:element name="appNotAdmittedInfo">
 							<xs:annotation>
-								<xs:documentation>Причины отказа в допуске. Указание хотя бы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+								<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="appRejectedReasonsInfo">
+										<xs:annotation>
+											<xs:documentation>Причины отказа в допуске</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Причина отказа в допуске</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="qualitativeCriterionInfo" type="qualitativeCriterionProtocolOK1Type" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Качественный (нестоимостной) критерий оценки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 					</xs:choice>
 				</xs:complexType>
@@ -4446,19 +4819,10 @@ O - оценка производится по шкале оценки или д
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="maxPriceInfo">
+						<xs:element name="maxPriceInfo" type="maxPriceInfoType">
 							<xs:annotation>
 								<xs:documentation>Информация о начальной (максимальной) цене контракта</xs:documentation>
 							</xs:annotation>
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="maxPrice" type="base:moneyPositiveType">
-										<xs:annotation>
-											<xs:documentation>Начальная (максимальная) цена контракта</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-								</xs:sequence>
-							</xs:complexType>
 						</xs:element>
 						<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 							<xs:annotation>
@@ -4537,26 +4901,10 @@ O - оценка производится по шкале оценки или д
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="maxPriceInfo">
+						<xs:element name="maxPriceInfo" type="maxPriceInfoType">
 							<xs:annotation>
 								<xs:documentation>Информация о начальной (максимальной) цене контракта</xs:documentation>
 							</xs:annotation>
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="maxPrice" type="base:moneyPositiveType">
-										<xs:annotation>
-											<xs:documentation>Начальная (максимальная) цена контрактав рублях</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="maxPriceCurrency" type="base:moneyType" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>Начальная (максимальная) цена в валюте контракта.
- Заполняется автоматически по формуле:
-«Начальная (максимальная) цена контракта» / «Курс конвертации»</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-								</xs:sequence>
-							</xs:complexType>
 						</xs:element>
 						<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 							<xs:annotation>
@@ -4640,26 +4988,10 @@ O - оценка производится по шкале оценки или д
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="maxPriceInfo">
+						<xs:element name="maxPriceInfo" type="maxPriceInfoType">
 							<xs:annotation>
 								<xs:documentation>Информация о начальной (максимальной) цене контракта</xs:documentation>
 							</xs:annotation>
-							<xs:complexType>
-								<xs:sequence>
-									<xs:element name="maxPrice" type="base:moneyPositiveType">
-										<xs:annotation>
-											<xs:documentation>Начальная (максимальная) цена контрактав рублях</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-									<xs:element name="maxPriceCurrency" type="base:moneyType" minOccurs="0">
-										<xs:annotation>
-											<xs:documentation>Начальная (максимальная) цена в валюте контракта.
- Заполняется автоматически по формуле:
-«Начальная (максимальная) цена контракта» / «Курс конвертации»</xs:documentation>
-										</xs:annotation>
-									</xs:element>
-								</xs:sequence>
-							</xs:complexType>
 						</xs:element>
 						<xs:element name="purchaseCode" type="base:ikzCodeType" minOccurs="0">
 							<xs:annotation>
@@ -4729,7 +5061,7 @@ O - оценка производится по шкале оценки или д
 			</xs:element>
 			<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Внешний идентификатор критерия. Игорируется при приёме, заполняется при передаче при наличии</xs:documentation>
+					<xs:documentation>Внешний идентификатор критерия. Игнорируется при приёме, заполняется при передаче при наличии</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="number" type="xs:positiveInteger">
@@ -4768,6 +5100,18 @@ O - оценка производится по шкале оценки или д
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="maxPriceInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация о начальной (максимальной) цене контракта</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="maxPrice" type="base:moneyPositiveType">
+				<xs:annotation>
+					<xs:documentation>Начальная (максимальная) цена контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="paymentInfoType">
 		<xs:annotation>
 			<xs:documentation>Тип: Информация о платеже для обеспечения заявки (исполнения контракта) или за предоставление документации</xs:documentation>
@@ -4790,7 +5134,7 @@ O - оценка производится по шкале оценки или д
 			</xs:element>
 			<xs:element name="part" type="xs:double" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Доля от начальной (максимальной) цены контракта. Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (contractGuarantee/amount) к НМЦК в валюте контракта (contractConditionsInfo/maxPriceInfo/maxPriceCurrency)</xs:documentation>
+					<xs:documentation>Доля от начальной (максимальной) цены контракта. Игнорируется при приёме. Рассчитывается автоматически как отношение размера обеспечения (amount) к НМЦК (contractConditionsInfo/maxPriceInfo/maxPrice)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -4833,7 +5177,7 @@ O - оценка производится по шкале оценки или д
 						</xs:element>
 						<xs:element name="registrationDate" type="xs:date" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
+								<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="ogrn" type="base:ogrnCodeType" minOccurs="0">
@@ -4942,7 +5286,7 @@ O - оценка производится по шкале оценки или д
 									</xs:element>
 									<xs:element name="registrationDate" type="xs:date" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
+											<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -4950,13 +5294,14 @@ O - оценка производится по шкале оценки или д
 						</xs:element>
 						<xs:element name="placeOfStayInRegCountryInfo">
 							<xs:annotation>
-								<xs:documentation>Место нахождления в стране регистрации</xs:documentation>
+								<xs:documentation>Место нахождения в стране регистрации</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
 									<xs:element name="country" type="base:OKSMRef">
 										<xs:annotation>
-											<xs:documentation>Страна регистрации</xs:documentation>
+											<xs:documentation>Страна регистрации. 
+При приеме содержимое контролируется на присутствие в справочнике "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="orgPostAddress" type="base:text2000Type">
@@ -5032,7 +5377,7 @@ O - оценка производится по шкале оценки или д
 						</xs:element>
 						<xs:element name="registrationDate" type="xs:date" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
+								<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="postAddress" type="base:text2000Type">
@@ -5097,7 +5442,7 @@ O - оценка производится по шкале оценки или д
 									</xs:element>
 									<xs:element name="registrationDate" type="xs:date" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Дата поставновки на учет в налоговом органе</xs:documentation>
+											<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -5105,7 +5450,7 @@ O - оценка производится по шкале оценки или д
 						</xs:element>
 						<xs:element name="placeOfStayInRegCountryInfo">
 							<xs:annotation>
-								<xs:documentation>Место нахождления в стране регистрации</xs:documentation>
+								<xs:documentation>Место нахождения в стране регистрации</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -5192,6 +5537,11 @@ O - оценка производится по шкале оценки или д
 При приеме изменений документа контролируется последовательность нумерации</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="foundationDocInfo" type="foundationDocInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Документ-основание. При указании блока должен быть заполнен элемент foundationDocNumber или foundationDocNumberExternal. В случае указания обоих элементов, элемент foundationDocNumberExternal будет игнорироваться. При выгрузке заполняются оба вложенных элемента</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="commonInfo" type="protocolCommonInfoType">
 				<xs:annotation>
 					<xs:documentation>Общая информация</xs:documentation>
@@ -5259,7 +5609,7 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:element>
 			<xs:element name="afterProlongation" type="xs:boolean">
 				<xs:annotation>
-					<xs:documentation>Протокол после продления. Для протоколов принимаемых после того как по закупке размещен документ "Извещение о продлении срока подачи заявок" должно быть указано значение true, в остальных случаях указывается значение false</xs:documentation>
+					<xs:documentation>Протокол после продления. Для протоколов принимаемых после того, как по закупке размещен документ "Извещение о продлении срока подачи заявок" должно быть указано значение true, в остальных случаях указывается значение false</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -5288,6 +5638,11 @@ RO - Региональный оператор.</xs:documentation>
 				<xs:annotation>
 					<xs:documentation>Номер версии документа. В случае если значение поля не указано или в поле указано 1, считается, что это первоначальная версия документа, иначе – изменение существующей версии.
 При приеме изменений документа контролируется последовательность нумерации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foundationDocInfo" type="foundationDocInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Документ-основание. При указании блока должен быть заполнен элемент foundationDocNumber или foundationDocNumberExternal. В случае указания обоих элементов, элемент foundationDocNumberExternal будет игнорироваться. При выгрузке заполняются оба вложенных элемента</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="commonInfo" type="protocolCommonInfoType">
@@ -5374,7 +5729,7 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:element>
 			<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Номер документа. Элемент ингорируется при приёме. Заполняется при передаче номерод документа присвоенным в ЕИС</xs:documentation>
+					<xs:documentation>Номер документа. Элемент игнорируется при приёме. Заполняется при передаче номером документа присвоенным в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="publishDTInEIS" type="xs:dateTime" minOccurs="0">
@@ -5384,12 +5739,12 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:element>
 			<xs:element name="href" type="base:hrefType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент ингорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
+					<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент игнорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="docNumberExternal" type="base:documentNumberType">
 				<xs:annotation>
-					<xs:documentation>Номер документа сформированный во внешней системе </xs:documentation>
+					<xs:documentation>Номер документа, сформированный во внешней системе </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="publishDTInETP" type="xs:dateTime">
@@ -5404,7 +5759,7 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:element>
 			<xs:element name="procedureDT" type="xs:dateTime">
 				<xs:annotation>
-					<xs:documentation>Дата и время проведения прооцедуры</xs:documentation>
+					<xs:documentation>Дата и время проведения процедуры</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="signDT" type="xs:date">
@@ -5563,7 +5918,7 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:element>
 			<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Номер документа. Элемент ингорируется при приёме. Заполняется при передаче номерод документа присвоенным в ЕИС</xs:documentation>
+					<xs:documentation>Номер документа. Элемент игнорируется при приёме. Заполняется при передаче номерод документа присвоенным в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="place" type="base:text2000Type" minOccurs="1">
@@ -5588,7 +5943,7 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:element>
 			<xs:element name="href" type="base:hrefType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент ингорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
+					<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент игнорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -5737,7 +6092,7 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:element>
 			<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Номер документа. Элемент ингорируется при приёме. Заполняется при передаче номерод документа присвоенным в ЕИС</xs:documentation>
+					<xs:documentation>Номер документа. Элемент игнорируется при приёме. Заполняется при передаче номерод документа присвоенным в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="place" type="base:text2000Type">
@@ -5762,7 +6117,7 @@ RO - Региональный оператор.</xs:documentation>
 			</xs:element>
 			<xs:element name="href" type="base:hrefType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент ингорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
+					<xs:documentation>Гиперссылка на размещённый в ЕИС документ. Элемент игнорируется при приёме. При передаче заполняется ссылкой на карточку размещенного документа</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -5843,15 +6198,42 @@ RO - Региональный оператор.</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:choice>
-						<xs:element name="admitted" type="xs:boolean" fixed="true">
+						<xs:element name="appAdmittedInfo">
 							<xs:annotation>
-								<xs:documentation>Заявка допущена</xs:documentation>
+								<xs:documentation>Информация о допущенной заявке</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="admitted" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>Заявка допущена</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
-						<xs:element name="appRejectedReason" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+						<xs:element name="appNotAdmittedInfo">
 							<xs:annotation>
-								<xs:documentation>Причины отказа в допуске. Указание хотябы одного элемента свидетельствует об отказе в допуске заявки</xs:documentation>
+								<xs:documentation>Информация о недопущенной заявке. Наличие блока свидетельствует об отказе в допуске заявки</xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="appRejectedReasonsInfo">
+										<xs:annotation>
+											<xs:documentation>Причины отказа в допуске</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="appRejectedReasonInfo" type="cmn:appRejectedReasonType" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Причина отказа в допуске</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 					</xs:choice>
 				</xs:complexType>
@@ -5980,7 +6362,7 @@ QF - Качественные, функциональные и экологич�
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="criterionsScoringInfo" type="criterionsScoringProtocolOKType">
+				<xs:element name="criterionScoringInfo" type="criterionsScoringProtocolOKType">
 					<xs:annotation>
 						<xs:documentation>Критерий оценки без показателей</xs:documentation>
 					</xs:annotation>
@@ -6024,7 +6406,7 @@ QO - Квалификация участников закупки, в том ч�
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="criterionsScoringInfo" type="criterionsScoringProtocolOKType">
+				<xs:element name="criterionScoringInfo" type="criterionsScoringProtocolOKType">
 					<xs:annotation>
 						<xs:documentation>Критерий оценки без показателей</xs:documentation>
 					</xs:annotation>
@@ -6069,7 +6451,7 @@ QO - Квалификация участников закупки, в том ч�
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="criterionsScoringInfo" type="criterionsScoringProtocolOKType">
+				<xs:element name="criterionScoringInfo" type="criterionsScoringProtocolOKType">
 					<xs:annotation>
 						<xs:documentation>Критерий оценки без показателей</xs:documentation>
 					</xs:annotation>
@@ -6115,10 +6497,19 @@ O - оценка производится по шкале оценки или д
 					<xs:documentation>Информация о предложении участника</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="criterionsScoringInfo" type="scoringType" maxOccurs="unbounded">
+			<xs:element name="commissionMembersScoringInfo">
 				<xs:annotation>
-					<xs:documentation>Оценка члена комиссии по критерию</xs:documentation>
+					<xs:documentation>Оценки членов комиссии по критерию</xs:documentation>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="commissionMemberScoringInfo" type="scoringType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Оценка члена комиссии по критерию</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -6134,7 +6525,7 @@ O - оценка производится по шкале оценки или д
 			</xs:element>
 			<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Внешний идентификатор показателя. Игорируется при приёме, заполняется при передаче при наличии</xs:documentation>
+					<xs:documentation>Внешний идентификатор показателя. Игнорируется при приёме, заполняется при передаче при наличии</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="name" type="base:text2000Type">
@@ -6193,7 +6584,7 @@ O - оценка производится по шкале оценки или д
 					<xs:sequence>
 						<xs:element name="indicatorScoringInfo" type="scoringType" maxOccurs="unbounded">
 							<xs:annotation>
-								<xs:documentation>Оценка членна комиссии по показателю критерия</xs:documentation>
+								<xs:documentation>Оценка члена комиссии по показателю критерия</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -6218,13 +6609,13 @@ EN - Предложение о сумме соответствующих рас�
 				</xs:element>
 				<xs:element name="criterionTextFormInfo">
 					<xs:annotation>
-						<xs:documentation>Кртитерий введённый в ручную</xs:documentation>
+						<xs:documentation>Критерий, введённый вручную</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="sId" type="base:sIdType">
 								<xs:annotation>
-									<xs:documentation>Уникальный идентификатор критерия в ЕИС в рамках закупки. Элемент ингорируется при приёме. Заполняется при передаче идентификатором критермя, присвоенным в ЕИС</xs:documentation>
+									<xs:documentation>Уникальный идентификатор критерия в ЕИС в рамках закупки. Элемент игнорируется при приёме. Заполняется при передаче идентификатором критерия, присвоенным в ЕИС</xs:documentation>
 								</xs:annotation>
 							</xs:element>
 							<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
@@ -6305,13 +6696,13 @@ QO - Квалификация участников закупки, в том ч�
 				</xs:element>
 				<xs:element name="criterionTextFormInfo">
 					<xs:annotation>
-						<xs:documentation>Кртитерий введённый в ручную</xs:documentation>
+						<xs:documentation>Критерий, введённый вручную</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="sId" type="base:sIdType">
 								<xs:annotation>
-									<xs:documentation>Уникальный идентификатор критерия в ЕИС в рамках закупки. Элемент ингорируется при приёме. Заполняется при передаче идентификатором критермя, присвоенным в ЕИС</xs:documentation>
+									<xs:documentation>Уникальный идентификатор критерия в ЕИС в рамках закупки. Элемент игнорируется при приёме. Заполняется при передаче идентификатором критермя, присвоенным в ЕИС</xs:documentation>
 								</xs:annotation>
 							</xs:element>
 							<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
@@ -6353,7 +6744,7 @@ QO - Квалификация участников закупки, в том ч�
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="criterionsScoringInfo" type="criterionsScoringProtocolZPType">
+				<xs:element name="criterionScoringInfo" type="criterionsScoringProtocolZPType">
 					<xs:annotation>
 						<xs:documentation>Критерий оценки без показателей</xs:documentation>
 					</xs:annotation>
@@ -6373,7 +6764,7 @@ QO - Квалификация участников закупки, в том ч�
 			</xs:element>
 			<xs:element name="externalSId" type="base:externalIdType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Внешний идентификатор показателя. Игорируется при приёме, заполняется при выгрузке</xs:documentation>
+					<xs:documentation>Внешний идентификатор показателя. Игнорируется при приёме, заполняется при выгрузке</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="name" type="base:text2000Type">
@@ -6492,10 +6883,19 @@ O - оценка производится по шкале оценки или д
 					<xs:documentation>Информация о предложении участника</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="criterionsScoringInfo" type="scoringType" maxOccurs="unbounded">
+			<xs:element name="commissionMembersScoringInfo">
 				<xs:annotation>
-					<xs:documentation>Оценка члена комиссии по критерию</xs:documentation>
+					<xs:documentation>Оценки членов комиссии по критерию</xs:documentation>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="commissionMemberScoringInfo" type="scoringType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Оценка члена комиссии по критерию</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -6504,7 +6904,7 @@ O - оценка производится по шкале оценки или д
 			<xs:documentation>Тип: Оценка члена комиссии</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="commissionMemberInfo" type="cmn:commissionMemberType" maxOccurs="unbounded">
+			<xs:element name="commissionMemberInfo" type="cmn:commissionMemberType" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Участник комиссии, осуществляющий оценку</xs:documentation>
 				</xs:annotation>
@@ -6553,7 +6953,7 @@ O - оценка производится по шкале оценки или д
 			</xs:element>
 		</xs:choice>
 	</xs:complexType>
-	<xs:complexType name="changeReasonWithoutСustomerDecisionType">
+	<xs:complexType name="changeReasonWithoutCustomerDecisionType">
 		<xs:annotation>
 			<xs:documentation>Тип: Основание внесения изменений без изменений на основании решения заказчика</xs:documentation>
 		</xs:annotation>
@@ -6794,7 +7194,7 @@ M - Орган местного самоуправления муниципал�
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="modificationWithoutСustomerDecisionType">
+	<xs:complexType name="modificationWithoutCustomerDecisionType">
 		<xs:annotation>
 			<xs:documentation>Тип: Внесение исправлений в документ закупки без изменений на основании решения заказчика</xs:documentation>
 		</xs:annotation>
@@ -6804,7 +7204,7 @@ M - Орган местного самоуправления муниципал�
 					<xs:documentation>Краткое описание</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="reasonInfo" type="changeReasonWithoutСustomerDecisionType">
+			<xs:element name="reasonInfo" type="changeReasonWithoutCustomerDecisionType">
 				<xs:annotation>
 					<xs:documentation>Основание</xs:documentation>
 				</xs:annotation>
@@ -6854,6 +7254,23 @@ M - Орган местного самоуправления муниципал�
 			<xs:element name="KPP" type="base:kppType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>КПП организации. Игнорируется при приеме, автоматически заполняется при передаче по коду организации из справочника "Организации" (nsiOrganization)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="foundationDocInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Документ-основание</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="foundationDocNumber" type="base:documentNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер документа-основания. В случае заполнения блока, проверяется, что по данной закупке существует документ с указанным номером</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foundationDocNumberExternal" type="base:documentNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер документа-основания, сформированный во внешней системе. В случае заполнения блока, проверяется, что по данной закупке существует документ с указанным номером, сформированным во внешней системе</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 8.2, create date 28.04.2018 -->
+<!-- BASE_TYPES Integration Scheme, version 8.2, create date 14.06.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -301,7 +301,7 @@
 			<xs:element name="name" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Наименование подспособа определения поставщика.
-Игнорируется при приеме. При передаче заполняется значением из справочника "" ()</xs:documentation>
+Игнорируется при приеме. При передаче заполняется значением из справочника "Способы размещения заказа (определения поставщика)" (nsiPlacingWay)</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -336,7 +336,7 @@
 		<xs:sequence>
 			<xs:element name="shortName" type="prefsReqsShortNameType">
 				<xs:annotation>
-					<xs:documentation>Крaткое наименование преимущества (требования, ограничения). Ссылка на справоник "Преимущества (требования, ограничения) к участникам закупки" (nsiPurchasePreferences)</xs:documentation>
+					<xs:documentation>Крaткое наименование преимущества (требования, ограничения). Ссылка на справочник "Преимущества (требования, ограничения) к участникам закупки" (nsiPurchasePreferences)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="name" type="text2000Type" minOccurs="0">
@@ -473,6 +473,12 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="schemeVersion">
+		<xs:annotation>
+			<xs:documentation>Тип: Текущая версия схем</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="current" type="base:schemeVersionType" fixed="8.2"/>
+	</xs:complexType>
 	<!--Простые типы-->
 	<xs:simpleType name="abandonedReasonCode">
 		<xs:annotation>
@@ -508,19 +514,22 @@ WIN_OFFER – Победитель
 LIKE_WIN_OFFER – Предложение о цене контракта такое же, как у победителя
 SECOND_OFFER – Лучшее предложение о цене контракта после победителя
 PASS_OFFER – Все остальные заявки
-ADMITTED_OFFER – Заявка допущена (только при рассмотрении единственной поданной заявки).</xs:documentation>
+</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="WIN_OFFER"/>
 			<xs:enumeration value="LIKE_WIN_OFFER"/>
 			<xs:enumeration value="SECOND_OFFER"/>
 			<xs:enumeration value="PASS_OFFER"/>
-			<xs:enumeration value="ADMITTED_OFFER"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="authorityType">
 		<xs:annotation>
-			<xs:documentation>Тип: Вид органа</xs:documentation>
+			<xs:documentation>Тип: Вид органа, возможные значения:
+FA - Федеральная антимонопольная служба;
+FO - Федеральная служба по оборонному заказу;
+S - Орган исполнительной власти субъекта РФ;
+M - Орган местного самоуправления муниципального района, городского округа.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="FA"/>
@@ -530,14 +539,10 @@ ADMITTED_OFFER – Заявка допущена (только при рассм
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="attachedDocumentKindCodeType">
-		<xs:annotation>
-			<xs:documentation>Тип: Код вида вложенного документа</xs:documentation>
-		</xs:annotation>
+		<xs:annotation/>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="FA"/>
-			<xs:enumeration value="FO"/>
-			<xs:enumeration value="S"/>
-			<xs:enumeration value="M"/>
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="bankGuaranteeRegNumberType">
@@ -886,7 +891,7 @@ QO - Квалификация участников закупки, в том ч�
 			<xs:documentation>Тип: ИНН физического лица</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:pattern value="d{12}"/>
+			<xs:pattern value="\d{12}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ikzCodeType">
@@ -987,7 +992,7 @@ QO - Квалификация участников закупки, в том ч�
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
-			<xs:maxLength value="18"/>
+			<xs:maxLength value="25"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ktruDictNameType">
@@ -1034,6 +1039,15 @@ QO - Квалификация участников закупки, в том ч�
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="less"/>
 			<xs:enumeration value="lessOrEqual"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ktruCharacteristicValueFormatType">
+		<xs:annotation>
+			<xs:documentation>Тип КТРУ: Формат значения характеристики: N - числовой; A - дополнительный</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="A"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="measurementOrderEnum">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION Integration Scheme, version 8.2, create date 28.04.2018 -->
+<!-- FCS INTEGRATION Integration Scheme, version 8.2, create date 14.06.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/integration/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/integration/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
@@ -2865,7 +2865,7 @@
 	</xs:element>
 	<xs:element name="pprf615ContractProcedure">
 		<xs:annotation>
-			<xs:documentation>Пакет данных:Сведения об исполнении/расторжении договора о проведении капитального ремонта по ПП РФ № 615</xs:documentation>
+			<xs:documentation>Пакет данных:Сведения об исполнении/расторжении договора о проведении капитального ремонта по ПП РФ № 615; </xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -3688,7 +3688,13 @@ PC - Плановая проверка для ИС КО;
 615_KPO - ПП РФ 615 Квалифицированная подрядная организация;
 615_EF - ПП РФ 615 Электронный аукцион;
 615_CT - ПП РФ 615 Договор;
-615_DD - ПП РФ 615 Разные документы.</xs:documentation>
+615_DD - ПП РФ 615 Разные документы;
+EOK - ЭП Открытый конкурс в электронной форме;
+EOKOU - ЭП Открытый конкурс с ограниченным участием  в электронной форме;
+EOKD - ЭП Двухэтапный конкурс в электронной форме;
+EZK - ЭП Запрос котировок в электронной форме;
+EZP - ЭП Запрос предложений в электронной форме;
+EP_DD - ЭП Разные документы.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="objectId" minOccurs="0">
@@ -3796,7 +3802,13 @@ ST - Участник закупки, аккредитованный на ЭП;
 615_KPO - ПП РФ 615 Квалифицированная подрядная организация;
 615_EF - ПП РФ 615 Электронный аукцион;
 615_CT - ПП РФ 615 Договор;
-615_DD - ПП РФ 615 Разные документы.</xs:documentation>
+615_DD - ПП РФ 615 Разные документы;
+EOK - ЭП Открытый конкурс в электронной форме;
+EOKOU - ЭП Открытый конкурс с ограниченным участием  в электронной форме;
+EOKD - ЭП Двухэтапный конкурс в электронной форме;
+EZK - ЭП Запрос котировок в электронной форме;
+EZP - ЭП Запрос предложений в электронной форме;
+EP_DD - ЭП Разные документы.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="94_OK"/>
@@ -3844,6 +3856,12 @@ ST - Участник закупки, аккредитованный на ЭП;
 			<xs:enumeration value="615_EF"/>
 			<xs:enumeration value="615_CT"/>
 			<xs:enumeration value="615_DD"/>
+			<xs:enumeration value="EOK"/>
+			<xs:enumeration value="EOKOU"/>
+			<xs:enumeration value="EOKD"/>
+			<xs:enumeration value="EZK"/>
+			<xs:enumeration value="EZP"/>
+			<xs:enumeration value="EP_DD"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 8.2, create date 28.04.2018 -->
+<!-- BASE_TYPES Integration Scheme, version 8.2, create date 14.06.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Базовые типы-->
@@ -102,11 +102,6 @@
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
-			</xs:element>
-			<xs:element name="attachedDocumentKind" type="base:attachedDocumentKindRef" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Вид прикреплённого документа</xs:documentation>
-				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -367,6 +362,9 @@ CAdES-A</xs:documentation>
 							<xs:complexType>
 								<xs:sequence>
 									<xs:element name="customerQuantity" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Количество</xs:documentation>
+										</xs:annotation>
 										<xs:complexType>
 											<xs:sequence>
 												<xs:element name="customer" type="base:organizationRef">
@@ -618,7 +616,7 @@ CAdES-A</xs:documentation>
 		<xs:sequence>
 			<xs:element name="MNNInfo">
 				<xs:annotation>
-					<xs:documentation>Международное, группировочное или химическое наименование лекарственного препарата (МНН). При приеме контрролируется, что МНН в списке лекарственных препаратов  должны иметь одни и те же наименования </xs:documentation>
+					<xs:documentation>Международное, группировочное или химическое наименование лекарственного препарата (МНН). При приеме контролируется, что МНН в списке лекарственных препаратов  должны иметь одни и те же наименования </xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -948,6 +946,16 @@ CAdES-A</xs:documentation>
 				<xs:element name="OKEI" type="base:OKEIRef" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>Единица измерения. Ссылка на классификатор ОКЕИ (nsiOKEI)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="valueFormat" type="base:ktruCharacteristicValueFormatType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Формат значения характеристики:
+
+N-числовой;
+A-дополнительный
+
+В случае если поле при приеме не указано, по умолчанию считается, что формат значения характеристики - числовой</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:choice>
