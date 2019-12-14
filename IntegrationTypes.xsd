@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 7.1.3, create date 05.06.2017 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 7.1.7, create date 21.06.2017 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:complexType name="account">
 		<xs:annotation>
@@ -6196,7 +6196,7 @@ OV2 - По результатам рассмотрения вторых част
 					<xs:complexContent>
 						<xs:extension base="zfcs_publicDiscussionCommonInfoType">
 							<xs:sequence>
-								<xs:element name="publicDiscussionPhase1Num" type="zfcs_publicDiscussionNumType">
+								<xs:element name="publicDiscussionPhase1Num" type="zfcs_publicDiscussionNumType" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>Реестровый номер первого этапа общественного обсуждения</xs:documentation>
 									</xs:annotation>
@@ -21223,7 +21223,7 @@ IN	Aннулировано.</xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="packagingInfo" maxOccurs="unbounded">
+															<xs:element name="packagingInfo">
 																<xs:annotation>
 																	<xs:documentation>Сведения об упаковке</xs:documentation>
 																</xs:annotation>
@@ -21248,8 +21248,9 @@ IN	Aннулировано.</xs:documentation>
 																				<xs:documentation>Количество лекарственных форм в первичной упаковке </xs:documentation>
 																			</xs:annotation>
 																			<xs:simpleType>
-																				<xs:restriction base="xs:int">
-																					<xs:totalDigits value="6"/>
+																				<xs:restriction base="xs:decimal">
+																					<xs:totalDigits value="11"/>
+																					<xs:fractionDigits value="10"/>
 																				</xs:restriction>
 																			</xs:simpleType>
 																		</xs:element>
@@ -21259,7 +21260,7 @@ IN	Aннулировано.</xs:documentation>
 																			</xs:annotation>
 																			<xs:simpleType>
 																				<xs:restriction base="xs:int">
-																					<xs:totalDigits value="6"/>
+																					<xs:totalDigits value="11"/>
 																				</xs:restriction>
 																			</xs:simpleType>
 																		</xs:element>
@@ -21268,8 +21269,9 @@ IN	Aннулировано.</xs:documentation>
 																				<xs:documentation>Количество лекарственных форм во вторичной (потребительской) упаковке. Игнорируется при приеме, автоматически рассчитывается как произведение packaging1Quantity*packaging2Quantity</xs:documentation>
 																			</xs:annotation>
 																			<xs:simpleType>
-																				<xs:restriction base="xs:int">
-																					<xs:totalDigits value="36"/>
+																				<xs:restriction base="xs:decimal">
+																					<xs:totalDigits value="22"/>
+																					<xs:fractionDigits value="10"/>
 																				</xs:restriction>
 																			</xs:simpleType>
 																		</xs:element>
@@ -21482,7 +21484,7 @@ IN	Aннулировано.</xs:documentation>
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="packagingInfo" maxOccurs="unbounded">
+															<xs:element name="packagingInfo">
 																<xs:annotation>
 																	<xs:documentation>Сведения об упаковке</xs:documentation>
 																</xs:annotation>
@@ -21507,8 +21509,9 @@ IN	Aннулировано.</xs:documentation>
 																				<xs:documentation>Количество лекарственных форм в первичной упаковке </xs:documentation>
 																			</xs:annotation>
 																			<xs:simpleType>
-																				<xs:restriction base="xs:int">
-																					<xs:totalDigits value="6"/>
+																				<xs:restriction base="xs:decimal">
+																					<xs:totalDigits value="11"/>
+																					<xs:fractionDigits value="10"/>
 																				</xs:restriction>
 																			</xs:simpleType>
 																		</xs:element>
@@ -21518,7 +21521,7 @@ IN	Aннулировано.</xs:documentation>
 																			</xs:annotation>
 																			<xs:simpleType>
 																				<xs:restriction base="xs:int">
-																					<xs:totalDigits value="6"/>
+																					<xs:totalDigits value="11"/>
 																				</xs:restriction>
 																			</xs:simpleType>
 																		</xs:element>
@@ -21527,8 +21530,9 @@ IN	Aннулировано.</xs:documentation>
 																				<xs:documentation>Количество лекарственных форво вторичной (потребительской) упаковке. Игнорируется при приеме, автоматически расчитывается как произведение packaging1Quantity*packaging2Quantity</xs:documentation>
 																			</xs:annotation>
 																			<xs:simpleType>
-																				<xs:restriction base="xs:int">
-																					<xs:totalDigits value="36"/>
+																				<xs:restriction base="xs:decimal">
+																					<xs:totalDigits value="22"/>
+																					<xs:fractionDigits value="10"/>
 																				</xs:restriction>
 																			</xs:simpleType>
 																		</xs:element>
@@ -44906,7 +44910,7 @@ Publish - Размещение (публикация) документа</xs:doc
 													</xs:annotation>
 													<xs:complexType>
 														<xs:sequence>
-															<xs:element name="packagingInfo" maxOccurs="unbounded">
+															<xs:element name="packagingInfo">
 																<xs:annotation>
 																	<xs:documentation>Сведения об упаковке</xs:documentation>
 																</xs:annotation>
@@ -44931,15 +44935,26 @@ Publish - Размещение (публикация) документа</xs:doc
 																				</xs:sequence>
 																			</xs:complexType>
 																		</xs:element>
-																		<xs:element name="packaging1Quantity" type="xs:int">
+																		<xs:element name="packaging1Quantity">
 																			<xs:annotation>
 																				<xs:documentation>Количество лекарственных форм в первичной упаковке по справочнику "Сведения об упаковке"</xs:documentation>
 																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:decimal">
+																					<xs:totalDigits value="11"/>
+																					<xs:fractionDigits value="10"/>
+																				</xs:restriction>
+																			</xs:simpleType>
 																		</xs:element>
-																		<xs:element name="packaging2Quantity" type="xs:int">
+																		<xs:element name="packaging2Quantity">
 																			<xs:annotation>
 																				<xs:documentation>Количество первичных упаковок во вторичной (потребительской) упаковке по справочнику "Сведения об упаковке"</xs:documentation>
 																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:int">
+																					<xs:totalDigits value="11"/>
+																				</xs:restriction>
+																			</xs:simpleType>
 																		</xs:element>
 																		<xs:element name="consumerPackagingInfo">
 																			<xs:annotation>

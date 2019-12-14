@@ -1,0 +1,70 @@
+Версия 7.1.7
+
+   IntegrationTypes.xsd
+
+https://jira.lanit.ru/browse/FCSNF-4104
+
+
+1. В типе "Информация об объекте закупки -  лекарственном препарате" (zfcs_contract2015DrugPurchaseInfoType) 
+
+    сделан одиночным блок "Сведения об упаковке" (drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo)
+    сделан одиночным блок "Сведения об упаковке" (drugInfoUsingTextForm\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo)
+
+    У поля "Количество лекарственных форм в первичной упаковке"(drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\packaging1Quantity) изменен тип на decimal (11,10)
+    У поля "Количество первичных упаковок во вторичной (потребительской) упаковке"(drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\packaging2Quantity) изменен тип на int(11)
+    У поля "Количество лекарственных форм во вторичной (потребительской) упаковке"(drugInfoUsingReferenceInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\sumaryPackagingQuantity) изменен тип на decimal (22,10)
+
+    У поля "Количество лекарственных форм в первичной упаковке"(drugInfoUsingTextForm\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\packaging1Quantity) изменен тип на decimal (11,10)
+    У поля "Количество первичных упаковок во вторичной (потребительской) упаковке"(drugInfoUsingTextForm\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\packaging2Quantity) изменен тип на int(11)
+    У поля "Количество лекарственных форм во вторичной (потребительской) упаковке"(drugInfoUsingTextForm\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\sumaryPackagingQuantity) изменен тип на decimal (22,10)
+
+
+2. В типе "Справочник: "Лекарственные препараты"" (zfcs_nsiFarmDrugDictionary) 
+
+    блок "Сведения об упаковке" (MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo) сделан одиночным
+    У поля "Количество лекарственных форм в первичной упаковке"(MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\packaging1Quantity) изменен тип на decimal (11,10)
+    У поля "Количество лекарственных форм во вторичной (потребительской) упаковке"(MNNInfo\positionsTradeName\positionTradeName\packagingsInfo\packagingInfo\packaging2Quantity) изменен тип на int(11)
+
+
+
+
+   fcsPrintForm.xsd 
+
+
+
+
+   fcsExport.xsd 
+
+
+
+
+   fcsIntegration.xsd
+
+
+
+   fcsExtegration.xsd
+
+
+
+
+   fcsEisSignIncoming.xsd
+
+
+
+   fcsInternal.xsd
+
+
+   docs-ws-api.xsd
+
+
+
+   eis-fs-ws-api.xsd
+
+
+
+   fcsControl99.xsd
+
+
+
+
+   eisSigningSOAPMessages.xsd
