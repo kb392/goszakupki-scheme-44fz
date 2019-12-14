@@ -1,0 +1,978 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- FCS CONTROL99 INTERNAL Integration Scheme, version 9.0, create date 25.12.2018 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/control99/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" targetNamespace="http://zakupki.gov.ru/oos/control99/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
+	<!--Документы интеграции ЕИС с ГМУ-->
+	<xs:element name="financialActivityPlanRequest">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Запрос данных ПФХД</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tPacket">
+					<xs:sequence>
+						<xs:element name="data" type="financialActivityPlanRequestType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="financialActivityPlanRequestType">
+		<xs:annotation>
+			<xs:documentation>Тип элемента: Запрос данных ПФХД</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="organization" type="tOrganization">
+				<xs:annotation>
+					<xs:documentation>Данные организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="period" type="oos:zfcs_yearType">
+				<xs:annotation>
+					<xs:documentation>Год ПФХД</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="getFinancialActivityPlanResponse">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Ответ с данными ПФХД</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tPacket">
+					<xs:sequence>
+						<xs:element name="data" type="getFinancialActivityPlanResponseType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="getFinancialActivityPlanResponseType">
+		<xs:annotation>
+			<xs:documentation>Тип элемента: Ответ с данными ПФХД</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="eventDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата/время формирования  ответа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="success">
+					<xs:annotation>
+						<xs:documentation>Запрос обработан успешно  на стороне ГМУ </xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="period" type="oos:zfcs_yearType">
+								<xs:annotation>
+									<xs:documentation>Год ПФХД</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="organization">
+								<xs:annotation>
+									<xs:documentation>Данные организации</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="INN" type="base:innOrganizationType">
+											<xs:annotation>
+												<xs:documentation>ИНН организации</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="KPP" type="base:kppType">
+											<xs:annotation>
+												<xs:documentation>КПП организации</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="consRegistryNum" type="base:consRegistryNumType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Код организации по Сводному Реестру</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="requisiteElements">
+								<xs:annotation>
+									<xs:documentation>Реквизиты ПФХД</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="documentName">
+											<xs:annotation>
+												<xs:documentation>Наименование документа</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="100"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="publishDate" type="xs:dateTime">
+											<xs:annotation>
+												<xs:documentation>Дата/время размещения</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="version" type="xs:int">
+											<xs:annotation>
+												<xs:documentation>Версия документа</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="productPurchaseSums2001">
+								<xs:annotation>
+									<xs:documentation>Суммы закупок по строке 2001 (на закупку товаров, работ услуг по году начала закупки)</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="main" type="productPurchaseSums2001YearType">
+											<xs:annotation>
+												<xs:documentation>Итоговая строка</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="detail" type="productPurchaseSums2001YearType" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Набор детализирующих строк</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="violations">
+					<xs:annotation>
+						<xs:documentation>Запрос обработан с ошибками  на стороне ГМУ</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="violation" type="tViolation" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Ошибка</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="violationsEIS">
+					<xs:annotation>
+						<xs:documentation>Запрос обработан с ошибками  на стороне шины ЕИС</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="violationEIS" type="tViolation" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Запрос обработан с ошибкой  на стороне шины ЕИС</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="productPurchaseSums2001YearType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сумма закупок по строке 2001 </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="year" type="oos:zfcs_yearType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Год начала закупки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Название строки</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="currentYearFz44Sum" type="base:moneyPositiveType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сумма по 44ФЗ на очередной финансовый год</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstYearFz44Sum" type="base:moneyPositiveType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сумма по 44ФЗ на первый год планового периода</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="secondYearFz44Sum" type="base:moneyPositiveType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сумма по 44ФЗ на второй год планового периода</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="getPlanChangedListRequest">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Запрос перечня организаций, изменивших ПФХД за период</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tPacket">
+					<xs:sequence>
+						<xs:element name="data" type="getPlanChangedListRequestType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="getPlanChangedListRequestType">
+		<xs:annotation>
+			<xs:documentation>Тип элемента: Запрос перечня организаций, изменивших ПФХД за период</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="planYear" type="oos:zfcs_yearType">
+				<xs:annotation>
+					<xs:documentation>Год ПФХД</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fromDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата/время начала интервала</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата/время окончания интервала</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="getPlanChangedListResponse">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Ответ с перечнем организаций, изменивших ПФХД за период</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tPacket">
+					<xs:sequence>
+						<xs:element name="data" type="getPlanChangedListResponseType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="getPlanChangedListResponseType">
+		<xs:annotation>
+			<xs:documentation>Тип элемента: Ответ с перечнем организаций, изменивших ПФХД за период</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="success">
+				<xs:annotation>
+					<xs:documentation>Запрос обработан успешно на стороне ГМУ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="organizations">
+							<xs:annotation>
+								<xs:documentation>Перечень организаций, изменивших ПФХД за период</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="organization" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Данные организации</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="tOrganization">
+													<xs:sequence>
+														<xs:element name="changeDate" type="xs:dateTime">
+															<xs:annotation>
+																<xs:documentation>Дата/время изменения ПФХД</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="planYear" type="oos:zfcs_yearType">
+							<xs:annotation>
+								<xs:documentation>Год ПФХД</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="violations">
+				<xs:annotation>
+					<xs:documentation>Запрос обработан с ошибкой  на стороне ГМУ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="violation" type="tViolation" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Ошибка</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="violationsEIS">
+				<xs:annotation>
+					<xs:documentation>Запрос обработан с ошибками  на стороне шины ЕИС</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="violationEIS" type="tViolation" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Запрос обработан с ошибкой  на стороне шины ЕИС</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Документы интеграции ЕИС с АС ФК-->
+	<xs:element name="asfkInformPlan">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Информация из плана закупок (РПЗ), направляемая из ЕИС в АС ФК</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tPacket">
+					<xs:sequence>
+						<xs:element name="data" type="asfkInformPlanType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="asfkInformPlanType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация из плана закупок (РПЗ), направляемая из ЕИС в АС ФК</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="oos:zfcs_control99PurchasePlanExtractType">
+				<xs:sequence>
+					<xs:element name="personalAccount" type="oos:zfcs_control99PersonalAccountType">
+						<xs:annotation>
+							<xs:documentation>Лицевой счет в ТОФК заказчика или организации, которой заказчиком переданы полномочия на осуществление закупок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TOFKCode" type="oos:zfcs_TOFKCodeType">
+						<xs:annotation>
+							<xs:documentation>Код ТОФК</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="asfkResLBO">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Результат проверки данных плана закупок в АС ФК</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tPacket">
+					<xs:sequence>
+						<xs:element name="data" type="asfkResLBOType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="asfkResLBOType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат проверки данных плана закупок в АС ФК</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="createDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Указывается дата и время формирования документа «Результаты контроля ЛБО».</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="oos:zfcs_TOFKCodeType">
+				<xs:annotation>
+					<xs:documentation>Указывается код ТОФК по КОФК, сформировавшего Результаты контроля ЛБО.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="oos:zfcs_longTextMinType">
+				<xs:annotation>
+					<xs:documentation>Указывается наименование ТОФК по КОФК, сформировавшего Результаты контроля ЛБО.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="registerCode" type="base:consRegistryNumType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Указывается код ТОФК по Сводному реестру.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="violations" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание ошибок</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="violation" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Ошибка</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="code">
+										<xs:annotation>
+											<xs:documentation>Код ошибки.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:length value="5"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="level">
+										<xs:annotation>
+											<xs:documentation>Тип ошибки</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="5"/>
+												<xs:maxLength value="7"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="name" type="oos:zfcs_longTextMinType">
+										<xs:annotation>
+											<xs:documentation>Наименование ошибки.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="description" type="oos:zfcs_longTextMinType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Описание ошибки</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="resultType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Тип проверки ЛБО</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="code" type="oos:zfcs_longTextMinType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Код</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="value">
+							<xs:annotation>
+								<xs:documentation>Возможные значения: 
+0» - Информация об объеме финансового обеспечения, включенная в план закупок, не соответствует остатку лимитов бюджетных обязательств, доведенных заказчику; 
+«1» - По результатам отзыва лимитов бюджетных обязательств, информация об объеме финансового обеспечения, включенная в план закупок, не соответствует остатку лимитов бюджетных обязательств, доведенных заказчику; 
+«2» - По результатам принятия на учет бюджетных обязательств, информация об объеме финансового обеспечения, включенная в план закупок, не соответствует остатку лимитов бюджетных обязательств, доведенных заказчику.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="0"/>
+									<xs:enumeration value="1"/>
+									<xs:enumeration value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="resultsControl" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Результат контроля ЛБО. Заполняется в случае заполнения блока «Тип проверки ЛБО»</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="resultControl" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Результат контроля</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="KBK" type="base:kbkType">
+										<xs:annotation>
+											<xs:documentation>КБК</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="result">
+										<xs:annotation>
+											<xs:documentation>Указывается результат проводимого контроля. Возможные значения:
+ «0» - пройден;
+ «1» - не пройден.</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="code" type="oos:zfcs_longTextMinType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Код</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="value">
+													<xs:annotation>
+														<xs:documentation>Возможные значения:
+«0» - пройден;
+«1» - не пройден.</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="0"/>
+															<xs:enumeration value="1"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="document" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Реквизиты документов содержащих информацию для осуществления контроля.
+Заполняется в случае заполнения блока «Результат контроля ЛБО»</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="document_ITEM" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Документ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="name">
+										<xs:annotation>
+											<xs:documentation>Указывается наименование документа, содержащего информацию для осуществления контроля.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="100"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="number">
+										<xs:annotation>
+											<xs:documentation>Указывается номер документа, содержащего информацию для осуществления контроля.</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+												<xs:maxLength value="100"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="date" type="xs:date">
+										<xs:annotation>
+											<xs:documentation>Указывается дата документа, содержащего информацию для осуществления контроля.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="orgCode" type="base:consRegistryNumType">
+										<xs:annotation>
+											<xs:documentation>Указывается код заказчика по Сводному реестру.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="INN" type="base:innType">
+										<xs:annotation>
+											<xs:documentation>Указывается ИНН заказчика.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="KPP" type="base:kppType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Указывается КПП заказчика.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inconsistencies" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Выявленные несоответствия. Заполняется в случае наличия в поле «Результат проверки» блока «Результат контроля ЛБО» значения «1».</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="inconsistency" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Несоответствие</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="KBK" type="base:kbkType">
+										<xs:annotation>
+											<xs:documentation>Указывается код по БК</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="year" type="oos:zfcs_yearType">
+										<xs:annotation>
+											<xs:documentation>Указывается год, на который доведены ЛБО.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="PlanSum" type="base:moneyPositiveType">
+										<xs:annotation>
+											<xs:documentation>Указывается общая сумма значений финансового обеспечения по плану закупок для указанного значения КВР.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="SumPlan1" type="base:moneyPositiveType">
+										<xs:annotation>
+											<xs:documentation>Указывается сумма финансового обеспечения на первый год планового периода, соответствующая идентификационному коду закупки.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="SumPlan2" type="base:moneyPositiveType">
+										<xs:annotation>
+											<xs:documentation>Указывается сумма финансового обеспечения на второй год планового периода, соответствующая идентификационному коду закупки.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="restSum" type="base:moneyType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Указывается общая сумма остатка ЛБО на текущий финансовый год по соответствующему КБК</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="restSum1" type="base:moneyType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation> Указывается общая сумма остатка ЛБО на первый год планового периода по соответствующему КБК (либо КВР, либо полному остатку в зависимости от контроля)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="restSum2" type="base:moneyType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Указывается общая сумма остатка ЛБО на второй год планового периода по соответствующему КБК (либо КВР, либо полному остатку в зависимости от контроля)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="description" type="oos:zfcs_longTextMinType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>При проведении контроля по л/с, обсуживающемуся в ЗК, указывается значение «Информация не предоставляется</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="confirmSinc">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Предварительное подтверждение</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tPacket">
+					<xs:sequence>
+						<xs:element name="data" type="confirmSincType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="confirmSincType">
+		<xs:annotation>
+			<xs:documentation>Тип: Предварительное подтверждение</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="creationDateTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата/время создания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status">
+				<xs:annotation>
+					<xs:documentation>Статус</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="statusCode">
+							<xs:annotation>
+								<xs:documentation>Код статуса. Допустимые значения:
+«0» - успешное вы-полнение;
+«1» - ошибка вали-дации конверта;
+«2» - ошибка про-верки подписи;
+«3» - ошибка опре-деления организа-ции;
+«4» - ошибка обра-ботки документа;
+«5» - ошибка обра-ботки вложения;
+«9» - системная ошибка.
+</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="0"/>
+									<xs:enumeration value="1"/>
+									<xs:enumeration value="2"/>
+									<xs:enumeration value="3"/>
+									<xs:enumeration value="4"/>
+									<xs:enumeration value="5"/>
+									<xs:enumeration value="9"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="statusMessage" type="oos:zfcs_longTextMinType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Сообщение об ошибке. Обязатель-но, если statusCode равно «1»</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="statusDetail" type="oos:zfcs_longTextMinType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дополнительная ин-формация о статусе</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="documentGuid" type="base:guidType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>GUID документа, на который получено подтверждение</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="confirmASinc">
+		<xs:annotation>
+			<xs:documentation>Пакет данных: Окончательное подтверждение</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tPacket">
+					<xs:sequence>
+						<xs:element name="data" type="confirmASincType">
+							<xs:annotation>
+								<xs:documentation>Данные информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="confirmASincType">
+		<xs:annotation>
+			<xs:documentation>Тип: Окончательное подтверждение</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TOFKCode" type="oos:zfcs_TOFKCodeType">
+				<xs:annotation>
+					<xs:documentation>Код ТОФК</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status">
+				<xs:annotation>
+					<xs:documentation>Статус</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="statusCode">
+							<xs:annotation>
+								<xs:documentation>Код статуса. Допустимые значения:
+0 - успешное вы-полнение;
+1 - ошибка валидации конверта;
+2 - ошибка проверки подписи;
+3 - ошибка определения организа-ции;
+4 - ошибка обработки документа;
+5 - ошибка обработки вложения;
+9 - системная ошибка.
+</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="0"/>
+									<xs:enumeration value="1"/>
+									<xs:enumeration value="2"/>
+									<xs:enumeration value="3"/>
+									<xs:enumeration value="4"/>
+									<xs:enumeration value="5"/>
+									<xs:enumeration value="9"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="statusMessage" type="oos:zfcs_longTextMinType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Сообщение об ошибке. Обязатель-но, если statusCode равно «1»</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="statusDetail" type="oos:zfcs_longTextMinType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дополнительная ин-формация о статусе</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="documentGuid" type="base:guidType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>GUID документа, на который получено подтверждение</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Общие типы-->
+	<xs:complexType name="tOrganization">
+		<xs:annotation>
+			<xs:documentation>Тип: Данные организации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="INN" type="base:innOrganizationType">
+				<xs:annotation>
+					<xs:documentation>ИНН организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KPP" type="base:kppType">
+				<xs:annotation>
+					<xs:documentation>КПП организации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="consRegistryNum" type="base:consRegistryNumType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Код организации по Сводному Реестру</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tViolation">
+		<xs:annotation>
+			<xs:documentation>Тип: Код и текст ошибки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="text" type="oos:zfcs_longTextMinType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Текст</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tPacket" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Тип: Информационный пакет</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="index">
+				<xs:annotation>
+					<xs:documentation>Индексная карточка информационного пакета</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Индексная карточка пакета данных</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="packetUid" type="base:guidType">
+							<xs:annotation>
+								<xs:documentation>Глобальный идентификатор  информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="refPacketUid" type="base:guidType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Идентификатор обработанного информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="createDateTime" type="xs:dateTime">
+							<xs:annotation>
+								<xs:documentation>Дата и время формирования информационного пакета</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="tPartner">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление контрагентов:
+  EIS - Единая информационная система;
+  GMU - Информационная система ГМУ</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OOS"/>
+			<xs:enumeration value="GMU"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tIndexMode">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление режимов:
+  PROD - промышленная эксплуатация;
+ TEST - тестовые данные/</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PROD"/>
+			<xs:enumeration value="TEST"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

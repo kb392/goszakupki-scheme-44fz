@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 9.0, create date 23.11.2018 -->
+<!-- COMMON_TYPES Integration Scheme, version 9.0, create date 25.12.2018 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -12,6 +12,31 @@
 				<xs:annotation>
 					<xs:documentation>Вложенный файл</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="attachmentListSignCheckUrlType">
+		<xs:annotation>
+			<xs:documentation>Тип: Прикрепленные документы с полем signatureCheckUrl</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="attachmentInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Вложенный файл</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="attachmentType">
+							<xs:sequence minOccurs="0">
+								<xs:element name="signatureCheckUrl" type="base:hrefType">
+									<xs:annotation>
+										<xs:documentation>Ссылка на страницу проверки подписи на ЭП</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -365,6 +390,383 @@ CAdES-A</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="participantType">
+		<xs:annotation>
+			<xs:documentation>Тип: Поставщик для протоколов электронных процедур</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="legalEntityRFInfo">
+				<xs:annotation>
+					<xs:documentation>Юридическое лицо РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:text2000Type">
+							<xs:annotation>
+								<xs:documentation>Полное наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="shortName" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Сокращенное наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="firmName" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Фирменное наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INN" type="base:innEntityType">
+							<xs:annotation>
+								<xs:documentation>ИНН</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="KPP" type="base:kppType">
+							<xs:annotation>
+								<xs:documentation>КПП</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="registrationDate" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ogrn" type="base:ogrnCodeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ОГРН</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="legalForm" type="base:OKOPFRef">
+							<xs:annotation>
+								<xs:documentation>Организационно-правовая форма организации в ОКОПФ. При приеме содержимое контролируется на  присутствие в справочнике "Общероссийский классификатор организационно-правовых форм (ОКОПФ)" (nsiOKOPF)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="contactInfo">
+							<xs:annotation>
+								<xs:documentation>Контактная информация</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="orgPostAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Почтовый адрес организации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="orgFactAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Адрес местонахождения организации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactPersonInfo" type="cmn:personType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Контактное лицо</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactEMail" type="base:eMailType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Электронная почта</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactPhone" type="base:phoneType">
+										<xs:annotation>
+											<xs:documentation>Контактный телефон</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="legalEntityForeignStateInfo">
+				<xs:annotation>
+					<xs:documentation>Юридическое лицо иностранного государства</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fullName" type="base:text2000Type">
+							<xs:annotation>
+								<xs:documentation>Полное наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="shortName" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Сокращенное наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="firmName" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Фирменное наименование</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="fullNameLat" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Полное наименование (латинскими буквами)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="taxPayerCode" type="base:taxPayerCode">
+							<xs:annotation>
+								<xs:documentation>Код налогоплательщика в стране регистрации или его аналог</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ogrn" type="base:ogrnCodeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ОГРН</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="legalForm" type="base:OKOPFRef" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Организационно-правовая форма организации в ОКОПФ</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="registerInRFTaxBodiesInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Поставщик состоит на учете в налоговых органах на территории РФ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="INN" type="base:innEntityType">
+										<xs:annotation>
+											<xs:documentation>ИНН</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="KPP" type="base:kppType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>КПП</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="registrationDate" type="xs:date" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="placeOfStayInRegCountryInfo">
+							<xs:annotation>
+								<xs:documentation>Место нахождения в стране регистрации</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="country" type="base:OKSMRef">
+										<xs:annotation>
+											<xs:documentation>Страна регистрации. 
+При приеме содержимое контролируется на присутствие в справочнике "Общероссийский классификатор стран мира (ОКСМ)" (nsiOKSM)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="orgPostAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Почтовый адрес организации в стране регистрации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="orgFactAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Адрес местонахождения организации в стране регистрации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactEMail" type="base:eMailType">
+										<xs:annotation>
+											<xs:documentation>Электронная почта</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactPhone" type="base:phoneType">
+										<xs:annotation>
+											<xs:documentation>Контактный телефон</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="placeOfStayInRFInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наличие у поставщика места пребывания на территории РФ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="orgPostAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Почтовый адрес организации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="orgFactAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Адрес местонахождения организации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactEMail" type="base:eMailType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Электронная почта</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactPhone" type="base:phoneType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Контактный телефон</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="individualPersonRFInfo">
+				<xs:annotation>
+					<xs:documentation>Физическое лицо РФ</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nameInfo" type="cmn:personType">
+							<xs:annotation>
+								<xs:documentation>ФИО</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INN" type="base:innIndividualType">
+							<xs:annotation>
+								<xs:documentation>ИНН</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="registrationDate" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="postAddress" type="base:text2000Type">
+							<xs:annotation>
+								<xs:documentation>Почтовый адрес </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="factAddress" type="base:text2000Type">
+							<xs:annotation>
+								<xs:documentation>Адрес местонахождения </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="contactEMail" type="base:eMailType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Электронная почта</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="contactPhone" type="base:phoneType">
+							<xs:annotation>
+								<xs:documentation>Контактный телефон</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="isIP" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>Индивидуальный предприниматель</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="individualPersonForeignStateInfo">
+				<xs:annotation>
+					<xs:documentation>Физическое лицо иностранного государства</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nameInfo" type="cmn:personType">
+							<xs:annotation>
+								<xs:documentation>ФИО</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="nameLatInfo" type="cmn:personType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>ФИО (латинскими буквами)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="taxPayerCode" type="base:taxPayerCode">
+							<xs:annotation>
+								<xs:documentation>Код налогоплательщика в стране регистрации или его аналог</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="registerInRFTaxBodiesInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Поставщик состоит на учете в налоговых органах на территории РФ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="INN" type="base:innIndividualType">
+										<xs:annotation>
+											<xs:documentation>ИНН</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="registrationDate" type="xs:date" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Дата постановки на учет в налоговом органе</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="placeOfStayInRegCountryInfo">
+							<xs:annotation>
+								<xs:documentation>Место нахождения в стране регистрации</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="country" type="base:OKSMRef">
+										<xs:annotation>
+											<xs:documentation>Страна регистрации</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="postAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Почтовый адрес </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="factAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Адрес местонахождения </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactEMail" type="base:eMailType">
+										<xs:annotation>
+											<xs:documentation>Электронная почта</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactPhone" type="base:phoneType">
+										<xs:annotation>
+											<xs:documentation>Телефон</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="placeOfStayInRFInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наличие у поставщика места пребывания на территории РФ</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="postAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Почтовый адрес </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="factAddress" type="base:text2000Type">
+										<xs:annotation>
+											<xs:documentation>Адрес местонахождения </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactEMail" type="base:eMailType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Электронная почта</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contactPhone" type="base:phoneType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Телефон</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="printFormType">
 		<xs:annotation>

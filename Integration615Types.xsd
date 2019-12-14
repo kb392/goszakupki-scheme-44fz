@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.0, create date 23.11.2018 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 9.0, create date 25.12.2018 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/pprf615types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -5272,18 +5272,26 @@ CAdES-A</xs:documentation>
 		<xs:sequence>
 			<xs:element name="registryNum" type="base:qualifiedContractorCodeType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Номер реестровой записи. Игнорируется при приёме первой версии, заполняется при передаче. Требуется заполнение при приёме изменеений</xs:documentation>
+					<xs:documentation>Номер реестровой записи. 
+Игнорируется при приёме первой версии, заполняется при передаче. Требуется заполнение при приёме изменений</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="docNumber" type="base:documentNumberRegistryType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Номер документа. Элемент ингорируется при приёме. Заполняется при передаче номерод документа присвоенным в ЕИС</xs:documentation>
+					<xs:documentation>Номер документа. 
+Элемент ингорируется при приёме. Заполняется при передаче номером документа, присвоенным в ЕИС</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="docPublishDate" type="xs:dateTime" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Дата размещения документа.
 Игнорируется при приёме, заполняется при передаче </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstVersionPublishDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата размещения первой версии документа
+Игнорируется при приеме, заполняется при передаче </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="href" type="base:hrefType" minOccurs="0">

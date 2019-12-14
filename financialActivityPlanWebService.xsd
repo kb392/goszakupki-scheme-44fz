@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.7-b01-. -->
+<xs:schema xmlns:tns="http://ws.gmu.lanit.ru/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0"
+           targetNamespace="http://ws.gmu.lanit.ru/">
+
+    <xs:element name="getFinancialActivityPlanRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="organization" type="tns:organizationType" minOccurs="0"/>
+                <xs:element name="period" type="xs:int" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getFinancialActivityPlanResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="return" type="tns:financialActivityPlanResponse" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPlanChangedListRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="planYear" type="xs:int" minOccurs="0"/>
+                <xs:element name="fromDate" type="xs:dateTime" minOccurs="0"/>
+                <xs:element name="toDate" type="xs:dateTime" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPlanChangedListResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="return" type="tns:planChangedListResponse" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="planChangedListResponse">
+        <xs:sequence>
+            <xs:element name="result" type="tns:errorResult" minOccurs="0"/>
+            <xs:element name="changes" type="tns:changedOrganization" nillable="true" minOccurs="0"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="errorResult">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string" minOccurs="0"/>
+            <xs:element name="text" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="changedOrganization">
+        <xs:sequence>
+            <xs:element name="changeDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="organization" type="tns:organizationType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="organizationType">
+        <xs:sequence>
+            <xs:element name="inn" type="xs:string" minOccurs="0"/>
+            <xs:element name="kpp" type="xs:string" minOccurs="0"/>
+            <xs:element name="regNum" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="financialActivityPlanResponse">
+        <xs:sequence>
+            <xs:element name="eventDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="result" type="tns:errorResult" minOccurs="0"/>
+            <xs:element name="financialActivityPlan" type="tns:financialActivityPlanDto" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="financialActivityPlanDto">
+        <xs:sequence>
+            <xs:element name="planYear" type="xs:int" minOccurs="0"/>
+            <xs:element name="organization" type="tns:organizationType" minOccurs="0"/>
+            <xs:element name="requisiteElements" type="tns:requisiteElements" minOccurs="0"/>
+            <xs:element name="contractPaymentSums1001" type="tns:sums" minOccurs="0"/>
+            <xs:element name="productPurchaseSums2001" type="tns:complexSum" minOccurs="0"/>
+            <xs:element name="productPayment260" type="tns:paymentIndex" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="requisiteElements">
+        <xs:sequence>
+            <xs:element name="documentName" type="xs:string" minOccurs="0"/>
+            <xs:element name="publishDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="version" type="xs:int" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="complexSum">
+        <xs:sequence>
+            <xs:element name="main" type="tns:sums" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="detail" type="tns:sums" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="sums">
+        <xs:sequence>
+            <xs:element name="year" type="xs:integer" minOccurs="0"/>
+            <xs:element name="name" type="xs:string"  minOccurs="0"/>
+            <xs:element name="currentYearFz223Sum" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="currentYearFz44Sum" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="currentYearTotalSum" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="firstYearFz223Sum" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="firstYearFz44Sum" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="firstYearTotalSum" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="secondYearFz223Sum" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="secondYearFz44Sum" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="secondYearTotalSum" type="xs:decimal" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="paymentIndex">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"  minOccurs="0"/>
+            <xs:element name="capitalInvestment" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="financialProvision" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="financialInsurance" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="healthInsurance" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="item781" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="kbk" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceTotal" type="xs:decimal" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
