@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 13.12.2019 -->
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0, create date 20.12.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -25352,7 +25352,7 @@ MCP - максимальное значение цены договора</xs:do
 			<xs:choice>
 				<xs:annotation>
 					<xs:documentation>Значение блоков OKPD/OKPD2/KTRU игнорируется и заполняется значением соответствующей позиции КТРУ, в случае если контракт создан на основании извещения об осуществлении закупки (заполнен блок foundation\fcsOrder\order\notificationNumber) и в извещении заполнен код по КТРУ, либо в случае если контракт создан на основании позиции плана-графика (заполнен блок foundation\singleCustomer\tenderPlanInfo или foundation\ notOosOrder\ tenderPlanInfo) и в такой позиции заполнен код по КТРУ. 
-В других случаях сохраняется значение одного из блоков OKPD/OKPD2/KTRU. Игнорируется при приеме сведений об изменении контракта, за исключением указания признака products/product/improvedProductReplacement</xs:documentation>
+В других случаях сохраняется значение одного из блоков OKPD/OKPD2/KTRU</xs:documentation>
 				</xs:annotation>
 				<xs:element name="OKPD" type="zfcs_OKPDRef">
 					<xs:annotation>
@@ -25405,8 +25405,9 @@ MCP - максимальное значение цены договора</xs:do
 			</xs:choice>
 			<xs:element name="name" type="zfcs_longTextMinType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование объекта закупки в соответствии с контрактом.
-Игнорируется при приеме, если тип изменения modification/contractChange и не установлен признак products/product/improvedProductReplacement</xs:documentation>
+					<xs:documentation>Наименование товара , работы, услуги.
+Игнорируется и заполняется наименованием КТРУ, если указана классификация по КТРУ (KTRU/code) (или наименованием ОКПД2, связанного с данной позицией КТРУ, в случае если у позиции КТРУ нет наименования). 
+Если указана классификация по ОКПД2, то если поле  заполнено в принимаемом документе, то сохраняется это "ручное" значение, иначе поле автоматически заполняется наименованием ОКПД2 по его коду. Классификация по ОКПД при приеме игнорируется, оставлено для обратной  совместимости</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="OKEI" type="zfcs_contract.OKEIType" minOccurs="0">
@@ -62586,25 +62587,46 @@ auto - автоматический.</xs:documentation>
 																	<xs:documentation>Валюта НМЦК требования заказчика по ОКВ. Игнорируется при приеме и передаче. Добавлено на развитие</xs:documentation>
 																</xs:annotation>
 															</xs:element>
-															<xs:element name="tenderPlanInfo" minOccurs="0">
-																<xs:annotation>
-																	<xs:documentation>Сведения о связи с позицией плана-графика</xs:documentation>
-																</xs:annotation>
-																<xs:complexType>
-																	<xs:sequence>
-																		<xs:element name="plan2017Number" type="base:tenderPlan2017RegNumberType">
-																			<xs:annotation>
-																				<xs:documentation>Реестровый номер плана-графика с 01.01.2017</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																		<xs:element name="position2017Number" type="zfcs_tenderPlan2017PositionNumberType">
-																			<xs:annotation>
-																				<xs:documentation>Номер позиции в плане-графике с 01.01.2017 (уникальный реестровый номер закупки)</xs:documentation>
-																			</xs:annotation>
-																		</xs:element>
-																	</xs:sequence>
-																</xs:complexType>
-															</xs:element>
+															<xs:choice minOccurs="0">
+																<xs:element name="tenderPlanInfo">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о связи с позицией плана-графика</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="plan2017Number" type="base:tenderPlan2017RegNumberType">
+																				<xs:annotation>
+																					<xs:documentation>Реестровый номер плана-графика с 01.01.2017</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="position2017Number" type="zfcs_tenderPlan2017PositionNumberType">
+																				<xs:annotation>
+																					<xs:documentation>Номер позиции в плане-графике с 01.01.2017 (уникальный реестровый номер закупки)</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="tenderPlan2020Info">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о связи с позицией плана-графика закупок с 01.01.2020</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="plan2020Number" type="base:tenderPlan2020RegNumberType">
+																				<xs:annotation>
+																					<xs:documentation>Реестровый номер плана-графика закупок с 01.01.2020</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="position2020Number" type="base:tenderPlan2020PositionNumberType">
+																				<xs:annotation>
+																					<xs:documentation>Номер позиции в плане-графике закупок с 01.01.2020 (уникальный реестровый номер закупки)</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:choice>
 														</xs:sequence>
 													</xs:complexType>
 												</xs:element>
