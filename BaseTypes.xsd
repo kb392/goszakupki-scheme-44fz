@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 10.0, create date 20.12.2019 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- BASE_TYPES Integration Scheme, version 10.0.3.1, create date 09.01.2019 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -1241,10 +1241,10 @@ cpNoticeDeviation - Уведомление об уклонении от закл
 cpNoticeEvasion - Уведомление об отказе от заключения контракта;
 cpProcedureCancel - Извещение об отмене процедуры заключения контракта;
 cpProcedureCancelFailure - Отмена извещения об отмене процедуры заключения контракта;
-sentPackageListRequest - Запрос списка отправленных пакетов;
+fcsSentPackageListRequest - Запрос списка отправленных пакетов;
 sentPackageList - Список отправленных пакетов;
-reSendPackage - Запрос на повторную отправку пакетов;
-receivedPackageListRequest - Запрос списка полученных пакетов;
+fcsReSendPackage - Запрос на повторную отправку пакетов;
+fcsReceivedPackageListRequest - Запрос списка полученных пакетов;
 receivedPackageList - Список полученных пакетов;
 notificationRemoveDoc - Уведомление об удалении из ЕИС проекта документа.</xs:documentation>
 		</xs:annotation>
@@ -1460,10 +1460,10 @@ notificationRemoveDoc - Уведомление об удалении из ЕИС
 			<xs:enumeration value="cpNoticeEvasion"/>
 			<xs:enumeration value="cpProcedureCancel"/>
 			<xs:enumeration value="cpProcedureCancelFailure"/>
-			<xs:enumeration value="sentPackageListRequest"/>
+			<xs:enumeration value="fcsSentPackageListRequest"/>
 			<xs:enumeration value="sentPackageList"/>
-			<xs:enumeration value="reSendPackage"/>
-			<xs:enumeration value="receivedPackageListRequest"/>
+			<xs:enumeration value="fcsReSendPackage"/>
+			<xs:enumeration value="fcsReceivedPackageListRequest"/>
 			<xs:enumeration value="receivedPackageList"/>
 			<xs:enumeration value="notificationRemoveDoc"/>
 		</xs:restriction>
