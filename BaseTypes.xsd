@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 10.0.4, create date 17.01.2020 -->
+<!-- BASE_TYPES Integration Scheme, version 10.1, create date 07.02.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -636,7 +636,7 @@
 		<xs:annotation>
 			<xs:documentation>Тип: Текущая версия схем</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="current" type="base:schemeVersionType" fixed="10.0"/>
+		<xs:attribute name="current" type="base:schemeVersionType" fixed="10.1"/>
 	</xs:complexType>
 	<!--Простые типы-->
 	<xs:simpleType name="abandonedReasonCode">
@@ -1242,11 +1242,14 @@ cpNoticeEvasion - Уведомление об отказе от заключен
 cpProcedureCancel - Извещение об отмене процедуры заключения контракта;
 cpProcedureCancelFailure - Отмена извещения об отмене процедуры заключения контракта;
 fcsSentPackageListRequest - Запрос списка отправленных пакетов;
-sentPackageList - Список отправленных пакетов;
+fcsSentPackageList - Список отправленных пакетов;
 fcsReSendPackage - Запрос на повторную отправку пакетов;
 fcsReceivedPackageListRequest - Запрос списка полученных пакетов;
-receivedPackageList - Список полученных пакетов;
-notificationRemoveDoc - Уведомление об удалении из ЕИС проекта документа.</xs:documentation>
+fcsReceivedPackageList - Список полученных пакетов;
+notificationRemoveDoc - Уведомление об удалении из ЕИС проекта документа;
+notEnumeratedPackage - Тип пакета неопределён;
+fcsDocProjectStatusRequest - Запрос о статусе размещения проектов документов;
+fcsDocProjectStatusResponse - Ответ на запрос о статусе размещения проектов документов</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="bankGuarantee"/>
@@ -1461,11 +1464,14 @@ notificationRemoveDoc - Уведомление об удалении из ЕИС
 			<xs:enumeration value="cpProcedureCancel"/>
 			<xs:enumeration value="cpProcedureCancelFailure"/>
 			<xs:enumeration value="fcsSentPackageListRequest"/>
-			<xs:enumeration value="sentPackageList"/>
+			<xs:enumeration value="fcsSentPackageList"/>
 			<xs:enumeration value="fcsReSendPackage"/>
 			<xs:enumeration value="fcsReceivedPackageListRequest"/>
-			<xs:enumeration value="receivedPackageList"/>
+			<xs:enumeration value="fcsReceivedPackageList"/>
 			<xs:enumeration value="notificationRemoveDoc"/>
+			<xs:enumeration value="notEnumeratedPackage"/>
+			<xs:enumeration value="fcsDocProjectStatusRequest"/>
+			<xs:enumeration value="fcsDocProjectStatusResponse"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="drugExternalCodeType">
@@ -1475,6 +1481,15 @@ notificationRemoveDoc - Уведомление об удалении из ЕИС
 		<xs:restriction base="xs:string">
 			<xs:minLength value="1"/>
 			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="drugDecimalCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Decimal для справочника "Лекарственные препараты"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="20"/>
+			<xs:fractionDigits value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="drugNameType">
@@ -1582,6 +1597,15 @@ notificationRemoveDoc - Уведомление об удалении из ЕИС
 		<xs:restriction base="xs:string">
 			<xs:maxLength value="1024"/>
 			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="contractKSNumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Идентификатор государственного контракта</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="innOrganizationType">
@@ -2452,6 +2476,7 @@ TC - Орган местного самоуправления и (или) гос
 			<xs:enumeration value="9.2"/>
 			<xs:enumeration value="9.3"/>
 			<xs:enumeration value="10.0"/>
+			<xs:enumeration value="10.1"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="serviceWorkCodeType">
@@ -2793,13 +2818,35 @@ n-без НДС.</xs:documentation>
 			<xs:maxInclusive value="100"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="percentRestr0100D2Type">
+	<xs:simpleType name="productTypeEnumType">
+		<xs:annotation>
+			<xs:documentation>Тип: Тип объекта закупки
+			PRODUCT - товар;
+			WORK - работа;
+			SERVICE - услуга
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PRODUCT"/>
+			<xs:enumeration value="WORK"/>
+			<xs:enumeration value="SERVICE"/>
+		</xs:restriction>
+	</xs:simpleType>
+    <xs:simpleType name="percentRestr0100D2Type">
 		<xs:annotation>
 			<xs:documentation>Тип: Процент с ограничениеми 0..100 и двумя знаками в дробной части</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:double">
 			<xs:minInclusive value="0"/>
 			<xs:maxInclusive value="100"/>
+			<xs:pattern value="\d+(\.\d{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="percentD2Type">
+		<xs:annotation>
+			<xs:documentation>Тип: Процент с двумя знаками в дробной части</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
 			<xs:pattern value="\d+(\.\d{1,2})?"/>
 		</xs:restriction>
 	</xs:simpleType>

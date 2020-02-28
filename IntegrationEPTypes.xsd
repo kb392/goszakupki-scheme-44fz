@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0.4, create date 17.01.2020 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.1, create date 07.02.2020 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -245,6 +245,12 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			<xs:element name="cancelReasonInfo" type="modificationWithoutCustomerDecisionType">
 				<xs:annotation>
 					<xs:documentation>Причина отмены протокола</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="afterProlongation" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Протокол после продления. Заполняется значением одноименного поля из протокола, который необходимо отменить.
+При приеме контролируется обязательность заполнения для отмены протоколов ЭОК, ЭОК-ОУ, ЭОКД, ЭЗК</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -642,6 +648,50 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="prolongationCancelEOKType">
+		<xs:annotation>
+			<xs:documentation>Тип: Отмена извещения о продлении срока подачи заявок на участие в ЭOK (открытый конкурс в электронной форме)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="purchaseDocumentType">
+				<xs:sequence>
+					<xs:element name="prolongationCancelInfo" type="cancelInfoType">
+						<xs:annotation>
+							<xs:documentation>Информация об отмене продления срока подачи заявок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="printFormFieldsInfo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Дополнительная информация для печатной формы. Игнорируется при приёме, заполняется при передаче</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="prolongationInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Дополнительная информация о продлении срока подачи заявок для печатной формы</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Номер документа</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="docDT" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Дата документа</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<!--Открытый конкурс с ограниченным участием в электронной форме (ЭOK-ОУ)-->
 	<xs:complexType name="notificationEOKOUPFType">
 		<xs:annotation>
@@ -1030,6 +1080,51 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="prolongationCancelEOKOUType">
+		<xs:annotation>
+			<xs:documentation>Тип: Отмена извещения о продлении срока подачи заявок на участие в ЭOK-ОУ (открытый конкурс с ограниченным участием в электронной форме);
+ внесение изменений</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="purchaseDocumentType">
+				<xs:sequence>
+					<xs:element name="prolongationCancelInfo" type="cancelInfoType">
+						<xs:annotation>
+							<xs:documentation>Информация об отмене продления срока подачи заявок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="printFormFieldsInfo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Дополнительная информация для печатной формы. Игнорируется при приёме, заполняется при передаче</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="prolongationInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Дополнительная информация о продлении срока подачи заявок для печатной формы</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Номер документа</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="docDT" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Дата документа</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<!--Двухэтапный конкурс в электронной форме (ЭOKД)-->
 	<xs:complexType name="notificationEOKDPFType">
 		<xs:annotation>
@@ -1189,7 +1284,7 @@ CU5CH26 - Заказчик как орган исполнительной вла
 	</xs:complexType>
 	<xs:complexType name="notificationEOKDType">
 		<xs:annotation>
-			<xs:documentation>Тип: Извещение о проведении ЭOKД (двухэтапный конкурс в электронной форме)  с конкурсной документацией;
+			<xs:documentation>Тип: Извещение о проведении ЭOKД (двухэтапный конкурс в электронной форме) с конкурсной документацией;
  внесение изменений</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
@@ -1586,6 +1681,51 @@ CU5CH26 - Заказчик как орган исполнительной вла
 											<xs:element name="scoringInfo" type="procedureScoringType">
 												<xs:annotation>
 													<xs:documentation>Информация о процедуре рассмотрения и оценки заявок</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="prolongationCancelEOKDType">
+		<xs:annotation>
+			<xs:documentation>Тип: Отмена извещения о продлении срока подачи заявок на участие в ЭOKД (двухэтапный конкурс в электронной форме);
+ внесение изменений</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="purchaseDocumentType">
+				<xs:sequence>
+					<xs:element name="prolongationCancelInfo" type="cancelInfoType">
+						<xs:annotation>
+							<xs:documentation>Информация об отмене продления срока подачи заявок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="printFormFieldsInfo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Дополнительная информация для печатной формы. Игнорируется при приёме, заполняется при передаче</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="prolongationInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Дополнительная информация о продлении срока подачи заявок для печатной формы</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Номер документа</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="docDT" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Дата документа</xs:documentation>
 												</xs:annotation>
 											</xs:element>
 										</xs:sequence>
@@ -2052,6 +2192,50 @@ PASS_OFFER - Все остальные заявки</xs:documentation>
 									<xs:annotation>
 										<xs:documentation>Дата и время окончания подачи заявок после продления</xs:documentation>
 									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="prolongationCancelEZKType">
+		<xs:annotation>
+			<xs:documentation>Тип: Отмена извещения о продлении срока подачи заявок на участие в ЭЗК (запрос котировок в электронной форме)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="purchaseDocumentType">
+				<xs:sequence>
+					<xs:element name="prolongationCancelInfo" type="cancelInfoType">
+						<xs:annotation>
+							<xs:documentation>Информация об отмене продления срока подачи заявок</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="printFormFieldsInfo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Дополнительная информация для печатной формы. Игнорируется при приёме, заполняется при передаче</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="prolongationInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Дополнительная информация о продлении срока подачи заявок для печатной формы</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="docNumber" type="base:documentNumberType" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Номер документа</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="docDT" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Дата документа</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
 								</xs:element>
 							</xs:sequence>
 						</xs:complexType>
@@ -3860,11 +4044,7 @@ manual - ручной ввод.
 						</xs:element>
 						<xs:element name="isContractPriceFormula" type="xs:boolean" minOccurs="0">
 							<xs:annotation>
-								<xs:documentation>Указать формулу цены и максимальное значение цены контракта
-
-При приеме бизнес-контролем контролируется, что если признак установлен в true, то для каждого объекта закупки в рамках лота в поле 
-purchaseObjectsInfo\notDrugPurchaseObjectsInfo\quantity\quantityUndefined\ либо в поле 
-purchaseObjectsInfo\drugPurchaseObjectsInfo\quantityUndefined\quantityUndefined устaновлено значение true</xs:documentation>
+								<xs:documentation>Указать формулу цены и максимальное значение цены контракта</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -5257,6 +5437,23 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			<xs:element name="href" type="base:hrefType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Гиперссылка на опубликованный документ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="cancelInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация об отмене продления</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="prolongationCancelReason" type="KOSOReasonType">
+				<xs:annotation>
+					<xs:documentation>Основание</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addInfo" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -6738,12 +6935,20 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			</xs:element>
 			<xs:element name="modificationInfo" type="modificationType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Основание внесения изменений</xs:documentation>
+					<xs:documentation>Основание внесения изменений.
+При приеме изменений протоколов fcsProtocolEOK1, fcsProtocolEOK2, fcsProtocolEOKSingleApp, fcsProtocolEOKSinglePart, fcsProtocolEOKOU1, fcsProtocolEOKOU2, fcsProtocolEOKOUSingleApp, fcsProtocolEOOUKSinglePart, fcsProtocolEOKD1, fcsProtocolEOKD2, fcsProtocolEOKD3, fcsProtocolEOKDSingleApp, fcsProtocolEOKDSinglePart, fcsProtocolEZP1Extract если:
+1) в ЕИС размещена действующая версия дочернего протокола;
+2) основание исправления «По решению судебного органа»/«По решению контролирующего органа» (т.е. заполнен блок modification/reason/courtDecision или modification/reason/authorityPrescription),
+то допускается изменение полей:
+- "Место проведения процедуры" (place)
+- "Дата и время проведения процедуры" (protocolDT)
+- "Информация о прикрепленных документах" (attachments)
+- "Название комиссии" (commission/commissionName) (за исключением протокола fcsProtocolEZP1Extract)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="afterProlongation" type="xs:boolean">
 				<xs:annotation>
-					<xs:documentation>Протокол после продления. Для протоколов принимаемых после того, как по закупке размещен документ "Извещение о продлении срока подачи заявок" должно быть указано значение true, в остальных случаях указывается значение false</xs:documentation>
+					<xs:documentation>Протокол после продления. Для протоколов, принимаемых после того, как по закупке размещен документ "Извещение о продлении срока подачи заявок" должно быть указано значение true, в остальных случаях указывается значение false</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="printFormFieldsInfo" minOccurs="0">
@@ -8286,6 +8491,23 @@ M - Орган местного самоуправления муниципал�
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KOSOReasonType">
+		<xs:annotation>
+			<xs:documentation>Тип: Основание КО/СО</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="authorityPrescriptionInfo" type="authorityPrescriptionType">
+				<xs:annotation>
+					<xs:documentation>Предписание органа, уполномоченного на осуществление контроля</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="courtDecisionInfo" type="courtDecisionType">
+				<xs:annotation>
+					<xs:documentation>Решение судебного органа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
 	</xs:complexType>
 	<xs:complexType name="kladrPlaceType">
 		<xs:annotation>

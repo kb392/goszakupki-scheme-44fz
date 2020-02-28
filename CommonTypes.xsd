@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- COMMON_TYPES Integration Scheme, version 10.0.4, create date 17.01.2020 -->
+<!-- COMMON_TYPES Integration Scheme, version 10.1, create date 07.02.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -1718,6 +1718,23 @@ CAdES-A</xs:documentation>
 																				<xs:documentation>Количество (объем) закупаемого лекарственного препарата. Игнорируется при приеме и не выгружается при наличии признака «Невозможно определить количество» (notificationInfo/purchaseObjectsInfo/drugPurchaseObjectsInfo/quantityUndefined)</xs:documentation>
 																			</xs:annotation>
 																		</xs:element>
+																		<xs:element name="averagePriceValue" type="base:drugDecimalCodeType" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Референтная цена по справочнику "Лекарственные препараты" (nsiFarmDrugDictionary) (блок "Референтные цены" (MNNsInfo\MNNInfo\pricesInfo). Игнорируется при приеме, заполняется автоматически при передаче</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="averagePriceTotal" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Сумма выплат по референтной цене (всего). Игнорируется при приеме, заполняется автоматически при передаче в случае если заполнено поле averagePriceValue округленным значением drugQuantity * averagePriceValue. Не выгружается при указании блока «Невозможно определить количество (объём)» (drugPurchaseObjectInfo/quantityUndefined) </xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="limPriceValuePerUnit" type="base:drugDecimalCodeType" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Предельная отпускная цена в расчете за единицу. Игнорируется при приеме, заполняется автоматически при передаче. Заполняется автоматически значением:
+минимальное выражение, полученное из отношения предельной отпускной цены за потребительскую упаковку к количеству лекарственных форм в упаковке по всем торговым наименованиям, которые относятся к указанному лекарственному средству. Не выгружается , если нет актуальных предельных отпускных цен, либо такие значения в справочнике "Лекарственные препараты" (nsiFarmDrugDictionary) отсутствуют. Не выгружается, если указанный препарат не входит в перечень ЖНВЛП, указанный в справочнике "Лекарственные препараты" (nsiFarmDrugDictionary)
+</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
 																	</xs:sequence>
 																</xs:extension>
 															</xs:complexContent>
@@ -1960,7 +1977,7 @@ CAdES-A</xs:documentation>
 			</xs:element>
 			<xs:element name="drugRef" type="base:text2000Type" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Ссылка на сведения о лекарственном препарате в ГРЛС. Требуется обязатеьное указание, если в справочнике "Причины корректировки справочных данных о лекарственных препаратах" (nsiDrugChangeReason) для записи соответствующим кодом причины корректировки поле "Признак «Обязательно указание ссылки на сведения о ЛП в ГРЛС»" (mustSpecifyDrugRef) имеет значение true</xs:documentation>
+					<xs:documentation>Ссылка на сведения о лекарственном препарате в ГРЛС. Требуется обязательное указание, если в справочнике "Причины корректировки справочных данных о лекарственных препаратах" (nsiDrugChangeReason) для записи соответствующим кодом причины корректировки поле "Признак «Обязательно указание ссылки на сведения о ЛП в ГРЛС»" (mustSpecifyDrugRef) имеет значение true</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

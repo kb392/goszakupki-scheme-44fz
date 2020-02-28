@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS PRINT_FORM Integration Scheme, version 10.0.4, create date 17.01.2020 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/printform/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1"  xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS PRINT_FORM Integration Scheme, version 10.1, create date 07.02.2020 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/printform/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" targetNamespace="http://zakupki.gov.ru/oos/printform/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
@@ -2432,6 +2432,11 @@ PUBL - Размещено.</xs:documentation>
 			<xs:documentation>Извещение о продлении срока подачи заявок на участие в ЭOK</xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<xs:element name="epProlongationCancelEOK" type="ep:prolongationCancelEOKType">
+		<xs:annotation>
+			<xs:documentation>Отмена извещения о продлении срока подачи заявок на участие в ЭOK</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 	<!--Открытый конкурс с ограниченным участием в электронной форме (ЭOK-ОУ)-->
 	<xs:element name="epNotificationEOKOUPF" type="ep:notificationEOKOUPFType">
 		<xs:annotation>
@@ -2471,6 +2476,11 @@ PUBL - Размещено.</xs:documentation>
 	<xs:element name="epProlongationEOKOU" type="ep:prolongationEOKOUType">
 		<xs:annotation>
 			<xs:documentation>Извещение о продлении срока подачи заявок на участие в ЭOK-ОУ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epProlongationCancelEOKOU" type="ep:prolongationCancelEOKOUType">
+		<xs:annotation>
+			<xs:documentation>Отмена извещения о продлении срока подачи заявок на участие в ЭOK-ОУ</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<!--Двухэтапный конкурс в электронной форме (ЭOKД)-->
@@ -2519,6 +2529,11 @@ PUBL - Размещено.</xs:documentation>
 			<xs:documentation>Извещение о продлении срока подачи заявок на участие в ЭOKД</xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<xs:element name="epProlongationCancelEOKD" type="ep:prolongationCancelEOKDType">
+		<xs:annotation>
+			<xs:documentation>Отмена извещения о продлении срока подачи заявок на участие в ЭOKД</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 	<!--Запрос котировок в электронной форме (ЭЗК)-->
 	<xs:element name="epNotificationEZK" type="ep:notificationEZKType">
 		<xs:annotation>
@@ -2538,6 +2553,11 @@ PUBL - Размещено.</xs:documentation>
 	<xs:element name="epProlongationEZK" type="ep:prolongationEZKType">
 		<xs:annotation>
 			<xs:documentation>Извещение о продлении срока подачи заявок на участие в ЭЗК</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="epProlongationCancelEZK" type="ep:prolongationCancelEZKType">
+		<xs:annotation>
+			<xs:documentation>Отмена извещения о продлении срока подачи заявок на участие в ЭЗK</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<!--Запрос котировок в электронной форме (ЭЗП)-->

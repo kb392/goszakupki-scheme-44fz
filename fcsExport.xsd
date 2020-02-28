@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 10.0.4, create date 17.01.2020 -->
+<!-- FCS EXPORT Integration Scheme, version 10.1, create date 07.02.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
@@ -1654,6 +1654,11 @@
 							<xs:documentation>Извещение о продлении срока подачи заявок на участие в ЭOK</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="epProlongationCancelEOK" type="ep:prolongationCancelEOKType">
+						<xs:annotation>
+							<xs:documentation>Отмена извещения о продлении срока подачи заявок на участие в ЭОK</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<!--Открытый конкурс с ограниченным участием в электронной форме-->
 					<xs:element name="epNotificationEOKOU" type="ep:notificationEOKOUType">
 						<xs:annotation>
@@ -1688,6 +1693,11 @@
 					<xs:element name="epProlongationEOKOU" type="ep:prolongationEOKOUType">
 						<xs:annotation>
 							<xs:documentation>Извещение о продлении срока подачи заявок на участие в ЭOK-ОУ</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="epProlongationCancelEOKOU" type="ep:prolongationCancelEOKOUType">
+						<xs:annotation>
+							<xs:documentation>Отмена извещения о продлении срока подачи заявок на участие в ЭОK-ОУ</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!--Двухэтапный конкурс в электронной форме-->
@@ -1731,6 +1741,11 @@
 							<xs:documentation>Извещение о продлении срока подачи заявок на участие в ЭOKД</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="epProlongationCancelEOKD" type="ep:prolongationCancelEOKDType">
+						<xs:annotation>
+							<xs:documentation>Отмена извещения о продлении срока подачи заявок на участие в ЭOKД</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<!--Запрос котировок в электронной форме-->
 					<xs:element name="epNotificationEZK" type="ep:notificationEZKType">
 						<xs:annotation>
@@ -1750,6 +1765,11 @@
 					<xs:element name="epProlongationEZK" type="ep:prolongationEZKType">
 						<xs:annotation>
 							<xs:documentation>Извещение о продлении срока подачи заявок на участие в ЭЗК</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="epProlongationCancelEZK" type="ep:prolongationCancelEZKType">
+						<xs:annotation>
+							<xs:documentation>Отмена извещения о продлении срока подачи заявок на участие в ЭЗK</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!--Запрос котировок в электронной форме-->

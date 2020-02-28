@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0.4, create date 17.01.2020 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.1, create date 07.02.2020 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/TPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -36,7 +36,8 @@
 			</xs:element>
 			<xs:element name="positions" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Позиции плана-графика закупок. Указание одного из блоков positions или specialPurchases обязательно при приеме.</xs:documentation>
+					<xs:documentation>Позиции плана-графика закупок.
+Указание одного из блоков positions или specialPurchasePositions обязательно при приеме</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -50,13 +51,30 @@
 			</xs:element>
 			<xs:element name="specialPurchases" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Особые закупки. Указание одного из блоков positions или specialPurchases обязательно при приеме</xs:documentation>
+					<xs:documentation>Особые закупки. 
+Устарело. Игнорируется при приеме, оставлено для обратной совместимости</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="specialPurchase" type="tenderPlan2020SpecialPurchaseType" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Особая закупка</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="specialPurchasePositions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Позиции особой закупки.
+Указание одного из блоков positions или specialPurchasePositions обязательно при приеме.
+При приеме изменений размещенного до выхода версии ЕИС 10.1 плана-графика закупок, необходимо один раз указать все закупки из особых закупок (в том числе отмененные)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="specialPurchasePosition" type="tenderPlan2020SpecialPurchasePositionType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Позиция особой закупки</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -239,13 +257,29 @@
 			</xs:element>
 			<xs:element name="specialPurchases" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Особые закупки</xs:documentation>
+					<xs:documentation>Особые закупки.
+Устарело. Игнорируется при приеме, оставлено для обратной совместимости</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="specialPurchase" type="tenderPlan2020SpecialPurchaseType" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Особая закупка</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="specialPurchasePositions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Позиции особой закупки.
+При приеме изменений размещенного до выхода версии ЕИС 10.1 плана-графика закупок, необходимо один раз указать все закупки из особых закупок (в том числе отмененные)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="specialPurchasePosition" type="tenderPlan2020SpecialPurchasePositionType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Позиция особой закупки</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
@@ -992,6 +1026,145 @@ E - Данные закупки отредактированы.</xs:documentatio
 
 N - Данные особой закупки перенесены из предыдущей версии без изменений;
 E - Данные особой закупки отредактированы.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="centralizedPurchaseInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Централизованная закупка</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="centralizedPurchaseOrgInfo" type="tenderPlan2020OrganizationType">
+							<xs:annotation>
+								<xs:documentation>Уполномоченный орган (учреждение).
+Значения полей и блоков "ОКПО организации" (OKPO), "Территориально-муниципальное образование организации по ОКТМО"(OKTMO), "Телефон организации" (phone), "Адрес электронной почты организации" (email) заполняются автоматически соответствующими значениями по Коду по СПЗ/Коду по СвР из справочника организаций ЕИС</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tenderPlan2020SpecialPurchasePositionType">
+		<xs:annotation>
+			<xs:documentation>Тип: Общие сведения позиции особой закупки плана-графика закупок</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="tenderPlan2020SpecialPurchaseRef">
+				<xs:annotation>
+					<xs:documentation>Тип особой закупки из справочника "Типы особых закупок для планов-графиков закупок с 01.01.2020" (zfcs_nsiSpecialPurchase2020Type)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="positionNumber" type="tenderPlan2020PositonNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Реестровый номер позиции в плане-графике закупок</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="extNumber" type="tenderPlan2020PositonExtNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Внешний номер позиции</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IKZ" type="base:ikzCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификационный код закупки. Обязателен для заполнения для новых позиций. При приеме значение  контролируется  на соответствие значениям полей: publishYear, IKU, purchaseNumber, KVRInfo\code.
+При приеме изменения позиции игнорируется, заполняется значением из предыдущей версии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="publishYear" type="base:yearType">
+				<xs:annotation>
+					<xs:documentation>Планируемый год размещения извещения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IKU" type="base:ikuType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификационный код организации-владельца версии плана-графика закупок (ИКУ). 
+При приеме, в случае если поле заполнено, значение контролируется на соответствие  значению ИКУ организации-владельца версии плана закупок в справочнике организаций ЕИС. В случае если поле не заполнено, в ИКЗ автоматически подставляется ИКУ организации из справочника организаций ЕИС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KVRInfo" type="tenderPlan2020KVRRefType">
+				<xs:annotation>
+					<xs:documentation>Классификация по КВР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="purchaseNumber" type="tenderPlan2020PurchaseNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер закупки, включенной в план-график закупок</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="financeInfo" type="tenderPlan2020FinanceResourcesType">
+				<xs:annotation>
+					<xs:documentation>Финансовое обеспечение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KBKsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Детализировано по КБК.
+Блок может быть заполнен в случае, если для организации заказчика выполняются условия:
+тип организации = «01 - федеральный орган государственной власти, федеральный государственный орган, орган государственной власти субъекта Российской Федерации, государственный орган субъекта Российской Федерации, орган местного самоуправления, в том числе его территориальные органы»
+ИЛИ
+тип организации = «08 - казенное учреждение»
+ИЛИ
+тип = «02 - орган управления государственным внебюджетным фондом»
+ИЛИ
+Код СПЗ организации = 09950000002 (Государственная корпорация по космической деятельности "Роскосмос")
+ИЛИ
+Код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")
+Блок должен быть заполнен в случае, если выполняется одно из условий выше И уровень организации заказчика = 1 «Федеральный уровень»</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tenderPlan2020KBKsInfoType">
+							<xs:sequence>
+								<xs:element name="extraBudgetFundsTotalsInfo" type="tenderPlan2020FinanceResourcesType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Итого из внебюджетных средств.
+При приеме контролируется, что блок может быть заполнен, только если для владельца версии плана-графика закупок выполняются условия:
+код СПЗ организации = 09950000002 (Государственная корпорация по космической деятельности "Роскосмос")
+ИЛИ
+код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="specialPurchasePositionModification" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Обоснование внесения изменений в позицию особой закупки плана-графика закупок. Обязателен для указания в случае если в поле specialPositionModificationStatus указано значение "E". Игнорируется, в случае если позиция особая закупки новая</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="changeReason" type="tenderPlan2020PositionChangeReasonRef">
+							<xs:annotation>
+								<xs:documentation>Основание внесения из справочника "Причины внесения изменений в позицию ПГ 2020" (nsiTenderPlan2020PositionChangeReason)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="decision" type="tenderPlan2020PositionDecisionType">
+							<xs:annotation>
+								<xs:documentation>Вынесенное решение. Заполнение блока зависит от обоснования внесения изменеий, указанных в блоке  changeReason</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="description" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Содержание изменений</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="modificationNumber" type="base:versionNumberType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер версии плана-графика закупок, в которую были внесены изменения. Игнорируется при приеме, заполняется при передаче</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="specialPurchasePositionModificationStatus" type="tenderPlan2020PositionModificationStatusEnum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Статус позиции особой закупки при приеме изменений плана-графика закупок (Если значение поля не указано, то данные позиции особой закупки перенесены из предыдущей версии без изменений). Игнорируется, в случае если позиция особой закупки новая: 
+
+N - Данные позиции особой закупки перенесены из предыдущей версии без изменений;
+E - Данные позиции особой закупки отредактированы.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="centralizedPurchaseInfo" minOccurs="0">

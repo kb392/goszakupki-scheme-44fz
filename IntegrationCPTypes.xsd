@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.0.4, create date 17.01.2020 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.1, create date 07.02.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/CPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -441,6 +441,11 @@ CC - Заказчик по Федеральному закону 223-ФЗ, ос�
 									<xs:element name="concludeContractRight" type="xs:boolean" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Торги проводили на право заключения контратка</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="isContractPriceFormula" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Указана формула цены и максимальное значение цены контракта</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 								</xs:sequence>
@@ -1502,7 +1507,9 @@ CN - Заказчик, осуществляющий закупки в соотв
 						<xs:element name="changePriceInfo" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Цена контракта изменена относительно предложения поставщика в итоговом протоколе, 
-При приеме блока контролируется отсутствие в итоговом протоколе (foundationInfo/protocolInfo/number) флага "Торги проводили на право заключения контратка" (concludeContractRight) с выставленным значением true. Если флаг присуствует и установлен в true, блок не может быть заполнен</xs:documentation>
+При приеме блока контролируется отсутствие в итоговом протоколе (foundationInfo/protocolInfo/number) флага "Торги проводили на право заключения контратка" (concludeContractRight) с выставленным значением true.
+При приеме блока контролируется отсутствие в извещении (foundationInfo/purchaseNumber) флага "quantityUndefined" (quantityUndefined) с выставленным значением true.
+При приеме блока контролируется отсутствие флага "Указана формула цены и максимальное значение цены контракта" (isContractPriceFormula)  выставленным значением true. Если хотя бы один из флагов присуствует и установлен в true, блок не может быть заполнен</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -1541,6 +1548,11 @@ CN - Заказчик, осуществляющий закупки в соотв
 				<xs:annotation>
 					<xs:documentation>Печатная форма документа.
 Элемент игнорируется при приёме. При передаче заполняется ссылкой на печатную форму и электронную подпись размещенного в ЕИС документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isContractPriceFormula" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Указана формула цены и максимальное значение цены контракта</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
