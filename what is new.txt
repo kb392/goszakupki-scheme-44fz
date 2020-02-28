@@ -1,5 +1,5 @@
-Версия 10.0.3.1
-Предыдущая версия схем 10.0 итерация 5
+Версия 10.0.4
+Предыдущая версия схем 10.0.3.1
 
 
 
@@ -8,10 +8,7 @@
 https://fk.jira.lanit.ru/browse/FCS-118707
 
 1. В типе documentKindType
-
-   элемент sentPackageListRequest переименован в fcsSentPackageListRequest 
-   элемент reSendPackage переименован в fcsReSendPackage 
-   элемент receivedPackageListRequest переименован в fcsReceivedPackageListRequest
+   - в элемент "fcsSentPackageListRequest" убран закрывающий пробел
 
 
 ===========================================================================================CommonTypes.xsd===============================================================================================================================
@@ -22,10 +19,6 @@ https://fk.jira.lanit.ru/browse/FCS-118707
 ===========================================================================================IntegrationTypes.xsd===============================================================================================================================
 
 
-https://fk.jira.lanit.ru/browse/FCS-118788
-
-1. В типе "Информация из извещения (конкурсной документации) (ПРИЗ), направляемая на контроль по 99 статье в орган контроля" (zfcs_control99NotificationExtractType)
-   - у поля  notificationLots\lot\customerRequirements\customerRequirement\currentFinanceInfoBalance изменен тип на base:moneyPosNegMaxLengthToPoint18Type
 
 
 
