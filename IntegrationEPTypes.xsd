@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.1, create date 07.02.2020 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.1, create date 20.02.2020 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/EPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -550,7 +550,7 @@ CU5CH26 - Заказчик как орган исполнительной вла
 								</xs:element>
 								<xs:element name="abandonedReason" type="base:abandonedReasonRef" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOK2" в поле objectName</xs:documentation>
+										<xs:documentation>Признание открытого конкурса в электронной форме несостоявшимся. При приеме содержимое контролируется на присутствие в справочнике "Справочник оснований признания процедуры несостоявшейся" (nsiAbandonedReason). Запись должна иметь значение "epProtocolEOK3" в поле objectName</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="research" type="xs:boolean">
@@ -5399,7 +5399,8 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			</xs:element>
 			<xs:element name="attachmentsInfo" type="cmn:attachmentListType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Прикрепленные документы. Игнорируется при приеме документа извещения о продлении срока</xs:documentation>
+					<xs:documentation>Прикрепленные документы. Игнорируется при приеме извещения о продлении срока подачи заявок.
+Требуется обязательное заполнение при приеме отмены извещения о продлении срока подачи заявок</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -6941,7 +6942,7 @@ CU5CH26 - Заказчик как орган исполнительной вла
 2) основание исправления «По решению судебного органа»/«По решению контролирующего органа» (т.е. заполнен блок modification/reason/courtDecision или modification/reason/authorityPrescription),
 то допускается изменение полей:
 - "Место проведения процедуры" (place)
-- "Дата и время проведения процедуры" (protocolDT)
+- "Дата и время проведения процедуры" (procedureDT)
 - "Информация о прикрепленных документах" (attachments)
 - "Название комиссии" (commission/commissionName) (за исключением протокола fcsProtocolEZP1Extract)</xs:documentation>
 				</xs:annotation>

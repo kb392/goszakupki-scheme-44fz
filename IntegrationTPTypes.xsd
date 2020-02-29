@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.1, create date 07.02.2020 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.1, create date 20.02.2020 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/TPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -94,18 +94,7 @@
 						<xs:element name="KBKsTotalsInfo" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Итоговые показатели по кодам бюджетной классификации.
-Блок ДОЛЖЕН быть заполнен в случае, если для организации заказчика выполняются условия:
-тип организации = «01 - федеральный орган государственной власти, федеральный государственный орган, орган государственной власти субъекта Российской Федерации, государственный орган субъекта Российской Федерации, орган местного самоуправления, в том числе его территориальные органы»
-ИЛИ
-тип организации = «08 - казенное учреждение»
-ИЛИ
-тип = «02 - орган управления государственным внебюджетным фондом»
-ИЛИ
-Код СПЗ организации = 09950000002 (Государственная корпорация по космической деятельности "Роскосмос")
-ИЛИ
-Код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")
-и НЕ ДОЛЖЕН быть заполнен для других владельцев версии плана-графика закупок.
-При приеме контролируется уникальность кодов БК</xs:documentation>
+Блоки «Итоговый показатель по коду бюджетной классификации» (outcomeIndicators/KBKsTotalsInfo/KBKTotalsInfo) игонрируются при приеме, автоматически заполняются значениями блоков «Детализация по коду бюджетной классификации» (positions/position/financeInfo/KBKsInfo/KBKInfo) всех позиций и из блоков «Детализация по коду бюджетной классификации» (specialPurchasePositions/specialPurchasePosition/KBKsInfo/KBKInfo) всех позиций особых закупок</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:complexContent>
@@ -114,10 +103,7 @@
 											<xs:element name="extraBudgetFundsTotalsInfo" type="tenderPlan2020FinanceResourcesType" minOccurs="0">
 												<xs:annotation>
 													<xs:documentation>Итого из внебюджетных средств.
-При приеме контролируется, что блок может быть заполнен, только если для владельца версии плана-графика закупок выполняются условия:
-код СПЗ организации = 09950000002 (Государственная корпорация по космической деятельности "Роскосмос")
-ИЛИ
-код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")</xs:documentation>
+Значения блока автоматически расчитывается как сумма соответствующих полей блока «Итого из внебюджетных средств» (positions/position/financeInfo/KBKsInfo/extraBudgetFundsTotalsInfo) всех позиций и сумма соответствующих полей блока «Итого из внебюджетных средств» (specialPurchasePositions/specialPurchasePosition/KBKsInfo/extraBudgetFundsTotalsInfo) всех позиций особых закупок</xs:documentation>
 												</xs:annotation>
 											</xs:element>
 										</xs:sequence>
@@ -125,10 +111,39 @@
 								</xs:complexContent>
 							</xs:complexType>
 						</xs:element>
+						<xs:element name="targetArticlesTotalsInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Итоговые показатели по целевым статьям.
+Игнорируется при приеме, автоматически заполняется значениями из блока «Детализации по целевым статьям» (positions/position/targetArticlesInfo) всех позиций и из блоков «Детализации по целевым статьям» (specialPurchasePositions/specialPurchasePosition/targetArticlesInfo) всех позиций особых закупок</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="targetArticleTotalsInfo" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Итоговый показатель по целевой статье</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="targetArticle" type="base:targetArticleType">
+													<xs:annotation>
+														<xs:documentation>Целевая статья (КБК3)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="targetArticleTotalsYearsInfo" type="tenderPlan2020FinanceResourcesType">
+													<xs:annotation>
+														<xs:documentation>Итоговые показатели по целевой статье в разбивке по годам</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 						<xs:element name="KVRsTotalsInfo" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Итоговые показатели по кодам видов расходов.
-Блок может быть заполнен только для организации заказчика, являющейся бюджетным или автономным учреждением</xs:documentation>
+Игнорируется при приеме, автоматически заполняется значениями из блока «Детализации по КВР» (positions/position/KVRsInfo) всех позиций и из блока «Детализации по КВР» (specialPurchasePositions/specialPurchasePosition/KVRsInfo) всех позиций особых закупок</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -299,18 +314,7 @@
 						<xs:element name="KBKsTotalsInfo" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Итоговые показатели по кодам бюджетной классификации.
-Блок ДОЛЖЕН быть заполнен в случае, если для организации заказчика выполняются условия:
-тип организации = «01 - федеральный орган государственной власти, федеральный государственный орган, орган государственной власти субъекта Российской Федерации, государственный орган субъекта Российской Федерации, орган местного самоуправления, в том числе его территориальные органы»
-ИЛИ
-тип организации = «08 - казенное учреждение»
-ИЛИ
-тип = «02 - орган управления государственным внебюджетным фондом»
-ИЛИ
-Код СПЗ организации = 09950000002 (Государственная корпорация по космической деятельности "Роскосмос")
-ИЛИ
-Код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")
-и НЕ ДОЛЖЕН быть заполнен для других владельцев версии плана закупок.
-При приеме контролируется уникальность кодов БК</xs:documentation>
+Блоки «Итоговый показатель по коду бюджетной классификации» (outcomeIndicators/KBKsTotalsInfo/KBKTotalsInfo) игнорируются при приеме, автоматически заполняются значениями блоков «Детализация по коду бюджетной классификации» (positions/position/financeInfo/KBKsInfo/KBKInfo) всех позиций и из блоков «Детализация по коду бюджетной классификации» (specialPurchasePositions/specialPurchasePosition/KBKsInfo/KBKInfo) всех позиций особых закупок</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:complexContent>
@@ -319,10 +323,7 @@
 											<xs:element name="extraBudgetFundsTotalsInfo" type="tenderPlan2020FinanceResourcesType" minOccurs="0">
 												<xs:annotation>
 													<xs:documentation>Итого из внебюджетных средств.
-При приеме контролируется, что блок может быть заполнен, только если для владельца версии плана закупок выполняются условия:
-код СПЗ организации = 09950000002 (Государственная корпорация по космической деятельности "Роскосмос")
-ИЛИ
-код СПЗ организации = 07731000003 (Государственная корпорация по атомной энергии "Росатом")</xs:documentation>
+Значения блока автоматически расчитывается как сумма соответствующих полей блока «Итого из внебюджетных средств» (positions/position/financeInfo/KBKsInfo/extraBudgetFundsTotalsInfo) всех позиций и сумма соответствующих полей блока «Итого из внебюджетных средств» (specialPurchasePositions/specialPurchasePosition/KBKsInfo/extraBudgetFundsTotalsInfo) всех позиций особых закупок</xs:documentation>
 												</xs:annotation>
 											</xs:element>
 										</xs:sequence>
@@ -333,7 +334,7 @@
 						<xs:element name="KVRsTotalsInfo" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Итоговые показатели по кодам видов расходов.
-Блок должен быть заполнен для организации заказчика, являющейся бюджетным или автономным учреждением</xs:documentation>
+Игнорируется при приеме, автоматически заполняется значениями из блока «Детализации по КВР» (positions/position/KVRsInfo) всех позиций и из блока «Детализации по КВР» (specialPurchasePositions/specialPurchasePosition/KVRsInfo) всех позиций особых закупок</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
@@ -351,6 +352,35 @@
 												<xs:element name="KVRTotalsYearsInfo" type="tenderPlan2020FinanceResourcesType">
 													<xs:annotation>
 														<xs:documentation>Итоговых показатели по КВР в разбивке по годам</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="targetArticlesTotalsInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Итоговые показатели по целевым статьям.
+Игнорируется при приеме, автоматически заполняется значениями из блока «Детализации по целевым статьям» (positions/position/targetArticlesInfo) всех позиций и из блоков «Детализации по целевым статьям» (specialPurchasePositions/specialPurchasePosition/targetArticlesInfo) всех позиций особых закупок</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="targetArticleTotalsInfo" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Итоговый показатель по целевой статье</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="targetArticle" type="base:targetArticleType">
+													<xs:annotation>
+														<xs:documentation>Целевая статья (КБК3)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="targetArticleTotalsYearsInfo" type="tenderPlan2020FinanceResourcesType">
+													<xs:annotation>
+														<xs:documentation>Итоговые показатели по целевой статье в разбивке по годам</xs:documentation>
 													</xs:annotation>
 												</xs:element>
 											</xs:sequence>
@@ -767,6 +797,42 @@ E - Данные позиции отредактированы</xs:documentation
 					</xs:complexContent>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="KVRsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Детализации по КВР.
+Контролируется обязательность заполнения, если тип организации владельца версии плана закупки:
+Тип организации = «03 - бюджетное учреждение»;
+Тип организации = «10 – автономное учреждение».
+Для остальных типов организаций игнорируется при приеме</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="KVRInfo" type="tenderPlan2020KVRInfoType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Детализация по КВР</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="targetArticlesInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Детализации по целевым статьям.
+Может быть заполнено, если тип организации владельца версии плана закупки:
+Тип организации = «03 - бюджетное учреждение»;
+Тип организации = «10 – автономное учреждение».
+Для остальных типов организаций игнорируется при приеме</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="targetArticleInfo" type="tenderPlan2020TargetArticleInfoType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Детализация по целевой статье</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="purchasesSubsecYearsInfo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Сведения о закупках на последующие годы.
@@ -1130,6 +1196,42 @@ E - Данные особой закупки отредактированы.</xs
 					</xs:complexContent>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="KVRsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Детализации по КВР.
+Контролируется обязательность заполнения, если тип организации владельца версии плана закупки:
+Тип организации = «03 - бюджетное учреждение»;
+Тип организации = «10 – автономное учреждение».
+Для остальных типов организаций игнорируется при приеме</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="KVRInfo" type="tenderPlan2020KVRInfoType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Детализация по КВР</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="targetArticlesInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Детализации по целевым статьям.
+Может быть заполнено, если тип организации владельца версии плана закупки:
+Тип организации = «03 - бюджетное учреждение»;
+Тип организации = «10 – автономное учреждение».
+Для остальных типов организаций игнорируется при приеме</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="targetArticleInfo" type="tenderPlan2020TargetArticleInfoType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Детализация по целевой статье</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="specialPurchasePositionModification" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Обоснование внесения изменений в позицию особой закупки плана-графика закупок. Обязателен для указания в случае если в поле specialPositionModificationStatus указано значение "E". Игнорируется, в случае если позиция особая закупки новая</xs:documentation>
@@ -1357,12 +1459,44 @@ E - Данные позиции особой закупки отредактир
 				<xs:annotation>
 					<xs:documentation>Закупка за счет нескольких КВР либо КВР отсутствует. В ИКЗ добавляется значение '000'.
 Контролируется обязательность заполнения, если тип организации владельца версии плана закупки:
-Тип организации = «03 - бюджетное учреждение»;
-Тип организации = «10 – автономное учреждение»;
-Тип организации = «05 – унитарное предприятие». </xs:documentation>
+Тип организации = «05 – унитарное предприятие»</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="tenderPlan2020KVRInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Детализация по КВР</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="KVR" type="base:KVRRef">
+				<xs:annotation>
+					<xs:documentation>КВР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KVRYearsInfo" type="tenderPlan2020FinanceResourcesType">
+				<xs:annotation>
+					<xs:documentation>Детализация по КВР в разбивке по годам</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tenderPlan2020TargetArticleInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Детализация по целевой статье</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="targetArticle" type="base:targetArticleType">
+				<xs:annotation>
+					<xs:documentation>Целевая статья</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="targetArticleYearsInfo" type="tenderPlan2020FinanceResourcesType">
+				<xs:annotation>
+					<xs:documentation>Детализация по целевой статье в разбивке по годам</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="tenderPlan2020SpecialPurchaseRef">
 		<xs:annotation>
@@ -1791,6 +1925,20 @@ tenderPlan2020 - План-график закупок с 01.01.2020.</xs:documen
 											</xs:complexContent>
 										</xs:complexType>
 									</xs:element>
+									<xs:element name="targetArticlesInfo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Детализации по целевым статьям</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="targetArticleInfo" type="tenderPlan2020TargetArticleInfoType" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Детализация по целевой статье</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
@@ -1879,6 +2027,20 @@ tenderPlan2020 - План-график закупок с 01.01.2020.</xs:documen
 							</xs:sequence>
 						</xs:extension>
 					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="targetArticlesInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Детализации по целевым статьям</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="targetArticleInfo" type="tenderPlan2020TargetArticleInfoType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Детализация по целевой статье</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="purchasesSubsecYearsInfo" minOccurs="0">

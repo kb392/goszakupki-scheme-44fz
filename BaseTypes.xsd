@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 10.1, create date 07.02.2020 -->
+<!-- BASE_TYPES Integration Scheme, version 10.1, create date 20.02.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -2535,6 +2535,14 @@ TC - Орган местного самоуправления и (или) гос
 			<xs:pattern value="\d{16}"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="targetArticleType">
+		<xs:annotation>
+			<xs:documentation>Тип: Целевая статья</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="taxPayerCode">
 		<xs:annotation>
 			<xs:documentation>Тип: Код налогоплательщика в стране регистрации или его аналог</xs:documentation>
@@ -2675,6 +2683,14 @@ n-без НДС.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:int">
 			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="yearNewType">
+		<xs:annotation>
+			<xs:documentation>Тип: Номер года (новый)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gYear">
+			<xs:minInclusive value="2000"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="tenderPlan2017PositionNumberType">
@@ -2832,7 +2848,7 @@ n-без НДС.</xs:documentation>
 			<xs:enumeration value="SERVICE"/>
 		</xs:restriction>
 	</xs:simpleType>
-    <xs:simpleType name="percentRestr0100D2Type">
+	<xs:simpleType name="percentRestr0100D2Type">
 		<xs:annotation>
 			<xs:documentation>Тип: Процент с ограничениеми 0..100 и двумя знаками в дробной части</xs:documentation>
 		</xs:annotation>

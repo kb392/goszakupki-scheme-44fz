@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- COMMON_TYPES Integration Scheme, version 10.1, create date 07.02.2020 -->
+<!-- COMMON_TYPES Integration Scheme, version 10.1, create date 20.02.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -1670,7 +1670,8 @@ CAdES-A</xs:documentation>
 				</xs:element>
 				<xs:element name="drugChangeInfo" type="drugChangeInfoType" minOccurs="0">
 					<xs:annotation>
-						<xs:documentation>Информация указываемая при ручном изменении лекарственного препарата. При приеме контролируется обязательность заполнения в случае указания лекарственной формы, дозировки, упаковки, единицы измерения  в текстовой форме</xs:documentation>
+						<xs:documentation>Информация указываемая при ручном изменении лекарственного препарата. При приеме контролируется обязательность заполнения в случае указания лекарственной формы, дозировки, упаковки, единицы измерения  в текстовой форме.
+Начиная с версии 10.1 контролируется обязательность указания причины  корректировки сведений о лекарственных препаратах</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
@@ -1731,8 +1732,7 @@ CAdES-A</xs:documentation>
 																		<xs:element name="limPriceValuePerUnit" type="base:drugDecimalCodeType" minOccurs="0">
 																			<xs:annotation>
 																				<xs:documentation>Предельная отпускная цена в расчете за единицу. Игнорируется при приеме, заполняется автоматически при передаче. Заполняется автоматически значением:
-минимальное выражение, полученное из отношения предельной отпускной цены за потребительскую упаковку к количеству лекарственных форм в упаковке по всем торговым наименованиям, которые относятся к указанному лекарственному средству. Не выгружается , если нет актуальных предельных отпускных цен, либо такие значения в справочнике "Лекарственные препараты" (nsiFarmDrugDictionary) отсутствуют. Не выгружается, если указанный препарат не входит в перечень ЖНВЛП, указанный в справочнике "Лекарственные препараты" (nsiFarmDrugDictionary)
-</xs:documentation>
+минимальное выражение, полученное из отношения предельной отпускной цены за потребительскую упаковку к количеству лекарственных форм в упаковке по всем торговым наименованиям, которые относятся к указанному лекарственному средству. Не выгружается , если нет актуальных предельных отпускных цен, либо такие значения в справочнике "Лекарственные препараты" (nsiFarmDrugDictionary) отсутствуют</xs:documentation>
 																			</xs:annotation>
 																		</xs:element>
 																	</xs:sequence>
@@ -1762,7 +1762,8 @@ CAdES-A</xs:documentation>
 							</xs:element>
 							<xs:element name="objectInfoUsingTextForm">
 								<xs:annotation>
-									<xs:documentation>Информация о вариантах поставки лекарственных препаратов  формируется в текстовой форме</xs:documentation>
+									<xs:documentation>Информация о вариантах поставки лекарственных препаратов  формируется в текстовой форме. 
+Начиная с версии 10.1, не допускается указание лекарственных препаратов в текстовой форме. Запрет не учитывается при приеме изменений, если в исходном размещенном извещении присутствует лекарственный препарат, реквизиты которого заполнены вручную</xs:documentation>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:sequence>
