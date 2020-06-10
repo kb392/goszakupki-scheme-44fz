@@ -1,64 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions xmlns="http://zakupki.gov.ru/oos/integration/service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:st="http://zakupki.gov.ru/oos/signIncoming/soap/messages" name="IntegrationService" targetNamespace="http://zakupki.gov.ru/oos/integration/service">
+<wsdl:definitions xmlns="http://zakupki.gov.ru/oos/integration/service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:st="http://zakupki.gov.ru/oos/signIncoming/soap/messages" xmlns:ns="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:ns1="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:ns2="http://zakupki.gov.ru/oos/base/1" xmlns:ns3="http://zakupki.gov.ru/oos/common/1" xmlns:ns4="http://zakupki.gov.ru/oos/signIncoming/1" xmlns:ns5="http://zakupki.gov.ru/oos/types/1" name="IntegrationService" targetNamespace="http://zakupki.gov.ru/oos/integration/service">
 	<wsdl:types>
 		<xsd:schema>
-			<xsd:import namespace="http://zakupki.gov.ru/oos/signIncoming/soap/messages" schemaLocation="eisSigningSOAPMessages.xsd"/>
+			<xsd:import namespace="http://zakupki.gov.ru/oos/signIncoming/soap/messages" schemaLocation="../eisSigningSOAPMessages.xsd"/>
 		</xsd:schema>
 	</wsdl:types>
-	<wsdl:message name="receiveRbgRequest">
-		<wsdl:part name="parameters" element="st:receiveRbgRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRbgResponse">
-		<wsdl:part name="parameters" element="st:receiveRbgResponse"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRpgRequest">
-		<wsdl:part name="parameters" element="st:receiveRpgRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRpgResponse">
-		<wsdl:part name="parameters" element="st:receiveRpgResponse"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRpzRequest">
-		<wsdl:part name="parameters" element="st:receiveRpzRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRpzResponse">
-		<wsdl:part name="parameters" element="st:receiveRpzResponse"/>
-	</wsdl:message>
-	<wsdl:message name="receivePrizRequest">
-		<wsdl:part name="parameters" element="st:receivePrizRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receivePrizResponse">
-		<wsdl:part name="parameters" element="st:receivePrizResponse"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRkRequest">
-		<wsdl:part name="parameters" element="st:receiveRkRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRkResponse">
-		<wsdl:part name="parameters" element="st:receiveRkResponse"/>
-	</wsdl:message>
-	<wsdl:message name="receiveOzRequest">
-		<wsdl:part name="parameters" element="st:receiveOzRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveOzResponse">
-		<wsdl:part name="parameters" element="st:receiveOzResponse"/>
-	</wsdl:message>
-	<wsdl:message name="receiveOokzRequest">
-		<wsdl:part name="parameters" element="st:receiveOokzRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveOokzResponse">
-		<wsdl:part name="parameters" element="st:receiveOokzResponse"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRdiRequest">
-		<wsdl:part name="parameters" element="st:receiveRdiRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRdiResponse">
-		<wsdl:part name="parameters" element="st:receiveRdiResponse"/>
-	</wsdl:message>
-	<wsdl:message name="receiveZcRequest">
-		<wsdl:part name="parameters" element="st:receiveZcRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveZcResponse">
-		<wsdl:part name="parameters" element="st:receiveZcResponse"/>
-	</wsdl:message>
 	<wsdl:message name="receiveRgRequest">
 		<wsdl:part name="parameters" element="st:receiveRgRequest"/>
 	</wsdl:message>
@@ -101,18 +47,6 @@
 	<wsdl:message name="receiveRrkOvkResponse">
 		<wsdl:part name="parameters" element="st:receiveRrkOvkResponse"/>
 	</wsdl:message>
-	<wsdl:message name="receiveRraRequest">
-		<wsdl:part name="parameters" element="st:receiveRraRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveRraResponse">
-		<wsdl:part name="parameters" element="st:receiveRraResponse"/>
-	</wsdl:message>
-	<wsdl:message name="receiveBusinessControlRequest">
-		<wsdl:part name="parameters" element="st:receiveBusinessControlRequest"/>
-	</wsdl:message>
-	<wsdl:message name="receiveBusinessControlResponse">
-		<wsdl:part name="parameters" element="st:receiveBusinessControlResponse"/>
-	</wsdl:message>
 	<wsdl:message name="getProcessingResultRequest">
 		<wsdl:part name="parameters" element="st:getProcessingResultRequest"/>
 	</wsdl:message>
@@ -120,42 +54,6 @@
 		<wsdl:part name="parameters" element="st:getProcessingResultResponse"/>
 	</wsdl:message>
 	<wsdl:portType name="IntegrationServicePortType">
-		<wsdl:operation name="receiveRbg">
-			<wsdl:input message="receiveRbgRequest"/>
-			<wsdl:output message="receiveRbgResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="receiveRpg">
-			<wsdl:input message="receiveRpgRequest"/>
-			<wsdl:output message="receiveRpgResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="receiveRpz">
-			<wsdl:input message="receiveRpzRequest"/>
-			<wsdl:output message="receiveRpzResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="receivePriz">
-			<wsdl:input message="receivePrizRequest"/>
-			<wsdl:output message="receivePrizResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="receiveRk">
-			<wsdl:input message="receiveRkRequest"/>
-			<wsdl:output message="receiveRkResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="receiveOz">
-			<wsdl:input message="receiveOzRequest"/>
-			<wsdl:output message="receiveOzResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="receiveOokz">
-			<wsdl:input message="receiveOokzRequest"/>
-			<wsdl:output message="receiveOokzResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="receiveRdi">
-			<wsdl:input message="receiveRdiRequest"/>
-			<wsdl:output message="receiveRdiResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="receiveZc">
-			<wsdl:input message="receiveZcRequest"/>
-			<wsdl:output message="receiveZcResponse"/>
-		</wsdl:operation>
 		<wsdl:operation name="receiveRg">
 			<wsdl:input message="receiveRgRequest"/>
 			<wsdl:output message="receiveRgResponse"/>
@@ -184,14 +82,6 @@
 			<wsdl:input message="receiveRrkOvkRequest"/>
 			<wsdl:output message="receiveRrkOvkResponse"/>
 		</wsdl:operation>
-		<wsdl:operation name="receiveRra">
-			<wsdl:input message="receiveRraRequest"/>
-			<wsdl:output message="receiveRraResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="receiveBusinessControl">
-			<wsdl:input message="receiveBusinessControlRequest"/>
-			<wsdl:output message="receiveBusinessControlResponse"/>
-		</wsdl:operation>
 		<wsdl:operation name="getProcessingResult">
 			<wsdl:input message="getProcessingResultRequest"/>
 			<wsdl:output message="getProcessingResultResponse"/>
@@ -199,87 +89,6 @@
 	</wsdl:portType>
 	<wsdl:binding name="IntegrationServiceBinding" type="IntegrationServicePortType">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-		<wsdl:operation name="receiveRbg">
-			<soap:operation soapAction="receiveRbg"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receiveRpg">
-			<soap:operation soapAction="receiveRpg"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receiveRpz">
-			<soap:operation soapAction="receiveRpz"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receivePriz">
-			<soap:operation soapAction="receivePriz"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receiveRk">
-			<soap:operation soapAction="receiveRk"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receiveOz">
-			<soap:operation soapAction="receiveOz"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receiveOokz">
-			<soap:operation soapAction="receiveOokz"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receiveRdi">
-			<soap:operation soapAction="receiveRdi"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receiveZc">
-			<soap:operation soapAction="receiveZc"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
 		<wsdl:operation name="receiveRg">
 			<soap:operation soapAction="receiveRg"/>
 			<wsdl:input>
@@ -336,24 +145,6 @@
 		</wsdl:operation>
 		<wsdl:operation name="receiveRrkOvk">
 			<soap:operation soapAction="receiveRrkOvk"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receiveRra">
-			<soap:operation soapAction="receiveRra"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="receiveBusinessControl">
-			<soap:operation soapAction="receiveBusinessControl"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>

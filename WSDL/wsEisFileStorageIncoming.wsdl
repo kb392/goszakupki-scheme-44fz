@@ -1,7 +1,7 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:fs="http://zakupki.gov.ru/filestore/ws/data"  xmlns:ws="http://zakupki.gov.ru/filestore/ws" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://zakupki.gov.ru/filestore/ws">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:fs="http://zakupki.gov.ru/filestore/ws/data" xmlns:ws="http://zakupki.gov.ru/filestore/ws" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://zakupki.gov.ru/filestore/ws">
 	<wsdl:types>
 		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-			<xsd:import namespace="http://zakupki.gov.ru/filestore/ws/data" schemaLocation="eis-fs-ws-api.xsd"/>
+			<xsd:import namespace="http://zakupki.gov.ru/filestore/ws/data" schemaLocation="../eis-fs-ws-api.xsd"/>
 		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="startRequest">

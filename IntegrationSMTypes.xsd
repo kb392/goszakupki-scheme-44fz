@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_SERVICE_TYPES Integration Scheme, version 10.1, create date 20.02.2020 -->
-<xs:schema xmlns="http://zakupki.gov.ru/oos/SMTypes/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/SMTypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<!-- FCS INTEGRATION_SERVICE_TYPES Integration Scheme, version 10.2, create date 07.05.2020 -->
+<xs:schema xmlns="http://zakupki.gov.ru/oos/SMTypes/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/SMTypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
+	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
 	<!--Информация о полученных / отправленных пакетах-->
 	<xs:complexType name="packageListRequestType">
 		<xs:annotation>
@@ -355,6 +356,343 @@ SM - Служебные сообщения.</xs:documentation>
 								</xs:annotation>
 							</xs:element>
 						</xs:choice>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Сервисное взаимодействие-->
+	<xs:complexType name="wsProcessingResultRequestType">
+		<xs:annotation>
+			<xs:documentation>Тип: Запрос результата обработки при сервисном взаимодействии</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="refPacketUid" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор переданного на ЕИС пакета данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="wsProcessingResultType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат обработки при сервисном взаимодействии</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="refPacketUid" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор обработанного пакета данных</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="success">
+					<xs:annotation>
+						<xs:documentation>Данные обработаны успешно</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="registrationInfo">
+								<xs:annotation>
+									<xs:documentation>Данные о размещении документа в ЕИС</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="loadId" type="base:guidType">
+											<xs:annotation>
+												<xs:documentation>Идентификатор загруженных данных</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="documentUid" type="base:guidType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Идентификатор загруженного документа</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="regNumber" type="base:regNumberBaseType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Регистрационный номер размещенного документа</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="docNumber" type="base:regNumberBaseType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Номер размещенного документа в рамках реестровой записи</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="publishDate" type="xs:dateTime" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Дата/время размещения документа</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="versionNumber" type="base:versionNumberType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Номер версии документа</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="warnings" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Выявленные в процессе обработки нарушения и ошибки, не препятствующие приему документа</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="warning" type="cmn:violationType" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Ошибка или нарушение</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="violations">
+					<xs:annotation>
+						<xs:documentation>Данные обработаны с ошибками.
+Выявленные в процессе обработки нарушения и ошибки</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="violation" type="cmn:violationType" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Ошибка или нарушение</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="processing" type="xs:boolean" default="true">
+					<xs:annotation>
+						<xs:documentation>Данные обрабатываются</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Файловое Хранилище-->
+	<xs:complexType name="inFileStorageType">
+		<xs:annotation>
+			<xs:documentation>Тип: Файл или часть файла для передачи в файловое хранилище</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subsystem" type="base:subsystemType">
+				<xs:annotation>
+					<xs:documentation>Код подсистемы, принимающей файл:
+PRIZ - подсистема определения поставщика;
+RGK - реестр контрактов;
+RPG - реестр планов-графиков;
+RPZ - реестр планов закупок.
+RBG - реестр банковских гарантий.
+OZ - реестр отчетов заказчиков;
+RDI - реестр дополнительной информации о закупках и контрактах;
+OOKZ - обязательное обсуждение крупных закупок;
+RPNZ - реестр правил нормирования закупок;
+ZC - реестр размещения запросов цен товаров, работ, услуг;
+RRA - реестр результатов аудита;
+RPGZ - реестр планов графиков с 2020 года.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commonInfo">
+				<xs:annotation>
+					<xs:documentation>Общая информация.
+
+При приёме 1 части файла необходимо заполнение блока "Информация о файле, необходимая для начала загрузки" (startFileInfo)
+
+При приёме 2 и последующийх частей файла необходимо обязательное заполненеие блока "Уникальный идентификатор контента прикрепленного документа в ЕРУЗ" (fileContentId)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="startFileInfo">
+							<xs:annotation>
+								<xs:documentation>Информация о файле, необходимая для начала загрузки</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="name" type="base:fileNameType">
+										<xs:annotation>
+											<xs:documentation>Наименование файла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="size" type="base:fileSizeType">
+										<xs:annotation>
+											<xs:documentation>Размер файла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="digest" type="base:hexHashSha256Type">
+										<xs:annotation>
+											<xs:documentation>Хеш-сумма содержимого файла, рассчитанная по алгоритму SHA-256</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="fileContentId" type="base:guidType">
+							<xs:annotation>
+								<xs:documentation>Уникальный идентификатор контента прикрепленного документа</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="range">
+				<xs:annotation>
+					<xs:documentation>Диапазон</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="start" type="base:fileSizeType">
+							<xs:annotation>
+								<xs:documentation>Начало передаваемого диапазона </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="size" type="base:fileSizeType">
+							<xs:annotation>
+								<xs:documentation>Размер передаваемой части файла</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="content">
+				<xs:annotation>
+					<xs:documentation>Содержимое файла / части контента файла</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:base64Binary">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Контроль по 99 статье-->
+	<xs:complexType name="control99DocsInfoRequestType">
+		<xs:annotation>
+			<xs:documentation>Тип: Запрос информации о прохождении контроля по ч.5 ст. 99</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="refPacketUid" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор пакета данных контролируемого документа </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refDocumentUid" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор контролируемого документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="control99DocsInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Информация о прохождении контроля по ч.5 ст. 99</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="refPacketUid" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор пакета данных контролируемого документа </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refDocInfo">
+				<xs:annotation>
+					<xs:documentation>Данные о контролируемом документе</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="documentUid" type="base:guidType">
+							<xs:annotation>
+								<xs:documentation>Идентификатор контролируемого документадокумента</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="versionNumber" type="base:versionNumberType">
+							<xs:annotation>
+								<xs:documentation>Номер версии документа</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="regNumber" type="base:regNumberBaseType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Регистрационный номер размещенного документа</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="docNumber" type="base:regNumberBaseType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер размещенного документа в рамках реестровой записи</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="publishDate" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Дата/время публикации документа</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="control99DocsInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Данные о размещении документов контроля по 99 статье в ЕИС</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="editionNumber" type="base:versionNumberType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Номер редакции в рамках версии документа</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:choice minOccurs="0">
+							<xs:element name="control99BeginMessageUid" type="base:guidType">
+								<xs:annotation>
+									<xs:documentation>Идентификатор сообщения о начале контроля по 99 статье</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="control99RefusalMessageUid" type="base:guidType">
+								<xs:annotation>
+									<xs:documentation>Идентификатор сообщения об отказе в принятии на контроль по 99 статье</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+						<xs:choice minOccurs="0">
+							<xs:element name="control99NoticeComplianceUid" type="base:guidType">
+								<xs:annotation>
+									<xs:documentation>Идентификатор уведомления о соответствии контролируемой информации</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="control99ProtocolMismatchUid" type="base:guidType">
+								<xs:annotation>
+									<xs:documentation>Идентификатор протокола о несоответствии контролируемой информации</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+						<xs:element name="control99ProtocolMismatchReductFundsUid" type="base:guidType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Идентификатор протокола о несоответствии контролируемой информации (в связи с уменьшением средств)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>

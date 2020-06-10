@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.1, create date 28.02.2020 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.2, create date 07.05.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/types/1" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/types/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -12545,7 +12545,8 @@ CAdES-A</xs:documentation>
 			</xs:element>
 			<xs:element name="controlPersonalSignature" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Электронная подпись электронного документа лицом, уполномоченным на проведение контроля в соответствии с ч.5 ст.99 закона №44-ФЗ</xs:documentation>
+					<xs:documentation>Электронная подпись электронного документа лицом, уполномоченным на проведение контроля в соответствии с ч.5 ст.99 закона №44-ФЗ.
+Устарело, не применяется</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:simpleContent>
@@ -13506,6 +13507,64 @@ REOPENING - возобновление</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="zfcs_unplannedCheckTenderSuspType">
+		<xs:annotation>
+			<xs:documentation>Информация о приостановке определения поставщика (подрядчика, исполнителя) в части заключения контракта по внеплановой проверке</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="checkNumber" type="zfcs_unplannedCheckNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер реестровой записи внеплановой проверки, сформированный контрольным органом</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="regNumber" type="zfcs_controlRegistersRegNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер реестровой записи внеплановой проверки (согласно ПП РФ №1148)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="regDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата решения о приостановке определения поставщика (подрядчика, исполнителя) в части заключения контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="publishDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата размещения решения </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="action" type="zfcs_tenderSuspensionActionType">
+				<xs:annotation>
+					<xs:documentation>Тип действия
+SUSPENSION - приостановка
+REOPENING - возобновление</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KO" type="zfcs_organizationRef">
+				<xs:annotation>
+					<xs:documentation>Контролирующий орган, принявший решение о приостановке определения поставщика (подрядчика, исполнителя) в части заключения контракта</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="purchaseInfo">
+				<xs:annotation>
+					<xs:documentation>Информация о закупке</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="purchaseNumber" type="base:purchaseNumberType">
+							<xs:annotation>
+								<xs:documentation>Номер извещения о проведении</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
@@ -18824,16 +18883,16 @@ SR - Преемник прав и обязанностей организаци�
 																		<xs:documentation>Код вида расходов. Допустимо указание для заказчиков - унитарных предприятий, автономных и бюджетных учреждений</xs:documentation>
 																	</xs:annotation>
 																</xs:element>
+																<xs:element name="targetArticle" type="base:targetArticleType">
+																	<xs:annotation>
+																		<xs:documentation>Целевая статья</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
 															</xs:choice>
-															<xs:element name="comment" minOccurs="0">
+															<xs:element name="comment" type="zfcs_longTextMinType" minOccurs="0">
 																<xs:annotation>
-																	<xs:documentation>Примечание</xs:documentation>
+																	<xs:documentation>Примечание. Игнорируется при приеме, если тип платежа targetArticle</xs:documentation>
 																</xs:annotation>
-																<xs:simpleType>
-																	<xs:restriction base="zfcs_longTextType">
-																		<xs:minLength value="1"/>
-																	</xs:restriction>
-																</xs:simpleType>
 															</xs:element>
 															<xs:element name="paymentMonth" type="base:monthType" minOccurs="0">
 																<xs:annotation>
@@ -19075,7 +19134,7 @@ MP - максимальное значение цены контракта</xs:d
 								</xs:annotation>
 							</xs:element>
 						</xs:sequence>
-						<xs:element name="rightToConcludeContractPriceInfo" type="zfcs_contract2015PriceInfoType">
+						<xs:element name="rightToConcludeContractPriceInfo">
 							<xs:annotation>
 								<xs:documentation>Цена за право заключения контракта. Заполняется в случае если выполняются условия:
 1) Закупка размещалась в ЕИС(заполнен блок foundation\fcsOrder\order) с номером, указанным в поле "Номер извещения о проведении" (foundation\fcsOrder\order\notificationNumber)
@@ -19104,6 +19163,11 @@ MP - максимальное значение цены контракта</xs:d
 
 </xs:documentation>
 							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="zfcs_contract2015PriceInfoType"/>
+								</xs:complexContent>
+							</xs:complexType>
 						</xs:element>
 					</xs:choice>
 				</xs:complexType>
@@ -19460,7 +19524,8 @@ MP - максимальное значение цены контракта</xs:d
 									</xs:element>
 									<xs:element name="stagePrice" type="base:moneyPositiveType" minOccurs="0">
 										<xs:annotation>
-											<xs:documentation>Цена этапа контракта в валюте контракта</xs:documentation>
+											<xs:documentation>Цена этапа контракта в валюте контракта. 
+Игнорируется при приеме в случае указания только одного блока executionPeriod/stages</xs:documentation>
 										</xs:annotation>
 									</xs:element>
 									<xs:element name="stagePriceRUR" type="base:moneyPositiveType" minOccurs="0">
@@ -20130,22 +20195,6 @@ IN	Aннулировано.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:complexType name="zfcs_contract2015WithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Информация о заключенном контракте с 01.01.2015 с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_contract2015Type">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_contractProcedure2015Type">
 		<xs:annotation>
 			<xs:documentation>Информация об исполнении (исполнении обязательств по предоставленной гарантии качества, расторжении, возврата переплаты по контракту, признании контракта недействительным) контракта с 01.01.2015</xs:documentation>
@@ -20494,6 +20543,15 @@ IN	Aннулировано.</xs:documentation>
 																						<xs:documentation>Объем ранее поставленных товаров, выполненных работ, оказанных услуг</xs:documentation>
 																					</xs:annotation>
 																				</xs:element>
+																				<xs:element name="type" type="base:productTypeEnumType" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation>Тип объекта закупки.
+Допустимые значения:
+PRODUCT - товар;
+WORK - работа;
+SERVICE - услуга</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
 																			</xs:sequence>
 																		</xs:complexType>
 																	</xs:element>
@@ -20759,6 +20817,15 @@ IN	Aннулировано.</xs:documentation>
 																						</xs:sequence>
 																					</xs:complexType>
 																				</xs:element>
+																				<xs:element name="type" type="base:productTypeEnumType" minOccurs="0">
+																					<xs:annotation>
+																						<xs:documentation>Тип объекта закупки.
+Допустимые значения:
+PRODUCT - товар;
+WORK - работа;
+SERVICE - услуга</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
 																			</xs:sequence>
 																		</xs:complexType>
 																	</xs:element>
@@ -20848,6 +20915,11 @@ n - без НДС </xs:documentation>
 																		<xs:annotation>
 																			<xs:documentation>Страна происхождения товара.
  Заполняется автоматически на основании значения поля  «Страна происхождения товара» (products/product/originCountry/countryCode) соответствующего объекта закупки из размещенной действующей версии информации о контракте (его изменении). Если значение не найдено в сведениях о контракте, то принимается значение из пакета</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="registrationCountry" type="zfcs_countryRef" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Страна регистрации производителя товара. Игнорируется при приеме. Заполняется автоматически значением поля "Производитель. Страна (код по ОКСМ)" соответствующего торгового наименования объекта закупки из размещенной действующей версии информации о контракте (его изменении)</xs:documentation>
 																		</xs:annotation>
 																	</xs:element>
 																</xs:sequence>
@@ -21873,22 +21945,6 @@ IN	Aннулировано.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:complexType name="zfcs_contractProcedure2015WithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Информация об исполнении (расторжении) контракта с 01.01.2015 с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_contractProcedure2015Type">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_contractProcedureCancel2015Type">
 		<xs:annotation>
 			<xs:documentation>Сведения об отмене информации об исполнении контракта (расторжении контракта, признании контракта недействительным) с 01.01.2015</xs:documentation>
@@ -21906,6 +21962,33 @@ IN	Aннулировано.</xs:documentation>
 				<xs:annotation>
 					<xs:documentation>Номер реестровой записи государственного или муниципального контракта</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="placer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация об организации, разместившей контракт. Контролируется обязательность заполнения блока</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="responsibleOrg" type="zfcs_organizationRef">
+							<xs:annotation>
+								<xs:documentation>Организация, разместившая контракт</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="responsibleRole" type="zfcs_placerRoleContract2015Type">
+							<xs:annotation>
+								<xs:documentation>Роль организации, организации, разместившей контракт:
+
+CU - Заказчик;
+RA - Уполномоченный орган;
+AI - Уполномоченное учреждение;
+OA - Организация, осуществляющая полномочия заказчика на осуществление закупок на основании договора (соглашения);
+CS - Заказчик, осуществляющий закупки в соответствии с частью 5 статьи 15 Федерального закона № 44-ФЗ;
+CN - Заказчик, осуществляющий закупки в соответствии с частью 4.1 статьи 15 Федерального закона № 44-ФЗ;
+SR - Преемник прав и обязанностей организации, ранее размещавшей информацию и документы в ЕИС.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:choice>
 				<xs:sequence>
@@ -25555,9 +25638,8 @@ MCP - максимальное значение цены договора</xs:do
 			</xs:choice>
 			<xs:element name="name" type="zfcs_longTextMinType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Наименование товара , работы, услуги.
-Игнорируется и заполняется наименованием КТРУ, если указана классификация по КТРУ (KTRU/code) (или наименованием ОКПД2, связанного с данной позицией КТРУ, в случае если у позиции КТРУ нет наименования). 
-Если указана классификация по ОКПД2, то если поле  заполнено в принимаемом документе, то сохраняется это "ручное" значение, иначе поле автоматически заполняется наименованием ОКПД2 по его коду. Классификация по ОКПД при приеме игнорируется, оставлено для обратной  совместимости</xs:documentation>
+					<xs:documentation>Наименование объекта закупки в соответствии с контрактом. Контролируется обязательность заполнения.
+Игнорируется при приеме, если тип изменения modification/contractChange и не установлен признак products/product/improvedProductReplacement и заполняется автоматически значением из предыдущей версии сведений о контракте, в противном случае принимается и сохраняется</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="type" type="base:productTypeEnumType" minOccurs="0">
@@ -25661,7 +25743,10 @@ n - Без НДС.
 			<xs:element name="originCountry" type="zfcs_countryRef" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Страна происхождения товара. 
-Контролируется наличие цифрового кода страны в справочнике «Общероссийский классификатор стран мира (ОКСМ)» (nsiOKSM). Кконтролируется обязательность заполнения, только при значении PRODUCT в поле "Тип объекта закупки" (type). Игнорируется при приеме и автоматически заполняется неповторяющимися значениями в соответствии с позициями по торговым наименованиям, если заполнен блок «Сведения об объекте закупки в том случае, когда объектом закупки является лекарственный препарат» (products/product/drugPurchaseObjectInfo)</xs:documentation>
+Контролируется наличие цифрового кода страны в справочнике «Общероссийский классификатор стран мира (ОКСМ)» (nsiOKSM). Кконтролируется обязательность заполнения, только при значении PRODUCT в поле "Тип объекта закупки" (type) и 
+Если в поле "Тип объекта закупки" (type) установлено значение PRODUCT и 
+если в связанном извещении о закупке способ определения "Запрос котировок", "Запрос котировок в электронной форме" и данное извещение размещено в ЕИС до 01.07.2020, то поле необязательно для завполнения.
+Игнорируется при приеме и автоматически заполняется неповторяющимися значениями в соответствии с позициями по торговым наименованиям, если заполнен блок «Сведения об объекте закупки в том случае, когда объектом закупки является лекарственный препарат» (products/product/drugPurchaseObjectInfo)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="improvedProductReplacement" type="xs:boolean" minOccurs="0">
@@ -31809,22 +31894,6 @@ Ro5 - Ненадлежащее исполнение обязательств б�
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="zfcs_notification111WithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении закупки способом определения поставщика (подрядчика, исполнителя), установленным Правительством Российской Федерации в соответствии со ст. 111 Федерального закона № 44-ФЗ с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationI111Type">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<!--Извещения по 111 статье (ПРИЗ). Общие типы-->
 	<xs:complexType name="zfcs_purchaseNotification111Type">
 		<xs:annotation>
@@ -31969,6 +32038,33 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ.<
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
+	<xs:complexType name="zfcs_notificationModification111Type">
+		<xs:annotation>
+			<xs:documentation>Внесение изменений в извещение по ст. 111 Федерального закона № 44-ФЗ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="modificationNumber" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Номер изменения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="info" type="zfcs_longTextMinType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Краткое описание изменения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addInfo" type="zfcs_longTextMinType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reason" type="zfcs_purchaseChangeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Основание внесения исправлений</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="zfcs_lotI111Type">
 		<xs:annotation>
 			<xs:documentation>Информация о лоте для способа по ст. 111 Федерального закона № 44-ФЗ</xs:documentation>
@@ -32026,6 +32122,34 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ.<
 					<xs:documentation>Формула цены контракта. Контролируется обязательность указания, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = TRUE.
 Не допускается указание, если признак «Указать формулу цены и максимальное значение цены контракта» (lot/isContractPriceFormula) = FALSE или признак не указан. Игнорируется при приеме для подспособов ПО, ЗК-БИ</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractLifeCycleInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о заключении с поставщиком (подрядчиком, исполнителем) контракта жизненного цикла</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="contractLifeCycle" type="xs:boolean" fixed="true">
+							<xs:annotation>
+								<xs:documentation>C поставщиком (подрядчиком, исполнителем) будет заключен контракт жизненного цикла</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="contractLifeCycleCasesInfo">
+							<xs:annotation>
+								<xs:documentation>Причины заключения контракта жизненного цикла</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="contractLifeCycleCase" type="base:contractLifeCycleCaseRef" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Причина заключения контракта жизненного цикла. При приеме код контролируется на  присутствие в справочнике "Случаи заключения контракта жизненного цикла" (nsiTenderPlan2017ContractLifeCycleCase)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="purchaseObjects" minOccurs="0">
 				<xs:annotation>
@@ -32426,6 +32550,16 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ.<
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
+						<xs:element name="KVRsInfo" type="cmn:KVRFinancingsType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Детализации по КВР. Принимается, только при наличии блока "Сведения о связи с позицией плана-графика закупок с 01.01.2020" (tenderPlan2020Info), иначе игнорируется при приеме. Применимо только для извещений, размещаемых начиная с верисии 10.2</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="targetArticlesInfo" type="cmn:targetArticleFinancingsType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Детализации по целевым статьям. Принимается, только при наличии блока "Сведения о связи с позицией плана-графика закупок с 01.01.2020" (tenderPlan2020Info), иначе игнорируется при приеме. Применимо только для извещений, размещаемых начиная с верисии 10.2</xs:documentation>
+							</xs:annotation>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -32454,33 +32588,6 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ.<
 			<xs:element name="bankSupportContractRequiredInfo" type="cmn:bankSupportContractRequiredInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Информация о банковском и (или) казначейском сопровождении контакта. Указание допустимо только для базовой версии извещения. Игнорируется при приеме изменений извещения. Игнорируется при приеме и заполняется на основании сведений связанного плана-графика, если указан блок tenderPlanInfo и в связанном ППГ информация о банковском сопровождении контракта не равна «Требуется банковское или казначейское сопровождение контракта»</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="zfcs_notificationModification111Type">
-		<xs:annotation>
-			<xs:documentation>Внесение изменений в извещение по ст. 111 Федерального закона № 44-ФЗ</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="modificationNumber" type="xs:int">
-				<xs:annotation>
-					<xs:documentation>Номер изменения</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="info" type="zfcs_longTextMinType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Краткое описание изменения</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="addInfo" type="zfcs_longTextMinType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Дополнительная информация</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="reason" type="zfcs_purchaseChangeType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Основание внесения исправлений</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -32882,6 +32989,34 @@ CU5CH26 - Заказчик как орган исполнительной вла
 										<xs:documentation>Указать формулу цены и максимальное значение цены контракта</xs:documentation>
 									</xs:annotation>
 								</xs:element>
+								<xs:element name="contractLifeCycleInfo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Информация о заключении с поставщиком (подрядчиком, исполнителем) контракта жизненного цикла</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="contractLifeCycle" type="xs:boolean" fixed="true">
+												<xs:annotation>
+													<xs:documentation>C поставщиком (подрядчиком, исполнителем) будет заключен контракт жизненного цикла</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="contractLifeCycleCasesInfo">
+												<xs:annotation>
+													<xs:documentation>Причины заключения контракта жизненного цикла</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="contractLifeCycleCase" type="base:contractLifeCycleCaseRef" maxOccurs="unbounded">
+															<xs:annotation>
+																<xs:documentation>Причина заключения контракта жизненного цикла. При приеме код контролируется на  присутствие в справочнике "Случаи заключения контракта жизненного цикла" (nsiTenderPlan2017ContractLifeCycleCase)</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
 								<xs:element name="customerRequirements">
 									<xs:annotation>
 										<xs:documentation>Требования заказчиков</xs:documentation>
@@ -33118,6 +33253,16 @@ CU5CH26 - Заказчик как орган исполнительной вла
 																				</xs:element>
 																			</xs:sequence>
 																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="KVRsInfo" type="cmn:KVRFinancingsType" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Детализации по КВР. Принимается, только при наличии блока "Сведения о связи с позицией плана-графика закупок с 01.01.2020" (tenderPlan2020Info), иначе игнорируется при приеме. Применимо только для извещений, размещаемых начиная с верисии 10.2</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="targetArticlesInfo" type="cmn:targetArticleFinancingsType" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Детализации по целевым статьям. Принимается, только при наличии блока "Сведения о связи с позицией плана-графика закупок с 01.01.2020" (tenderPlan2020Info), иначе игнорируется при приеме. Применимо только для извещений, размещаемых начиная с верисии 10.2</xs:documentation>
+																		</xs:annotation>
 																	</xs:element>
 																</xs:sequence>
 															</xs:complexType>
@@ -33480,22 +33625,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 						<xs:annotation>
 							<xs:documentation>Файлы проектной документации.
 Бизнес-контролем  контролируется заполнение блока в случае, если в блоке placingWay установлен подспособ «Электронный аукцион на проведение работ по строительству, реконструкции, кап. ремонту, сносу объекта кап. строительства, предусматривающих проектную документацию, утвержденную в порядке, установленном законодательством о градостроительной деятельности» (код EAB44)</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_notificationEFWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении ЭА (электронный аукцион) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationEFType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -33964,6 +34093,34 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ</
 								<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 							</xs:annotation>
 						</xs:element>
+						<xs:element name="contractLifeCycleInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Информация о заключении с поставщиком (подрядчиком, исполнителем) контракта жизненного цикла</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="contractLifeCycle" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>C поставщиком (подрядчиком, исполнителем) будет заключен контракт жизненного цикла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contractLifeCycleCasesInfo">
+										<xs:annotation>
+											<xs:documentation>Причины заключения контракта жизненного цикла</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="contractLifeCycleCase" type="base:contractLifeCycleCaseRef" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Причина заключения контракта жизненного цикла. При приеме код контролируется на  присутствие в справочнике "Случаи заключения контракта жизненного цикла" (nsiTenderPlan2017ContractLifeCycleCase)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
 						<xs:element name="customerRequirements">
 							<xs:annotation>
 								<xs:documentation>Требования заказчиков</xs:documentation>
@@ -34355,22 +34512,6 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ</
 				<xs:documentation>Версия схемы</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-	</xs:complexType>
-	<xs:complexType name="zfcs_notificationEPWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении закупки у ЕП (единственного поставщика) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationEPType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="zfcs_notificationISMType">
 		<xs:annotation>
@@ -34900,22 +35041,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="zfcs_notificationOKDWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении OK-Д (двухэтапный конкурс) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationOKDType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_notificationOKOUType">
 		<xs:annotation>
 			<xs:documentation>Извещение о проведении OK-ОУ (конкурс с ограниченным участием); внесение изменений</xs:documentation>
@@ -34973,22 +35098,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:element name="modification" type="zfcs_notificationModificationType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Основание внесения изменений</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_notificationOKOUWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении OK-ОУ (конкурс с ограниченным участием) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationOKOUType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -35055,22 +35164,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:element name="modification" type="zfcs_notificationModificationType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Основание внесения изменений</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_notificationOKWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении OK (открытый конкурс) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationOKType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -35809,22 +35902,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="zfcs_notificationZakAWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении ЗакА (закрытый аукцион) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationZakAType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_notificationZakKDType">
 		<xs:annotation>
 			<xs:documentation>Извещение о проведении ЗакK-Д (закрытый двухэтапный конкурс);
@@ -35865,22 +35942,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:element name="modification" type="zfcs_notificationModificationType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Основание внесения изменений</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_notificationZakKDWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении ЗакK-Д (закрытый двухэтапный конкурс) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationZakKDType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -35934,22 +35995,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="zfcs_notificationZakKOUWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении ЗакK-ОУ (закрытый конкурс с ограниченным участием) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationZakKOUType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_notificationZakKType">
 		<xs:annotation>
 			<xs:documentation>Извещение о проведении ЗакK (закрытый конкурс);
@@ -35991,22 +36036,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:element name="modification" type="zfcs_notificationModificationType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Основание внесения изменений</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_notificationZakKWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении ЗакK (закрытый конкурс) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationZakKType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -36081,22 +36110,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:element name="modification" type="zfcs_notificationModificationType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Основание внесения изменений</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_notificationZKWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении ЗK (запрос котировок) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationZKType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -36582,22 +36595,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:element name="modification" type="zfcs_notificationModificationType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Основание внесения изменений</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_notificationZPWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Извещение о проведении ЗП (запрос предложений) с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_notificationZPType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -37294,6 +37291,34 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:documentation>Указать формулу цены и максимальное значение цены контракта</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="contractLifeCycleInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о заключении с поставщиком (подрядчиком, исполнителем) контракта жизненного цикла</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="contractLifeCycle" type="xs:boolean" fixed="true">
+							<xs:annotation>
+								<xs:documentation>C поставщиком (подрядчиком, исполнителем) будет заключен контракт жизненного цикла</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="contractLifeCycleCasesInfo">
+							<xs:annotation>
+								<xs:documentation>Причины заключения контракта жизненного цикла</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="contractLifeCycleCase" type="base:contractLifeCycleCaseRef" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Причина заключения контракта жизненного цикла. При приеме код контролируется на  присутствие в справочнике "Случаи заключения контракта жизненного цикла" (nsiTenderPlan2017ContractLifeCycleCase)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="customerRequirements">
 				<xs:annotation>
 					<xs:documentation>Требования заказчиков</xs:documentation>
@@ -37539,6 +37564,16 @@ CU5CH26 - Заказчик как орган исполнительной вла
 															</xs:element>
 														</xs:sequence>
 													</xs:complexType>
+												</xs:element>
+												<xs:element name="KVRsInfo" type="cmn:KVRFinancingsType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Детализации по КВР. Принимается, только при наличии блока "Сведения о связи с позицией плана-графика закупок с 01.01.2020" (tenderPlan2020Info), иначе игнорируется при приеме. Применимо только для извещений, размещаемых начиная с верисии 10.2</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="targetArticlesInfo" type="cmn:targetArticleFinancingsType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Детализации по целевым статьям. Принимается, только при наличии блока "Сведения о связи с позицией плана-графика закупок с 01.01.2020" (tenderPlan2020Info), иначе игнорируется при приеме. Применимо только для извещений, размещаемых начиная с верисии 10.2</xs:documentation>
+													</xs:annotation>
 												</xs:element>
 											</xs:sequence>
 										</xs:complexType>
@@ -37910,6 +37945,34 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:documentation>Указать формулу цены и максимальное значение цены контракта</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="contractLifeCycleInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Информация о заключении с поставщиком (подрядчиком, исполнителем) контракта жизненного цикла</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="contractLifeCycle" type="xs:boolean" fixed="true">
+							<xs:annotation>
+								<xs:documentation>C поставщиком (подрядчиком, исполнителем) будет заключен контракт жизненного цикла</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="contractLifeCycleCasesInfo">
+							<xs:annotation>
+								<xs:documentation>Причины заключения контракта жизненного цикла</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="contractLifeCycleCase" type="base:contractLifeCycleCaseRef" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Причина заключения контракта жизненного цикла. При приеме код контролируется на  присутствие в справочнике "Случаи заключения контракта жизненного цикла" (nsiTenderPlan2017ContractLifeCycleCase)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="customerRequirements">
 				<xs:annotation>
 					<xs:documentation>Требования заказчиков</xs:documentation>
@@ -38128,6 +38191,16 @@ CU5CH26 - Заказчик как орган исполнительной вла
 															</xs:element>
 														</xs:sequence>
 													</xs:complexType>
+												</xs:element>
+												<xs:element name="KVRsInfo" type="cmn:KVRFinancingsType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Детализации по КВР. Принимается, только при наличии блока "Сведения о связи с позицией плана-графика закупок с 01.01.2020" (tenderPlan2020Info), иначе игнорируется при приеме. Применимо только для извещений, размещаемых начиная с верисии 10.2</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="targetArticlesInfo" type="cmn:targetArticleFinancingsType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Детализации по целевым статьям. Принимается, только при наличии блока "Сведения о связи с позицией плана-графика закупок с 01.01.2020" (tenderPlan2020Info), иначе игнорируется при приеме. Применимо только для извещений, размещаемых начиная с верисии 10.2</xs:documentation>
+													</xs:annotation>
 												</xs:element>
 											</xs:sequence>
 										</xs:complexType>
@@ -43517,22 +43590,6 @@ QO - Квалификация участников закупки, в том ч�
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="zfcs_protocolOK2WithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Протокол рассмотрения и оценки заявок на участие в конкурсе в ОК с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolOK2Type">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_protocolOKSingleAppType">
 		<xs:annotation>
 			<xs:documentation>Протокол рассмотрения единственной заявки в ОК</xs:documentation>
@@ -43683,22 +43740,6 @@ QO - Квалификация участников закупки, в том ч�
 					<xs:element name="foundationProtocol" type="zfcs_foundationProtocolInfoType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Реквизиты предыдущего протокола (для печатной формы)</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_protocolOKSingleAppWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Протокол рассмотрения единственной заявки в ОК с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolOKSingleAppType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -44481,22 +44522,6 @@ QO - Квалификация участников закупки, в том ч�
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="zfcs_protocolOKD5WithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Протокол рассмотрения и оценки заявок на участие в конкурсе в ОК-Д  с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolOKD5Type">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_protocolOKDSingleAppType">
 		<xs:annotation>
 			<xs:documentation>Протокол рассмотрения единственной заявки в ОК-Д</xs:documentation>
@@ -44642,22 +44667,6 @@ QO - Квалификация участников закупки, в том ч�
 					<xs:element name="foundationProtocol" type="zfcs_foundationProtocolInfoType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Реквизиты предыдущего протокола</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_protocolOKDSingleAppWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Протокол рассмотрения единственной заявки в ОК-Д с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolOKDSingleAppType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -45179,22 +45188,6 @@ QO - Квалификация участников закупки, в том ч�
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="zfcs_protocolOKOU3WithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Протокол рассмотрения и оценки заявок на участие в конкурсе в ОК-ОУ  с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolOKOU3Type">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_protocolOKOUSingleAppType">
 		<xs:annotation>
 			<xs:documentation>Протокол рассмотрения единственной заявки в ОК-ОУ</xs:documentation>
@@ -45345,22 +45338,6 @@ QO - Квалификация участников закупки, в том ч�
 					<xs:element name="openingProtocol" type="zfcs_foundationProtocolInfoType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Реквизиты протокола вскрытия заявок (для печатной формы)</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_protocolOKOUSingleAppWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Протокол рассмотрения единственной заявки в ОК-ОУ  с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolOKOUSingleAppType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -45669,6 +45646,34 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ</
 							<xs:annotation>
 								<xs:documentation>Невозможно определить количество товара, объем подлежащих выполнению работ, оказанию услуг</xs:documentation>
 							</xs:annotation>
+						</xs:element>
+						<xs:element name="contractLifeCycleInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Информация о заключении с поставщиком (подрядчиком, исполнителем) контракта жизненного цикла</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="contractLifeCycle" type="xs:boolean" fixed="true">
+										<xs:annotation>
+											<xs:documentation>C поставщиком (подрядчиком, исполнителем) будет заключен контракт жизненного цикла</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="contractLifeCycleCasesInfo">
+										<xs:annotation>
+											<xs:documentation>Причины заключения контракта жизненного цикла</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="contractLifeCycleCase" type="base:contractLifeCycleCaseRef" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Причина заключения контракта жизненного цикла. При приеме код контролируется на  присутствие в справочнике "Случаи заключения контракта жизненного цикла" (nsiTenderPlan2017ContractLifeCycleCase)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="customerRequirements">
 							<xs:annotation>
@@ -46182,22 +46187,6 @@ P41 - В соответствии с ч. 4.1 ст. 15 Закона № 44-ФЗ</
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:complexType name="zfcs_protocolZKBIWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Общая информация об объекте закупки и структурированный протокол рассмотрения и оценки заявок на участие в ЗК-БИ (запрос котировок без извещения)  с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolZKBIType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_protocolZKBIAfterProlongType">
 		<xs:annotation>
 			<xs:documentation>Протокол рассмотрения и оценки заявок на участие в ЗК-БИ по результатам продления срока подачи заявок; внесение изменений</xs:documentation>
@@ -46689,22 +46678,6 @@ ADMITTED_OFFER – Заявка допущена (только при рассм
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="zfcs_protocolZKWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Протокол рассмотрения и оценки заявок в ЗК  с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolZKType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_protocolZKAfterProlongType">
 		<xs:annotation>
 			<xs:documentation>Протокол рассмотрения и оценки заявок по результатам продления срока подачи заявок в ЗК</xs:documentation>
@@ -46843,22 +46816,6 @@ ADMITTED_OFFER – Заявка допущена (только при рассм
 								</xs:element>
 							</xs:sequence>
 						</xs:complexType>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_protocolZKAfterProlongWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Протокол рассмотрения и оценки заявок по результатам продления срока подачи заявок в ЗК  с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolZKAfterProlongType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
 			</xs:extension>
@@ -47309,22 +47266,6 @@ CU5CH26 - Заказчик как орган исполнительной вла
 					<xs:element name="foundationProtocolName" type="zfcs_longTextType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Наименование предыдущего протокола (для печатной формы)</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="zfcs_protocolZPFinalWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>Итоговый протокол в ЗП  с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_protocolZPFinalType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -53785,22 +53726,6 @@ Publish - Размещение (публикация) документа</xs:doc
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:complexType name="zfcs_purchasePlanWithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>План закупок в структурированной форме с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_purchasePlanType">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="zfcs_purchasePlanExecutionType">
 		<xs:annotation>
 			<xs:documentation>Исполнение плана закупок в структурированной форме</xs:documentation>
@@ -55906,22 +55831,6 @@ EC - В данные позиции вносятся сведения об эк�
 				<xs:documentation>Версия схемы</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-	</xs:complexType>
-	<xs:complexType name="zfcs_tenderPlan2017WithControl99NoticeComplianceType">
-		<xs:annotation>
-			<xs:documentation>План-график в структурированной форме с 01.01.2017 с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="zfcs_tenderPlan2017Type">
-				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="zfcs_control99NoticeComplianceForRMISType">
-						<xs:annotation>
-							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="zfcs_tenderPlanChange2017Type">
 		<xs:annotation>
@@ -59272,6 +59181,265 @@ PPF1043 -  Ошибочное значение, не применяется. О�
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="zfcs_nsiFarmDrugInterchangeGroup">
+		<xs:annotation>
+			<xs:documentation>Справочник "Группы взаимозаменяемости лекарственных препаратов"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="interchangeGroup">
+				<xs:annotation>
+					<xs:documentation>Группа взаимозаменяемых лекарственных препаратов</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="groupInfo" type="zfcs_nsiFarmDrugInterchangeGroupInfo">
+							<xs:annotation>
+								<xs:documentation>Сведения о группе</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="groupOKEI" form="qualified">
+							<xs:annotation>
+								<xs:documentation>Единица измерения группы </xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="name" type="base:text500Type">
+										<xs:annotation>
+											<xs:documentation>Название единицы измерения группы</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="OKEI" type="zfcs_OKEIRef">
+										<xs:annotation>
+											<xs:documentation>Единица измерения по справочнику "Общероссийский классификатор единиц измерения (ОКЕИ)" (nsiOKEIType)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="groupPriceList">
+							<xs:annotation>
+								<xs:documentation>Референтные цены на группу</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="groupPrice" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Референтная цена на группу</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="value" type="zfcs_nsiFarmDrugDecimalCodeType">
+													<xs:annotation>
+														<xs:documentation>Значение референтной цены (рублей) за единицу измерения группы </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="usageMin" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Минимальное количество закупаемых единиц ЛП в ЕИ группы, для которых применима данная цена</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:totalDigits value="30"/>
+															<xs:fractionDigits value="10"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="usageMax" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Максимальное количество закупаемых единиц ЛП в ЕИ группы, для которых применима данная цена</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:totalDigits value="30"/>
+															<xs:fractionDigits value="10"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="type" type="zfcs_nsiFarmDrugPriceTypeEnum">
+													<xs:annotation>
+														<xs:documentation>Тип цены:
+1 - средневзвешенная цена по России после 01.01.2019
+2 - (не применяется) рассчитана по Методике с использованием исторических данных и последующей ручной корректировкой
+3 - (не применяется) задана путем проведения переговоров
+4 - референтная цена, рассчитаная по Методике с использованием исторических данных и сведений о взаимозаменяемости после 01.01.2019
+</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="dateCreate" type="xs:dateTime">
+													<xs:annotation>
+														<xs:documentation>Дата расчета цены</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="dateStart" type="xs:dateTime">
+													<xs:annotation>
+														<xs:documentation>Дата начала действия цены</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="dateEnd" type="xs:dateTime" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Дата окончания действия цены</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="isActual" type="xs:boolean">
+													<xs:annotation>
+														<xs:documentation>Признак актуальности</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="childGroupsList">
+							<xs:annotation>
+								<xs:documentation>Cписок дочерних групп</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="childGroup" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Дочерняя группа</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="groupInfo" type="zfcs_nsiFarmDrugInterchangeGroupInfo">
+													<xs:annotation>
+														<xs:documentation>Сведения о группе</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="elementList">
+													<xs:annotation>
+														<xs:documentation>Список элементов</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="element" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation>Элемент</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="MNNExternalCode" type="base:drugExternalCodeType">
+																			<xs:annotation>
+																				<xs:documentation>Уникальный внешний код МНН по справочнику "Лекарственные препараты" (MNNInfo/MNNExternalCode)</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="dateCreate" type="xs:dateTime">
+																			<xs:annotation>
+																				<xs:documentation>Дата создания</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="dateChange" type="xs:dateTime">
+																			<xs:annotation>
+																				<xs:documentation>Дата последнего изменения</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="dateEnd" type="xs:dateTime" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Дата окончания действия записи</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="lastUpdateDate" type="xs:dateTime" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Дата последнего изменения</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="isActual" type="xs:boolean">
+																			<xs:annotation>
+																				<xs:documentation>Признак актуальности</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																		<xs:element name="rateValue">
+																			<xs:annotation>
+																				<xs:documentation>Коэффициент приведения</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:decimal">
+																					<xs:totalDigits value="5"/>
+																					<xs:fractionDigits value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="packRequirement" type="base:text2000Type" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Требование к содержимому упаковки ЛП</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="zfcs_nsiFarmDrugInterchangeGroupInfo">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения о группе взаимозаменяемости лекарственных препаратов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="interchangeGroupID" type="base:drugDecimalCodeType">
+				<xs:annotation>
+					<xs:documentation>Идентификатор записи в ЕИС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="base:drugExternalCodeType">
+				<xs:annotation>
+					<xs:documentation>Код</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="level" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Уровень</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isActual" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Признак актуальности</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dateCreate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата создания</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dateChange" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата изменения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hash" type="base:hash32">
+				<xs:annotation>
+					<xs:documentation>Контрольная сумма версии записи группы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="version" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Версия</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ancestorID" type="base:drugDecimalCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ссылка на предшествующую версию головной группы </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="zfcs_nsiFarmDrugDosageInfoType">
 		<xs:annotation>
 			<xs:documentation>Тип:Дозировки для справочника "Лекарственные препараты"</xs:documentation>
@@ -61192,13 +61360,13 @@ UF - Юридическое лицо иностранного государст
 								<xs:documentation>КПП</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="place">
+						<xs:element name="place" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>Место нахождения юридического лица</xs:documentation>
 							</xs:annotation>
 							<xs:complexType>
 								<xs:sequence>
-									<xs:choice>
+									<xs:choice minOccurs="0">
 										<xs:element name="kladr">
 											<xs:annotation>
 												<xs:documentation>Код КЛАДР - если в РФ</xs:documentation>
@@ -61248,7 +61416,7 @@ UF - Юридическое лицо иностранного государст
 											</xs:annotation>
 										</xs:element>
 									</xs:choice>
-									<xs:element name="zip">
+									<xs:element name="zip" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Почтовый индекс</xs:documentation>
 										</xs:annotation>
@@ -61258,7 +61426,7 @@ UF - Юридическое лицо иностранного государст
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:element>
-									<xs:element name="place" type="oos:zfcs_longTextType">
+									<xs:element name="place" type="oos:zfcs_longTextType" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>Место</xs:documentation>
 										</xs:annotation>
@@ -61288,7 +61456,7 @@ UF - Юридическое лицо иностранного государст
 функции единоличного исполнительного органа юридического лица</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="inn">
+									<xs:element name="inn" minOccurs="0">
 										<xs:annotation>
 											<xs:documentation>ИНН (или аналог ИНН для иностранного поставщика)</xs:documentation>
 										</xs:annotation>
@@ -63209,79 +63377,13 @@ CU5CH26 - Заказчик как орган исполнительной вла
 			<xs:extension base="zfcs_control99NoticeProtocolCommonInfoType"/>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="zfcs_control99NoticeComplianceForRMISType">
+	<xs:complexType name="zfcs_control99NoticeComplianceWithDocType">
 		<xs:annotation>
-			<xs:documentation>Уведомление о соответствии контролируемой информации, принятое от РМИС вместе с контролируемым документом</xs:documentation>
+			<xs:documentation>Уведомление о соответствии контролируемой информации, принятое вместе с контролируемым документом</xs:documentation>
 		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="docNumber" type="zfcs_control99DocNumberType">
-				<xs:annotation>
-					<xs:documentation>Номер документа</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="docDate" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата/время формирования результата контроля</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="signDate" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата/время подписания результата контроля</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="controlAuthorityInfo" type="zfcs_control99ControlAuthorityInfoType">
-				<xs:annotation>
-					<xs:documentation>Сведения об органе контроля</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="customerInfo">
-				<xs:annotation>
-					<xs:documentation>Сведения о заказчике (организации, размещающей закупку)</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:complexContent>
-						<xs:extension base="zfcs_control99CustomerInfoType">
-							<xs:sequence>
-								<xs:element name="OKTMOPPO" type="zfcs_OKTMOPPORef" minOccurs="0">
-									<xs:annotation>
-										<xs:documentation>ОКТМО публично-правового образования (ППО)</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-							</xs:sequence>
-						</xs:extension>
-					</xs:complexContent>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="controlObjectsInfo">
-				<xs:annotation>
-					<xs:documentation>Сведения об объектах контроля</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="controlObjectInfo" type="zfcs_control99ControlObjectWithMandatoryDocsInfoType" maxOccurs="unbounded">
-							<xs:annotation>
-								<xs:documentation>Сведения об объекте контроля</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="responsibleInfo" type="zfcs_control99ResponsibleType">
-				<xs:annotation>
-					<xs:documentation>Сведения об ответственном исполнителе</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="extPrintForm" type="zfcs_control99ExtPrintFormType">
-				<xs:annotation>
-					<xs:documentation>Электронный документ. При приеме контролируется обязательность заполнения блока content</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="bNeedGIISPURCheck" type="xs:boolean" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Необходима проверка в ГИИС ПУР</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:extension base="cmn:control99NoticeComplianceWithDocType"/>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="zfcs_control99ProtocolMismatchType">
 		<xs:annotation>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- EIS docs-https-api Integration Scheme, version 10.1, create date 20.02.2020 -->
+<!-- EIS docs-https-api Integration Scheme, version 10.2, create date 07.05.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/fz44/https" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:base="http://zakupki.gov.ru/oos/base/1" targetNamespace="http://zakupki.gov.ru/fz44/https" elementFormDefault="unqualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Сервис РБГ-->

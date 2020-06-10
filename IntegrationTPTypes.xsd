@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.1, create date 20.02.2020 -->
+<!-- FCS INTEGRATION_TYPES Integration Scheme, version 10.2, create date 07.05.2020 -->
 <xs:schema xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/TPtypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -209,14 +209,14 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	<xs:complexType name="tenderPlan2020WithControl99NoticeComplianceType">
+	<xs:complexType name="tenderPlan2020Control99NCType">
 		<xs:annotation>
 			<xs:documentation>План-график закупок с уведомлением о соответствии контролируемой информации по 99 статье</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="tenderPlan2020Type">
 				<xs:sequence>
-					<xs:element name="control99NoticeCompliance" type="cmn:control99NoticeComplianceForRMISType">
+					<xs:element name="control99NoticeCompliance" type="cmn:control99NoticeComplianceWithDocType">
 						<xs:annotation>
 							<xs:documentation>Уведомление о соответствии контролируемой информации</xs:documentation>
 						</xs:annotation>
@@ -800,10 +800,10 @@ E - Данные позиции отредактированы</xs:documentation
 			<xs:element name="KVRsInfo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Детализации по КВР.
-Контролируется обязательность заполнения, если тип организации владельца версии плана закупки:
+Контролируется обязательность заполнения, если тип организации заказчика
 Тип организации = «03 - бюджетное учреждение»;
 Тип организации = «10 – автономное учреждение».
-Для остальных типов организаций игнорируется при приеме</xs:documentation>
+Для остальных типов организаций не допускается указание данного блока</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -818,10 +818,10 @@ E - Данные позиции отредактированы</xs:documentation
 			<xs:element name="targetArticlesInfo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Детализации по целевым статьям.
-Может быть заполнено, если тип организации владельца версии плана закупки:
+Может быть заполнено, если тип организации заказчика:
 Тип организации = «03 - бюджетное учреждение»;
 Тип организации = «10 – автономное учреждение».
-Для остальных типов организаций игнорируется при приеме</xs:documentation>
+Для остальных типов организаций не допускается указание данного блока</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -1199,10 +1199,10 @@ E - Данные особой закупки отредактированы.</xs
 			<xs:element name="KVRsInfo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Детализации по КВР.
-Контролируется обязательность заполнения, если тип организации владельца версии плана закупки:
+Контролируется обязательность заполнения, если тип организации заказчика:
 Тип организации = «03 - бюджетное учреждение»;
 Тип организации = «10 – автономное учреждение».
-Для остальных типов организаций игнорируется при приеме</xs:documentation>
+Для остальных типов организаций не допускается указание данного блока</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -1217,10 +1217,10 @@ E - Данные особой закупки отредактированы.</xs
 			<xs:element name="targetArticlesInfo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Детализации по целевым статьям.
-Может быть заполнено, если тип организации владельца версии плана закупки:
+Может быть заполнено, если тип организации заказчика:
 Тип организации = «03 - бюджетное учреждение»;
 Тип организации = «10 – автономное учреждение».
-Для остальных типов организаций игнорируется при приеме</xs:documentation>
+Для остальных типов организаций не допускается указание данного блока</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -1960,6 +1960,34 @@ tenderPlan2020 - План-график закупок с 01.01.2020.</xs:documen
 							<xs:annotation>
 								<xs:documentation>Итоговые показатели по кодам бюджетной классификации</xs:documentation>
 							</xs:annotation>
+						</xs:element>
+						<xs:element name="targetArticlesTotalsInfo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Итоговые показатели по целевым статьям</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="targetArticleTotalsInfo" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Итоговый показатель по целевой статье</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="targetArticle" type="base:targetArticleType">
+													<xs:annotation>
+														<xs:documentation>Целевая статья</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="targetArticleTotalsYearsInfo" type="tenderPlan2020FinanceResourcesType">
+													<xs:annotation>
+														<xs:documentation>Итоговые показатели по целевой статье в разбивке по годам</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
 						</xs:element>
 						<xs:element name="agreementsTotalsInfo" minOccurs="0">
 							<xs:annotation>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 10.1, create date 20.02.2020 -->
+<!-- FCS EXPORT Integration Scheme, version 10.2, create date 07.05.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
@@ -586,6 +586,11 @@
 					<xs:element name="unplannedCheckCancel" type="oos:zfcs_unplannedCheckCancelType">
 						<xs:annotation>
 							<xs:documentation>Информация об отмене проведения внеплановой проверки для ИС КО</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="unplannedCheckTenderSusp" type="oos:zfcs_unplannedCheckTenderSuspType">
+						<xs:annotation>
+							<xs:documentation>Информация о приостановке определения поставщика (подрядчика, исполнителя) в части заключения контракта по внеплановой проверке</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="unfairSupplier" type="oos:zfcs_unfairSupplierType">
@@ -1290,6 +1295,16 @@
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="nsiFarmDrugDictionary" type="oos:zfcs_nsiFarmDrugDictionary" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiFarmDrugInterchangeGroup">
+						<xs:annotation>
+							<xs:documentation>Справочник: Группы взаимозаменяемости лекарственных препаратов</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiFarmDrugInterchangeGroup" type="oos:zfcs_nsiFarmDrugInterchangeGroup" minOccurs="0" maxOccurs="unbounded"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>

@@ -2,7 +2,7 @@
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://zakupki.gov.ru/fz44/ws/priz" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/fz44/ws/priz">
 	<wsdl:types>
 		<xsd:schema>
-			<xsd:import namespace="http://zakupki.gov.ru/fz44/ws/priz" schemaLocation="docs-ws-api.xsd"/>
+			<xsd:import namespace="http://zakupki.gov.ru/fz44/ws/priz" schemaLocation="../docs-ws-api.xsd"/>
 		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="getRNPObjectListRequest">

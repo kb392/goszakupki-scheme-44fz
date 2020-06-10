@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- BASE_TYPES Integration Scheme, version 10.1, create date 20.02.2020 -->
+<!-- BASE_TYPES Integration Scheme, version 10.2, create date 07.05.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/base/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/base/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--Ссылки на НСИ-->
 	<!--Ссылки на общие справочники-->
@@ -636,7 +636,7 @@
 		<xs:annotation>
 			<xs:documentation>Тип: Текущая версия схем</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="current" type="base:schemeVersionType" fixed="10.1"/>
+		<xs:attribute name="current" type="base:schemeVersionType" fixed="10.2"/>
 	</xs:complexType>
 	<!--Простые типы-->
 	<xs:simpleType name="abandonedReasonCode">
@@ -1163,6 +1163,7 @@ tenderSuspension - Информация о приостановке опреде
 timeEF - Время проведения открытого аукциона в электронной форме (94 ФЗ);
 unplannedCheck - Информация по внеплановой проверке;
 unplannedCheckCancel - Информация об отмене проведения внеплановой проверки;
+unplannedCheckTenderSusp - Информация о приостановке определения поставщика (подрядчика, исполнителя) в части заключения контракта по внеплановой проверке;
 sketchPlan - План закупок в неструктурированной форме;
 sketchPlanExecution - Сведения об исполнении плана закупок;
 control99BeginMessage - Сообщение о начале контроля по 99 статье;
@@ -1385,6 +1386,7 @@ fcsDocProjectStatusResponse - Ответ на запрос о статусе р�
 			<xs:enumeration value="timeEF"/>
 			<xs:enumeration value="unplannedCheck"/>
 			<xs:enumeration value="unplannedCheckCancel"/>
+			<xs:enumeration value="unplannedCheckTenderSusp"/>
 			<xs:enumeration value="sketchPlan"/>
 			<xs:enumeration value="sketchPlanExecution"/>
 			<xs:enumeration value="control99BeginMessage"/>
@@ -1536,6 +1538,15 @@ fcsDocProjectStatusResponse - Ответ на запрос о статусе р�
 			<xs:fractionDigits value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="errorCodeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Код ошибки</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="eMailType">
 		<xs:annotation>
 			<xs:documentation>Тип: Адрес электронной почты</xs:documentation>
@@ -1590,6 +1601,14 @@ fcsDocProjectStatusResponse - Ответ на запрос о статусе р�
 			<xs:minLength value="1"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="hexHashSha256Type">
+		<xs:annotation>
+			<xs:documentation>Тип: HEX представление хеша, рассчитанного по алгоритму SHA256</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="hrefType">
 		<xs:annotation>
 			<xs:documentation>Тип: Гиперссылка</xs:documentation>
@@ -1597,6 +1616,17 @@ fcsDocProjectStatusResponse - Ответ на запрос о статусе р�
 		<xs:restriction base="xs:string">
 			<xs:maxLength value="1024"/>
 			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="indexModeType">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление режимов:
+			PROD - промышленная эксплуатация;
+			TEST - тестовые данные/</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PROD"/>
+			<xs:enumeration value="TEST"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="contractKSNumType">
@@ -2045,6 +2075,17 @@ SM - Служебные сообщения.</xs:documentation>
 			<xs:enumeration value="SM"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="wsObjectTypeEnum">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление типов объектов в "бесшовной" интеграции:
+TP - План график;
+SM - Служебные сообщения.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TP"/>
+			<xs:enumeration value="SM"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="ogrnCodeType">
 		<xs:annotation>
 			<xs:documentation>Тип: Код ОГРН</xs:documentation>
@@ -2342,6 +2383,15 @@ F - на форуме Официального сайта Единой инфо�
 			<xs:enumeration value="epProtocolEZP2"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="regNumberBaseType">
+		<xs:annotation>
+			<xs:documentation>Тип: Общий тип для реестрового номера в интегарционных пакетах</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="36"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="rejectReasonCode">
 		<xs:annotation>
 			<xs:documentation>Тип: Код причины для отказа в допуске заявки</xs:documentation>
@@ -2477,6 +2527,7 @@ TC - Орган местного самоуправления и (или) гос
 			<xs:enumeration value="9.3"/>
 			<xs:enumeration value="10.0"/>
 			<xs:enumeration value="10.1"/>
+			<xs:enumeration value="10.2"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="serviceWorkCodeType">
@@ -2533,6 +2584,38 @@ TC - Орган местного самоуправления и (или) гос
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:pattern value="\d{16}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="subsystemType">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление подсистем ЕИС:
+				PRIZ - подсистема определения поставщика;
+				RGK - реестр контрактов;
+				RPG - реестр планов-графиков;
+				RPZ - реестр планов закупок.
+				RBG - реестр банковских гарантий.
+				OZ - реестр отчетов заказчиков;
+				RDI - реестр дополнительной информации о закупках и контрактах;
+				OOKZ - обязательное обсуждение крупных закупок;
+				RPNZ - реестр правил нормирования закупок;
+				ZC - реестр размещения запросов цен товаров, работ, услуг;
+				RRA - реестр результатов аудита;
+				RPGZ - реестр планов графиков с 2020 года.
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PRIZ"/>
+			<xs:enumeration value="RGK"/>
+			<xs:enumeration value="RPG"/>
+			<xs:enumeration value="RPZ"/>
+			<xs:enumeration value="RBG"/>
+			<xs:enumeration value="OZ"/>
+			<xs:enumeration value="RDI"/>
+			<xs:enumeration value="OOKZ"/>
+			<xs:enumeration value="RPNZ"/>
+			<xs:enumeration value="ZC"/>
+			<xs:enumeration value="RRA"/>
+			<xs:enumeration value="RPGZ"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="targetArticleType">
@@ -2816,6 +2899,30 @@ n-без НДС.</xs:documentation>
 			<xs:maxLength value="46"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="wsPartnerType">
+		<xs:annotation>
+			<xs:documentation>Тип: Перечисление контрагентов сервисного взаимодействия:
+OOS - Единая информационная система;
+GIIS_EB - Государственная интегрированная информационная система Электронный бюджет (ГИИС ЭБ);
+RMIS - Региональная (муниципальная) информационная система (РМИС);
+OVK - Информационная система органа внутреннего контроля (ИС ОВК);
+OA - Информационная система органа аудита (ИС ОА);
+KO - Информационная система контрольного органа (ИС КО);
+FAS - Информационная система Федеральной антимонопольной службы (ИС ФАС);
+SMEV3 - Подсистема взаимодействия со СМЭВ3.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OOS"/>
+			<xs:enumeration value="GIIS_EB"/>
+			<xs:enumeration value="RMIS"/>
+			<xs:enumeration value="OVK"/>
+			<xs:enumeration value="OA"/>
+			<xs:enumeration value="KO"/>
+			<xs:enumeration value="FAS"/>
+			<xs:enumeration value="SMEV3"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="NPASt14CodeType">
 		<xs:annotation>
 			<xs:documentation>Тип: Код Нормативно-правового акта, регулирующего допуск товаров, работ, услуг в соответствии со ст.14 Закона 44-ФЗ</xs:documentation>
@@ -2962,6 +3069,15 @@ CN - Заказчик, осуществляющий закупки в соотв
 			<xs:enumeration value="AU"/>
 			<xs:enumeration value="CC"/>
 			<xs:enumeration value="CN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="hash32">
+		<xs:annotation>
+			<xs:documentation>Тип: Контрольная сумма версии (32)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

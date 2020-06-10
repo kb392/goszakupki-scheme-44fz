@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- COMMON_TYPES Integration Scheme, version 10.1, create date 20.02.2020 -->
+<!-- COMMON_TYPES Integration Scheme, version 10.2, create date 07.05.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -272,6 +272,24 @@
 						<xs:minLength value="1"/>
 					</xs:restriction>
 				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="errorInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Результат вызова сервиса в случае ошибки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="message" type="base:text2000Type">
+				<xs:annotation>
+					<xs:documentation>Текстовая расшифровка ошибки, включающая дополнительную информацию
+                    </xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -1251,6 +1269,150 @@ CAdES-A</xs:documentation>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
+	<xs:complexType name="violationType">
+		<xs:annotation>
+			<xs:documentation>Тип: Нарушение приема</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="errCode" type="base:errorCodeType">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="level" type="base:violationLevelType">
+				<xs:annotation>
+					<xs:documentation>Тип:
+error - Ошибка
+warning - Предупреждение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="base:text200Type">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="base:text2000Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fullErrorLog" type="xs:base64Binary" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Полный текст ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="financeResourcesType">
+		<xs:annotation>
+			<xs:documentation>Тип: Финансовое обеспечение закупки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="total" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Всего. Значение игнорируется при приеме. автоматически рассчитывается как сумма нижеследующих полей (т.е. total=currentYear+firstYear+secondYear+subsecYears). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currentYear" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сумма на текущий плановый год</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstYear" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сумма на первый плановый год</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="secondYear" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сумма на второй плановый год</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subsecYears" type="base:moneyMaxLengthToPoint18Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сумма на последующие годы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KVRFinancingType">
+		<xs:annotation>
+			<xs:documentation>Тип: Детализация по коду КВР</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="KVR" type="base:KVRRef">
+				<xs:annotation>
+					<xs:documentation>КВР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KVRYearsInfo" type="financeResourcesType">
+				<xs:annotation>
+					<xs:documentation>Детализация по КВР в разбивке по годам</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KVRFinancingsType">
+		<xs:annotation>
+			<xs:documentation>Тип: Детализация по кодам КВР</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="currentYear" type="base:yearType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Текущий плановый год. Игнорируется при приеме, автоматически заполняется соответствующим полем из связанной позиции плана-графика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KVRInfo" type="KVRFinancingType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Детализация по КВР. Коды КВР проверяются на вхождение в перечень КВР связанной позиции плана-графика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="totalSum" type="base:moneyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Общая сумма. Игнорируется при приеме, рассчитывается как сумма полей, указанных в полях «Всего» (notificationInfo/customerRequirementsInfo/customerRequirementInfo/contractConditionsInfo/contractExecutionPaymentPlan/KVRsInfo/KVRInfo/KVRYearsInfo/total)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="targetArticleFinancingType">
+		<xs:annotation>
+			<xs:documentation>Тип: Детализация по целевой статье</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="targetArticle" type="base:targetArticleType">
+				<xs:annotation>
+					<xs:documentation>Целевая статья</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="targetArticleYearsInfo" type="financeResourcesType">
+				<xs:annotation>
+					<xs:documentation>Детализация по целевой статье в разбивке по годам</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="targetArticleFinancingsType">
+		<xs:annotation>
+			<xs:documentation>Тип: Детализация по целевым статьям</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="currentYear" type="base:yearType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Текущий плановый год. Игнорируется при приеме, автоматически заполняется соответствующим полем из связанной позиции плана-графика</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="targetArticleInfo" type="targetArticleFinancingType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Детализация по целевой статье. Коды целевых статей проверяются на вхождение в перечень целевых статей связанной позиции плана-графика </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="totalSum" type="base:moneyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Общая сумма. Игнорируется при приеме, рассчитывается как сумма полей, указанных в полях «Всего» (notificationInfo/customerRequirementsInfo/customerRequirementInfo/contractConditionsInfo/contractExecutionPaymentPlan/targetArticlesInfo/targetArticleInfo/targetArticleYearsInfo/total)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!--Контроль по 99 статье-->
 	<xs:complexType name="control99CustomerInfoType">
 		<xs:annotation>
@@ -1415,11 +1577,35 @@ CAdES-A</xs:documentation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="control99NoticeComplianceForRMISType">
+	<xs:complexType name="control99NoticeComplianceWithDocType">
 		<xs:annotation>
-			<xs:documentation>Тип: Уведомление о соответствии контролируемой информации, принятое от РМИС вместе с контролируемым документом</xs:documentation>
+			<xs:documentation>Тип: Уведомление о соответствии контролируемой информации, принятое вместе с контролируемым документом</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="refExternalId" type="base:externalIdType">
+				<xs:annotation>
+					<xs:documentation>Внешний идентификатор документа, направленного на контроль</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="documentType" type="base:control99DocumentTypeEnum">
+				<xs:annotation>
+					<xs:documentation>Тип документа, направленного на контроль:
+contract - Сведения о контракте;
+contractProcedure - Сведения об исполнении (расторжении) контракта;
+purchasePlan - План закупок;
+tenderPlan2017 - План график с 01.01.2017;
+notification - Извещение (конкурсная документация);
+protocol - Итоговый протокол определения поставщика, подрядчика, исполнителя;
+contractProject - Проект контракта без подписей;
+contractProjectChange - Доработанный проект контракта на основании размещенного поставщиком протокола разногласий;
+tenderPlan2020 - План график закупок с 01.01.2020</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refVersionNumber" type="base:versionNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер версии документа, направленного на контроль</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="docNumber" type="base:control99DocNumberType">
 				<xs:annotation>
 					<xs:documentation>Номер документа</xs:documentation>
@@ -1440,10 +1626,23 @@ CAdES-A</xs:documentation>
 					<xs:documentation>Сведения об органе контроля</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="customerInfo" type="cmn:control99CustomerInfoType">
+			<xs:element name="customerInfo">
 				<xs:annotation>
 					<xs:documentation>Сведения о заказчике (организации, размещающей закупку)</xs:documentation>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="cmn:control99CustomerInfoType">
+							<xs:sequence>
+								<xs:element name="OKTMOPPO" type="base:OKTMOPPORef" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>ОКТМО публично-правового образования (ППО)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="controlObjectsInfo">
 				<xs:annotation>
@@ -1464,9 +1663,9 @@ CAdES-A</xs:documentation>
 					<xs:documentation>Сведения об ответственном исполнителе</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extPrintForm" type="cmn:extPrintFormType">
+			<xs:element name="extPrintForm" type="cmn:extPrintFormType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Электронный документ. При приеме контролируется обязательность заполнения блока content</xs:documentation>
+					<xs:documentation>Электронный документ. При приеме контролируется наличие xml-файла с типом control99NoticeComplianceWithDoc, сформированного по схеме fcsPrintForm.xsd, в блоке content. Не заполняется при формировании печатной формы</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="bNeedGIISPURCheck" type="xs:boolean" minOccurs="0">
