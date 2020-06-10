@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS INTEGRATION_SERVICE_TYPES Integration Scheme, version 10.2, create date 07.05.2020 -->
+<!-- FCS INTEGRATION_SERVICE_TYPES Integration Scheme, version 10.2, create date 05.06.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/SMTypes/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" targetNamespace="http://zakupki.gov.ru/oos/SMTypes/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/common/1" schemaLocation="CommonTypes.xsd"/>
@@ -695,6 +695,49 @@ RPGZ - реестр планов графиков с 2020 года.</xs:document
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">
+			<xs:annotation>
+				<xs:documentation>Версия схемы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Сведения о событии, необходимые для формирования регулярного сообщения-->
+	<xs:complexType name="nrgEventInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения о событии, необходимые для формирования регулярного сообщения</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="base:guidType">
+				<xs:annotation>
+					<xs:documentation>Уникальный идентификатор события в ЕИС</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="base:text100Type">
+				<xs:annotation>
+					<xs:documentation>Код типа события</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="base:text100Type">
+				<xs:annotation>
+					<xs:documentation>Тип события</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DT" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата-время наступления события</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="content" type="xs:base64Binary">
+				<xs:annotation>
+					<xs:documentation>XML-документ со сведениями о событии, сформированный по форматам ГИС НР</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="purchaseNumber" type="base:purchaseNumberType">
+				<xs:annotation>
+					<xs:documentation>Номер закупки</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="schemeVersion" type="base:schemeVersionType" use="required">

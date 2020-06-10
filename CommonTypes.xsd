@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- COMMON_TYPES Integration Scheme, version 10.2, create date 07.05.2020 -->
+<!-- COMMON_TYPES Integration Scheme, version 10.2, create date 05.06.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/common/1" xmlns:cmn="http://zakupki.gov.ru/oos/common/1" xmlns:base="http://zakupki.gov.ru/oos/base/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://zakupki.gov.ru/oos/common/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/base/1" schemaLocation="BaseTypes.xsd"/>
 	<!--Общие типы-->
@@ -1732,7 +1732,7 @@ tenderPlan2020 - План график закупок с 01.01.2020</xs:document
 			</xs:element>
 			<xs:element name="packagingInfo" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Сведения об упаковке. В  случае заполнения блока mustSpecifyDrugPackage при приеме контролируется заполненность блока packagingInfo во всех  вариантах поставки лекарственных препаратов</xs:documentation>
+					<xs:documentation>Сведения об упаковке. В  случае заполнения блока mustSpecifyDrugPackage при приеме контролируется заполненность блока packagingInfo во всех  вариантах поставки лекарственных препаратовю. Для групп взаимозаменяемости (блок drugInterchangeInfo) всегда игнорируется при приеме, автоматически заполняется при передаче по справочнику "Лекарственные препараты"</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
@@ -1756,12 +1756,12 @@ tenderPlan2020 - План график закупок с 01.01.2020</xs:document
 			</xs:element>
 			<xs:element name="manualUserOKEI" type="base:OKEIRef" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Единица измерения товара, введенная вручную . Если  заполнено в принимаемом документе, то считается, что внешняя система явно указала этот блок, содержимое контролируется на  присутствие в справочнике "Справочник: Единицы измерения потребительских единиц измерения лекарственных препаратов по ОКЕИ" (nsiDrugOKEI)</xs:documentation>
+					<xs:documentation>Единица измерения товара, введенная вручную . Если  заполнено в принимаемом документе, то считается, что внешняя система явно указала этот блок, содержимое контролируется на  присутствие в справочнике "Справочник: Единицы измерения потребительских единиц измерения лекарственных препаратов по ОКЕИ" (nsiDrugOKEI). Для групп взаимозаменяемости (блок drugInterchangeInfo) всегда игнорируется при приеме, автоматически заполняется при передаче по справочнику "Лекарственные препараты"</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="basicUnit" type="xs:boolean" fixed="true" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Признак основного варианта поставки. При приеме контролируется обязательность заполнения поля только для одного значения блока drugInfo в составе двух блоков objectInfoUsingReferenceInfo и objectInfoUsingTextForm</xs:documentation>
+					<xs:documentation>Признак основного варианта поставки. При приеме контролируется обязательность заполнения поля только для одного значения блока drugInfo в составе двух блоков objectInfoUsingReferenceInfo и objectInfoUsingTextForm. Не допускается указание признака для комбинаций однокомпонентных препаратов</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1904,7 +1904,7 @@ tenderPlan2020 - План график закупок с 01.01.2020</xs:document
 												<xs:documentation>Сведения о вариантах поставки лекарственных препаратов</xs:documentation>
 											</xs:annotation>
 											<xs:complexType>
-												<xs:sequence>
+												<xs:choice>
 													<xs:element name="drugInfo" maxOccurs="unbounded">
 														<xs:annotation>
 															<xs:documentation>Сведения о варианте поставки лекарственного препарата</xs:documentation>
@@ -1939,7 +1939,26 @@ tenderPlan2020 - План график закупок с 01.01.2020</xs:document
 															</xs:complexContent>
 														</xs:complexType>
 													</xs:element>
-												</xs:sequence>
+													<xs:element name="drugInterchangeInfo">
+														<xs:annotation>
+															<xs:documentation>Сведения о лекарственных препаратах с учетом взаимозаменяемости</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:choice>
+																<xs:element name="drugInterchangeReferenceInfo" type="drugInterchangeReferenceInfoType">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о лекарственных препаратах с учетом взаимозаменяемости по справочнику  "Группы взаимозаменяемости лекарственных препаратов" (zfcs_nsiFarmDrugInterchangeGroup)</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="drugInterchangeManualInfo" type="drugInterchangeManualInfoType">
+																	<xs:annotation>
+																		<xs:documentation>Сведения о лекарственных препаратах с учетом взаимозаменяемости не по справочнику "Группы взаимозаменяемости лекарственных препаратов" (zfcs_nsiFarmDrugInterchangeGroup) (формирование своей группы на основании справочника "Лекарственные препараты" (nsiFarmDrugDictionary))</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:choice>
+														</xs:complexType>
+													</xs:element>
+												</xs:choice>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="mustSpecifyDrugPackage" minOccurs="0">
@@ -1971,7 +1990,7 @@ tenderPlan2020 - План график закупок с 01.01.2020</xs:document
 												<xs:documentation>Сведения о вариантах поставки лекарственных препаратов</xs:documentation>
 											</xs:annotation>
 											<xs:complexType>
-												<xs:sequence>
+												<xs:choice>
 													<xs:element name="drugInfo" maxOccurs="unbounded">
 														<xs:annotation>
 															<xs:documentation>Сведения о варианте поставки лекарственного препарата</xs:documentation>
@@ -1990,7 +2009,12 @@ tenderPlan2020 - План график закупок с 01.01.2020</xs:document
 															</xs:complexContent>
 														</xs:complexType>
 													</xs:element>
-												</xs:sequence>
+													<xs:element name="drugInterchangeTextFormInfo" type="drugInterchangeTextFormInfoType">
+														<xs:annotation>
+															<xs:documentation>Сведения о лекарственных препаратах с учетом взаимозаменяемости не по справочнику "Группы взаимозаменяемости лекарственных препаратов" (zfcs_nsiFarmDrugInterchangeGroup) (формирование своей группы)</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:choice>
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="mustSpecifyDrugPackage" minOccurs="0">
@@ -2179,6 +2203,216 @@ tenderPlan2020 - План график закупок с 01.01.2020</xs:document
 				<xs:annotation>
 					<xs:documentation>Ссылка на сведения о лекарственном препарате в ГРЛС. Требуется обязательное указание, если в справочнике "Причины корректировки справочных данных о лекарственных препаратах" (nsiDrugChangeReason) для записи соответствующим кодом причины корректировки поле "Признак «Обязательно указание ссылки на сведения о ЛП в ГРЛС»" (mustSpecifyDrugRef) имеет значение true</xs:documentation>
 				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="drugInterchangeReferenceInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения о лекарственных препаратах с учетом взаимозаменяемости</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="isInterchange" type="xs:boolean" fixed="true">
+				<xs:annotation>
+					<xs:documentation>Добавить сведения о лекарственных препаратах с учетом взаимозаменяемости</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="interchangeGroupInfo">
+				<xs:annotation>
+					<xs:documentation>Группа взаимозаменяемости по справочнику ЕСКЛП</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="groupCode" type="base:drugExternalCodeType">
+							<xs:annotation>
+								<xs:documentation>Код группы. 
+Контролируется наличие группы уровня 1 с заданным кодом в справочнике "Группы взаимозаменяемости лекарственных препаратов" (nsiFarmDrugInterchangeGroup)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="groupName" type="base:text2000Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Наименование группы. Игнорируется при приеме, заполняется автоматически на основании справочника "Группы взаимозаменяемости лекарственных препаратов" (nsiFarmDrugInterchangeGroup)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="groupOKEI" form="qualified" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Единица измерения группы. 
+Игнорируется при приеме, заполняется автоматически на основании справочника "Группы взаимозаменяемости лекарственных препаратов" (nsiFarmDrugInterchangeGroup)</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="name" type="base:text500Type">
+										<xs:annotation>
+											<xs:documentation>Название единицы измерения группы</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="OKEI" type="base:OKEIRef">
+										<xs:annotation>
+											<xs:documentation>Единица измерения по справочнику "Общероссийский классификатор единиц измерения (ОКЕИ)" (nsiOKEIType)</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="groupPriceValue" type="base:drugDecimalCodeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Референтная цена зп единицу товара в единицах измерения группы. 
+Игнорируется при приеме, заполняется автоматически на основании справочника "Группы взаимозаменяемости лекарственных препаратов" (nsiFarmDrugInterchangeGroup)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="drugInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о варианте поставки лекарственного препарата. При отсутствии хотя бы одного блока drugInfo сведения о вариантах поставки заполняются автоматически по коду drugPurchaseObjectInfo/objectInfoUsingReferenceInfo/drugsInfo/drugInterchange/InterchangeGroupInfo/groupCode на основании справочника "Группы взаимозаменяемости лекарственных препаратов" (nsiFarmDrugInterchangeGroup). Не допускается указание блока tradeInfo</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:choice>
+							<xs:element name="drugInfoUsingReferenceInfo" type="drugInfoType">
+								<xs:annotation>
+									<xs:documentation>Сведения о варианте поставки лекарственного препарата из справочника ЕСКЛП</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="drugInfoUsingTextForm" type="drugInfoUsingTextFormType">
+								<xs:annotation>
+									<xs:documentation>Сведения о варианте поставки лекарственного препарата. Допускается указание только при заполненном поле externalDrugInfoLink. Не допускается указание поля drugInfo/drugInfoUsingTextForm/basicUnit</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+						<xs:element name="drugQuantity" type="base:quantity18p11Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Количество (объем) закупаемого лекарственного препарата. Игнорируется при приеме, заполняется автоматически  значением, рассчитанным по формуле:
+= "Количество (объем) закупаемого лекарственного препарата в разбивке по заказчикам" (drugPurchaseObjectInfo/drugQuantityCustomersInfo/total) / "Коэффициент кратности количества" (quantityMultiplier)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="quantityMultiplier" type="base:quantityMultiplierType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Коэффициент кратности количетва. Игнорируется при приеме, заполняется автоматически значением, рассчитанным по формуле:
+= 1 / коэффициент кратности поступающим из справочника  "Группы взаимозаменяемости лекарственных препаратов" (zfcs_nsiFarmDrugInterchangeGroup) в случае указания блока drugInfoUsingReferenceInfo. Принимается и сохраняется в случае указания блока drugInfoUsingTextForm или в случае, если справочник  поступающим из справочника  "Группы взаимозаменяемости лекарственных препаратов" (zfcs_nsiFarmDrugInterchangeGroup) не вернул значение (вариант добавления лекарственного препарата не из группы, а из справочника "Лекарственные препараты" (nsiFarmDrugDictionary))</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="averagePriceValue" type="base:drugDecimalCodeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Цена за единицу товара. Игнорируется при приеме, заполняется автоматически, как «Цена за единицу товара в единицах измерения группы» / «Коэффициент кратности количества» для препаратов, не входящих в комбинацию из нескольких однокомпонентных препаратов. Принимается и сохраняется для однокомпонентных препаратов, входящих в комбинацию</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="externalDrugInfoLink" type="base:externalIdType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Внешний идентификатор комбинации из нескольких однокомпонентных препаратов. 
+Указывается при необходимости объединения двух или более альтернативных вариантов поставки в одну комбинацию. Объединияются в комбинацию варианты арставки для которых значение поля externalDrugInfoLink совпадают</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="interchangeGroupCode" type="base:drugExternalCodeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Код группы уровня 2 в ЕИС по справочнику "Справочник "Группы взаимозаменяемости лекарственных препаратов"" (nsiFarmDrugInterchangeGroup). Игнорируется при приеме, автоматически заполяется при выгрузке. Одинаковое значение поля interchangeGroupCode свидетельствует о том, что данные варианты поставок объеденены в комбинацию из двух или более вариантов поставок</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="drugInterchangeManualInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения о лекарственных препаратах с учетом взаимозаменяемости, своя группа</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="isInterchange" type="xs:boolean" fixed="true">
+				<xs:annotation>
+					<xs:documentation>Добавить сведения о лекарственных препаратах с учетом взаимозаменяемости</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="drugInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о варианте поставки лекарственного препарата</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:choice>
+							<xs:element name="drugInfoUsingReferenceInfo" type="drugInfoType">
+								<xs:annotation>
+									<xs:documentation>Сведения о варианте поставки лекарственного препарата из справочника ЕСКЛП</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="drugInfoUsingTextForm" type="drugInfoUsingTextFormType">
+								<xs:annotation>
+									<xs:documentation>Сведения о варианте поставки лекарственного препарата. Допускается указание, только при заполненном поле externalDrugInfoLink. Не допускается указание поля drugInfo/drugInfoUsingTextForm/basicUnit</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+						<xs:element name="drugQuantity" type="base:quantity18p11Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Количество (объем) закупаемого лекарственного препарата. Игнорируется при приеме, заполняется автоматически значением, рассчитанным по формуле:
+= "Количество (объем) закупаемого лекарственного препарата в разбивке по заказчикам" (drugPurchaseObjectInfo/drugQuantityCustomersInfo/total) / "Коэффициент кратности количества" (quantityMultiplier)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="quantityMultiplier" type="base:quantityMultiplierType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Коэффициент кратности количетва. Принимается и сохраняется</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="averagePriceValue" type="base:drugDecimalCodeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Цена за единицу товара. Игнорируется при приеме, заполняется автоматически, как «Цена за единицу товара в единицах измерения группы» / «Коэффициент кратности количества» для препаратов, не входящих в комбинацию из нескольких однокомпонентных препаратов. Принимается и сохраняется для однокомпонентных препаратов, входящих в комбинацию</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="externalDrugInfoLink" type="base:externalIdType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Внешний идентификатор комбинации из нескольких однокомпонентных препаратов. Указывается при необходимости объединения двух или более альтернативных вариантов поставки в одну комбинацию. Объединияются в комбинацию варианты арставки для которых значение поля externalDrugInfoLink совпадают</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="drugInterchangeTextFormInfoType">
+		<xs:annotation>
+			<xs:documentation>Тип: Сведения о лекарственных препаратах с учетом взаимозаменяемости, своя группа в текстовой форме</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="isInterchange" type="xs:boolean" fixed="true">
+				<xs:annotation>
+					<xs:documentation>Добавить сведения о лекарственных препаратах с учетом взаимозаменяемости</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="drugInfo" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о варианте поставки лекарственного препарата</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="drugInfoUsingTextForm" type="drugInfoUsingTextFormType">
+							<xs:annotation>
+								<xs:documentation>Сведения о варианте поставки лекарственного препарата. Допускается указание, только при заполненном поле externalDrugInfoLink. Не допускается указание поля drugInfo/drugInfoUsingTextForm/basicUnit</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="drugQuantity" type="base:quantity18p11Type" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Количество (объем) закупаемого лекарственного препарата. Игнорируется при приеме, заполняется автоматически значением, рассчитанным по формуле:
+= "Количество (объем) закупаемого лекарственного препарата в разбивке по заказчикам" (drugPurchaseObjectInfo/drugQuantityCustomersInfo/total) / "Коэффициент кратности количества" (quantityMultiplier)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="quantityMultiplier" type="base:quantityMultiplierType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Коэффициент кратности количества. Принимается и сохраняется</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="averagePriceValue" type="base:drugDecimalCodeType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Цена за единицу товара.
+Игнорируется при приеме, заполняется автоматически, как «Цена за единицу товара в единицах измерения группы» / «Коэффициент кратности количества» для препаратов, не входящих в комбинацию из нескольких однокомпонентных препаратов. Принимается и сохраняется для однокомпонентных препаратов, входящих в комбинацию</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="externalDrugInfoLink" type="base:externalIdType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Внешний идентификатор комбинации из нескольких однокомпонентных препаратов. 
+Указывается при необходимости объединения двух или более альтернативных вариантов поставки в одну комбинацию. Объединияются в комбинацию варианты арставки для которых значение поля externalDrugInfoLink совпадают</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>

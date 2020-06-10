@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!-- FCS EXPORT Integration Scheme, version 10.2, create date 07.05.2020 -->
+<!-- FCS EXPORT Integration Scheme, version 10.2, create date 05.06.2020 -->
 <xs:schema xmlns="http://zakupki.gov.ru/oos/export/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oos="http://zakupki.gov.ru/oos/types/1" xmlns:pp615="http://zakupki.gov.ru/oos/pprf615types/1" xmlns:ep="http://zakupki.gov.ru/oos/EPtypes/1" xmlns:cp="http://zakupki.gov.ru/oos/CPtypes/1" xmlns:tp="http://zakupki.gov.ru/oos/TPtypes/1" xmlns:sm="http://zakupki.gov.ru/oos/SMTypes/1" targetNamespace="http://zakupki.gov.ru/oos/export/1" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://zakupki.gov.ru/oos/types/1" schemaLocation="IntegrationTypes.xsd"/>
 	<xs:import namespace="http://zakupki.gov.ru/oos/pprf615types/1" schemaLocation="Integration615Types.xsd"/>
@@ -1323,6 +1323,20 @@
 							<xs:documentation>Справочник: Каталог товаров, работ, услуг (КТРУ)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="nsiKTRUNotUsingReasons">
+						<xs:annotation>
+							<xs:documentation>Справочник : Причины неприменения ЕИ, указанной в КТРУ при описании объекта закупки в РК</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiKTRUNotUsingReason" type="oos:zfcs_nsiKTRUNotUsingReasonType" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Причина неприменения ЕИ, указанной в КТРУ при описании объекта закупки в РК</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
 					<xs:element name="nsiETPs">
 						<xs:annotation>
 							<xs:documentation>Справочник: Электронные площадки</xs:documentation>
@@ -1374,6 +1388,20 @@
 								<xs:element name="nsiEAESCountry" type="oos:zfcs_nsiEAESCountry" minOccurs="0" maxOccurs="unbounded">
 									<xs:annotation>
 										<xs:documentation>Справочник: Страны ЕАЭС</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="nsiEADocTypes">
+						<xs:annotation>
+							<xs:documentation>Справочник: Виды документов электронного актирования</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="nsiEADocType" type="oos:zfcs_nsiEADocType" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Вид документа электронного актирвоания</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
